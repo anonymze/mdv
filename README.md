@@ -6,6 +6,10 @@ A modern static website built with Astro and Payload CMS, featuring weekly data 
 
 This project combines the power of Astro's static site generation with Payload CMS's flexible content management capabilities. The site consists of 10 total pages, with 7 dynamic pages that update weekly through automated rebuilds triggered by Payload CMS webhooks.
 
+## Tips & Useful Commands
+
+pnpm astro preferences disable devToolbar
+
 ### Architecture
 
 - **Frontend**: Astro (Static Site Generation)
@@ -121,7 +125,7 @@ VERCEL_WEBHOOK_SECRET=your-webhook-secret
    ---
    import Layout from '../layouts/Layout.astro';
    ---
-   
+
    <Layout title="Page Title">
      <!-- Page content -->
    </Layout>

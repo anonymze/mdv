@@ -14,6 +14,7 @@ const metadata: {
         defaultDescription: string;
         titleSuffix: string;
         keywords: string;
+        ogLocale: string;
     };
 } = {
     fr: {
@@ -22,6 +23,7 @@ const metadata: {
         titleSuffix: " | MDV",
         keywords:
             "centre culturel, Pyrénées, Luz Saint Sauveur, cinéma, spectacles, expositions, médiathèque, ludothèque, parc national, montagne, vallée, patrimoine, conférences, animation, résidences artistes, théâtre, Hautes-Pyrénées, tourisme culturel",
+        ogLocale: "fr_FR",
     },
     en: {
         defaultDescription:
@@ -29,6 +31,7 @@ const metadata: {
         titleSuffix: " | MDV",
         keywords:
             "cultural center, Pyrénées, Luz Saint Sauveur, cinema, shows, exhibitions, library, games, national park, mountain, valley, heritage, conferences, entertainment, artist residencies, theater, Hautes-Pyrénées, cultural tourism",
+        ogLocale: "en_US",
     },
     es: {
         defaultDescription:
@@ -36,6 +39,7 @@ const metadata: {
         titleSuffix: " | MDV",
         keywords:
             "centro cultural, Pirineos, Luz Saint Sauveur, cine, espectáculos, exposiciones, biblioteca, juegos, parque nacional, montaña, valle, patrimonio, conferencias, animación, residencias artistas, teatro, Hautes-Pyrénées, turismo cultural",
+        ogLocale: "es_ES",
     },
 };
 
@@ -51,7 +55,7 @@ const pageDescription = description || meta.defaultDescription;
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="generator" content={Astro.generator} />
-        
+
         <!-- SEO Meta Tags -->
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
@@ -59,20 +63,23 @@ const pageDescription = description || meta.defaultDescription;
         <meta name="author" content="Maison du Parc National et de la Vallée" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={Astro.url} />
-        
+
         <!-- Open Graph Meta Tags -->
         <meta property="og:type" content="website" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
         <meta property="og:url" content={Astro.url} />
-        <meta property="og:site_name" content="Maison du Parc National et de la Vallée" />
-        <meta property="og:locale" content={Astro.currentLocale === "fr" ? "fr_FR" : Astro.currentLocale === "en" ? "en_US" : "es_ES"} />
-        
+        <meta
+            property="og:site_name"
+            content="Maison du Parc National et de la Vallée"
+        />
+        <meta property="og:locale" content={meta.ogLocale} />
+
         <!-- Twitter Card Meta Tags -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDescription} />
-        
+
         <!-- Geographic Meta Tags -->
         <meta name="geo.region" content="FR-65" />
         <meta name="geo.placename" content="Luz Saint Sauveur" />
@@ -80,6 +87,6 @@ const pageDescription = description || meta.defaultDescription;
         <meta name="ICBM" content="42.8722, -0.0033" />
     </head>
     <body>
-        <h1>Astro</h1>
+        <slot />
     </body>
 </html>
