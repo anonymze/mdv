@@ -73,11 +73,29 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 								}}
 							>
 								{menu.subMenus.map((subMenu, subIndex) => (
-									<ul key={subIndex} className="bg-green-200">
-										{subMenu.subMenus?.map((item, itemIndex) => (
-											<ListItem key={itemIndex} href={item.link} title={item.label} />
-										))}
-									</ul>
+									<div key={subIndex} className="flex flex-col">
+										<ul className="flex-1 bg-green-200 pb-8">
+											{subMenu.subMenus?.map((item, itemIndex) => (
+												<ListItem key={itemIndex} href={item.link} title={item.label} />
+											))}
+										</ul>
+										<div className="relative h-32 overflow-hidden group/image">
+											<img
+												src={subMenu.image.src}
+												width={subMenu.image.width}
+												height={subMenu.image.height}
+												alt={subMenu.label}
+												className="absolute inset-0 w-full h-full object-cover translate-y-0 transition-transform duration-200 group-hover/image:-translate-y-full"
+											/>
+											<img
+												src={subMenu.imageReplacement.src}
+												width={subMenu.imageReplacement.width}
+												height={subMenu.imageReplacement.height}
+												alt={subMenu.label}
+												className="absolute inset-0 w-full h-full object-cover translate-y-full transition-transform duration-200 group-hover/image:translate-y-0"
+											/>
+										</div>
+									</div>
 								))}
 							</NavigationMenuContent>
 						</NavigationMenuItem>
@@ -92,7 +110,7 @@ function ListItem({ title, href, ...props }: React.ComponentPropsWithoutRef<'li'
 	return (
 		<li {...props}>
 			<NavigationMenuLink asChild>
-				<a href={href} className="flex items-centert">
+				<a href={href} className="items-centert flex">
 					{title}
 				</a>
 			</NavigationMenuLink>

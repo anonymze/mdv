@@ -225,12 +225,13 @@ const menuNavs: MenuNav[] = [
 
 <header class="mt-4 flex h-16 gap-4">
 	<div class="flex h-full flex-1 justify-between bg-red-200 px-5 py-2">
-		<a class="inline-block" href="/"
+		<a class="block" href="/"
 			><Image
-				src="https://cdn.shopify.com/static/sample-images/bath.jpeg"
+				src={BastienImg}
 				width={100}
 				height={50}
-				alt="A lovely bath"
+				alt="Logo MDV"
+				  class="h-full object-contain"
 			/></a
 		>
 		<NavigationMenuDemo menuNavs={menuNavs} client:load />
