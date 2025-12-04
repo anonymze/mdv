@@ -10,9 +10,6 @@ import BastienImg from "@/assets/imgs/bastien.png";
 import Bastien2Img from "@/assets/imgs/bastien2.png";
 import type { MenuNav } from '@/types/menu'
 
-// const optimizedBastienImg = await getImage({src: BastienImg, format: 'png'})
-const optimizedBastien2Img = await getImage({src: Bastien2Img, format: 'png'})
-
 const menuNavs: MenuNav[] = [
 	{
 		label: t('ESPACES_ARTISTIQUES'),
@@ -234,7 +231,9 @@ const menuNavs: MenuNav[] = [
 				width={100}
 				height={50}
 				alt="Logo MDV"
-				  class="h-full object-contain"
+				loading="eager"
+				class="h-full object-contain"
+				fetchpriority="high"
 			/></a
 		>
 		<NavigationMenuDemo menuNavs={menuNavs} client:load />
