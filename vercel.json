@@ -1,0 +1,11 @@
+{
+  "images": {
+    "domains": ["mdv-chi.vercel.app"],
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "**.vercel.app"
+      }
+    ]
+  }
+}
