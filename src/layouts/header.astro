@@ -2,13 +2,16 @@
 import { NavigationMenuDemo } from '@/components/header-menu'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
-import { Image } from 'astro:assets'
+import { getImage, Image } from 'astro:assets'
 import { ArrowRightIcon } from 'lucide-react'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 import BastienImg from "@/assets/imgs/bastien.png";
 import Bastien2Img from "@/assets/imgs/bastien2.png";
 import type { MenuNav } from '@/types/menu'
+
+// const optimizedBastienImg = await getImage({src: BastienImg, format: 'png'})
+const optimizedBastien2Img = await getImage({src: Bastien2Img, format: 'png'})
 
 const menuNavs: MenuNav[] = [
 	{
