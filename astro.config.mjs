@@ -28,6 +28,7 @@ export default defineConfig({
  //      placeholder: "blurhash"
  //    }),
  //  },
+
 	vite: {
 		plugins: [tailwindcss()]
 	}
