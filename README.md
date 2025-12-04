@@ -31,16 +31,19 @@ pnpm astro preferences disable devToolbar
 ## Technology Stack
 
 ### Frontend
+
 - **Astro 5.12.4** - Static Site Generator
 - **React 19.1.1** - Component framework for dynamic elements
 - **Tailwind CSS 4.1.11** - Utility-first CSS framework
 - **TypeScript** - Type safety and better developer experience
 
 ### Backend (Planned)
+
 - **Payload CMS** - Headless Content Management System
 - **MongoDB/PostgreSQL** - Database for content storage
 
 ### Deployment & Infrastructure
+
 - **Vercel** - Hosting platform with automatic deployments
 - **GitHub** - Version control and CI/CD integration
 - **Webhooks** - Automated rebuild triggers
@@ -75,17 +78,20 @@ mdv/
 ### Local Development Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd mdv
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Start development server**
+
    ```bash
    pnpm dev
    ```
@@ -121,13 +127,14 @@ VERCEL_WEBHOOK_SECRET=your-webhook-secret
 
 1. Create new `.astro` files in `src/pages/`
 2. Use the base layout for consistency:
+
    ```astro
    ---
-   import Layout from '../layouts/Layout.astro';
+   import Layout from '../layouts/Layout.astro'
    ---
 
    <Layout title="Page Title">
-     <!-- Page content -->
+   	<!-- Page content -->
    </Layout>
    ```
 
@@ -155,8 +162,8 @@ The CMS will manage content for 7 dynamic pages that update weekly:
 
 ```javascript
 // Example: Fetching weekly content
-const response = await fetch(`${PAYLOAD_API_URL}/api/weekly-content`);
-const weeklyData = await response.json();
+const response = await fetch(`${PAYLOAD_API_URL}/api/weekly-content`)
+const weeklyData = await response.json()
 ```
 
 ### Content Types
@@ -164,12 +171,12 @@ const weeklyData = await response.json();
 ```typescript
 // Example content schema
 interface WeeklyContent {
-  id: string;
-  title: string;
-  content: string;
-  publishDate: Date;
-  featured: boolean;
-  category: string;
+	id: string
+	title: string
+	content: string
+	publishDate: Date
+	featured: boolean
+	category: string
 }
 ```
 
@@ -227,29 +234,29 @@ For urgent updates outside the weekly schedule:
 ### Astro Configuration (`astro.config.mjs`)
 
 ```javascript
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'astro/config'
+import react from '@astrojs/react'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  integrations: [react()],
-  vite: {
-    plugins: [tailwindcss()]
-  }
-});
+	integrations: [react()],
+	vite: {
+		plugins: [tailwindcss()]
+	}
+})
 ```
 
 ### TypeScript Configuration (`tsconfig.json`)
 
 ```json
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
-  }
+	"extends": "astro/tsconfigs/strict",
+	"include": [".astro/types.d.ts", "**/*"],
+	"exclude": ["dist"],
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
+	}
 }
 ```
 
@@ -274,6 +281,7 @@ export default defineConfig({
 ### Common Issues
 
 1. **Build Failures**
+
    ```bash
    # Clear cache and rebuild
    rm -rf dist/ .astro/
@@ -281,6 +289,7 @@ export default defineConfig({
    ```
 
 2. **Development Server Issues**
+
    ```bash
    # Restart dev server
    pnpm dev --force
