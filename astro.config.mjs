@@ -9,7 +9,7 @@ import { imageService } from '@unpic/astro/service'
 // https://astro.build/config
 export default defineConfig({
 	integrations: [react()],
-	base: "https://mdv-chi.vercel.app/",
+	site: "https://mdv-chi.vercel.app",
 	i18n: {
 		locales: ['es', 'en', 'fr'],
 		defaultLocale: 'fr',
