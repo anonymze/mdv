@@ -1,5 +1,5 @@
 {
   "images": {
-    "unoptimized": true
+    "disableStaticImages": true
   }
 }
