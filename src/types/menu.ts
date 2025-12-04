@@ -8,8 +8,8 @@ export type SubMenuItem = {
 export type SubMenu = {
 	label: string
 	link: string
-	image: ImageMetadata
-	imageReplacement: ImageMetadata
+	image: string
+	imageReplacement: string
 	subMenus?: SubMenuItem[]
 }
 

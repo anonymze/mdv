@@ -2,13 +2,19 @@
 import { NavigationMenuDemo } from '@/components/header-menu'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
-import { getImage, Image } from 'astro:assets'
+
+import type { MenuNav } from '@/types/menu'
+import type { GetImageResult } from 'astro'
 import { ArrowRightIcon } from 'lucide-react'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
-import BastienImg from "@/assets/imgs/bastien.png";
-import Bastien2Img from "@/assets/imgs/bastien2.png";
-import type { MenuNav } from '@/types/menu'
+
+interface Props {
+	optimizedBastienImg: GetImageResult
+	optimizedBastien2Img: GetImageResult
+}
+
+const { optimizedBastienImg, optimizedBastien2Img } = Astro.props
 
 const menuNavs: MenuNav[] = [
 	{
@@ -17,8 +23,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('ART_VIVANT'),
 				link: 'art-vivant',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('SPECTACLES'), link: 'art-vivant/spectacles' },
 					{ label: t('SEANCES'), link: 'art-vivant/seances' },
@@ -28,15 +34,15 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('CINEMA'),
 				link: 'cinema',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [{ label: t('RDV_CINE'), link: 'cinema/rdv-cine' }]
 			},
 			{
 				label: t('MEDIATHEQUE'),
 				link: 'mediatheque',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('BIBLIOTHEQUE'), link: 'mediatheque/bibliotheque' },
 					{ label: t('LUDOBHEQUE'), link: 'mediatheque/ludotheque' },
@@ -47,8 +53,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('EXPOSITION'),
 				link: 'exposition',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('EXPOSITION_DU_MOMENT'), link: 'exposition/du-moment' },
 					{ label: t('EVENEMENTS'), link: 'exposition/evenements' }
@@ -57,8 +63,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('JEUNESSE'),
 				link: 'jeunesse',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('SPECTACLES'), link: 'jeunesse/spectacles' },
 					{ label: t('SEANCES'), link: 'jeunesse/seances' },
@@ -68,8 +74,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('ARTISTE'),
 				link: 'artiste',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('RESIDENCE'), link: 'artiste/residence' },
 					{ label: t('INFORMATIONS_TECHNIQUES'), link: 'artiste/informations-techniques' }
@@ -83,8 +89,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('PARC_NATIONAL'),
 				link: 'art-vivant',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles' },
 					{ label: t('EVENEMENTS'), link: 'art-vivant/seances' },
@@ -94,26 +100,26 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('ACTUALITES'),
 				link: 'cinema',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine' }]
 			},
 			{
 				label: t('INFORMATIONS_PRATIQUES'),
 				link: 'mediatheque',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque' },
 					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque' },
-					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base' },
+					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base' }
 				]
 			},
 			{
 				label: t('INFORMATIONS_GENERALES'),
 				link: 'exposition',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('A_PROPOS'), link: 'exposition/du-moment' },
 					{ label: t('L_EQUIPE'), link: 'exposition/evenements' },
@@ -124,8 +130,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('ARCHIVES'),
 				link: 'jeunesse',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles' },
 					{ label: t('ANNEE_2024'), link: 'jeunesse/seances' },
@@ -135,8 +141,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('ARTISTE'),
 				link: 'artiste',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('RESIDENCE'), link: 'artiste/residence' },
 					{ label: t('INFORMATIONS_TECHNIQUES'), link: 'artiste/informations-techniques' }
@@ -146,7 +152,7 @@ const menuNavs: MenuNav[] = [
 	},
 	{
 		label: t('ACTUALITES'),
-		link: 'actualites',
+		link: 'actualites'
 	},
 	{
 		label: t('INFORMATIONS'),
@@ -155,8 +161,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('PARC_NATIONAL'),
 				link: 'art-vivant',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles' },
 					{ label: t('EVENEMENTS'), link: 'art-vivant/seances' },
@@ -166,26 +172,26 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('ACTUALITES'),
 				link: 'cinema',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine' }]
 			},
 			{
 				label: t('INFORMATIONS_PRATIQUES'),
 				link: 'mediatheque',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque' },
 					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque' },
-					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base' },
+					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base' }
 				]
 			},
 			{
 				label: t('INFORMATIONS_GENERALES'),
 				link: 'exposition',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('A_PROPOS'), link: 'exposition/du-moment' },
 					{ label: t('L_EQUIPE'), link: 'exposition/evenements' },
@@ -196,8 +202,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('ARCHIVES'),
 				link: 'jeunesse',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles' },
 					{ label: t('ANNEE_2024'), link: 'jeunesse/seances' },
@@ -207,8 +213,8 @@ const menuNavs: MenuNav[] = [
 			{
 				label: t('ARTISTE'),
 				link: 'artiste',
-				image: BastienImg,
-				imageReplacement: Bastien2Img,
+				image: optimizedBastienImg.src,
+				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
 					{ label: t('RESIDENCE'), link: 'artiste/residence' },
 					{ label: t('INFORMATIONS_TECHNIQUES'), link: 'artiste/informations-techniques' }
@@ -218,21 +224,21 @@ const menuNavs: MenuNav[] = [
 	},
 	{
 		label: t('ARCHIVES'),
-		link: 'archives',
-	},
+		link: 'archives'
+	}
 ]
 ---
 
 <header class="mt-4 flex h-16 gap-4">
 	<div class="flex h-full flex-1 justify-between bg-red-200 px-5 py-2">
 		<a class="block" href="/"
-			><Image
-				src={BastienImg}
+			><img
+				src={optimizedBastienImg.src}
 				width={100}
 				height={50}
 				alt="Logo MDV"
 				loading="eager"
-				class="h-full object-contain"
+				class="h-full object-cover"
 				fetchpriority="high"
 			/></a
 		>

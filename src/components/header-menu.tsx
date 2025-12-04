@@ -73,24 +73,24 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 								}}
 							>
 								{menu.subMenus.map((subMenu, subIndex) => (
-									<div key={subIndex} className="flex flex-col">
+									<div key={subIndex} className="flex flex-col group/image">
 										<ul className="flex-1 bg-green-200 pb-8">
 											{subMenu.subMenus?.map((item, itemIndex) => (
 												<ListItem key={itemIndex} href={item.link} title={item.label} />
 											))}
 										</ul>
-										<div className="relative h-32 overflow-hidden group/image">
+										<div className="relative h-32 overflow-hidden">
 											<img
-												src={subMenu.image.src}
-												width={subMenu.image.width}
-												height={subMenu.image.height}
+												src={subMenu.image}
+												width="300"
+												height="150"
 												alt={subMenu.label}
 												className="absolute inset-0 w-full h-full object-cover translate-y-0 transition-transform duration-200 group-hover/image:-translate-y-full"
 											/>
 											<img
-												src={subMenu.imageReplacement.src}
-												width={subMenu.imageReplacement.width}
-												height={subMenu.imageReplacement.height}
+												src={subMenu.imageReplacement}
+												width="300"
+												height="150"
 												alt={subMenu.label}
 												className="absolute inset-0 w-full h-full object-cover translate-y-full transition-transform duration-200 group-hover/image:translate-y-0"
 											/>
