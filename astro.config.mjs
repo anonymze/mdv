@@ -2,17 +2,12 @@
 import { defineConfig } from 'astro/config'
 
 import react from '@astrojs/react'
-import vercel from '@astrojs/vercel/static'
 
 import tailwindcss from '@tailwindcss/vite'
 import { imageService } from '@unpic/astro/service'
 
 // https://astro.build/config
 export default defineConfig({
-	output: 'static',
-	adapter: vercel({
-		imageService: false
-	}),
 	integrations: [react()],
 	site: "https://mdv-chi.vercel.app",
 	i18n: {
@@ -27,12 +22,12 @@ export default defineConfig({
 			fallbackType: 'rewrite'
 		}
 	},
-	image: {
-    service: imageService({
-      layout: "constrained",
-      placeholder: "blurhash"
-    }),
-  },
+	// image: {
+ //    service: imageService({
+ //      layout: "constrained",
+ //      placeholder: "blurhash"
+ //    }),
+ //  },
 	vite: {
 		plugins: [tailwindcss()]
 	}
