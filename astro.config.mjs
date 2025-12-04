@@ -10,7 +10,9 @@ import { imageService } from '@unpic/astro/service'
 // https://astro.build/config
 export default defineConfig({
 	output: 'static',
-	adapter: vercel(),
+	adapter: vercel({
+		imageService: false
+	}),
 	integrations: [react()],
 	site: "https://mdv-chi.vercel.app",
 	i18n: {
