@@ -101,6 +101,7 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 						</NavigationMenuItem>
 					)
 				})}
+
 			</NavigationMenuList>
 		</NavigationMenu>
 	)
