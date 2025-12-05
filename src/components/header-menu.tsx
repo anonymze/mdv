@@ -73,26 +73,26 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 								}}
 							>
 								{menu.subMenus.map((subMenu, subIndex) => (
-									<div key={subIndex} className="flex flex-col group/image">
-										<ul className="flex-1 bg-green-200 pb-8">
+									<div key={subIndex} className="group/image flex flex-col">
+										<ul className="flex-1 bg-green-200 p-4 pb-8">
 											{subMenu.subMenus?.map((item, itemIndex) => (
 												<ListItem key={itemIndex} href={item.link} title={item.label} />
 											))}
 										</ul>
-										<div className="relative h-32 overflow-hidden">
+										<div className="relative h-36 overflow-hidden">
 											<img
 												src={subMenu.image}
 												width="300"
 												height="150"
 												alt={subMenu.label}
-												className="absolute inset-0 w-full h-full object-cover translate-y-0 transition-transform duration-200 group-hover/image:-translate-y-full"
+												className="absolute inset-0 h-full w-full translate-y-0 object-cover transition-transform duration-200 group-hover/image:-translate-y-full"
 											/>
 											<img
 												src={subMenu.imageReplacement}
 												width="300"
 												height="150"
 												alt={subMenu.label}
-												className="absolute inset-0 w-full h-full object-cover translate-y-full transition-transform duration-200 group-hover/image:translate-y-0"
+												className="absolute inset-0 h-full w-full translate-y-full object-cover transition-transform duration-200 group-hover/image:translate-y-0"
 											/>
 										</div>
 									</div>
@@ -108,12 +108,12 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 
 function ListItem({ title, href, ...props }: React.ComponentPropsWithoutRef<'li'> & { href: string }) {
 	return (
-		<li {...props}>
-			<NavigationMenuLink asChild>
-				<a href={href} className="items-centert flex">
-					{title}
-				</a>
-			</NavigationMenuLink>
+		<li {...props} className="group/link block py-4">
+			<a href={href} className="relative block pb-1.5">
+				{title}
+				<span className="absolute bottom-0 left-0 h-px w-full bg-black transition-all duration-0 group-hover/link:w-0" />
+				<span className="absolute bottom-0 left-0 h-px w-0 bg-black transition-all duration-400 ease-in-out group-hover/link:w-full" />
+			</a>
 		</li>
 	)
 }
