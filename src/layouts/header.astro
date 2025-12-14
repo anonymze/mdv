@@ -24,61 +24,64 @@ const menuNavs: MenuNav[] = [
 				label: t('ART_VIVANT'),
 				link: 'art-vivant',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
+
 				subMenus: [
-					{ label: t('SPECTACLES'), link: 'art-vivant/spectacles' },
-					{ label: t('SEANCES'), link: 'art-vivant/seances' },
-					{ label: t('EVENEMENTS'), link: 'art-vivant/evenements' }
+					{ label: t('SPECTACLES'), link: 'art-vivant/spectacles', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('SEANCES'), link: 'art-vivant/seances', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('EVENEMENTS'), link: 'art-vivant/evenements', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('CINEMA'),
 				link: 'cinema',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
-				subMenus: [{ label: t('RDV_CINE'), link: 'cinema/rdv-cine' }]
+				subMenus: [{ label: t('RDV_CINE'), link: 'cinema/rdv-cine', imageReplacement: optimizedBastien2Img.src }]
 			},
 			{
 				label: t('MEDIATHEQUE'),
 				link: 'mediatheque',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('BIBLIOTHEQUE'), link: 'mediatheque/bibliotheque' },
-					{ label: t('LUDOBHEQUE'), link: 'mediatheque/ludotheque' },
-					{ label: t('CYBER_BASE'), link: 'mediatheque/cyber-base' },
-					{ label: t('AUTRES_MEDIAS'), link: 'mediatheque/autres-medias' }
+					{ label: t('BIBLIOTHEQUE'), link: 'mediatheque/bibliotheque', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('LUDOBHEQUE'), link: 'mediatheque/ludotheque', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('CYBER_BASE'), link: 'mediatheque/cyber-base', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('AUTRES_MEDIAS'), link: 'mediatheque/autres-medias', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('EXPOSITION'),
 				link: 'exposition',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('EXPOSITION_DU_MOMENT'), link: 'exposition/du-moment' },
-					{ label: t('EVENEMENTS'), link: 'exposition/evenements' }
+					{
+						label: t('EXPOSITION_DU_MOMENT'),
+						link: 'exposition/du-moment',
+						imageReplacement: optimizedBastien2Img.src
+					},
+					{ label: t('EVENEMENTS'), link: 'exposition/evenements', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('JEUNESSE'),
 				link: 'jeunesse',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('SPECTACLES'), link: 'jeunesse/spectacles' },
-					{ label: t('SEANCES'), link: 'jeunesse/seances' },
-					{ label: t('EVENEMENTS'), link: 'jeunesse/evenements' }
+					{ label: t('SPECTACLES'), link: 'jeunesse/spectacles', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('SEANCES'), link: 'jeunesse/seances', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('EVENEMENTS'), link: 'jeunesse/evenements', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('ARTISTE'),
 				link: 'artiste',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('RESIDENCE'), link: 'artiste/residence' },
-					{ label: t('INFORMATIONS_TECHNIQUES'), link: 'artiste/informations-techniques' }
+					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: optimizedBastien2Img.src },
+					{
+						label: t('INFORMATIONS_TECHNIQUES'),
+						link: 'artiste/informations-techniques',
+						imageReplacement: optimizedBastien2Img.src
+					}
 				]
 			}
 		]
@@ -90,62 +93,60 @@ const menuNavs: MenuNav[] = [
 				label: t('PARC_NATIONAL'),
 				link: 'art-vivant',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles' },
-					{ label: t('EVENEMENTS'), link: 'art-vivant/seances' },
-					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements' }
+					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('EVENEMENTS'), link: 'art-vivant/seances', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('ACTUALITES'),
 				link: 'cinema',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
-				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine' }]
+				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine', imageReplacement: optimizedBastien2Img.src }]
 			},
 			{
 				label: t('INFORMATIONS_PRATIQUES'),
 				link: 'mediatheque',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque' },
-					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque' },
-					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base' }
+					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('INFORMATIONS_GENERALES'),
 				link: 'exposition',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('A_PROPOS'), link: 'exposition/du-moment' },
-					{ label: t('L_EQUIPE'), link: 'exposition/evenements' },
-					{ label: t('NOS_ENGAGEMENTS'), link: 'exposition/evenements' },
-					{ label: t('NOS_PARTENAIRES'), link: 'exposition/evenements' }
+					{ label: t('A_PROPOS'), link: 'exposition/du-moment', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('L_EQUIPE'), link: 'exposition/evenements', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('NOS_ENGAGEMENTS'), link: 'exposition/evenements', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('NOS_PARTENAIRES'), link: 'exposition/evenements', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('ARCHIVES'),
 				link: 'jeunesse',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles' },
-					{ label: t('ANNEE_2024'), link: 'jeunesse/seances' },
-					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements' }
+					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('ANNEE_2024'), link: 'jeunesse/seances', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('ARTISTE'),
 				link: 'artiste',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('RESIDENCE'), link: 'artiste/residence' },
-					{ label: t('INFORMATIONS_TECHNIQUES'), link: 'artiste/informations-techniques' }
+					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: optimizedBastien2Img.src },
+					{
+						label: t('INFORMATIONS_TECHNIQUES'),
+						link: 'artiste/informations-techniques',
+						imageReplacement: optimizedBastien2Img.src
+					}
 				]
 			}
 		]
@@ -162,62 +163,60 @@ const menuNavs: MenuNav[] = [
 				label: t('PARC_NATIONAL'),
 				link: 'art-vivant',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles' },
-					{ label: t('EVENEMENTS'), link: 'art-vivant/seances' },
-					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements' }
+					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('EVENEMENTS'), link: 'art-vivant/seances', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('ACTUALITES'),
 				link: 'cinema',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
-				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine' }]
+				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine', imageReplacement: optimizedBastien2Img.src }]
 			},
 			{
 				label: t('INFORMATIONS_PRATIQUES'),
 				link: 'mediatheque',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque' },
-					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque' },
-					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base' }
+					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('INFORMATIONS_GENERALES'),
 				link: 'exposition',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('A_PROPOS'), link: 'exposition/du-moment' },
-					{ label: t('L_EQUIPE'), link: 'exposition/evenements' },
-					{ label: t('NOS_ENGAGEMENTS'), link: 'exposition/evenements' },
-					{ label: t('NOS_PARTENAIRES'), link: 'exposition/evenements' }
+					{ label: t('A_PROPOS'), link: 'exposition/du-moment', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('L_EQUIPE'), link: 'exposition/evenements', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('NOS_ENGAGEMENTS'), link: 'exposition/evenements', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('NOS_PARTENAIRES'), link: 'exposition/evenements', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('ARCHIVES'),
 				link: 'jeunesse',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles' },
-					{ label: t('ANNEE_2024'), link: 'jeunesse/seances' },
-					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements' }
+					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('ANNEE_2024'), link: 'jeunesse/seances', imageReplacement: optimizedBastien2Img.src },
+					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements', imageReplacement: optimizedBastien2Img.src }
 				]
 			},
 			{
 				label: t('ARTISTE'),
 				link: 'artiste',
 				image: optimizedBastienImg.src,
-				imageReplacement: optimizedBastien2Img.src,
 				subMenus: [
-					{ label: t('RESIDENCE'), link: 'artiste/residence' },
-					{ label: t('INFORMATIONS_TECHNIQUES'), link: 'artiste/informations-techniques' }
+					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: optimizedBastien2Img.src },
+					{
+						label: t('INFORMATIONS_TECHNIQUES'),
+						link: 'artiste/informations-techniques',
+						imageReplacement: optimizedBastien2Img.src
+					}
 				]
 			}
 		]

@@ -1,15 +1,13 @@
-import type { ImageMetadata } from 'astro'
-
 export type SubMenuItem = {
 	label: string
 	link: string
+	imageReplacement: string
 }
 
 export type SubMenu = {
 	label: string
 	link: string
 	image: string
-	imageReplacement: string
 	subMenus?: SubMenuItem[]
 }
 

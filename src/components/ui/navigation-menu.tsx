@@ -17,6 +17,8 @@ function NavigationMenu({
 		<NavigationMenuPrimitive.Root
 			data-slot="navigation-menu"
 			data-viewport={viewport}
+			delayDuration={999999}
+			// skipDelayDuration={999999}
 			className={cn('group/navigation-menu relative flex max-w-max flex-1 items-center justify-center [&>div]:h-full [&>div]:static', className)}
 			{...props}
 		>

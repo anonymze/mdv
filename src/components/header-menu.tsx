@@ -13,7 +13,16 @@ import type { MenuNav } from '@/types/menu'
 
 export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 	const [headerWidth, setHeaderWidth] = React.useState(0)
+	const [value, setValue] = React.useState('')
 	const itemRefs = React.useRef<(HTMLLIElement | null)[]>([])
+	const isClickingRef = React.useRef(false)
+
+	const handleValueChange = (newValue: string) => {
+		if (isClickingRef.current || newValue === '') {
+			setValue(newValue)
+			isClickingRef.current = false
+		}
+	}
 
 	React.useEffect(() => {
 		const updateWidth = () => {
@@ -42,7 +51,7 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 	}
 
 	return (
-		<NavigationMenu viewport={false}>
+		<NavigationMenu viewport={false} value={value} onValueChange={handleValueChange}>
 			<NavigationMenuList className="flex-wrap">
 				{menuNavs.map((menu, index) => {
 					// No submenus or only 1 submenu without children = simple link
@@ -60,11 +69,18 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 					return (
 						<NavigationMenuItem
 							key={index}
+							value={`menu-${index}`}
 							ref={(el) => {
 								itemRefs.current[index] = el
 							}}
 						>
-							<NavigationMenuTrigger>{menu.label}</NavigationMenuTrigger>
+							<NavigationMenuTrigger
+								onPointerDown={() => {
+									isClickingRef.current = true
+								}}
+							>
+								{menu.label}
+							</NavigationMenuTrigger>
 							<NavigationMenuContent
 								className="grid grid-cols-6 gap-x-4"
 								style={{
@@ -73,7 +89,15 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 								}}
 							>
 								{menu.subMenus.map((subMenu, subIndex) => (
-									<div key={subIndex} className="group/image flex flex-col">
+									<div
+										key={subIndex}
+										className="group/image flex flex-col animate-in fade-in slide-in-from-bottom-4"
+										style={{
+											animationDelay: `${subIndex * 50}ms`,
+											animationDuration: '300ms',
+											animationFillMode: 'backwards'
+										}}
+									>
 										<ul className="flex-1 bg-green-200 p-4 pb-8">
 											{subMenu.subMenus?.map((item, itemIndex) => (
 												<ListItem key={itemIndex} href={item.link} title={item.label} />
@@ -86,13 +110,6 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 												height="150"
 												alt={subMenu.label}
 												className="absolute inset-0 h-full w-full translate-y-0 object-cover transition-transform duration-200 group-hover/image:-translate-y-full"
-											/>
-											<img
-												src={subMenu.imageReplacement}
-												width="300"
-												height="150"
-												alt={subMenu.label}
-												className="absolute inset-0 h-full w-full translate-y-full object-cover transition-transform duration-200 group-hover/image:translate-y-0"
 											/>
 										</div>
 									</div>
