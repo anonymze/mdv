@@ -2,11 +2,6 @@
 import '../styles/global.css'
 import Header from './header.astro'
 import { getImage } from 'astro:assets'
-import BastienImg from "@/assets/imgs/bastien.webp";
-import Bastien2Img from "@/assets/imgs/bastien2.webp";
-
-const optimizedBastienImg = await getImage({src: BastienImg, format: 'webp', width: 600})
-const optimizedBastien2Img = await getImage({src: Bastien2Img, format: 'webp', width: 600})
 
 export interface Props {
 	title: string
@@ -63,9 +58,6 @@ const pageDescription = description || meta.defaultDescription
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
 
-		<!-- Preload critical images -->
-		<link rel="preload" as="image" href={optimizedBastienImg.src} type="image/webp" />
-		<link rel="preload" as="image" href={optimizedBastien2Img.src} type="image/webp" />
 
 		<!-- SEO Meta Tags -->
 		<title>{pageTitle}</title>
@@ -96,7 +88,7 @@ const pageDescription = description || meta.defaultDescription
 	</head>
 	<body>
 		<div class="container">
-			<Header optimizedBastienImg={optimizedBastienImg} optimizedBastien2Img={optimizedBastien2Img} />
+			<Header />
 			<slot />
 		</div>
 	</body>
