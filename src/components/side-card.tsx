@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import * as React from 'react'
 
 interface SideCardProps {
@@ -58,21 +59,32 @@ export function SideCard({ width = 'w-72', tabText, children, ariaLabel }: SideC
 				role="complementary"
 			>
 				{/* Content panel */}
-				<div className={`relative h-48 ${width} px-5 py-6 overflow-y-auto flex flex-col bg-[#C4C4F5]`}>
+				<div className={`relative h-52 ${width} overflow-y-auto p-4 flex flex-col bg-[#C4C4F5]`}>
 					{/* Vertical text tab - visible when closed */}
 					<div
-						className={`absolute left-0 top-0 bg-[#C4C4F5] h-48 w-14 flex gap-2 items-center justify-center transition-opacity duration-300 ${
+						className={`absolute left-0 top-0 bg-[#C4C4F5] h-52 w-14 flex gap-2 items-center justify-center transition-opacity duration-300 ${
 							isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
 						}`}
 						aria-hidden={isOpen}
 					>
-						{tabText.map((text, idx) => (
-							<span key={idx} className="flex flex-col gap-px text-black font-medium text-xs" aria-hidden="true">
-								{text.split('').map((letter, i) => (
-									<span key={i}>{letter}</span>
-								))}
-							</span>
-						))}
+						{tabText.map((text, idx) => {
+							// Keep apostrophes with preceding letter
+							const letters = text.split('').reduce<string[]>((acc, char) => {
+								if (char === "'" && acc.length > 0) {
+									acc[acc.length - 1] += char
+								} else {
+									acc.push(char)
+								}
+								return acc
+							}, [])
+							return (
+                <span key={idx} className={cn("flex flex-col gap-px text-black font-medium text-xs text-center", idx === 1 && "text-start")} aria-hidden="true">
+									{letters.map((letter, i) => (
+										<span key={i}>{letter}</span>
+									))}
+								</span>
+							)
+						})}
 					</div>
 					{/* Content visible when open */}
 					<article
