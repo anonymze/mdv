@@ -59,7 +59,7 @@ export function SideCard({ width = 'w-72', tabText, children, ariaLabel }: SideC
 				role="complementary"
 			>
 				{/* Content panel */}
-				<div className={`relative h-52 ${width} overflow-y-auto p-4 flex flex-col bg-[#C4C4F5]`}>
+				<div className={`relative h-52 ${width} overflow-y-auto p-5 flex flex-col bg-[#C4C4F5]`}>
 					{/* Vertical text tab - visible when closed */}
 					<div
 						className={`absolute left-0 top-0 bg-[#C4C4F5] h-52 w-14 flex gap-2 items-center justify-center transition-opacity duration-300 ${
