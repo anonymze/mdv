@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css'
 import Header from './header.astro'
+import { HoursSideCard } from '@/components/hours-side-card'
 import { getImage } from 'astro:assets'
 
 export interface Props {
@@ -91,5 +92,6 @@ const pageDescription = description || meta.defaultDescription
 			<Header />
 			<slot />
 		</div>
+		<HoursSideCard client:load />
 	</body>
 </html>
