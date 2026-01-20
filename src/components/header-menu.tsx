@@ -104,7 +104,7 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 												animationFillMode: 'backwards'
 											}}
 										>
-											<ul className="flex-1 bg-green-200 p-4 pb-8">
+											<ul className="flex-1 bg-primary p-4 pb-8">
 												{subMenu.subMenus?.map((item, itemIndex) => (
 													<ListItem
 														key={itemIndex}
@@ -194,10 +194,10 @@ function ListItem({
 }: React.ComponentPropsWithoutRef<'li'> & { href: string }) {
 	return (
 		<li {...props} className="group/link block py-4" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-			<a href={href} className="relative block pb-1.5">
+			<a href={href} className="relative block pb-1.5 text-primary-foreground">
 				{title}
-				<span className="absolute bottom-0 left-0 h-px w-full bg-black transition-all duration-0 group-hover/link:w-0" />
-				<span className="absolute bottom-0 left-0 h-px w-0 bg-black transition-all duration-400 ease-in-out group-hover/link:w-full" />
+				<span className="absolute bottom-0 left-0 h-px w-full bg-primary-foreground transition-[width] duration-0 group-hover/link:w-0" />
+				<span className="absolute bottom-0 left-0 h-px w-0 bg-primary-foreground transition-[width] duration-400 ease-in-out group-hover/link:w-full" />
 			</a>
 		</li>
 	)

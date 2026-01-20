@@ -1,5 +1,6 @@
 export default {
 	A_PROPOS: "Acerca de",
+	ACCUEIL_TITLE: "Inicio - Casa del Parque Nacional y del Valle",
 	ACTUALITES: "Noticias",
 	AGENDA: "Agenda",
 	ANNEE_2023: "2023",
@@ -25,8 +26,10 @@ export default {
 	INFORMATIONS_TECHNIQUES: "Información técnica",
 	JEUNESSE: "Juventud",
 	L_EQUIPE: "El equipo",
+	LOGO_ALT: "Logo MDV",
 	LUDOBHEQUE: "Ludoteca",
 	MEDIATHEQUE: 'Mediateca',
+	NAVIGATION_PRINCIPALE: "Navegación principal",
 	NOS_ENGAGEMENTS: "Nuestros compromisos",
 	NOS_PARTENAIRES: "Nuestros socios",
 	NOUS_CONTACTER: "Contáctenos",
@@ -36,6 +39,7 @@ export default {
 	RDV_CINE: "Cita cine",
 	RESIDENCE: "Residencia",
 	SEANCES: "Sesiones",
+	SITE_TITLE: "Casa del Parque Nacional y del Valle",
 	SPECTACLES: "Espectáculos",
 	TARIFICATIONS: "Tarifas",
 };

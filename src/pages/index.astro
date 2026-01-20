@@ -1,7 +1,210 @@
 ---
+import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
+import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
+import SectionBg from '@/assets/imgs/section-image.png'
+import Image from '@/components/my-image.astro'
+import { Button } from '@/components/ui/button'
+import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
+import type langs from '@/i18n/langs'
+
+const locale = (Astro.currentLocale || 'fr') as I18n
+const t = createTranslator(locale)
+
+// Hero categories with links
+const categories: Array<{key: keyof typeof langs.fr, href: string, image: string}> = [
+    {
+        key: 'ART_VIVANT',
+        href: '/art-vivant',
+        image: ExemplePersonImg.src
+    },
+    {
+        key: 'CINEMA',
+        href: '/cinema',
+        image: ExemplePersonImg.src
+    },
+    {
+        key: 'MEDIATHEQUE',
+        href: '/mediatheque',
+        image: ExemplePersonImg.src
+    },
+    {
+        key: 'EXPOSITION',
+        href: '/exposition',
+        image: ExemplePersonImg.src
+    },
+    {
+        key: 'JEUNESSE',
+        href: '/jeunesse',
+        image: ExemplePersonImg.src
+    },
+    {
+        key: 'ARTISTE',
+        href: '/artiste',
+        image: ExemplePersonImg.src
+    }
+]
 ---
 
-<Layout title="Accueil">
-	<!-- <h1 class="bg-red-500">Hey</h1> -->
+<Layout title={t('ACCUEIL_TITLE')}>
+    <main class="pb-8">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex flex-col mt-6">
+            <!-- Background image with overlay -->
+            <div class="absolute inset-0 z-0">
+                <Image
+                    src={SectionBg}
+                    alt=""
+                    role="presentation"
+                    class="absolute inset-0 w-full h-full object-cover"
+                    loading="eager"
+                    fetchpriority="high"
+                    layout="fullWidth"
+                />
+                <div class="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/30"></div>
+            </div>
+
+            <!-- Content Container -->
+            <div class="relative flex flex-col flex-1 px-8 py-16">
+                <!-- Main Title -->
+                <header class="mb-auto pt-8">
+                    <h1>
+                        {t('SITE_TITLE')}
+                    </h1>
+                </header>
+
+                <!-- Category Cards Grid -->
+                <nav class="mt-auto" aria-label={t('NAVIGATION_PRINCIPALE')}>
+                    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-7 max-w-7xl mx-auto">
+                        {categories.map((category) => (
+                            <li>
+                                <a
+                                    href={category.href}
+                                    aria-label={t(category.key)}
+                                >
+                                    <article>
+                                        <!-- Card Image -->
+                                        <!-- <figure class="relative overflow-hidden"> -->
+                                        <figure>
+                                            <Image
+                                                src={category.image}
+                                                alt={t(category.key)}
+                                                loading="lazy"
+                                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                width={200}
+                                                height={250}
+                                                layout="constrained"
+                                            />
+                                            <!-- Gradient Overlay -->
+                                            <!-- <div class="absolute inset-0 bg-linear-to-t from-black/50 via-black/5 to-transparent"></div> -->
+                                        </figure>
+
+                                        <!-- Category Title -->
+                                        <figcaption class="pt-2">
+                                            <h2 class="text-center">
+                                                {t(category.key)}
+                                            </h2>
+                                        </figcaption>
+                                    </article>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+        <section class="my-3">
+            <article class="flex gap-4 py-24">
+                <div>
+                    <h2 class="pb-4">Un espace culture et nature</h2>
+                    <p class="italic pb-6">À "La Maison du Parc National et de la Vallée", on y fait quoi ?</p>
+                    <p>
+                        La Maison du Parc national et de la vallée a été construite en 1982. Dessinée par l’architecte Monsieur Durancet, elle présente une dimension architecturale exceptionnelle. Cette maison offre une expérience culturelle unique avec une salle de spectacle et de cinéma, une médiathèque et une salle d’exposition implantées en milieu rural associées à un espace de sensibilisation à la protection de la nature avec le  Parc national des Pyrénées.<br/>
+
+                        C’est un centre culturel, un lieu unique qui propose des spectacles, des films, des expositions, des conférences, des ateliers, une médiathèque, une ludothèque, et qui héberge aussi des associations socio-culturelles à destination de la population locale ou de passage.<br/>
+
+                        Le lieu, ouvert à l’année, est porté par la commune de Luz Saint Sauveur et le Parc national des Pyrénées. Il propose une saison culturelle avec une trentaine de spectacles par an, une programmation cinéma art et essai de huit séances par semaine en moyenne, un espace médiathèque, une salle d’exposition et un accueil nature  en lien avec le Parc national.<br/>
+
+                        La Maison s’attache à offrir une programmation adaptée à tous les publics. Elle œuvre également à soutenir la démarche d’artistes du territoire ou d’ailleurs, en accueillant régulièrement des équipes en résidence. L’activité de la Maison se voit chaque année complétée par de nombreux spectacles et animations proposés par des associations et structures partenaires, que nous accueillons toujours avec joie, tant la Maison se veut un lieu de vie, de rencontres, d’échanges et de partage !<br/>
+
+                        Notre programmation artistique est soutenue par la Région Occitanie, le Département des Hautes-Pyrénées et la commune de Luz Saint Sauveur.
+                    </p>
+
+                    <Button className="mt-6">Bouton</Button>
+                </div>
+                <div class="grid">
+                    <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+                    <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+                    <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+                    <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+                    <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+                </div>
+            </article>
+        </section>
+
+         <section class="mt-6 bg-secondary-muted">
+             <article class="flex gap-4">
+                 <div>
+                     <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+                     <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+                 </div>
+                 <div>
+                     <h2 class="pb-3">Spectacles à venir</h2>
+                     <p class="italic pb-5">À "La Maison du Parc National et de la Vallée", on y fait quoi ?</p>
+                     <p>
+                         La Maison du Parc national et de la vallée a été construite en 1982. Dessinée par l’architecte Monsieur Durancet, elle présente une dimension architecturale exceptionnelle. Cette maison offre une expérience culturelle unique avec une salle de spectacle et de cinéma, une médiathèque et une salle d’exposition implantées en milieu rural associées à un espace de sensibilisation à la protection de la nature avec le  Parc national des Pyrénées.<br/>
+
+                         C’est un centre culturel, un lieu unique qui propose des spectacles, des films, des expositions, des conférences, des ateliers, une médiathèque, une ludothèque, et qui héberge aussi des associations socio-culturelles à destination de la population locale ou de passage.<br/>
+
+                         Le lieu, ouvert à l’année, est porté par la commune de Luz Saint Sauveur et le Parc national des Pyrénées. Il propose une saison culturelle avec une trentaine de spectacles par an, une programmation cinéma art et essai de huit séances par semaine en moyenne, un espace médiathèque, une salle d’exposition et un accueil nature  en lien avec le Parc national.<br/>
+
+                         La Maison s’attache à offrir une programmation adaptée à tous les publics. Elle œuvre également à soutenir la démarche d’artistes du territoire ou d’ailleurs, en accueillant régulièrement des équipes en résidence. L’activité de la Maison se voit chaque année complétée par de nombreux spectacles et animations proposés par des associations et structures partenaires, que nous accueillons toujours avec joie, tant la Maison se veut un lieu de vie, de rencontres, d’échanges et de partage !<br/>
+
+                         Notre programmation artistique est soutenue par la Région Occitanie, le Département des Hautes-Pyrénées et la commune de Luz Saint Sauveur.
+                     </p>
+                 </div>
+                 <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+             </article>
+             <nav class="mx-auto mt-6" aria-label={t('NAVIGATION_PRINCIPALE')}>
+                 <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-7 max-w-7xl mx-auto">
+                     {categories.map((category) => (
+                         <li>
+                             <a
+                                 href={category.href}
+                                 aria-label={t(category.key)}
+                             >
+                                 <article>
+                                     <!-- Card Image -->
+                                     <!-- <figure class="relative overflow-hidden"> -->
+                                     <figure>
+                                         <Image
+                                             src={category.image}
+                                             alt={t(category.key)}
+                                             loading="lazy"
+                                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                             width={200}
+                                             height={250}
+                                             layout="constrained"
+                                         />
+                                         <!-- Gradient Overlay -->
+                                         <!-- <div class="absolute inset-0 bg-linear-to-t from-black/50 via-black/5 to-transparent"></div> -->
+                                     </figure>
+
+                                     <!-- Category Title -->
+                                     <figcaption class="pt-2">
+                                         <h3 class="text-primary-foreground text-lg font-semibold uppercase text-center">
+                                             {t(category.key)}
+                                         </h3>
+                                     </figcaption>
+                                 </article>
+                             </a>
+                         </li>
+                     ))}
+                 </ul>
+             </nav>
+
+            <Button className="mt-6">Voir tous les spectacles</Button>
+         </section>
+    </main>
 </Layout>

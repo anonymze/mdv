@@ -1,10 +1,12 @@
 ---
 import { NavigationMenuDemo } from '@/components/header-menu'
 import { Button } from '@/components/ui/button'
+import Image from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 
 import type { MenuNav } from '@/types/menu'
 import { ArrowRightIcon } from 'lucide-react'
+import LogoImg from '@/assets/icons/logo.svg'
 import img1 from '@/assets/imgs/1.jpg'
 import img2 from '@/assets/imgs/2.jpg'
 import img3 from '@/assets/imgs/3.jpg'
@@ -23,7 +25,6 @@ const menuNavs: MenuNav[] = [
 				label: t('ART_VIVANT'),
 				link: 'art-vivant',
 				image: randomImg(),
-
 				subMenus: [
 					{ label: t('SPECTACLES'), link: 'art-vivant/spectacles', imageReplacement: randomImg() },
 					{ label: t('SEANCES'), link: 'art-vivant/seances', imageReplacement: randomImg() },
@@ -228,19 +229,19 @@ const menuNavs: MenuNav[] = [
 ---
 
 <header class="mt-4 flex h-16 gap-4">
-	<div class="flex h-full flex-1 justify-between bg-red-200 px-5 py-2">
+	<div class="flex h-full flex-1 justify-between bg-primary px-5 py-2">
 		<a class="block" href="/"
 			><img
-				src={img1.src}
-				width={100}
+				src={LogoImg.src}
+				width={80}
 				height={50}
-				alt="Logo MDV"
+				alt={t('LOGO_ALT')}
 				loading="eager"
-				class="h-full object-cover"
+				class="h-full object-contain"
 				fetchpriority="high"
 			/></a
 		>
 		<NavigationMenuDemo menuNavs={menuNavs} client:load />
 	</div>
-	<Button className="h-full group">Nous contacter <ArrowRightIcon className="transition-transform group-hover:translate-x-1" /></Button>
+	<Button variant={"secondary"} className="h-full group">{t('NOUS_CONTACTER')} <ArrowRightIcon className="transition-transform group-hover:translate-x-1" /></Button>
 </header>

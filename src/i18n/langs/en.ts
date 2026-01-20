@@ -1,5 +1,6 @@
 export default {
 	A_PROPOS: "About",
+	ACCUEIL_TITLE: "Home - House of the National Park and Valley",
 	ACTUALITES: "News",
 	AGENDA: "Calendar",
 	ANNEE_2023: "2023",
@@ -25,8 +26,10 @@ export default {
 	INFORMATIONS_TECHNIQUES: "Technical information",
 	JEUNESSE: "Youth",
 	L_EQUIPE: "The team",
+	LOGO_ALT: "MDV Logo",
 	LUDOBHEQUE: "Game library",
 	MEDIATHEQUE: 'Media Library',
+	NAVIGATION_PRINCIPALE: "Main navigation",
 	NOS_ENGAGEMENTS: "Our commitments",
 	NOS_PARTENAIRES: "Our partners",
 	NOUS_CONTACTER: "Contact us",
@@ -36,6 +39,7 @@ export default {
 	RDV_CINE: "Cinema meetup",
 	RESIDENCE: "Residency",
 	SEANCES: "Screenings",
+	SITE_TITLE: "House of the National Park and Valley",
 	SPECTACLES: "Shows",
 	TARIFICATIONS: "Pricing",
 }

@@ -37,5 +37,9 @@ export default {
 	ANNEE_2023: "2023",
 	INFORMATIONS_PRATIQUES: "Informations pratiques",
 	INFORMATIONS_GENERALES: "Informations générales",
-	BOUTIQUE: "Boutique"
+	BOUTIQUE: "Boutique",
+	LOGO_ALT: "Logo MDV",
+	SITE_TITLE: "Maison du Parc national et de la vallée",
+	ACCUEIL_TITLE: "Accueil - Maison du Parc national et de la vallée",
+	NAVIGATION_PRINCIPALE: "Navigation principale"
 }
