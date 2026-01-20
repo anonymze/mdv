@@ -40,7 +40,7 @@ export function SideCard({ width = 'w-72', tabText, children, ariaLabel }: SideC
 			{/* Backdrop when open */}
 			{isOpen && (
 				<div
-					className="fixed inset-0 bg-black/20 z-40 transition-opacity"
+					className="fixed inset-0 z-40 transition-opacity"
 					onClick={() => setIsOpen(false)}
 					aria-hidden="true"
 				/>
@@ -59,10 +59,10 @@ export function SideCard({ width = 'w-72', tabText, children, ariaLabel }: SideC
 				role="complementary"
 			>
 				{/* Content panel */}
-				<div className={`relative h-52 ${width} overflow-y-auto p-5 flex flex-col bg-[#C4C4F5]`}>
+				<div className={`relative h-52 ${width} overflow-y-auto p-5 flex flex-col bg-primary`}>
 					{/* Vertical text tab - visible when closed */}
 					<div
-						className={`absolute left-0 top-0 bg-[#C4C4F5] h-52 w-14 flex gap-2 items-center justify-center transition-opacity duration-300 ${
+						className={`absolute left-0 top-0 bg-primary h-52 w-14 flex gap-2 items-center justify-center transition-opacity duration-300 ${
 							isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
 						}`}
 						aria-hidden={isOpen}
@@ -78,7 +78,7 @@ export function SideCard({ width = 'w-72', tabText, children, ariaLabel }: SideC
 								return acc
 							}, [])
 							return (
-                <span key={idx} className={cn("flex flex-col gap-px text-black font-medium text-xs text-center", idx === 1 && "text-start")} aria-hidden="true">
+                <span key={idx} className={cn("flex flex-col gap-px text-primary-foreground font-medium text-xs text-center uppercase", idx === 1 && "text-start")} aria-hidden="true">
 									{letters.map((letter, i) => (
 										<span key={i}>{letter}</span>
 									))}

@@ -1,14 +1,15 @@
 ---
 import { Image as UnpicImage } from '@unpic/astro'
 import type { ImageMetadata } from 'astro'
+import type { AriaRole } from 'react'
 
 
 
 export interface Props {
     src: string | ImageMetadata
     alt: string
-    width: number
-    height: number
+    width?: number
+    height?: number
     loading?: 'lazy' | 'eager'
     class?: string
     role?: any

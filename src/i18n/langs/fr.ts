@@ -41,5 +41,9 @@ export default {
 	LOGO_ALT: "Logo MDV",
 	SITE_TITLE: "Maison du Parc national et de la vallée",
 	ACCUEIL_TITLE: "Accueil - Maison du Parc national et de la vallée",
-	NAVIGATION_PRINCIPALE: "Navigation principale"
+	NAVIGATION_PRINCIPALE: "Navigation principale",
+	D_OUVERTURE: "d'ouverture",
+	PANNEAU_HORAIRES_OUVERTURE: "Panneau des horaires d'ouverture",
+	HORAIRES_OUVERTURE: "Horaires d'ouverture",
+	OUVERT_HEURES_ARIA: "Ouvert de 14 heures à 19 heures"
 }

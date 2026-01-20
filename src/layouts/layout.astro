@@ -1,15 +1,16 @@
 ---
 import { HoursSideCard } from '@/components/hours-side-card'
+import type { I18n } from '@/i18n/translations'
 import { Font } from 'astro:assets'
 import '../styles/global.css'
 import Header from './header.astro'
-
 export interface Props {
 	title: string
 	description?: string
 }
 
 const { title, description = '' } = Astro.props
+const locale = (Astro.currentLocale || 'fr') as I18n
 
 // Multilingual metadata
 const metadata: {
@@ -93,6 +94,6 @@ const pageDescription = description || meta.defaultDescription
 			<Header />
 			<slot />
 		</div>
-		<HoursSideCard client:load />
+		<HoursSideCard locale={locale} client:load />
 	</body>
 </html>
