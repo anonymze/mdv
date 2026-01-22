@@ -2,8 +2,9 @@
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
 import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
 import SectionBg from '@/assets/imgs/section-image.png'
-import Image from '@/components/my-image.astro'
+import MyImage from '@/components/my-image.astro'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import type langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
@@ -52,7 +53,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
         <section class="relative min-h-screen flex flex-col mt-6">
             <!-- Background image with overlay -->
             <div class="absolute inset-0 z-0">
-                <Image
+                <MyImage
                     src={SectionBg}
                     alt=""
                     role="presentation"
@@ -60,6 +61,8 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                     loading="eager"
                     fetchpriority="high"
                     layout="fullWidth"
+                    width={600}
+                    height={600}
                 />
                 <div class="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/30"></div>
             </div>
@@ -86,7 +89,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                                         <!-- Card Image -->
                                         <!-- <figure class="relative overflow-hidden"> -->
                                         <figure>
-                                            <Image
+                                            <MyImage
                                                 src={category.image}
                                                 alt={t(category.key)}
                                                 loading="lazy"
@@ -112,99 +115,293 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
             </div>
         </section>
 
-        <section class="my-3 py-24 px-8">
+        <section class="section-type">
             <article class="flex gap-4 ">
                 <div class="w-2/3">
-                    <h2 class="pb-3">Un espace culture et nature</h2>
-                    <p class="italic pb-6">À "La Maison du Parc National et de la Vallée", on y fait quoi ?</p>
+                    <h2 class="pb-3">{t('ESPACE_CULTURE_TITRE')}</h2>
+                    <p class="italic pb-6">{t('ESPACE_CULTURE_INTRO')}</p>
                     <p>
-                        La Maison du Parc national et de la vallée a été construite en 1982. Dessinée par l’architecte Monsieur Durancet, elle présente une dimension architecturale exceptionnelle. Cette maison offre une expérience culturelle unique avec une salle de spectacle et de cinéma, une médiathèque et une salle d’exposition implantées en milieu rural associées à un espace de sensibilisation à la protection de la nature avec le  Parc national des Pyrénées.<br/><br/>
-
-                        C’est un centre culturel, un lieu unique qui propose des spectacles, des films, des expositions, des conférences, des ateliers, une médiathèque, une ludothèque, et qui héberge aussi des associations socio-culturelles à destination de la population locale ou de passage.<br/><br/>
-
-                        Le lieu, ouvert à l’année, est porté par la commune de Luz Saint Sauveur et le Parc national des Pyrénées. Il propose une saison culturelle avec une trentaine de spectacles par an, une programmation cinéma art et essai de huit séances par semaine en moyenne, un espace médiathèque, une salle d’exposition et un accueil nature  en lien avec le Parc national.<br/><br/>
-
-                        La Maison s’attache à offrir une programmation adaptée à tous les publics. Elle œuvre également à soutenir la démarche d’artistes du territoire ou d’ailleurs, en accueillant régulièrement des équipes en résidence. L’activité de la Maison se voit chaque année complétée par de nombreux spectacles et animations proposés par des associations et structures partenaires, que nous accueillons toujours avec joie, tant la Maison se veut un lieu de vie, de rencontres, d’échanges et de partage !<br/><br/>
-
-                        Notre programmation artistique est soutenue par la Région Occitanie, le Département des Hautes-Pyrénées et la commune de Luz Saint Sauveur.
+                        {t('ESPACE_CULTURE_DESC_PART1')}<br/><br/>
+                        {t('ESPACE_CULTURE_DESC_PART2')}<br/><br/>
+                        {t('ESPACE_CULTURE_DESC_PART3')}<br/><br/>
+                        {t('ESPACE_CULTURE_DESC_PART4')}<br/><br/>
+                        {t('ESPACE_CULTURE_DESC_PART5')}
                     </p>
                 </div>
                 <div class="w-1/3 grid grid-cols-3 gap-4">
-                    <Image alt="" src={EspaceCultureImg} width={320} height={140} layout="fullWidth" class="col-span-2" />
-                    <Image alt="" src={EspaceCultureImg} width={200} height={140} layout="fullWidth" class="col-span-1" />
-                    <Image alt="" src={EspaceCultureImg} width={640} height={250} layout="constrained" class="col-span-3" />
-                    <Image alt="" src={EspaceCultureImg} width={200} height={140} layout="fullWidth" class="col-span-1" />
-                    <Image alt="" src={EspaceCultureImg} width={320} height={140} layout="fullWidth" class="col-span-2" />
+                    <MyImage alt="" src={EspaceCultureImg} width={320} height={140} layout="fullWidth" class="col-span-2 h-full object-cover" />
+                    <MyImage alt="" src={EspaceCultureImg} width={200} height={140} layout="fullWidth" class="col-span-1 h-full object-cover" />
+                    <MyImage alt="" src={EspaceCultureImg} width={640} height={250} layout="constrained" class="col-span-3 h-full object-cover" />
+                    <MyImage alt="" src={EspaceCultureImg} width={200} height={140} layout="fullWidth" class="col-span-1 h-full object-cover" />
+                    <MyImage alt="" src={EspaceCultureImg} width={320} height={140} layout="fullWidth" class="col-span-2 h-full object-cover" />
                 </div>
             </article>
 
 
-            <Button link="/"  size={"xl"} className="mt-12">Bouton</Button>
+            <Button link="/"  size={"xl"} className="mt-12">{t('BOUTON_LIEN')}</Button>
 
         </section>
 
-         <section class="mt-3 py-24 px-8 bg-secondary-muted">
-             <article class="flex gap-4 ">
-                 <div>
-                     <Image alt="" src={EspaceCultureImg} width={200} height={200} />
-                     <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+         <section class="section-type bg-secondary-muted/40">
+             <article class="flex gap-5">
+                 <div class="w-2/12">
+                     <MyImage alt="" src={EspaceCultureImg} width={280} height={320} layout="fullWidth" class="mb-6" />
+                     <MyImage alt="" src={EspaceCultureImg} width={280} height={320} layout="fullWidth" />
                  </div>
-                 <div>
-                     <h2 class="pb-3">Spectacles à venir</h2>
-                     <p class="italic pb-6">À "La Maison du Parc National et de la Vallée", on y fait quoi ?</p>
+                 <div class="w-7/12">
+                     <h2 class="pb-3">{t('SPECTACLES_A_VENIR')}</h2>
+                     <p class="italic pb-6">{t('SPECTACLES_INTRO')}</p>
                      <p>
-                         La Maison du Parc national et de la vallée a été construite en 1982. Dessinée par l’architecte Monsieur Durancet, elle présente une dimension architecturale exceptionnelle. Cette maison offre une expérience culturelle unique avec une salle de spectacle et de cinéma, une médiathèque et une salle d’exposition implantées en milieu rural associées à un espace de sensibilisation à la protection de la nature avec le  Parc national des Pyrénées.<br/>
-
-                         C’est un centre culturel, un lieu unique qui propose des spectacles, des films, des expositions, des conférences, des ateliers, une médiathèque, une ludothèque, et qui héberge aussi des associations socio-culturelles à destination de la population locale ou de passage.<br/>
-
-                         Le lieu, ouvert à l’année, est porté par la commune de Luz Saint Sauveur et le Parc national des Pyrénées. Il propose une saison culturelle avec une trentaine de spectacles par an, une programmation cinéma art et essai de huit séances par semaine en moyenne, un espace médiathèque, une salle d’exposition et un accueil nature  en lien avec le Parc national.<br/>
-
-                         La Maison s’attache à offrir une programmation adaptée à tous les publics. Elle œuvre également à soutenir la démarche d’artistes du territoire ou d’ailleurs, en accueillant régulièrement des équipes en résidence. L’activité de la Maison se voit chaque année complétée par de nombreux spectacles et animations proposés par des associations et structures partenaires, que nous accueillons toujours avec joie, tant la Maison se veut un lieu de vie, de rencontres, d’échanges et de partage !<br/>
-
-                         Notre programmation artistique est soutenue par la Région Occitanie, le Département des Hautes-Pyrénées et la commune de Luz Saint Sauveur.
+                        {t('ESPACE_CULTURE_DESC_PART1')}<br/>
+                        {t('ESPACE_CULTURE_DESC_PART2')}<br/>
+                        {t('ESPACE_CULTURE_DESC_PART3')}<br/>
+                        {t('ESPACE_CULTURE_DESC_PART4')}<br/>
+                        {t('ESPACE_CULTURE_DESC_PART5')}
                      </p>
                  </div>
-                 <Image alt="" src={EspaceCultureImg} width={200} height={200} />
+                 <div class="w-3/12">
+                     <MyImage class="w-2/6" alt="" src={EspaceCultureImg} width={550} height={664} layout="fullWidth" />
+                 </div>
              </article>
-             <nav class="mx-auto mt-6" aria-label={t('NAVIGATION_PRINCIPALE')}>
-                 <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-7 max-w-7xl mx-auto">
-                     {categories.map((category) => (
-                         <li>
-                             <a
-                                 href={category.href}
-                                 aria-label={t(category.key)}
-                             >
-                                 <article>
-                                     <!-- Card Image -->
-                                     <!-- <figure class="relative overflow-hidden"> -->
-                                     <figure>
-                                         <Image
-                                             src={category.image}
-                                             alt={t(category.key)}
-                                             loading="lazy"
-                                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                             width={200}
-                                             height={250}
-                                             layout="constrained"
-                                         />
-                                         <!-- Gradient Overlay -->
-                                         <!-- <div class="absolute inset-0 bg-linear-to-t from-black/50 via-black/5 to-transparent"></div> -->
-                                     </figure>
 
-                                     <!-- Category Title -->
-                                     <figcaption class="pt-2">
-                                         <h3 class="text-primary-foreground text-lg font-semibold uppercase text-center">
-                                             {t(category.key)}
-                                         </h3>
-                                     </figcaption>
-                                 </article>
-                             </a>
-                         </li>
-                     ))}
-                 </ul>
-             </nav>
+             <div class="my-16 flex gap-4">
+                 <article class="group bg-white w-full shadow-xs">
+                     <div class="overflow-hidden">
+                         <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                     </div>
+                     <figure class="p-4">
+                         <figcaption>
+                             <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+                             <time class="italic text-sm"
+                    datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                             <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
+                         </figcaption>
+                     </figure>
+                 </article>
+                 <article class="group bg-white w-full shadow-xs">
+                     <div class="overflow-hidden">
+                         <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                     </div>
+                     <figure class="p-4">
+                         <figcaption>
+                             <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+                             <time class="italic text-sm"
+                    datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                             <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
+                         </figcaption>
+                     </figure>
+                 </article>
+                 <article class="group bg-white w-full shadow-xs">
+                     <div class="overflow-hidden">
+                         <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                     </div>
+                     <figure class="p-4">
+                         <figcaption>
+                             <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+                             <time class="italic text-sm"
+                    datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                             <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
+                         </figcaption>
+                     </figure>
+                 </article>
+                 <article class="group bg-white w-full shadow-xs">
+                     <div class="overflow-hidden">
+                         <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                     </div>
+                     <figure class="p-4">
+                         <figcaption>
+                             <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+                             <time class="italic text-sm"
+                    datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                             <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
+                         </figcaption>
+                     </figure>
+                 </article>
+             </div>
 
-            <Button className="mt-20">Voir tous les spectacles</Button>
+            <Button link="/"  size={"xl"}>{t('VOIR_TOUS_SPECTACLES')}</Button>
+         </section>
+
+         <section class="section-type">
+             <article>
+
+                     <h2 class="pb-3">{t('SEANCES_A_VENIR')}</h2>
+                     <p class="italic pb-6">{t('CINEMA_INTRO')}</p>
+                     <p class="w-2/3">
+                         {t('CINEMA_DESC')}
+                     </p>
+
+                     <div class="my-16 grid grid-cols-2 gap-5">
+                         <article class="group w-full">
+                             <div class="overflow-hidden">
+                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                             </div>
+                             <figure class="p-4">
+                                 <figcaption>
+                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
+                                     <p class="italic text-sm pb-1"
+                           >{t('EVENT_DESC_EXAMPLE')}</p>
+                           <time class="italic text-sm"
+                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                                 </figcaption>
+                             </figure>
+                         </article>
+                         <article class="group w-full">
+                             <div class="overflow-hidden">
+                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                             </div>
+                             <figure class="p-4">
+                                 <figcaption>
+                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
+                                     <p class="italic text-sm pb-1"
+                           >{t('EVENT_DESC_EXAMPLE')}</p>
+                           <time class="italic text-sm"
+                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                                 </figcaption>
+                             </figure>
+                         </article>
+                         <article class="group w-full">
+                             <div class="overflow-hidden">
+                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                             </div>
+                             <figure class="p-4">
+                                 <figcaption>
+                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
+                                     <p class="italic text-sm pb-1"
+                           >{t('EVENT_DESC_EXAMPLE')}</p>
+                           <time class="italic text-sm"
+                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                                 </figcaption>
+                             </figure>
+                         </article>
+                         <article class="group w-full">
+                             <div class="overflow-hidden">
+                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                             </div>
+                             <figure class="p-4">
+                                 <figcaption>
+                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
+                                     <p class="italic text-sm pb-1"
+                           >{t('EVENT_DESC_EXAMPLE')}</p>
+                           <time class="italic text-sm"
+                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                                 </figcaption>
+                             </figure>
+                         </article>
+                         <article class="group w-full">
+                             <div class="overflow-hidden">
+                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                             </div>
+                             <figure class="p-4">
+                                 <figcaption>
+                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
+                                     <p class="italic text-sm pb-1"
+                           >{t('EVENT_DESC_EXAMPLE')}</p>
+                           <time class="italic text-sm"
+                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                                 </figcaption>
+                             </figure>
+                         </article>
+                         <article class="group w-full">
+                             <div class="overflow-hidden">
+                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                             </div>
+                             <figure class="p-4">
+                                 <figcaption>
+                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
+                                     <p class="italic text-sm pb-1"
+                           >{t('EVENT_DESC_EXAMPLE')}</p>
+                           <time class="italic text-sm"
+                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+                                 </figcaption>
+                             </figure>
+                         </article>
+                     </div>
+
+             </article>
+
+
+             <Button link="/"  size={"xl"} className="mt-12">{t('VOIR_TOUTES_SEANCES')}</Button>
+
+         </section>
+
+         <section class="section-type bg-primary-muted/40">
+             <article class="grid grid-cols-2 gap-5">
+                 <div class="flex flex-col">
+                     <h2 class="pb-3 text-secondary">L'exposition du moment</h2>
+                     <h3 class="pb-3 text-secondary">Cosmogénèse - Emmanuelle Williot</h3>
+                     <p class="italic pb-16">Du mercredi 7 au samedi 31 janvier</p>
+                     <p>
+                         Les règles qui régissent l’univers, le mettent en scène, sont les mêmes pour tous, pour toutes choses. Pour Emmanuelle Williot, l’acte de création trouve son sens dans la recherche d’une réalité qui nous dépasse, que nous ne pouvons qu’effleurer du bout des doigts. La quête du monde sensible par la pratique de la peinture amène dans un lieu qui a sa propre vie, sa temporalité, ses propres règles, et qui n’a pour limites que celles que nous nous imposons. Peindre plonge dans une condition sensible qui éclaire sous un jour nouveau l’acte de création en tant que tel et le milieu dans lequel nous évoluons. Le cheminement du peintre consiste à avancer à tâtons dans cette pénombre, à façonner et transcender les limites de nos sensations, de nos perceptions à la recherche de nouvelles interprétations de notre monde.<br><br>
+                         Ce n’est pas un hasard si les ramures des arbres ressemblent étrangement au déploiement de nos tissus pulmonaires. Il s’agit du même principe...
+                     </p>
+
+
+                     <Button variant={"secondary"} link="/"  size={"xl"}  className='mt-auto w-fit'>En savoir plus</Button>
+                 </div>
+                 <div class="space-y-5">
+                     <!-- Top image full width -->
+                     <MyImage alt="" src={EspaceCultureImg} width={800} height={300} layout="fullWidth" />
+
+                     <!-- Bottom grid with 2 columns -->
+                     <div class="grid grid-cols-2 gap-5">
+                         <!-- Left column -->
+                         <div class="space-y-5">
+                             <MyImage alt="" src={EspaceCultureImg} width={400} height={180} layout="fullWidth" />
+                             <MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" />
+                         </div>
+
+                         <!-- Right column -->
+                         <div class="space-y-5">
+                             <MyImage alt="" src={EspaceCultureImg} width={400} height={430} layout="fullWidth" />
+                             <MyImage alt="" src={EspaceCultureImg} width={400} height={120} layout="fullWidth" />
+                         </div>
+                     </div>
+                 </div>
+               </article>
+         </section>
+
+         <section class="section-type">
+             <article class="max-w-200 mx-auto">
+                 <h2 class="pb-4">{t('NEWSLETTER_TITRE')}</h2>
+                 <p class="italic pb-7">{t('NEWSLETTER_INTRO')}</p>
+                <p class="pb-8">{t('NEWSLETTER_DESC')}</p>
+
+                <div class="flex items-center gap-4">
+                    <Input className="w-full h-12 bg-secondary-muted/40 border-none" placeholder={t('EMAIL_PLACEHOLDER')} />
+                    <Button size={"xl"}>{t('NEWSLETTER_BOUTON')}</Button>
+                </div>
+             </article>
+         </section>
+
+         <section class="section-type bg-secondary-muted/40">
+             <article class="grid grid-cols-[1fr_2fr] gap-16">
+                 <!-- Left side: Images grid -->
+                 <div class="grid grid-cols-2 gap-5">
+                     <MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
+                     <MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
+                     <MyImage alt="" src={EspaceCultureImg} width={400} height={200} layout="fullWidth" class="col-span-2" />
+                     <MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
+                     <MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
+                 </div>
+
+                 <!-- Right side: Content -->
+                 <div>
+                     <h2 class="pb-3 text-secondary">{t('VALEURS_TITRE')}</h2>
+                     <p class="italic pb-6">{t('VALEURS_INTRO')}</p>
+                     <p>
+                         {t('VALEURS_DESC')}
+                     </p>
+                 </div>
+             </article>
          </section>
     </main>
 </Layout>
+
+<style>
+    .section-type {
+        margin-block: .75rem;
+        padding-block: 6rem;
+        padding-inline: 2rem;
+    }
+</style>
