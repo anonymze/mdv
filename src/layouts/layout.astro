@@ -1,9 +1,10 @@
 ---
-import { HoursSideCard } from '@/components/hours-side-card'
+import HoursSideCard from '@/components/hours-side-card.astro'
 import type { I18n } from '@/i18n/translations'
 import { Font } from 'astro:assets'
 import '../styles/global.css'
 import Header from './header.astro'
+import EventsSideCard from '@/components/events-side-card.astro'
 export interface Props {
 	title: string
 	description?: string
@@ -94,6 +95,7 @@ const pageDescription = description || meta.defaultDescription
 			<Header />
 			<slot />
 		</div>
-		<HoursSideCard locale={locale} client:load />
+		<HoursSideCard locale={locale} />
+		<EventsSideCard locale={locale} />
 	</body>
 </html>

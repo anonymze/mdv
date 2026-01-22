@@ -3,12 +3,21 @@ import * as React from 'react'
 
 interface SideCardProps {
 	width?: string
+	height?: string
+	position?: string
 	tabText: string[]
 	children: React.ReactNode
 	ariaLabel: string
 }
 
-export function SideCard({ width = 'w-72', tabText, children, ariaLabel }: SideCardProps) {
+export function SideCard({
+	width = 'w-72',
+	height = 'h-50',
+	position = 'top-1/4',
+	tabText,
+	children,
+	ariaLabel
+}: SideCardProps) {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const [justClosed, setJustClosed] = React.useState(false)
 
@@ -39,16 +48,12 @@ export function SideCard({ width = 'w-72', tabText, children, ariaLabel }: SideC
 		<>
 			{/* Backdrop when open */}
 			{isOpen && (
-				<div
-					className="fixed inset-0 z-40 transition-opacity"
-					onClick={() => setIsOpen(false)}
-					aria-hidden="true"
-				/>
+				<div className="fixed inset-0 z-40 transition-opacity" onClick={() => setIsOpen(false)} aria-hidden="true" />
 			)}
 
 			{/* Side card - main container */}
 			<aside
-				className={`fixed right-0 top-1/4 z-50 transition-transform duration-300 ${
+				className={`fixed ${position} right-0 z-50 transition-transform duration-300 ${
 					isOpen
 						? 'translate-x-0'
 						: `translate-x-[calc(100%-56px)] ${!justClosed ? 'hover:translate-x-[calc(100%-70px)]' : ''} cursor-pointer`
@@ -59,11 +64,11 @@ export function SideCard({ width = 'w-72', tabText, children, ariaLabel }: SideC
 				role="complementary"
 			>
 				{/* Content panel */}
-				<div className={`relative h-52 ${width} overflow-y-auto p-5 flex flex-col bg-primary`}>
+				<div className={`relative ${height} ${width} bg-primary flex flex-col overflow-y-auto`}>
 					{/* Vertical text tab - visible when closed */}
 					<div
-						className={`absolute left-0 top-0 bg-primary h-52 w-14 flex gap-2 items-center justify-center transition-opacity duration-300 ${
-							isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
+						className={`bg-primary absolute top-0 left-0 flex ${height} w-14 items-center justify-center gap-2 transition-opacity duration-300 ${
+							isOpen ? 'pointer-events-none opacity-0' : 'opacity-100'
 						}`}
 						aria-hidden={isOpen}
 					>
@@ -78,7 +83,14 @@ export function SideCard({ width = 'w-72', tabText, children, ariaLabel }: SideC
 								return acc
 							}, [])
 							return (
-                <span key={idx} className={cn("flex flex-col gap-px text-primary-foreground font-medium text-xs text-center uppercase", idx === 1 && "text-start")} aria-hidden="true">
+								<span
+									key={idx}
+									className={cn(
+										'text-primary-foreground flex flex-col gap-px text-center text-xs font-medium uppercase',
+										idx === 1 && 'text-start'
+									)}
+									aria-hidden="true"
+								>
 									{letters.map((letter, i) => (
 										<span key={i}>{letter}</span>
 									))}

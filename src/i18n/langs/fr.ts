@@ -45,5 +45,9 @@ export default {
 	D_OUVERTURE: "d'ouverture",
 	PANNEAU_HORAIRES_OUVERTURE: "Panneau des horaires d'ouverture",
 	HORAIRES_OUVERTURE: "Horaires d'ouverture",
-	OUVERT_HEURES_ARIA: "Ouvert de 14 heures à 19 heures"
+	OUVERT_HEURES_ARIA: "Ouvert de 14 heures à 19 heures",
+	EVENEMENT: "Évènement",
+	IMMANQUABLE: "immanquable",
+	PANNEAU_EVENEMENT_IMMANQUABLE: "Panneau de l'évènement immanquable",
+	EVENEMENT_IMMANQUABLE: "L'évènement immanquable"
 }

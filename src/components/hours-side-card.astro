@@ -1,0 +1,36 @@
+---
+import { createTranslator, type I18n } from '@/i18n/translations'
+import { SideCard } from './side-card'
+
+interface Props {
+	locale: I18n
+}
+
+const { locale } = Astro.props
+const t = createTranslator(locale)
+---
+
+<SideCard
+	client:load
+	tabText={[t('HORAIRES'), t('D_OUVERTURE')]}
+	ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}
+>
+	<div class="flex h-full flex-col items-start border-l-12 border-white px-10 py-7 text-left">
+		<p class="text-primary-foreground pb-5 text-xl">{t('HORAIRES_OUVERTURE')}</p>
+
+		<hr class="mb-4 w-full h-px bg-white/40 border-0" />
+
+		<p class="text-primary-foreground pb-3">
+			<time datetime="2024-12-02">Mardi 02 Décembre</time>
+		</p>
+
+		<div itemscope itemtype="https://schema.org/OpeningHoursSpecification">
+			<meta itemprop="dayOfWeek" content="Tuesday" />
+			<meta itemprop="opens" content="14:00" />
+			<meta itemprop="closes" content="19:00" />
+			<p class="text-primary-foreground text-3xl font-bold" aria-label={t('OUVERT_HEURES_ARIA')}>
+				<time datetime="14:00">14h</time> - <time datetime="19:00">19h</time>
+			</p>
+		</div>
+	</div>
+</SideCard>
