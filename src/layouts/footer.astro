@@ -4,6 +4,7 @@ import MyImage from '@/components/my-image.astro'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { createTranslator, type I18n } from '@/i18n/translations'
+import { getMenuNavs } from '@/lib/menu-navs'
 
 interface Props {
 	locale: I18n
@@ -11,7 +12,10 @@ interface Props {
 
 const { locale } = Astro.props
 const t = createTranslator(locale)
+const menuNavs = getMenuNavs(t)
 
+const espacesArtistiques = menuNavs[0]?.subMenus || []
+const parcNational = menuNavs[1]?.subMenus || []
 ---
 
 <footer class="bg-primary text-primary-foreground space-y-14 px-10 py-20">
@@ -43,7 +47,9 @@ const t = createTranslator(locale)
 					<h4 class="tracking-wider">{t('HORAIRES')}</h4>
 					<hr class="mb-4 border-white/40" />
 					<p class="pl-4 text-sm">
-						{t('HORAIRES_PART1')} <br /> {t('HORAIRES_PART2')}
+						{t('HORAIRES_PART1')}
+						<br />
+						{t('HORAIRES_PART2')}
 					</p>
 				</div>
 			</div>
@@ -58,12 +64,32 @@ const t = createTranslator(locale)
 				<div>
 					<h4 class="tracking-wider">{t('ESPACES_ARTISTIQUES')}</h4>
 					<hr class="mb-4 border-white/40" />
-					<p class="pl-4 text-sm">24, Place Saint Clément <br />65120 - LUZ-SAINT-SAUVEUR</p>
+					<ul class="space-y-2 pl-4">
+						{
+							espacesArtistiques.map((item) => (
+								<li>
+									<a href={`/${item.link}`} class="text-sm hover:underline">
+										{item.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
 				</div>
 				<div>
 					<h4 class="tracking-wider">Maison de la vallée</h4>
 					<hr class="mb-4 border-white/40" />
-					<p class="pl-4 text-sm">24, Place Saint Clément <br />65120 - LUZ-SAINT-SAUVEUR</p>
+					<ul class="space-y-2 pl-4">
+						{
+							parcNational.map((item) => (
+								<li>
+									<a href={`/${item.link}`} class="text-sm hover:underline">
+										{item.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -82,14 +108,11 @@ const t = createTranslator(locale)
 		<h3 class="text-primary-foreground pb-4">{t('NOS_PARTENAIRES')}</h3>
 
 		<div class="flex items-center justify-center gap-5">
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} layout="constrained" />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} layout="constrained" />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} layout="constrained" />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} layout="constrained" />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} layout="constrained" />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} layout="constrained" />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} layout="constrained" />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} layout="constrained" />
+			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
+			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
+			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
+			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
+			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
 		</div>
 	</div>
 </footer>

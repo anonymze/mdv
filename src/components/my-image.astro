@@ -2,41 +2,41 @@
 import { Image as UnpicImage } from '@unpic/astro'
 import type { ImageMetadata } from 'astro'
 
-
-
 export interface Props {
-    src: string | ImageMetadata
-    alt: string
-    width: number
-    height: number
-    loading?: 'lazy' | 'eager'
-    class?: string
-    role?: any
-    fetchpriority?: 'high' | 'low' | undefined
-    aspectRatio?: number
-    layout?: 'fixed' | 'constrained' | 'fullWidth'
-    placeholder?: 'blur' | 'none'
-    background?: string
-    breakpoints?: number[]
-    sizes?: string
+	src: string | ImageMetadata
+	alt: string
+	width: number
+	height: number
+	loading?: 'lazy' | 'eager'
+	priority?: boolean
+	class?: string
+	role?: any
+	fetchpriority?: 'high' | 'low' | undefined
+	aspectRatio?: number
+	layout?: 'fixed' | 'constrained' | 'fullWidth'
+	placeholder?: 'blur' | 'none'
+	background?: string
+	breakpoints?: number[]
+	sizes?: string
 }
 
 const {
-    src,
-    alt,
-    width,
-    height,
-    loading = 'lazy',
-    class: className,
-    role,
-    fetchpriority,
-    aspectRatio,
-    layout = 'constrained',
-    placeholder,
-    background,
-    breakpoints,
-    sizes,
-    ...rest
+	src,
+	alt,
+	width,
+	height,
+	loading = 'lazy',
+	class: className,
+	role,
+	fetchpriority,
+	aspectRatio,
+	layout = 'constrained',
+	placeholder,
+	background,
+	breakpoints,
+	priority,
+	sizes,
+	...rest
 } = Astro.props
 
 // Handle Astro image imports (ImageMetadata) and string URLs
@@ -49,19 +49,20 @@ const imageSrc = typeof src === 'string' ? src : src.src
     The component interface will remain the same.
 -->
 <UnpicImage
-    src={imageSrc}
-    alt={alt}
-    width={width}
-    height={height}
-    loading={loading}
-    class={className}
-    role={role}
-    fetchpriority={fetchpriority}
-    aspectRatio={aspectRatio}
-    layout={layout}
-    placeholder={placeholder}
-    background={background}
-    breakpoints={breakpoints}
-    sizes={sizes}
-    {...rest}
+	src={imageSrc}
+	alt={alt}
+	width={width}
+	height={height}
+	loading={loading}
+	class={className}
+	role={role}
+	fetchpriority={fetchpriority}
+	aspectRatio={aspectRatio}
+	layout={layout}
+	placeholder={placeholder}
+	background={background}
+	breakpoints={breakpoints}
+	sizes={sizes}
+	priority={priority}
+	{...rest}
 />
