@@ -1,5 +1,5 @@
 ---
-import LogoMDV from '@/assets/icons/logo.svg'
+import logoSvg from '@/assets/icons/logo.svg'
 import MyImage from '@/components/my-image.astro'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -26,10 +26,10 @@ const parcNational = menuNavs[1]?.subMenus || []
 
 <footer class="bg-primary text-primary-foreground space-y-14 px-10 py-20">
 	<!-- Top section: Logo, Info, Site Map, Newsletter -->
-	<div class="flex gap-4">
+	<div class="flex items-start gap-6">
 		<!-- Logo -->
 
-		<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={200} height={200} />
+		<img src={logoSvg.src} alt={t('LOGO_ALT')} class="w-42" />
 
 		<!-- Informations pratiques -->
 		<div class="w-full">

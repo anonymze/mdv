@@ -84,9 +84,5 @@ export default {
 	HORAIRES_PART1: "Du lundi au samedi de 14h à 19h, dimanche de 17h à 19h",
 	HORAIRES_PART2: "Vacances d'été et d'hiver, du lundi au dimanche de 14h à 19h",
 	EXPO_MOMENT_TITRE: "L'exposition du moment",
-	EXPO_MOMENT_NOM: "Cosmogénèse - Emmanuelle Williot",
-	EXPO_MOMENT_DATES: "Du mercredi 7 au samedi 31 janvier",
-	EXPO_MOMENT_DESC_PART1: "Les règles qui régissent l'univers, le mettent en scène, sont les mêmes pour tous, pour toutes choses. Pour Emmanuelle Williot, l'acte de création trouve son sens dans la recherche d'une réalité qui nous dépasse, que nous ne pouvons qu'effleurer du bout des doigts. La quête du monde sensible par la pratique de la peinture amène dans un lieu qui a sa propre vie, sa temporalité, ses propres règles, et qui n'a pour limites que celles que nous nous imposons. Peindre plonge dans une condition sensible qui éclaire sous un jour nouveau l'acte de création en tant que tel et le milieu dans lequel nous évoluons. Le cheminement du peintre consiste à avancer à tâtons dans cette pénombre, à façonner et transcender les limites de nos sensations, de nos perceptions à la recherche de nouvelles interprétations de notre monde.",
-	EXPO_MOMENT_DESC_PART2: "Ce n'est pas un hasard si les ramures des arbres ressemblent étrangement au déploiement de nos tissus pulmonaires. Il s'agit du même principe...",
 	EN_SAVOIR_PLUS: "En savoir plus"
 }
