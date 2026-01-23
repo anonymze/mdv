@@ -115,7 +115,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
             </div>
         </section>
 
-        <section class="section-">
+        <section class="section-default">
             <article class="flex gap-4 ">
                 <div class="w-2/3">
                     <h2 class="pb-3">{t('ESPACE_CULTURE_TITRE')}</h2>
@@ -142,7 +142,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
 
         </section>
 
-         <section class="section- bg-secondary-muted/40">
+         <section class="section-default bg-secondary-muted/40">
              <article class="flex gap-5">
                  <div class="w-2/12">
                      <MyImage alt="" src={EspaceCultureImg} width={280} height={320} layout="fullWidth" class="mb-6" />
@@ -222,9 +222,8 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
             <Button link="/"  size={"xl"}>{t('VOIR_TOUS_SPECTACLES')}</Button>
          </section>
 
-         <section class="section-">
+         <section class="section-default">
              <article>
-
                      <h2 class="pb-3">{t('SEANCES_A_VENIR')}</h2>
                      <p class="distinguished pb-6">{t('CINEMA_INTRO')}</p>
                      <p class="w-2/3">
@@ -236,7 +235,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                              <div class="overflow-hidden">
                                  <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                              </div>
-                             <figure class="p-4">
+                             <figure class="py-4">
                                  <figcaption>
                                      <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
                                      <p class="italic text-sm pb-1"
@@ -250,7 +249,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                              <div class="overflow-hidden">
                                  <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                              </div>
-                             <figure class="p-4">
+                             <figure class="py-4">
                                  <figcaption>
                                      <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
                                      <p class="italic text-sm pb-1"
@@ -264,7 +263,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                              <div class="overflow-hidden">
                                  <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                              </div>
-                             <figure class="p-4">
+                             <figure class="py-4">
                                  <figcaption>
                                      <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
                                      <p class="italic text-sm pb-1"
@@ -278,7 +277,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                              <div class="overflow-hidden">
                                  <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                              </div>
-                             <figure class="p-4">
+                             <figure class="py-4">
                                  <figcaption>
                                      <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
                                      <p class="italic text-sm pb-1"
@@ -292,7 +291,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                              <div class="overflow-hidden">
                                  <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                              </div>
-                             <figure class="p-4">
+                             <figure class="py-4">
                                  <figcaption>
                                      <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
                                      <p class="italic text-sm pb-1"
@@ -306,7 +305,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                              <div class="overflow-hidden">
                                  <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                              </div>
-                             <figure class="p-4">
+                             <figure class="py-4">
                                  <figcaption>
                                      <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
                                      <p class="italic text-sm pb-1"
@@ -325,19 +324,19 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
 
          </section>
 
-         <section class="section- bg-primary-muted/40">
+         <section class="section-default bg-primary-muted/40">
              <article class="grid grid-cols-2 gap-5">
                  <div class="flex flex-col">
-                     <h2 class="pb-3 text-secondary">L'exposition du moment</h2>
-                     <h3 class="pb-3 text-secondary">Cosmogénèse - Emmanuelle Williot</h3>
-                     <p class="italic pb-16">Du mercredi 7 au samedi 31 janvier</p>
+                     <h2 class="pb-3 text-secondary">{t('EXPO_MOMENT_TITRE')}</h2>
+                     <h3 class="pb-3 text-secondary">{t('EXPO_MOMENT_NOM')}</h3>
+                     <p class="italic pb-16">{t('EXPO_MOMENT_DATES')}</p>
                      <p>
-                         Les règles qui régissent l’univers, le mettent en scène, sont les mêmes pour tous, pour toutes choses. Pour Emmanuelle Williot, l’acte de création trouve son sens dans la recherche d’une réalité qui nous dépasse, que nous ne pouvons qu’effleurer du bout des doigts. La quête du monde sensible par la pratique de la peinture amène dans un lieu qui a sa propre vie, sa temporalité, ses propres règles, et qui n’a pour limites que celles que nous nous imposons. Peindre plonge dans une condition sensible qui éclaire sous un jour nouveau l’acte de création en tant que tel et le milieu dans lequel nous évoluons. Le cheminement du peintre consiste à avancer à tâtons dans cette pénombre, à façonner et transcender les limites de nos sensations, de nos perceptions à la recherche de nouvelles interprétations de notre monde.<br><br>
-                         Ce n’est pas un hasard si les ramures des arbres ressemblent étrangement au déploiement de nos tissus pulmonaires. Il s’agit du même principe...
+                         {t('EXPO_MOMENT_DESC_PART1')}<br><br>
+                         {t('EXPO_MOMENT_DESC_PART2')}
                      </p>
 
 
-                     <Button variant={"secondary"} link="/"  size={"xl"}  className='mt-auto w-fit'>En savoir plus</Button>
+                     <Button variant={"secondary"} link="/"  size={"xl"}  className='mt-auto w-fit'>{t('EN_SAVOIR_PLUS')}</Button>
                  </div>
                  <div class="space-y-5">
                      <!-- Top image full width -->
