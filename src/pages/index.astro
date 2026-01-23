@@ -142,7 +142,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
 
         </section>
 
-         <section class="section-default bg-secondary-muted/40">
+         <section class="section-default bg-primary/20">
              <article class="flex gap-5">
                  <div class="w-2/12">
                      <MyImage alt="" src={EspaceCultureImg} width={280} height={320} layout="fullWidth" class="mb-6" />
@@ -222,7 +222,15 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
             <Button link="/"  size={"xl"}>{t('VOIR_TOUS_SPECTACLES')}</Button>
          </section>
 
-         <section class="section-default">
+
+         <section>
+             <div class="grid grid-cols-8 grid-rows-2 gap-5 pt-24">
+                 <MyImage src={EspaceCultureImg} alt='' width={200} height={460} layout='fullWidth' class="row-span-2 col-span-1" />
+                 <MyImage src={EspaceCultureImg} alt='' width={1300} height={460} layout='fullWidth' class="row-span-2 col-span-6" />
+                 <MyImage src={EspaceCultureImg} alt='' width={200} height={220} layout='fullWidth' class="row-span-1 col-span-1" />
+                 <MyImage src={EspaceCultureImg} alt='' width={200} height={220} layout='fullWidth' class="row-span-1 col-span-1" />
+             </div>
+             <div class="section-default pt-10">
              <article>
                      <h2 class="pb-3">{t('SEANCES_A_VENIR')}</h2>
                      <p class="distinguished pb-6">{t('CINEMA_INTRO')}</p>
@@ -233,7 +241,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                      <div class="my-16 grid grid-cols-2 gap-5">
                          <article class="group w-full">
                              <div class="overflow-hidden">
-                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
+                                    <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                              </div>
                              <figure class="py-4">
                                  <figcaption>
@@ -321,10 +329,10 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
 
 
              <Button link="/"  size={"xl"} className="mt-12">{t('VOIR_TOUTES_SEANCES')}</Button>
-
+</div>
          </section>
 
-         <section class="section-default bg-primary-muted/40">
+         <section class="section-default bg-secondary/20">
              <article class="grid grid-cols-2 gap-5">
                  <div class="flex flex-col">
                      <h2 class="pb-3 text-secondary">{t('EXPO_MOMENT_TITRE')}</h2>
