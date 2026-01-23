@@ -5,6 +5,12 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { createTranslator, type I18n } from '@/i18n/translations'
 import { getMenuNavs } from '@/lib/menu-navs'
+import BeHappyImg from '@/assets/imgs/sponsos/be-happy.webp';
+import EuropeImg from '@/assets/imgs/sponsos/europe.webp';
+import HautesPyreneesImg from '@/assets/imgs/sponsos/hautes-pyrenees.webp';
+import ParcNationalImg from '@/assets/imgs/sponsos/parc-national.webp';
+import OccitanieImg from '@/assets/imgs/sponsos/occitanie.webp';
+import PrefetImg from '@/assets/imgs/sponsos/prefet.webp';
 
 interface Props {
 	locale: I18n
@@ -23,7 +29,7 @@ const parcNational = menuNavs[1]?.subMenus || []
 	<div class="flex gap-4">
 		<!-- Logo -->
 
-		<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={200} height={200} layout="constrained" />
+		<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={200} height={200} />
 
 		<!-- Informations pratiques -->
 		<div class="w-full">
@@ -108,11 +114,12 @@ const parcNational = menuNavs[1]?.subMenus || []
 		<h3 class="text-primary-foreground pb-4">{t('NOS_PARTENAIRES')}</h3>
 
 		<div class="flex items-center justify-center gap-5">
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
-			<MyImage src={LogoMDV} alt={t('LOGO_ALT')} width={100} height={100} priority={false} />
+			<MyImage src={BeHappyImg} alt="Be Happy partenaire" width={80} height={80}  />
+			<MyImage src={HautesPyreneesImg} alt="Hautes-Pyrénées partenaire" width={80} height={80}  />
+			<MyImage src={OccitanieImg} alt="Parc National partenaire" width={80} height={80}  />
+			<MyImage src={PrefetImg} alt="Préfet partenaire" width={80} height={80}  />
+			<MyImage src={ParcNationalImg} alt="Parc National partenaire" width={160} height={80}  />
+			<MyImage src={EuropeImg} alt="Europe partenaire" width={454} height={80}  />
 		</div>
 	</div>
 </footer>

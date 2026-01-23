@@ -31,8 +31,13 @@ export default defineConfig({
 		fonts: [
 			{
 				provider: fontProviders.google(),
-				name: 'Roboto',
-				cssVariable: '--font-roboto'
+				name: 'Libre Baskerville',
+				cssVariable: '--font-libre-baskerville'
+			},
+			{
+				provider: fontProviders.google(),
+				name: 'Noto Sans',
+				cssVariable: '--font-noto-sans'
 			}
 		]
 	},

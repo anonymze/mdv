@@ -5,7 +5,7 @@ import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import type langs from '@/i18n/langs'
+import  langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 
@@ -115,11 +115,11 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
             </div>
         </section>
 
-        <section class="section-type">
+        <section class="section-">
             <article class="flex gap-4 ">
                 <div class="w-2/3">
                     <h2 class="pb-3">{t('ESPACE_CULTURE_TITRE')}</h2>
-                    <p class="italic pb-6">{t('ESPACE_CULTURE_INTRO')}</p>
+                    <p class="pb-6 distinguished">{t('ESPACE_CULTURE_INTRO')}</p>
                     <p>
                         {t('ESPACE_CULTURE_DESC_PART1')}<br/><br/>
                         {t('ESPACE_CULTURE_DESC_PART2')}<br/><br/>
@@ -142,7 +142,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
 
         </section>
 
-         <section class="section-type bg-secondary-muted/40">
+         <section class="section- bg-secondary-muted/40">
              <article class="flex gap-5">
                  <div class="w-2/12">
                      <MyImage alt="" src={EspaceCultureImg} width={280} height={320} layout="fullWidth" class="mb-6" />
@@ -150,7 +150,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                  </div>
                  <div class="w-7/12">
                      <h2 class="pb-3">{t('SPECTACLES_A_VENIR')}</h2>
-                     <p class="italic pb-6">{t('SPECTACLES_INTRO')}</p>
+                     <p class="distinguished pb-6">{t('SPECTACLES_INTRO')}</p>
                      <p>
                         {t('ESPACE_CULTURE_DESC_PART1')}<br/>
                         {t('ESPACE_CULTURE_DESC_PART2')}<br/>
@@ -222,11 +222,11 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
             <Button link="/"  size={"xl"}>{t('VOIR_TOUS_SPECTACLES')}</Button>
          </section>
 
-         <section class="section-type">
+         <section class="section-">
              <article>
 
                      <h2 class="pb-3">{t('SEANCES_A_VENIR')}</h2>
-                     <p class="italic pb-6">{t('CINEMA_INTRO')}</p>
+                     <p class="distinguished pb-6">{t('CINEMA_INTRO')}</p>
                      <p class="w-2/3">
                          {t('CINEMA_DESC')}
                      </p>
@@ -325,7 +325,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
 
          </section>
 
-         <section class="section-type bg-primary-muted/40">
+         <section class="section- bg-primary-muted/40">
              <article class="grid grid-cols-2 gap-5">
                  <div class="flex flex-col">
                      <h2 class="pb-3 text-secondary">L'exposition du moment</h2>
@@ -361,7 +361,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                </article>
          </section>
 
-         <section class="section-type">
+         <section class="section-default">
              <article class="max-w-200 mx-auto">
                  <h2 class="pb-4">{t('NEWSLETTER_TITRE')}</h2>
                  <p class="italic pb-7">{t('NEWSLETTER_INTRO')}</p>
@@ -374,7 +374,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
              </article>
          </section>
 
-         <section class="section-type bg-secondary-muted/40">
+         <section class="section-default bg-secondary-muted/40">
              <article class="grid grid-cols-[1fr_2fr] gap-16">
                  <!-- Left side: Images grid -->
                  <div class="grid grid-cols-2 gap-5">
@@ -388,7 +388,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                  <!-- Right side: Content -->
                  <div>
                      <h2 class="pb-3 text-secondary">{t('VALEURS_TITRE')}</h2>
-                     <p class="italic pb-6">{t('VALEURS_INTRO')}</p>
+                     <p class="distinguished pb-6">{t('VALEURS_INTRO')}</p>
                      <p>
                          {t('VALEURS_DESC')}
                      </p>
@@ -397,11 +397,3 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
          </section>
     </main>
 </Layout>
-
-<style>
-    .section-type {
-        margin-block: .75rem;
-        padding-block: 6rem;
-        padding-inline: 2rem;
-    }
-</style>

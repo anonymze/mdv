@@ -108,6 +108,8 @@
 }
 
 @theme inline {
+	--font-sans: var(--font-noto-sans);
+	--font-serif: var(--font-libre-baskerville);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -163,19 +165,17 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-background text-foreground font-sans;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		font-family: var(--font-roboto);
 	}
 
 	h1,
 	h2,
 	h3 {
-		font-family: serif;
+		@apply text-primary font-serif;
 		font-weight: bold;
 		text-transform: uppercase;
-		color: var(--color-primary);
 	}
 
 	h1 {
@@ -192,8 +192,21 @@
 	h4 {
 		font-size: 14px;
 	}
+
+	code {
+		font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+	}
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+@layer components {
+	.distinguished {
+		@apply font-serif;
+		font-style: italic;
+	}
+
+	.section-default {
+		margin-block: 0.75rem;
+		padding-block: 6rem;
+		padding-inline: 2rem;
+	}
 }
