@@ -48,7 +48,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
-    <main class="pb-8">
+    <main>
         <!-- Hero Section -->
         <section class="relative min-h-screen flex flex-col mt-6">
             <!-- Background image with overlay -->
@@ -164,53 +164,57 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                  </div>
              </article>
 
-             <div class="my-16 flex gap-4">
-                 <article class="group bg-white w-full shadow-xs">
+             <div class="my-16 grid grid-cols-4 place-items-center gap-x-5 gap-y-8 *:max-w-72">
+                 <article class="group bg-white w-full shadow-xs col-span-1">
                      <div class="overflow-hidden">
                          <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                      </div>
                      <figure class="p-4">
                          <figcaption>
                              <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+                             <p class="text-sm text-primary italic">Théatre humour</p>
                              <time class="italic text-sm"
                     datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
                              <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
                          </figcaption>
                      </figure>
                  </article>
-                 <article class="group bg-white w-full shadow-xs">
+                 <article class="group bg-white w-full shadow-xs col-span-1">
                      <div class="overflow-hidden">
                          <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                      </div>
                      <figure class="p-4">
                          <figcaption>
                              <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+                              <p class="text-sm text-primary italic">Théatre humour</p>
                              <time class="italic text-sm"
                     datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
                              <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
                          </figcaption>
                      </figure>
                  </article>
-                 <article class="group bg-white w-full shadow-xs">
+                 <article class="group bg-white w-full shadow-xs col-span-1">
                      <div class="overflow-hidden">
                          <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                      </div>
                      <figure class="p-4">
                          <figcaption>
                              <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+                              <p class="text-sm text-primary italic">Théatre humour</p>
                              <time class="italic text-sm"
                     datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
                              <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
                          </figcaption>
                      </figure>
                  </article>
-                 <article class="group bg-white w-full shadow-xs">
+                 <article class="group bg-white w-full shadow-xs col-span-1">
                      <div class="overflow-hidden">
                          <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
                      </div>
                      <figure class="p-4">
                          <figcaption>
                              <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+                              <p class="text-sm text-primary italic truncate">Théatre humour</p>
                              <time class="italic text-sm"
                     datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
                              <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
@@ -246,7 +250,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                              <figure class="py-4">
                                  <figcaption>
                                      <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
-                                     <p class="italic text-sm pb-1"
+                                     <p class="italic text-sm pb-1 truncate"
                            >{t('EVENT_DESC_EXAMPLE')}</p>
                            <time class="italic text-sm"
                   datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>

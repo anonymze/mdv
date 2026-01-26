@@ -6,6 +6,3 @@ BA agence educative enseignement superieur, ecolle de commerce (marketing digita
 facture entre 15 et 30 jours
 
 carte identité, diplome, kabi, associate d'affiliation, casier judiciaire
-
-
-BAHY Claude (formation)
