@@ -84,5 +84,15 @@ export default {
 	HORAIRES_PART1: "Du lundi au samedi de 14h à 19h, dimanche de 17h à 19h",
 	HORAIRES_PART2: "Vacances d'été et d'hiver, du lundi au dimanche de 14h à 19h",
 	EXPO_MOMENT_TITRE: "L'exposition du moment",
-	EN_SAVOIR_PLUS: "En savoir plus"
+	EN_SAVOIR_PLUS: "En savoir plus",
+	MOTS_CLES: "Mots clés",
+	TYPE_PUBLIC: "Type de public",
+	PRIX: "Prix",
+	LIEU: "Lieu",
+	RESIDENCE_ARTISTIQUE: "Résidence artistique",
+	SPECTACLES_DESC_PART1: "Tout au long de l'année, nous vous invitons à vivre des moments fabuleux grâce à une programmation d'art vivant riche et vibrante.",
+	SPECTACLES_DESC_PART2: "Spectacles, marionnettes, cirque, concerts, danse… Nous avons à cœur de mettre en lumière les compagnies locales qui s'emparent de la création artistique pour vous transporter dans leurs univers.",
+	RESIDENCE_INTRO: "Accompagner les artistes, au plus près de la création",
+	RESIDENCE_DESC_PART1: "La résidence artistique est un temps privilégié dédié à la création, à la recherche et à l'expérimentation. Elle offre aux artistes et aux compagnies un espace, des moyens et un cadre propice pour développer un projet artistique, affiner une écriture ou finaliser une œuvre.",
+	RESIDENCE_DESC_PART2: "En accueillant des artistes en résidence, nous affirmons notre engagement en faveur de la création et du soutien aux compagnies locales. Ces temps de travail sont l'occasion d'accompagner les artistes dans leur parcours tout en offrant au public un regard privilégié sur la naissance d'une œuvre lors des sorties de résidences."
 }

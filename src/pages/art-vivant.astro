@@ -5,7 +5,6 @@ import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
 import { SelectWrapper } from '@/components/select-wrapper'
 import { Input } from '@/components/ui/input'
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
@@ -117,32 +116,38 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 			<article>
 				<h2 class="pb-3">{t('SPECTACLES_A_VENIR')}</h2>
 				<p class="distinguished pb-6">{t('SPECTACLES_INTRO')}</p>
-				<p>
-					Tout au long de l’année, nous vous invitons à vivre des moments fabuleux grâce à une programmation d’art
-					vivant riche et vibrante.<br />
-					Spectacles, marionnettes, cirque, concerts, danse… Nous avons à cœur de mettre en lumière les compagnies locales
-					qui s’emparent de la création artistique pour vous transporter dans leurs univers.
+				<p class="w-2/3">
+					{t('SPECTACLES_DESC_PART1')}<br />
+					{t('SPECTACLES_DESC_PART2')}
 				</p>
 			</article>
 
 			<div class="bg-primary/20 mt-12 grid grid-cols-8 grid-rows-2 gap-6 px-10 py-8 *:min-h-12">
-				<Input placeholder="Mots clés" className="rows-span-1 col-span-6 bg-white" />
+				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 col-span-6 bg-white" />
 				<SelectWrapper
-					placeholder="Horaires"
+					placeholder={t('HORAIRES')}
 					options={[{ key: 'fefef', value: 'fef' }]}
 					className="col-span-2 w-full"
 				/>
 				<SelectWrapper
-					placeholder="Type de public"
+					placeholder={t('TYPE_PUBLIC')}
 					options={[{ key: 'fefef', value: 'fef' }]}
 					className="col-span-2 w-full"
 				/>
-				<SelectWrapper placeholder="Prix" options={[{ key: 'fefef', value: 'fef' }]} className="col-span-2 w-full" />
-				<SelectWrapper placeholder="Lieu" options={[{ key: 'fefef', value: 'fef' }]} className="col-span-2 w-full" />
+				<SelectWrapper
+					placeholder={t('PRIX')}
+					options={[{ key: 'fefef', value: 'fef' }]}
+					className="col-span-2 w-full"
+				/>
+				<SelectWrapper
+					placeholder={t('LIEU')}
+					options={[{ key: 'fefef', value: 'fef' }]}
+					className="col-span-2 w-full"
+				/>
 			</div>
 
 			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
-				<article class="group w-full bg-white shadow-xs col-span-1">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -162,7 +167,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group w-full bg-white shadow-xs col-span-1">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -182,7 +187,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group w-full bg-white shadow-xs col-span-1">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -202,7 +207,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group w-full bg-white shadow-xs col-span-1">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -222,7 +227,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group w-full bg-white shadow-xs col-span-1">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -247,22 +252,16 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 
 		<section class="section-default">
 			<article>
-				<h2 class="pb-3">Résidence artistique</h2>
-				<p class="distinguished pb-6">{t('SPECTACLES_INTRO')}</p>
-				<p>
-					La résidence artistique est un temps privilégié dédié à la création, à la recherche et à l’expérimentation.
-					Elle offre aux artistes et aux compagnies un espace, des moyens et un cadre propice pour développer un projet
-					artistique, affiner une écriture ou finaliser une œuvre.<br /><br />
-
-					En accueillant des artistes en résidence, nous affirmons notre engagement en faveur de la création et du
-					soutien aux compagnies locales. Ces temps de travail sont l’occasion d’accompagner les artistes dans leur
-					parcours tout en offrant au public un regard privilégié sur la naissance d’une œuvre lors des sorties de
-					résidences.
+				<h2 class="pb-3">{t('RESIDENCE_ARTISTIQUE')}</h2>
+				<p class="distinguished pb-6">{t('RESIDENCE_INTRO')}</p>
+				<p class="w-2/3">
+					{t('RESIDENCE_DESC_PART1')}<br /><br />
+					{t('RESIDENCE_DESC_PART2')}
 				</p>
 			</article>
 
 			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
-				<article class="group w-full bg-white shadow-xs col-span-1">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -282,7 +281,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group w-full bg-white shadow-xs col-span-1">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -302,27 +301,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group w-full bg-white shadow-xs col-span-1">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
-							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group w-full bg-white shadow-xs col-span-1">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -342,7 +321,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group w-full bg-white shadow-xs col-span-1">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
