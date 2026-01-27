@@ -16,8 +16,6 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 	const [value, setValue] = React.useState('')
 	const itemRefs = React.useRef<(HTMLLIElement | null)[]>([])
 	const isClickingRef = React.useRef(false)
-	const [hoveredImages, setHoveredImages] = React.useState<Record<string, string | null>>({})
-	const [previousHoveredImages, setPreviousHoveredImages] = React.useState<Record<string, string | null>>({})
 
 	const handleValueChange = (newValue: string) => {
 		if (isClickingRef.current || newValue === '') {
@@ -53,7 +51,7 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 	}
 
 	return (
-		<NavigationMenu viewport={false} value={value} onValueChange={handleValueChange}>
+		<NavigationMenu viewport={false} value={value} onValueChange={handleValueChange} className='z-20'>
 			<NavigationMenuList className="flex-wrap">
 				{menuNavs.map((menu, index) => {
 					// No submenus or only 1 submenu without children = simple link
@@ -91,13 +89,10 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 								}}
 							>
 								{menu.subMenus.map((subMenu, subIndex) => {
-									const columnKey = `${index}-${subIndex}`
-									const hoveredImg = hoveredImages[columnKey]
-									const previousImg = previousHoveredImages[columnKey]
 									return (
 										<div
 											key={subIndex}
-											className="group/image flex flex-col animate-in fade-in slide-in-from-bottom-12"
+											className="flex flex-col animate-in fade-in slide-in-from-bottom-12 z-20"
 											style={{
 												animationDelay: `${subIndex * 50}ms`,
 												animationDuration: '300ms',
@@ -109,68 +104,20 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 													<ListItem
 														key={itemIndex}
 														href={item.link}
-														title={item.label}
-														onMouseEnter={() => {
-															const currentImg = hoveredImages[columnKey]
-															if (currentImg && currentImg !== item.imageReplacement) {
-																// Move current to previous
-																setPreviousHoveredImages((prev) => ({ ...prev, [columnKey]: currentImg }))
-																// Cleanup previous after animation
-																setTimeout(() => {
-																	setPreviousHoveredImages((prev) => ({ ...prev, [columnKey]: null }))
-																}, 300)
-															}
-															// Set new current
-															setHoveredImages((prev) => ({ ...prev, [columnKey]: item.imageReplacement }))
-														}}
-														onMouseLeave={() => {
-															// Move current to previous so it can animate down
-															const currentImg = hoveredImages[columnKey]
-															if (currentImg) {
-																setPreviousHoveredImages((prev) => ({ ...prev, [columnKey]: currentImg }))
-																setTimeout(() => {
-																	setPreviousHoveredImages((prev) => ({ ...prev, [columnKey]: null }))
-																}, 300)
-															}
-															setHoveredImages((prev) => ({ ...prev, [columnKey]: null }))
-														}}
+                            title={item.label}
+                            className='z-20'
 													/>
 												))}
 											</ul>
-											<div className="relative h-36 overflow-hidden">
-												{/* Default image - always visible, static */}
+											<div className="relative h-36">
 												<img
 													src={subMenu.image}
 													width="300"
 													height="150"
-													alt={subMenu.label}
-													className="absolute inset-0 h-full w-full object-cover"
-													style={{ zIndex: 10 }}
+													alt={`${subMenu.label} menu illustration`}
+													loading="lazy"
+													className="h-full w-full object-cover"
 												/>
-												{/* Previous image - sliding down with fade out */}
-												{previousImg && (
-													<img
-														key={`prev-${previousImg}`}
-														src={previousImg}
-														width="300"
-														height="150"
-														alt="Previous"
-														className="absolute inset-0 h-full w-full object-cover animate-out slide-out-to-bottom fade-out duration-300"
-														style={{ zIndex: 20 }}
-													/>
-												)}
-												{/* Current hovered image - sliding up with fade in */}
-												{hoveredImg && (
-													<img
-														key={`curr-${hoveredImg}`}
-														src={hoveredImg}
-														width="300"
-														height="150"
-														alt="Current"
-														className="absolute inset-0 h-full w-full object-cover animate-in slide-in-from-bottom fade-in duration-300"
-														style={{ zIndex: 30 }}
-													/>
-												)}
 											</div>
 										</div>
 									)
@@ -188,12 +135,10 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 function ListItem({
 	title,
 	href,
-	onMouseEnter,
-	onMouseLeave,
 	...props
-}: React.ComponentPropsWithoutRef<'li'> & { href: string }) {
+}: React.ComponentPropsWithoutRef<'li'> & { href: string; title: string }) {
 	return (
-		<li {...props} className="group/link block py-4" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+		<li {...props} className="group/link block py-4">
 			<a href={href} className="relative block pb-1.5 text-primary-foreground">
 				{title}
 				<span className="absolute bottom-0 left-0 h-px w-full bg-primary-foreground transition-[width] duration-0 group-hover/link:w-0" />

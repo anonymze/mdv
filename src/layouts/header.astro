@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
 import { getMenuNavs } from '@/lib/menu-navs'
 
+import LogoImg from '@/assets/icons/logo-icon-only.svg'
 import { ArrowRightIcon } from 'lucide-react'
-import LogoImg from '@/assets/icons/logo.svg'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
@@ -13,16 +13,13 @@ const menuNavs = getMenuNavs(t)
 ---
 
 <header class="mt-4 flex h-16 gap-4">
-	<div class="flex h-full flex-1 justify-between bg-primary px-5 py-2">
-		<a class="block" href="/"
-			><img
-				src={LogoImg.src}
-				width={80}
-				alt={t('LOGO_ALT')}
-				loading="eager"
-			/></a
+	<div class="bg-primary flex h-full flex-1 justify-between px-5 py-2">
+		<a class="flex items-center justify-center" href="/"
+			><img src={LogoImg.src} alt={t('LOGO_ALT')} loading="eager" class="w-15" /></a
 		>
 		<NavigationMenuDemo menuNavs={menuNavs} client:load />
 	</div>
-	<Button link="/" variant={"secondary"} className="h-full group">{t('NOUS_CONTACTER')} <ArrowRightIcon className="transition-transform group-hover:translate-x-1" /></Button>
+	<Button link="/" variant={'secondary'} className="group h-full"
+		>{t('NOUS_CONTACTER')} <ArrowRightIcon className="transition-transform group-hover:translate-x-1" /></Button
+	>
 </header>

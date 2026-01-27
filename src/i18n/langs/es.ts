@@ -17,6 +17,7 @@ export default {
 	ANNEE_2024: "2024",
 	ANNEE_2025: "2025",
 	ARCHIVES: "Archivos",
+	ARCHIVES_DESC: "Sumérjase de nuevo en la historia de la Casa del Parque Nacional y del Valle a través de nuestros archivos: espectáculos pasados, exposiciones destacadas, eventos culturales que han dado forma a nuestro lugar desde su creación en 1982.",
 	ART_VIVANT: 'Arte vivo',
 	ARTISTE: "Artista",
 	AUTRES_MEDIAS: "Otros medios",

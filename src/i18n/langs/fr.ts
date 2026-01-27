@@ -17,6 +17,7 @@ export default {
 	ANNEE_2024: "2024",
 	ANNEE_2025: "2025",
 	ARCHIVES: "Archives",
+	ARCHIVES_DESC: "Replongez dans l'histoire de la Maison du Parc national et de la Vallée à travers nos archives : spectacles passés, expositions marquantes, événements culturels qui ont façonné notre lieu depuis sa création en 1982.",
 	ART_VIVANT: 'Art vivant',
 	ARTISTE: "Artiste",
 	AUTRES_MEDIAS: "Autres médias",

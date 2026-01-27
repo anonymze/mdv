@@ -17,6 +17,7 @@ export default {
 	ANNEE_2024: "2024",
 	ANNEE_2025: "2025",
 	ARCHIVES: "Archives",
+	ARCHIVES_DESC: "Dive back into the history of the House of the National Park and Valley through our archives: past shows, notable exhibitions, cultural events that have shaped our venue since its creation in 1982.",
 	ART_VIVANT: 'Living Art',
 	ARTISTE: "Artist",
 	AUTRES_MEDIAS: "Other media",
