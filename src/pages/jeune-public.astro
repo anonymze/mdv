@@ -113,8 +113,8 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 		</section>
 
 		<section class="section-default">
-			<h2 class="text-secondary pb-3">Évènements liés aux expositions</h2>
-			<p class="distinguished pb-16">Laissons l’art s’exprimer.</p>
+			<h2 class="text-secondary pb-3">{t('EVENEMENTS_EXPO')}</h2>
+			<p class="distinguished pb-16">{t('EVENEMENTS_EXPO_INTRO')}</p>
 
 			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
 				<article class="group col-span-1 w-full bg-white shadow-xs">
@@ -356,25 +356,25 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 
 		<section class="section-default bg-primary/20">
 			<article>
-				<h2 class="pb-3">La ludothèque</h2>
-				<p class="distinguished pb-6">Place au jeu</p>
-				<p class="w-2/3">Jeu pour les plus jeunes</p>
+				<h2 class="pb-3">{t('LUDOTHEQUE_TITRE')}</h2>
+				<p class="distinguished pb-6">{t('LUDOTHEQUE_INTRO')}</p>
+				<p class="w-2/3">{t('LUDOTHEQUE_DESC')}</p>
 			</article>
 
 			<div class="bg-primary mt-12 grid grid-cols-8 grid-rows-2 gap-6 px-10 py-8 *:min-h-12">
 				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 col-span-6 bg-white" />
 				<SelectWrapper
-					placeholder={'Temps de jeu'}
+					placeholder={t('TEMPS_DE_JEU')}
 					options={[{ key: 'fefef', value: 'fef' }]}
 					className="col-span-2 w-full"
 				/>
 				<SelectWrapper
-					placeholder={'Nombre de joueurs'}
+					placeholder={t('NOMBRE_DE_JOUEURS')}
 					options={[{ key: 'fefef', value: 'fef' }]}
 					className="col-span-2 w-full"
 				/>
 
-				<SelectWrapper placeholder={'Âge'} options={[{ key: 'fefef', value: 'fef' }]} className="col-span-2 w-full" />
+				<SelectWrapper placeholder={t('AGE')} options={[{ key: 'fefef', value: 'fef' }]} className="col-span-2 w-full" />
 			</div>
 
 			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">

@@ -113,12 +113,10 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 		</section>
 
 		<section class="section-default">
-			<h2 class="text-primary pb-3">Les événements à venir</h2>
-			<p class="distinguished pb-6">Des rencontres et des découvertes tout au long de l’année</p>
+			<h2 class="text-primary pb-3">{t('PARC_EVENEMENTS_TITRE')}</h2>
+			<p class="distinguished pb-6">{t('PARC_EVENEMENTS_INTRO')}</p>
 			<p class="w-2/3">
-				Tout au long de l’année, le Parc national des Pyrénées propose des activités variées pour sensibiliser et faire
-				découvrir son territoire. Découvrez des projections sous le ciel étoilé, assistez à des conférences
-				passionnantes ou rencontrez et échangez avec les gardes-moniteurs.
+				{t('PARC_EVENEMENTS_DESC')}
 			</p>
 
 			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
@@ -203,12 +201,10 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 
 		<section class="section-default bg-primary/20">
 			<article>
-				<h2 class="pb-3">Les articles du Parc national des Pyrénées</h2>
-				<p class="distinguished pb-6">Toute l’actualité à portée de main</p>
+				<h2 class="pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
+				<p class="distinguished pb-6">{t('PARC_ARTICLES_INTRO')}</p>
 				<p class="w-2/3">
-					Cette rubrique rassemble les articles et actualités du Parc national des Pyrénées que nous relayons. Vous y
-					découvrirez des informations et des contenus pour mieux connaître, comprendre et apprécier ce territoire
-					naturel exceptionnel.
+					{t('PARC_ARTICLES_DESC')}
 				</p>
 			</article>
 
@@ -216,16 +212,16 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 col-span-6 bg-white" />
 
 				<SelectWrapper
-					placeholder={'Type d\'article'}
+					placeholder={t('TYPE_ARTICLE')}
 					options={[{ key: 'fefef', value: 'fef' }]}
 					className="col-span-2 w-full"
 				/>
 				<SelectWrapper
-					placeholder={'Âge'}
+					placeholder={t('AGE')}
 					options={[{ key: 'fefef', value: 'fef' }]}
 					className="col-span-2 w-full"
 				/>
-				<SelectWrapper placeholder={'Prix'} options={[{ key: 'fefef', value: 'fef' }]} className="col-span-2 w-full" />
+				<SelectWrapper placeholder={t('PRIX')} options={[{ key: 'fefef', value: 'fef' }]} className="col-span-2 w-full" />
 			</div>
 
 			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">

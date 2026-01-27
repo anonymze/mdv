@@ -120,19 +120,13 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 					<MyImage alt="" src={EspaceCultureImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
 				</div>
 				<div class="flex flex-col">
-					<h2 class="text-primary pb-3">Accueil en résidence artistique</h2>
-					<p class="distinguished pb-16">Un accompagnement dédié</p>
-					<p>
-						La résidence artistique est un temps privilégié que nous vous proposons pour créer, rechercher et
-						expérimenter. Elle vous offre un espace de travail, des moyens adaptés et un cadre propice pour développer
-						votre projet artistique, affiner votre écriture ou finaliser une œuvre.<br /><br />
-
-						En vous accueillant en résidence, nous affirmons notre engagement en faveur de la création et du soutien aux
-						compagnies, notamment locales. Ces temps de travail sont pensés pour vous accompagner dans votre parcours
-						artistique et vous offrir des conditions favorables à l’épanouissement de votre projet.
+					<h2 class="text-primary pb-3">{t('RESIDENCE_ACCUEIL_TITRE')}</h2>
+					<p class="distinguished pb-16">{t('RESIDENCE_ACCUEIL_INTRO')}</p>
+					<p class="whitespace-pre-line">
+						{t('RESIDENCE_ACCUEIL_DESC')}
 					</p>
 
-					<Button link="/" size={'xl'} className="mt-auto w-fit">Bouton</Button>
+					<Button link="/" size={'xl'} className="mt-auto w-fit">{t('BOUTON_LIEN')}</Button>
 				</div>
 			</article>
 		</section>
@@ -140,14 +134,13 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 		<section class="section-default bg-primary/20">
 			<article class="grid grid-cols-2 gap-5">
 				<div class="flex flex-col">
-					<h2 class="text-primary pb-3">Les informations techniques</h2>
-					<p class="distinguished pb-16">Dossiers technique et de candidature</p>
+					<h2 class="text-primary pb-3">{t('INFORMATIONS_TECHNIQUES_TITRE')}</h2>
+					<p class="distinguished pb-16">{t('INFORMATIONS_TECHNIQUES_INTRO')}</p>
 					<p>
-						Consultez et téléchargez tous les dossiers techniques relatifs à notre salle de spectacle et à notre salle
-						d’exposition. Le dossier de candidature pour nos résidences artistiques est également disponible.
+						{t('INFORMATIONS_TECHNIQUES_DESC')}
 					</p>
 
-					<Button link="/" size={'xl'} className="mt-auto w-fit">Bouton</Button>
+					<Button link="/" size={'xl'} className="mt-auto w-fit">{t('BOUTON_LIEN')}</Button>
 				</div>
 				<div class="grid grid-cols-2 gap-5">
 					<MyImage alt="" src={EspaceCultureImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
