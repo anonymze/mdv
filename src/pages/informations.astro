@@ -2,10 +2,16 @@
 import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
 import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
-import { Button } from '@/components/ui/button'
 import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
+import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
+import BeHappyImg from '@/assets/imgs/sponsos/be-happy.webp';
+import EuropeImg from '@/assets/imgs/sponsos/europe.webp';
+import HautesPyreneesImg from '@/assets/imgs/sponsos/hautes-pyrenees.webp';
+import ParcNationalImg from '@/assets/imgs/sponsos/parc-national.webp';
+import OccitanieImg from '@/assets/imgs/sponsos/occitanie.webp';
+import PrefetImg from '@/assets/imgs/sponsos/prefet.webp';
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
@@ -115,15 +121,16 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 				<div class="flex flex-col">
 					<h2 class="text-primary pb-3">Où nous trouver</h2>
 					<p class="distinguished pb-16">Maison du Parc</p>
-					<div class="grid-cols-2 grid gap-5">
+					<div class="grid grid-cols-2 gap-5">
 						<div class="bg-primary/20 px-5 py-8">
 							<ul class="space-y-5">
 								<li class="border-b border-black/20 px-5 pb-4">
 									<span class="font-bold">{t('HORAIRES')}</span> : Du lundi au samedi de 14h à 19h. Le dimanche de 17h à 19h.
 								</li>
 
-								<li class=" px-5">
-									<span class="font-bold">{t('ADRESSE')}</span> : Salle des voûtes, Maison de la Valée, 24 Place Saint Clément, 65120 LUZ-SAINT-SAUVEUR
+								<li class="px-5">
+									<span class="font-bold">{t('ADRESSE')}</span> : Salle des voûtes, Maison de la Valée, 24 Place Saint Clément,
+									65120 LUZ-SAINT-SAUVEUR
 								</li>
 							</ul>
 						</div>
@@ -133,7 +140,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 									<span class="font-bold">Parking</span> : Place du 8 Mai 65120 Luz-Saint-Sauveur
 								</li>
 
-								<li class=" px-5">
+								<li class="px-5">
 									<span class="font-bold">Accès transport public </span> : Vélo, bus, covoiturager
 								</li>
 							</ul>
@@ -151,6 +158,163 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 					allowfullscreen
 				>
 				</iframe>
+			</article>
+		</section>
+
+		<section class="section-default bg-primary/20">
+			<article>
+				<h2 class="text-primary pb-3">Nos tarifs</h2>
+				<p class="distinguished pb-16">Des prix adaptés à tous pour que la culture reste accessbile</p>
+
+				<div class="grid grid-cols-9 gap-5">
+					<div class="bg-primary text-primary-foreground col-span-2 p-6">
+						<h3 class="text-primary-foreground pb-10">Tarifs médiatheque</h3>
+						<p><span class="font-bold">Adulte</span> : 10€</p>
+						<p class="distinguished mb-6 border-b border-white/20">Année</p>
+						<p><span class="text-primary-foreground font-bold">Enfant</span> : 5€</p>
+						<p class="distinguished mb-6 border-b border-white/20">Année</p>
+						<p><span class="text-primary-foreground font-bold">Famille</span> : 5€</p>
+						<p class="distinguished mb-6 border-b border-white/20">3 semaines</p>
+					</div>
+					<MyImage src={EspaceCultureImg} alt="" width={200} height={380} />
+					<div class="bg-primary text-primary-foreground col-span-2 p-6">
+						<h3 class="text-primary-foreground pb-10">Tarifs spectacle</h3>
+						<p><span class="font-bold">Normal</span> : 10€</p>
+						<p class="distinguished mb-6 border-b border-white/20">Dès 14ans</p>
+						<p><span class="text-primary-foreground font-bold">Réduit</span> : 5€</p>
+						<p class="distinguished mb-6 border-b border-white/20">3-13 ans et abonné</p>
+						<p><span class="text-primary-foreground font-bold">Enfant</span> : Offert</p>
+						<p class="distinguished mb-6 border-b border-white/20">-3 ans</p>
+					</div>
+					<MyImage src={EspaceCultureImg} alt="" width={200} height={380} />
+					<div class="bg-primary text-primary-foreground col-span-2 p-6">
+						<h3 class="text-primary-foreground pb-10">Tarifs cinéma</h3>
+						<p class="mb-6 border-b border-white/20"><span class="font-bold">Adulte</span> : 7€</p>
+						<p class="mb-6 border-b border-white/20"><span class="font-bold">Étudiant</span> : 6€</p>
+						<p class="mb-6 border-b border-white/20"><span class="font-bold">Enfant -13 ans</span> : 5€</p>
+						<p class="mb-6 border-b border-white/20"><span class="font-bold">Abonné</span> : 5,80€</p>
+					</div>
+					<MyImage src={EspaceCultureImg} alt="" width={200} height={380} />
+				</div>
+			</article>
+		</section>
+
+		<section class="section-default">
+			<article>
+				<h2 class="text-primary pb-3">L’équipe de la maison e la vallée</h2>
+				<p class="distinguished pb-16">Les membres du personnel</p>
+				<p class="w-2/3 pb-16">
+					Notre équipe a le plaisir d’accompagner visiteurs, habitants et professionnels lors de leur passage dans notre
+					structure. Notre accueil se veut chaleureux et bienveillant, afin que votre visite soit une expérience
+					agréable.
+				</p>
+
+				<div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-20 *:w-[20%]">
+					<figure>
+						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<figcaption class="pt-2">
+							<h2>Marque Cathy</h2>
+							<p>Directrice administrative</p>
+						</figcaption>
+					</figure>
+					<figure>
+						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<figcaption class="pt-2">
+							<h2>Lay Marie</h2>
+							<p>Directrice artistique</p>
+						</figcaption>
+					</figure>
+					<figure>
+						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<figcaption class="pt-2">
+							<h2>Boussac Chantal</h2>
+							<p>Comptable</p>
+						</figcaption>
+					</figure>
+					<figure>
+						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<figcaption class="pt-2">
+							<h2>Loo Santos Andréa</h2>
+							<p>Responsable médiathique</p>
+						</figcaption>
+					</figure>
+					<figure>
+						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<figcaption class="pt-2">
+							<h2>Bouillon Marie-Jade</h2>
+							<p>Responsable cinéma et exposition</p>
+						</figcaption>
+					</figure>
+					<figure>
+						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<figcaption class="pt-2">
+							<h2>Poulalion Léo-Polde</h2>
+							<p>Technicien régisseur</p>
+						</figcaption>
+					</figure>
+					<figure>
+						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<figcaption class="pt-2">
+							<h2>Bouillon Mélinda</h2>
+							<p>Agent d’entretien et accueil artiste</p>
+						</figcaption>
+					</figure>
+				</div>
+			</article>
+		</section>
+
+		<section class="section-default bg-secondary/20">
+			<article class="grid grid-cols-3">
+				<div class="col-span-2">
+					<h2 class="text-secondary pb-3">Nos engagements et valeurs</h2>
+					<p class="distinguished pb-16">Un engagement humain au cœur de nos actions</p>
+					<p>
+						Dans le cadre de ses actions et de sa programmation, la Maison du Parc national et de la vallée affirme des
+						engagements forts, guidés par des valeurs humaines et responsables. Nous soutenons et diffusons la création
+						locale en accompagnant en priorité les compagnies et artistes d’Occitanie et en co-produisant chaque année 1
+						à 2 spectacles.<br /><br />
+
+						Nous nous engageons également à promouvoir l’égalité entre les femmes et les hommes, un principe essentiel
+						qui guide nos choix et nos pratiques. Attachée à la tolérance et à la mixité sociale, notre structure lutte
+						activement contre toutes les formes de harcèlement et de violences sexistes ou sexuelles et s’attache à
+						favoriser l’inclusion.<br /><br />
+
+						Soucieuse de l’environnement, la Maison du Parc national et de la vallée encourage une démarche éco
+						responsable dans l’ensemble de ses actions. Elle valorise également les mobilités douces et invite chaque
+						visiteur à privilégier la marche, le vélo ou le covoiturage pour rejoindre ses événements. <br /><br />Ces
+						engagements dessinent un lieu culturel ouvert, solidaire et tourné vers l’avenir.
+					</p>
+				</div>
+
+				<div class="col-span-1 flex items-center justify-center gap-3">
+					<MyImage src={EspaceCultureImg} alt="" width={150} height={150} />
+					<MyImage src={EspaceCultureImg} alt="" width={150} height={150} />
+					<MyImage src={EspaceCultureImg} alt="" width={150} height={150} />
+				</div>
+			</article>
+		</section>
+		<section class="section-default">
+			<article class="grid grid-cols-3 gap-5">
+				<div class="col-span-1 grid grid-cols-3 grid-rows-3 gap-3 pt-48 place-items-center">
+					<MyImage src={BeHappyImg} alt="" width={120} height={120} class="col-span-1"  />
+					<MyImage src={HautesPyreneesImg} alt="" width={120} height={120} class="col-span-1"  />
+					<MyImage src={OccitanieImg} alt="" width={120} height={120} class="col-span-1"  />
+					<MyImage src={PrefetImg} alt="" width={120} height={120} class="col-span-1"  />
+					<MyImage src={ParcNationalImg} alt="" width={240} height={120} class="col-span-2"  />
+					<MyImage src={EuropeImg} alt="" width={700} height={120} class="col-span-3" />
+				</div>
+				<div class="col-span-2">
+					<h2 class="text-primary pb-3">Nos partenaires</h2>
+					<p class="distinguished pb-16">Ensemble pour soutenir la culture et le territoire</p>
+					<p>
+						La Maison du Parc national et de la vallée travaille en étroite collaboration avec des partenaires
+						institutionnels et culturels, qui partagent ses valeurs et soutiennent ses actions. Grâce à ces
+						collaborations  avec le Parc national des Pyrénées, le Conseil régional Occitanie, le Conseil départemental
+						des Hautes-Pyrénées, la commune de Luz-Saint-Sauveur ou le Centre national du Cinéma et de l’image animée
+						(CNC), nous pouvons proposer des projets, des spectacles et des activités qui mettent en valeur le
+						patrimoine naturel et culturel de notre territoire.
+					</p>
+				</div>
 			</article>
 		</section>
 	</main>
