@@ -109,5 +109,13 @@ export default {
 	CYBERBASE_DESC: "L'espace de travail est gratuit et ouvert à tous. Il offre un cadre calme et confortable pour travailler seul ou en groupe, étudier, lire ou effectuer des démarches en ligne. Un accès Wi-Fi gratuit est disponible, ainsi que des ordinateurs en libre utilisation sur place. Cet espace est conçu pour favoriser la concentration, l'échange et l'autonomie, dans une atmosphère conviviale et un lieu hors-norme.",
 	AUTRES_MEDIAS_TITRE: "Les autres supports médias",
 	AUTRES_MEDIAS_INTRO: "CD, DVD, vinyles et clics en ligne !",
-	AUTRES_MEDIAS_DESC: "La médiathèque propose également un large choix de supports multimédias : CD, DVD et vinyles pour tous les goûts. Votre abonnement vous permet aussi d'accéder à une multitude de ressources en ligne, pour écouter, regarder ou découvrir des contenus depuis chez vous ou sur place. Musique, films, presse en ligne, tutoriels, documentaires et plus encore : tout est à portée de main pour enrichir vos loisirs et vos découvertes."
+	AUTRES_MEDIAS_DESC: "La médiathèque propose également un large choix de supports multimédias : CD, DVD et vinyles pour tous les goûts. Votre abonnement vous permet aussi d'accéder à une multitude de ressources en ligne, pour écouter, regarder ou découvrir des contenus depuis chez vous ou sur place. Musique, films, presse en ligne, tutoriels, documentaires et plus encore : tout est à portée de main pour enrichir vos loisirs et vos découvertes.",
+	DEMARCHE_ARTISTIQUE: "Démarche artistique de l'artiste plasticienne",
+	DATE: "Date",
+	HORAIRE: "Horaire",
+	ADRESSE: "Adresse",
+	TARIF: "Tarif",
+	AUTEURS: "Auteur(s)",
+	EVENEMENTS_EXPO: "Évènements liés aux expositions",
+	EVENEMENTS_EXPO_INTRO: "Laissons l'art s'exprimer."
 }

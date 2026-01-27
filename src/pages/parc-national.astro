@@ -4,7 +4,6 @@ import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
 import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
 import { SelectWrapper } from '@/components/select-wrapper'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
@@ -50,6 +49,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
+		<!-- Hero Section -->
 		<section class="relative mt-6 flex min-h-screen flex-col">
 			<!-- Background image with overlay -->
 			<div class="absolute inset-0 z-0">
@@ -113,50 +113,119 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 		</section>
 
 		<section class="section-default">
-			<article class="grid grid-cols-2 gap-5">
-				<div class="grid grid-cols-2 gap-5">
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-2" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
-				</div>
-				<div class="flex flex-col">
-					<h2 class="text-primary pb-3">{t('MEDIATHEQUE_TITRE')}</h2>
-					<p class="distinguished pb-16">{t('MEDIATHEQUE_INTRO')}</p>
-					<p>{t('MEDIATHEQUE_DESC')}</p>
+			<h2 class="text-primary pb-3">Les événements à venir</h2>
+			<p class="distinguished pb-6">Des rencontres et des découvertes tout au long de l’année</p>
+			<p class="w-2/3">
+				Tout au long de l’année, le Parc national des Pyrénées propose des activités variées pour sensibiliser et faire
+				découvrir son territoire. Découvrez des projections sous le ciel étoilé, assistez à des conférences
+				passionnantes ou rencontrez et échangez avec les gardes-moniteurs.
+			</p>
 
-					<Button link="/" size={'xl'} className="mt-auto w-fit">{t('EN_SAVOIR_PLUS')}</Button>
-				</div>
-			</article>
+			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
+				<article class="group col-span-1 w-full bg-white shadow-xs">
+					<div class="overflow-hidden">
+						<MyImage
+							src={EspaceCultureImg}
+							alt=""
+							width={300}
+							height={200}
+							layout="fullWidth"
+							class="transition-transform duration-250 group-hover:scale-110"
+						/>
+					</div>
+					<figure class="p-4">
+						<figcaption>
+							<h3 class="pb-1 text-black">{t('EVENT_TITLE')}</h3>
+							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
+						</figcaption>
+					</figure>
+				</article>
+				<article class="group col-span-1 w-full bg-white shadow-xs">
+					<div class="overflow-hidden">
+						<MyImage
+							src={EspaceCultureImg}
+							alt=""
+							width={300}
+							height={200}
+							layout="fullWidth"
+							class="transition-transform duration-250 group-hover:scale-110"
+						/>
+					</div>
+					<figure class="p-4">
+						<figcaption>
+							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
+						</figcaption>
+					</figure>
+				</article>
+				<article class="group col-span-1 w-full bg-white shadow-xs">
+					<div class="overflow-hidden">
+						<MyImage
+							src={EspaceCultureImg}
+							alt=""
+							width={300}
+							height={200}
+							layout="fullWidth"
+							class="transition-transform duration-250 group-hover:scale-110"
+						/>
+					</div>
+					<figure class="p-4">
+						<figcaption>
+							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
+						</figcaption>
+					</figure>
+				</article>
+				<article class="group col-span-1 w-full bg-white shadow-xs">
+					<div class="overflow-hidden">
+						<MyImage
+							src={EspaceCultureImg}
+							alt=""
+							width={300}
+							height={200}
+							layout="fullWidth"
+							class="transition-transform duration-250 group-hover:scale-110"
+						/>
+					</div>
+					<figure class="p-4">
+						<figcaption>
+							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
+							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
+						</figcaption>
+					</figure>
+				</article>
+			</div>
 		</section>
 
 		<section class="section-default bg-primary/20">
 			<article>
-				<h2 class="pb-3">La ludothèque</h2>
-				<p class="distinguished pb-6">Place au jeu</p>
+				<h2 class="pb-3">Les articles du Parc national des Pyrénées</h2>
+				<p class="distinguished pb-6">Toute l’actualité à portée de main</p>
 				<p class="w-2/3">
-					Tous les quatre mois, nous renouvelons notre ludothèque afin de vous proposer encore plus de façons de vous
-					amuser en famille ou entre amis. Notre sélection de jeux s’adresse à tous les âges, dès 3 ans, et séduit aussi
-					bien les enfants que les adultes. Vous pouvez jouer sur place librement, et les jeux sont empruntables avec un
-					abonnement à la médiathèque pour en profiter aussi à la maison.
+					Cette rubrique rassemble les articles et actualités du Parc national des Pyrénées que nous relayons. Vous y
+					découvrirez des informations et des contenus pour mieux connaître, comprendre et apprécier ce territoire
+					naturel exceptionnel.
 				</p>
 			</article>
 
 			<div class="bg-primary mt-12 grid grid-cols-8 grid-rows-2 gap-6 px-10 py-8 *:min-h-12">
 				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 col-span-6 bg-white" />
-				<SelectWrapper
-					placeholder={'Temps de jeu'}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
-				/>
-				<SelectWrapper
-					placeholder={'Nombre de joueurs'}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
-				/>
 
-				<SelectWrapper placeholder={'Âge'} options={[{ key: 'fefef', value: 'fef' }]} className="col-span-2 w-full" />
+				<SelectWrapper
+					placeholder={'Type d\'article'}
+					options={[{ key: 'fefef', value: 'fef' }]}
+					className="col-span-2 w-full"
+				/>
+				<SelectWrapper
+					placeholder={'Âge'}
+					options={[{ key: 'fefef', value: 'fef' }]}
+					className="col-span-2 w-full"
+				/>
+				<SelectWrapper placeholder={'Prix'} options={[{ key: 'fefef', value: 'fef' }]} className="col-span-2 w-full" />
 			</div>
 
 			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
@@ -333,38 +402,6 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 					</figure>
 				</article>
 			</div>
-		</section>
-
-		<section class="section-default">
-			<article class="grid grid-cols-2 gap-5">
-				<div class="flex flex-col">
-					<h2 class="text-primary pb-3">{t('CYBERBASE_TITRE')}</h2>
-					<p class="distinguished pb-16">{t('CYBERBASE_INTRO')}</p>
-					<p>{t('CYBERBASE_DESC')}</p>
-				</div>
-				<div class="grid grid-cols-4 gap-5">
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-2" />
-				</div>
-			</article>
-		</section>
-
-		<section class="section-default bg-secondary/20">
-			<article class="grid grid-cols-2 gap-5">
-				<div class="grid grid-cols-2 gap-5">
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={250} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={250} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={175} layout="fullWidth" class="col-span-2" />
-				</div>
-				<div class="flex flex-col">
-					<h2 class="text-secondary pb-3">{t('AUTRES_MEDIAS_TITRE')}</h2>
-					<p class="distinguished pb-16">{t('AUTRES_MEDIAS_INTRO')}</p>
-					<p>{t('AUTRES_MEDIAS_DESC')}</p>
-
-					<Button variant={'secondary'} link="/" size={'xl'} className="mt-auto w-fit">{t('EN_SAVOIR_PLUS')}</Button>
-				</div>
-			</article>
 		</section>
 	</main>
 </Layout>
