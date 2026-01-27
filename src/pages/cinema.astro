@@ -112,13 +112,14 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 			</div>
 		</section>
 
-		<section class="section-default">
+		<section class="section-default pb-4">
 			<article>
-				<h2 class="pb-3">{t('SPECTACLES_A_VENIR')}</h2>
-				<p class="distinguished pb-6">{t('SPECTACLES_INTRO')}</p>
+				<h2 class="pb-3">{t('CINEMA')}</h2>
+				<p class="distinguished pb-6">{t('CINEMA_INTRO')}</p>
 				<p class="w-2/3">
-					{t('SPECTACLES_DESC_PART1')}<br />
-					{t('SPECTACLES_DESC_PART2')}
+					{t('CINEMA_DESC_PART1')}<br /><br />
+					{t('CINEMA_DESC_PART2')}<br /><br />
+					{t('CINEMA_DESC_PART3')}
 				</p>
 			</article>
 
@@ -144,10 +145,15 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 					options={[{ key: 'fefef', value: 'fef' }]}
 					className="col-span-2 w-full"
 				/>
+				<SelectWrapper
+					placeholder={t('GENRE')}
+					options={[{ key: 'fefef', value: 'fef' }]}
+					className="col-span-2 w-full"
+				/>
 			</div>
 
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
-				<article class="group col-span-1 w-full bg-white shadow-xs">
+			<div class="my-16 grid grid-cols-2 gap-5">
+				<article class="group w-full">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -158,16 +164,15 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 							class="transition-transform duration-250 group-hover:scale-110"
 						/>
 					</div>
-					<figure class="p-4">
+					<figure class="py-4">
 						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
+							<h3 class="text-secondary pb-1">{t('EVENT_TITLE')}</h3>
+							<p class="truncate pb-1 text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
 							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
+				<article class="group w-full">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -178,16 +183,15 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 							class="transition-transform duration-250 group-hover:scale-110"
 						/>
 					</div>
-					<figure class="p-4">
+					<figure class="py-4">
 						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
+							<h3 class="text-secondary pb-1">{t('EVENT_TITLE')}</h3>
+							<p class="pb-1 text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
 							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
+				<article class="group w-full">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -198,16 +202,15 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 							class="transition-transform duration-250 group-hover:scale-110"
 						/>
 					</div>
-					<figure class="p-4">
+					<figure class="py-4">
 						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
+							<h3 class="text-secondary pb-1">{t('EVENT_TITLE')}</h3>
+							<p class="pb-1 text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
 							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
+				<article class="group w-full">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -218,16 +221,15 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 							class="transition-transform duration-250 group-hover:scale-110"
 						/>
 					</div>
-					<figure class="p-4">
+					<figure class="py-4">
 						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary truncate text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
+							<h3 class="text-secondary pb-1">{t('EVENT_TITLE')}</h3>
+							<p class="pb-1 text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
 							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
 						</figcaption>
 					</figure>
 				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
+				<article class="group w-full">
 					<div class="overflow-hidden">
 						<MyImage
 							src={EspaceCultureImg}
@@ -238,27 +240,40 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 							class="transition-transform duration-250 group-hover:scale-110"
 						/>
 					</div>
-					<figure class="p-4">
+					<figure class="py-4">
 						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary truncate text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
+							<h3 class="text-secondary pb-1">{t('EVENT_TITLE')}</h3>
+							<p class="pb-1 text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
 							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
+						</figcaption>
+					</figure>
+				</article>
+				<article class="group w-full">
+					<div class="overflow-hidden">
+						<MyImage
+							src={EspaceCultureImg}
+							alt=""
+							width={300}
+							height={200}
+							layout="fullWidth"
+							class="transition-transform duration-250 group-hover:scale-110"
+						/>
+					</div>
+					<figure class="py-4">
+						<figcaption>
+							<h3 class="text-secondary pb-1">{t('EVENT_TITLE')}</h3>
+							<p class="pb-1 text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
+							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
 						</figcaption>
 					</figure>
 				</article>
 			</div>
 		</section>
 
-		<section class="section-default pb-">
-			<article>
-				<h2 class="pb-3">{t('RESIDENCE_ARTISTIQUE')}</h2>
-				<p class="distinguished pb-6">{t('RESIDENCE_INTRO')}</p>
-				<p class="w-2/3">
-					{t('RESIDENCE_DESC_PART1')}<br /><br />
-					{t('RESIDENCE_DESC_PART2')}
-				</p>
-			</article>
+		<section class="section-default bg-secondary/20">
+			<h2 class="text-secondary pb-3">{t('RDV_CINEMA')}</h2>
+			<p class="distinguished pb-6">{t('RDV_CINEMA_INTRO')}</p>
+			<p class="w-2/3">{t('RDV_CINEMA_DESC')}</p>
 
 			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
 				<article class="group col-span-1 w-full bg-white shadow-xs">
@@ -274,9 +289,8 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 					</div>
 					<figure class="p-4">
 						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary text-sm distinguished">{t('EVENT_DESC_EXAMPLE')}</p>
-							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+							<h3 class="text-secondary pb-1">{t('EVENT_TITLE')}</h3>
+							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
 							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
 						</figcaption>
 					</figure>
@@ -295,8 +309,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 					<figure class="p-4">
 						<figcaption>
 							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
-							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
 							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
 						</figcaption>
 					</figure>
@@ -315,8 +328,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 					<figure class="p-4">
 						<figcaption>
 							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary truncate text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
-							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
 							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
 						</figcaption>
 					</figure>
@@ -335,8 +347,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 					<figure class="p-4">
 						<figcaption>
 							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary truncate text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
-							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
+							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
 							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
 						</figcaption>
 					</figure>

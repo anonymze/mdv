@@ -5,7 +5,7 @@ import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import  langs from '@/i18n/langs'
+import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 
@@ -239,7 +239,7 @@ const categories: Array<{key: keyof typeof langs.fr, href: string, image: string
                      <h2 class="pb-3">{t('SEANCES_A_VENIR')}</h2>
                      <p class="distinguished pb-6">{t('CINEMA_INTRO')}</p>
                      <p class="w-2/3">
-                         {t('CINEMA_DESC')}
+                         {t('CINEMA_DESC_PART1')}
                      </p>
 
                      <div class="my-16 grid grid-cols-2 gap-5">
