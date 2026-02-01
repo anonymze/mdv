@@ -43,7 +43,7 @@ const articles = await find<ParcNational>('parc_national', {
 							.join(' ')
 
 						return (
-							<article class="group relative col-span-1 w-full bg-white shadow-xs overflow-hidden">
+							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-xs">
 								<div class="overflow-hidden">
 									<MyImage
 										src={item.thumbnail?.url}
@@ -54,9 +54,9 @@ const articles = await find<ParcNational>('parc_national', {
 										layout="fullWidth"
 									/>
 								</div>
-								<figure class="p-4 group-hover:opacity-0 transition-opacity duration-250">
+								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
-										<h3 class="text-black pb-1">
+										<h3 class="pb-1 text-black">
 											<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
@@ -64,22 +64,28 @@ const articles = await find<ParcNational>('parc_national', {
 										<time class="distinguished text-sm" datetime={item.date_start}>
 											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })}
 										</time>
-										<p class="line-clamp-2 pt-3 text-xs">
-											{descText}
-										</p>
+										<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
 									</figcaption>
 								</figure>
-								<div class="bg-primary/80 absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-250 pointer-events-none" />
-								<figure class="absolute inset-0 p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-250 pointer-events-none">
+								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
 									<figcaption class="text-white">
-											<p class="line-clamp-8 text-sm">
-											{descText}
-										</p>
-										<p class="pt-10 text-sm font-semibold inline-flex items-center gap-2 underline underline-offset-2">
+										<p class="line-clamp-8 text-sm">{descText}</p>
+										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
 											{t('EN_SAVOIR_PLUS')}
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-												<path d="M5 12h14"/>
-												<path d="m12 5 7 7-7 7"/>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d="M5 12h14" />
+												<path d="m12 5 7 7-7 7" />
 											</svg>
 										</p>
 									</figcaption>
@@ -108,7 +114,7 @@ const articles = await find<ParcNational>('parc_national', {
 							.join(' ')
 
 						return (
-							<article class="group relative col-span-1 w-full bg-white shadow-xs overflow-hidden">
+							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-xs">
 								<div class="overflow-hidden">
 									<MyImage
 										src={item.thumbnail?.url}
@@ -119,32 +125,38 @@ const articles = await find<ParcNational>('parc_national', {
 										layout="fullWidth"
 									/>
 								</div>
-								<figure class="p-4 group-hover:opacity-0 transition-opacity duration-250">
+								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
-										<h3 class="text-black pb-1">
+										<h3 class="pb-1 text-black">
 											<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
-										<time class="distinguished text-sm" datetime={item.date_start}>
-											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })}
-										</time>
-										<p class="line-clamp-2 pt-3 text-xs">
-											{descText}
-										</p>
+										<div class="flex items-center gap-4 pt-3">
+											<p class="line-clamp-2 text-xs">{descText}</p>
+											<p class="text-primary text-lg">9€</p>
+										</div>
 									</figcaption>
 								</figure>
-								<div class="bg-primary/80 absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-250 pointer-events-none" />
-								<figure class="absolute inset-0 p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-250 pointer-events-none">
+								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
 									<figcaption class="text-white">
-											<p class="line-clamp-8 text-sm">
-											{descText}
-										</p>
-										<p class="pt-10 text-sm font-semibold inline-flex items-center gap-2 underline underline-offset-2">
+										<p class="line-clamp-8 text-sm">{descText}</p>
+										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
 											{t('EN_SAVOIR_PLUS')}
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-												<path d="M5 12h14"/>
-												<path d="m12 5 7 7-7 7"/>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d="M5 12h14" />
+												<path d="m12 5 7 7-7 7" />
 											</svg>
 										</p>
 									</figcaption>
