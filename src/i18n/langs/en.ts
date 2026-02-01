@@ -82,6 +82,7 @@ export default {
 	HORAIRES_OUVERTURE: "Opening hours",
 	HORAIRES_PART1: "Monday to Saturday from 2 PM to 7 PM, Sunday from 5 PM to 7 PM",
 	HORAIRES_PART2: "Summer and winter holidays, Monday to Sunday from 2 PM to 7 PM",
+	IMAGE_PLACEHOLDER: "Placeholder image",
 	IMMANQUABLE: "unmissable",
 	INFORMATIONS: "Information",
 	INFORMATIONS_GENERALES: "General information",

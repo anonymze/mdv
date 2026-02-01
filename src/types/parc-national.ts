@@ -1,5 +1,31 @@
 import type { Media } from './media'
 
+type RichTextNode =
+	| {
+			type: 'text'
+			text: string
+			mode?: string
+			style?: string
+			detail?: number
+			format?: number
+			version: number
+	  }
+	| {
+			type: 'linebreak'
+			version: number
+	  }
+
+type ParagraphNode = {
+	type: 'paragraph'
+	format: string
+	indent: number
+	version: number
+	children: RichTextNode[]
+	direction?: ('ltr' | 'rtl') | null
+	textStyle?: string
+	textFormat?: number
+}
+
 export interface ParcNational {
 	id: string
 	type: 'evenement' | 'article'
@@ -9,15 +35,13 @@ export interface ParcNational {
 	description: {
 		root: {
 			type: string
-			children: {
-				type: any
-				version: number
-				[k: string]: unknown
-			}[]
+			children: ParagraphNode[]
 			direction: ('ltr' | 'rtl') | null
 			format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
 			indent: number
 			version: number
+			textStyle?: string
+			textFormat?: number
 		}
 		[k: string]: unknown
 	}
@@ -41,9 +65,6 @@ export interface ParcNational {
 	duration: string
 	other_images?:
 		| {
-				/**
-				 * Le fichier doit être une image.
-				 */
 				image?: Media | null
 				id?: string | null
 		  }[]

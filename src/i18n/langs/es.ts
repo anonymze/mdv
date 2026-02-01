@@ -82,6 +82,7 @@ export default {
 	HORAIRES_OUVERTURE: "Horarios de apertura",
 	HORAIRES_PART1: "De lunes a sábado de 14h a 19h, domingo de 17h a 19h",
 	HORAIRES_PART2: "Vacaciones de verano e invierno, de lunes a domingo de 14h a 19h",
+	IMAGE_PLACEHOLDER: "Imagen de sustitución",
 	IMMANQUABLE: "imperdible",
 	INFORMATIONS: "Información",
 	INFORMATIONS_GENERALES: "Información general",

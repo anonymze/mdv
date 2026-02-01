@@ -11,7 +11,17 @@ import type { ParcNational } from '@/types/parc-national'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
-const data = await find<ParcNational>('parc_national', { limit: 8, locale })
+const evenements = await find<ParcNational>('parc_national', {
+	limit: 4,
+	locale,
+	where: { type: { equals: 'evenement' } }
+})
+
+const articles = await find<ParcNational>('parc_national', {
+	limit: 8,
+	locale,
+	where: { type: { equals: 'article' } }
+})
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
@@ -23,288 +33,126 @@ const data = await find<ParcNational>('parc_national', { limit: 8, locale })
 				{t('PARC_EVENEMENTS_DESC')}
 			</p>
 
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1 text-black">{t('EVENT_TITLE')}</h3>
-							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
+			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+				{
+					evenements.docs.map((item) => {
+						const descText = item.description.root.children
+							.flatMap((para) => para.children)
+							.filter((child) => child.type === 'text')
+							.map((child) => child.text)
+							.join(' ')
+
+						return (
+							<article class="group relative col-span-1 w-full bg-white shadow-xs overflow-hidden">
+								<div class="overflow-hidden">
+									<MyImage
+										src={item.thumbnail?.url}
+										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={item.thumbnail?.blurhash}
+										width={275}
+										height={305}
+										layout="fullWidth"
+									/>
+								</div>
+								<figure class="p-4 group-hover:opacity-0 transition-opacity duration-250">
+									<figcaption>
+										<h3 class="text-black pb-1">
+											<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+												{item.title}
+											</a>
+										</h3>
+										<time class="distinguished text-sm" datetime={item.date_start}>
+											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })}
+										</time>
+										<p class="line-clamp-2 pt-3 text-xs">
+											{descText}
+										</p>
+									</figcaption>
+								</figure>
+								<div class="bg-primary/80 absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-250 pointer-events-none" />
+								<figure class="absolute inset-0 p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-250 pointer-events-none">
+									<figcaption class="text-white">
+											<p class="line-clamp-8 text-sm">
+											{descText}
+										</p>
+										<p class="pt-10 text-sm font-semibold inline-flex items-center gap-2 underline underline-offset-2">
+											{t('EN_SAVOIR_PLUS')}
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<path d="M5 12h14"/>
+												<path d="m12 5 7 7-7 7"/>
+											</svg>
+										</p>
+									</figcaption>
+								</figure>
+							</article>
+						)
+					})
+				}
 			</div>
 		</section>
 
 		<section class="section-default bg-primary/20">
-			<article>
-				<h2 class="pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
-				<p class="distinguished pb-6">{t('PARC_ARTICLES_INTRO')}</p>
-				<p class="w-2/3">
-					{t('PARC_ARTICLES_DESC')}
-				</p>
-			</article>
+			<h2 class="text-primary pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
+			<p class="distinguished pb-6">{t('PARC_ARTICLES_INTRO')}</p>
+			<p class="w-2/3">
+				{t('PARC_ARTICLES_DESC')}
+			</p>
 
-			<div class="bg-primary mt-12 grid grid-cols-8 grid-rows-2 gap-6 px-10 py-8 *:min-h-12">
-				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 col-span-6 bg-white" />
+			<div class="my-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
+				{
+					articles.docs.map((item) => {
+						const descText = item.description.root.children
+							.flatMap((para) => para.children)
+							.filter((child) => child.type === 'text')
+							.map((child) => child.text)
+							.join(' ')
 
-				<SelectWrapper
-					placeholder={t('TYPE_ARTICLE')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
-				/>
-				<SelectWrapper
-					placeholder={t('AGE')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
-				/>
-				<SelectWrapper
-					placeholder={t('PRIX')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
-				/>
-			</div>
-
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-3">{t('EVENT_TITLE')}</h3>
-							<p class="text-sm">{t('EVENT_DATE_EXAMPLE')}</p>
-							<div class="flex items-center justify-between pt-2 text-xs">
-								<p>3ans et +</p>
-								<p>1 à 4 joueurs</p>
-								<p>30 min</p>
-							</div>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-3">{t('EVENT_TITLE')}</h3>
-							<p class="text-sm">{t('EVENT_DATE_EXAMPLE')}</p>
-							<div class="flex items-center justify-between pt-2 text-xs">
-								<p>3ans et +</p>
-								<p>1 à 4 joueurs</p>
-								<p>30 min</p>
-							</div>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-3">{t('EVENT_TITLE')}</h3>
-							<p class="text-sm">{t('EVENT_DATE_EXAMPLE')}</p>
-							<div class="flex items-center justify-between pt-2 text-xs">
-								<p>3ans et +</p>
-								<p>1 à 4 joueurs</p>
-								<p>30 min</p>
-							</div>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-3">{t('EVENT_TITLE')}</h3>
-							<p class="text-sm">{t('EVENT_DATE_EXAMPLE')}</p>
-							<div class="flex items-center justify-between pt-2 text-sm">
-								<p>3ans et +</p>
-								<p>1 à 4 joueurs</p>
-								<p>30 min</p>
-							</div>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
-							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
-							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary truncate text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
-							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<p class="text-primary truncate text-sm italic">{t('EVENT_DESC_EXAMPLE')}</p>
-							<time class="text-sm italic" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
+						return (
+							<article class="group relative col-span-1 w-full bg-white shadow-xs overflow-hidden">
+								<div class="overflow-hidden">
+									<MyImage
+										src={item.thumbnail?.url}
+										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={item.thumbnail?.blurhash}
+										width={365}
+										height={265}
+										layout="fullWidth"
+									/>
+								</div>
+								<figure class="p-4 group-hover:opacity-0 transition-opacity duration-250">
+									<figcaption>
+										<h3 class="text-black pb-1">
+											<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+												{item.title}
+											</a>
+										</h3>
+										<time class="distinguished text-sm" datetime={item.date_start}>
+											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })}
+										</time>
+										<p class="line-clamp-2 pt-3 text-xs">
+											{descText}
+										</p>
+									</figcaption>
+								</figure>
+								<div class="bg-primary/80 absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-250 pointer-events-none" />
+								<figure class="absolute inset-0 p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-250 pointer-events-none">
+									<figcaption class="text-white">
+											<p class="line-clamp-8 text-sm">
+											{descText}
+										</p>
+										<p class="pt-10 text-sm font-semibold inline-flex items-center gap-2 underline underline-offset-2">
+											{t('EN_SAVOIR_PLUS')}
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<path d="M5 12h14"/>
+												<path d="m12 5 7 7-7 7"/>
+											</svg>
+										</p>
+									</figcaption>
+								</figure>
+							</article>
+						)
+					})
+				}
 			</div>
 		</section>
 	</main>

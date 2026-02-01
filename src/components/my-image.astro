@@ -1,9 +1,10 @@
 ---
 import { Image as UnpicImage } from '@unpic/astro'
 import type { ImageMetadata } from 'astro'
+import PlaceholderImg from '@/assets/imgs/placeholder.webp'
 
 export interface Props {
-	src: string | ImageMetadata
+	src?: string | ImageMetadata | null
 	alt: string
 	width: number
 	height: number
@@ -15,17 +16,17 @@ export interface Props {
 	aspectRatio?: number
 	layout?: 'fixed' | 'constrained' | 'fullWidth'
 	placeholder?: 'blur' | 'none'
-	background?: string
+	background?: string | null
 	breakpoints?: number[]
 	sizes?: string
 }
 
 const {
-	src,
+	src = PlaceholderImg,
 	alt,
 	width,
 	height,
-	background = 'auto',
+	background,
 	loading,
 	layout,
 	priority,
@@ -39,8 +40,23 @@ const {
 	...rest
 } = Astro.props
 
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
+
 // Handle Astro image imports (ImageMetadata) and string URLs
-const imageSrc = typeof src === 'string' ? src : src.src
+let imageSrc: string | ImageMetadata
+
+if (typeof src === 'string') {
+	// String from API - prepend Payload URL
+	imageSrc = `${PAYLOAD_URL}${src}`
+} else if (src) {
+	// ImageMetadata - use .src
+	imageSrc = src.src
+} else {
+	// Null/undefined - use placeholder
+	imageSrc = PlaceholderImg.src
+}
+
+// console.log(imageSrc)
 ---
 
 <UnpicImage
@@ -55,7 +71,7 @@ const imageSrc = typeof src === 'string' ? src : src.src
 	aspectRatio={aspectRatio}
 	layout={layout}
 	placeholder={placeholder}
-	background={background}
+	background={background ?? undefined}
 	breakpoints={breakpoints}
 	sizes={sizes}
 	priority={priority}

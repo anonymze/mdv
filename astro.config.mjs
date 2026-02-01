@@ -21,12 +21,9 @@ export default defineConfig({
 			fallbackType: 'rewrite'
 		}
 	},
-	// image: {
-	//    service: imageService({
-	//      layout: "constrained",
-	//      placeholder: "blurhash"
-	//    }),
-	//  },
+	image: {
+		remotePatterns: [{ protocol: 'https', hostname: 'mdv-admin.vercel.app' }]
+	},
 	experimental: {
 		fonts: [
 			{

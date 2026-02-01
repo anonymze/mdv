@@ -26,7 +26,7 @@ export interface PayloadQueryParams {
   locale?: string
 }
 
-const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_API_URL;
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL + "/api";
 
 function buildQuery(params?: PayloadQueryParams): string {
   if (!params) return ''
