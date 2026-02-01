@@ -2,13 +2,11 @@
 import { find } from '@/api/payload'
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
 import MyImage from '@/components/my-image.astro'
-import { SelectWrapper } from '@/components/select-wrapper'
-import { Input } from '@/components/ui/input'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import { translatePublicField } from '@/lib/translate-fields'
+import { translateLudoDuration, translateLudoPlayers, translateLudoPublic, translatePublicField } from '@/lib/translate-fields'
 import type { Cinema } from '@/types/cinema'
-import type { Exposition } from '@/types/exposition'
+import type { Mediatheque } from '@/types/mediatheque'
 import type { ParcNational } from '@/types/parc-national'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
@@ -20,10 +18,10 @@ const evenements = await find<ParcNational>('parc_national', {
 	where: { type: { equals: 'evenement' } }
 })
 
-const exposition = await find<Exposition>('exposition', {
-	limit: 1,
+const ludotheque = await find<Mediatheque>('mediatheque', {
+	limit: 3,
 	locale,
-	where: { type: { equals: 'exposition' } }
+	where: { type: { equals: 'ludotheque' } }
 })
 
 const cinema = await find<Cinema>('cinema', {
@@ -31,12 +29,86 @@ const cinema = await find<Cinema>('cinema', {
 	locale,
 	where: { type: { equals: 'seance' } }
 })
-
-console.log(cinema)
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
+		<section class="section-default">
+			<h2 class="text-primary pb-3">{t('SPECTACLES_JEUNE_PUBLIC_TITRE')}</h2>
+			<p class="distinguished pb-6">{t('SPECTACLES_JEUNE_PUBLIC_INTRO')}</p>
+			<p class="w-2/3">
+				{t('SPECTACLES_JEUNE_PUBLIC_DESC')}
+			</p>
+
+			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+				{
+					evenements.docs.map((item) => {
+						const descText = item.description.root.children
+							.flatMap((para) => para.children)
+							.filter((child) => child.type === 'text')
+							.map((child) => child.text)
+							.join(' ')
+
+						return (
+							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
+								<div class="overflow-hidden">
+									<MyImage
+										src={item.thumbnail?.url}
+										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={item.thumbnail?.blurhash}
+										width={275}
+										height={305}
+										layout="fullWidth"
+									/>
+								</div>
+								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
+									<figcaption>
+										<h3 class="pb-1 text-black">
+											<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+												{item.title}
+											</a>
+										</h3>
+										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
+											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
+											{new Date(item.date_start).toLocaleTimeString(locale, {
+												hour: '2-digit',
+												minute: '2-digit',
+												hour12: false
+											})}
+										</time>
+										<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
+									</figcaption>
+								</figure>
+								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
+									<figcaption class="text-white">
+										<p class="line-clamp-8 text-sm">{descText}</p>
+										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
+											{t('EN_SAVOIR_PLUS')}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d="M5 12h14" />
+												<path d="m12 5 7 7-7 7" />
+											</svg>
+										</p>
+									</figcaption>
+								</figure>
+							</article>
+						)
+					})
+				}
+			</div>
+		</section>
+
 		<section class="section-default bg-primary/20 pb-4">
 			<article>
 				<h2 class="pb-3">{t('CINEMA_JEUNE_PUBLIC_TITRE')}</h2>
@@ -116,209 +188,75 @@ console.log(cinema)
 		</section>
 
 		<section class="section-default">
-			<h2 class="text-secondary pb-3">{t('EVENEMENTS_EXPO')}</h2>
-			<p class="distinguished pb-16">{t('EVENEMENTS_EXPO_INTRO')}</p>
-
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1 text-black">{t('EVENT_TITLE')}</h3>
-							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-							<time class="distinguished text-sm" datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-							<p class="pt-3 text-sm">{t('EVENT_DESC_EXAMPLE')}</p>
-						</figcaption>
-					</figure>
-				</article>
-			</div>
-		</section>
-
-		<section class="section-default bg-primary/20">
 			<article>
-				<h2 class="pb-3">{t('LUDOTHEQUE_TITRE')}</h2>
-				<p class="distinguished pb-6">{t('LUDOTHEQUE_INTRO')}</p>
-				<p class="w-2/3">{t('LUDOTHEQUE_DESC')}</p>
+				<h2 class="pb-3 text-secondary">{t('LUDOTHEQUE_JEUNE_PUBLIC_TITRE')}</h2>
+				<p class="distinguished pb-6">{t('LUDOTHEQUE_JEUNE_PUBLIC_INTRO')}</p>
+				<p class="w-2/3">{t('LUDOTHEQUE_JEUNE_PUBLIC_DESC')}</p>
 			</article>
 
-			<div class="bg-primary mt-12 grid grid-cols-8 grid-rows-2 gap-6 px-10 py-8 *:min-h-12">
-				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 col-span-6 bg-white" />
-				<SelectWrapper
-					placeholder={t('TEMPS_DE_JEU')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
-				/>
-				<SelectWrapper
-					placeholder={t('NOMBRE_DE_JOUEURS')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
-				/>
+			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-92">
+				{
+					ludotheque.docs.map((item) => {
+						const descText = item.description.root.children
+							.flatMap((para) => para.children)
+							.filter((child) => child.type === 'text')
+							.map((child) => child.text)
+							.join(' ')
 
-				<SelectWrapper
-					placeholder={t('AGE')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
-				/>
-			</div>
-
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-72">
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-3">{t('EVENT_TITLE')}</h3>
-							<p class="text-sm">{t('EVENT_DATE_EXAMPLE')}</p>
-							<div class="flex items-center justify-between pt-2 text-xs">
-								<p>3ans et +</p>
-								<p>1 à 4 joueurs</p>
-								<p>30 min</p>
-							</div>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-3">{t('EVENT_TITLE')}</h3>
-							<p class="text-sm">{t('EVENT_DATE_EXAMPLE')}</p>
-							<div class="flex items-center justify-between pt-2 text-xs">
-								<p>3ans et +</p>
-								<p>1 à 4 joueurs</p>
-								<p>30 min</p>
-							</div>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-3">{t('EVENT_TITLE')}</h3>
-							<p class="text-sm">{t('EVENT_DATE_EXAMPLE')}</p>
-							<div class="flex items-center justify-between pt-2 text-xs">
-								<p>3ans et +</p>
-								<p>1 à 4 joueurs</p>
-								<p>30 min</p>
-							</div>
-						</figcaption>
-					</figure>
-				</article>
-				<article class="group col-span-1 w-full bg-white shadow-xs">
-					<div class="overflow-hidden">
-						<MyImage
-							src={EspaceCultureImg}
-							alt=""
-							width={300}
-							height={200}
-							layout="fullWidth"
-							class="transition-transform duration-250 group-hover:scale-110"
-						/>
-					</div>
-					<figure class="p-4">
-						<figcaption>
-							<h3 class="pb-3">{t('EVENT_TITLE')}</h3>
-							<p class="text-sm">{t('EVENT_DATE_EXAMPLE')}</p>
-							<div class="flex items-center justify-between pt-2 text-sm">
-								<p>3ans et +</p>
-								<p>1 à 4 joueurs</p>
-								<p>30 min</p>
-							</div>
-						</figcaption>
-					</figure>
-				</article>
+						return (
+							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-xs">
+								<div class="overflow-hidden">
+									<MyImage
+										src={item.thumbnail?.url}
+										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={item.thumbnail?.blurhash}
+										width={365}
+										height={270}
+										layout="fullWidth"
+									/>
+								</div>
+								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
+									<figcaption>
+										<h3 class="pb-3 text-black">
+											<a href={`/mediatheque/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+												{item.title}
+											</a>
+										</h3>
+										<p class="text-xs font-serif text-secondary pb-2">{item.genre}</p>
+										<div class="flex items-center justify-between text-xs">
+											<p>{translateLudoPublic(item.public, t)}</p>
+											<p>{translateLudoPlayers(item.players, t)}</p>
+											<p>{translateLudoDuration(item.duration, t)}</p>
+										</div>
+									</figcaption>
+								</figure>
+								<div class="bg-secondary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
+									<figcaption class="text-white">
+										<p class="line-clamp-8 text-sm">{descText}</p>
+										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
+											{t('EN_SAVOIR_PLUS')}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d="M5 12h14" />
+												<path d="m12 5 7 7-7 7" />
+											</svg>
+										</p>
+									</figcaption>
+								</figure>
+							</article>
+						)
+					})
+				}
 			</div>
 		</section>
 	</main>
