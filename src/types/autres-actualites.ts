@@ -1,4 +1,5 @@
 import type { Media } from './media'
+import type { RichTextField } from './rich-text'
 
 export interface AutresActualites {
 	id: string
@@ -6,37 +7,9 @@ export interface AutresActualites {
 	archive?: boolean | null
 	thumbnail?: Media | null
 	title: string
-	description: {
-		root: {
-			type: string
-			children: {
-				type: any
-				version: number
-				[k: string]: unknown
-			}[]
-			direction: ('ltr' | 'rtl') | null
-			format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-			indent: number
-			version: number
-		}
-		[k: string]: unknown
-	}
+	description: RichTextField
 	date_start: string
-	informations_more?: {
-		root: {
-			type: string
-			children: {
-				type: any
-				version: number
-				[k: string]: unknown
-			}[]
-			direction: ('ltr' | 'rtl') | null
-			format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-			indent: number
-			version: number
-		}
-		[k: string]: unknown
-	} | null
+	informations_more?: RichTextField | null
 	price: string
 	duration: string
 	other_images?:

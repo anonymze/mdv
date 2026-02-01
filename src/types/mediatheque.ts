@@ -1,4 +1,5 @@
 import type { Media } from "./media";
+import type { RichTextField } from "./rich-text";
 
 export interface Mediatheque {
   id: string;
@@ -9,21 +10,7 @@ export interface Mediatheque {
    */
   thumbnail?: Media | null;
   title: string;
-  description: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  description: RichTextField;
   /**
    * Séparer si plusieurs prix par un ";" Ex : 5€ adulte; Gratuit sur place; 2€ par jour...
    */
@@ -31,21 +18,7 @@ export interface Mediatheque {
   players: '1' | '1-2' | '1-4' | '1-8' | '4+';
   duration: '15' | '30' | '1h' | '1h+';
   public: '-3' | '3+' | '12+' | '16+' | '18+';
-  informations_more?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  informations_more?: RichTextField | null;
   other_images?:
     | {
         /**

@@ -38,14 +38,34 @@ function buildQuery(params?: PayloadQueryParams): string {
   if (params.page !== undefined) searchParams.set('page', params.page.toString())
   if (params.sort) searchParams.set('sort', params.sort)
   if (params.locale) searchParams.set('locale', params.locale)
-  if (params.where) searchParams.set('where', JSON.stringify(params.where))
+
+  // Build where clause in Payload REST API format: where[field][operator]=value
+  if (params.where) {
+    Object.entries(params.where).forEach(([field, value]) => {
+      if (typeof value === 'object' && value !== null) {
+        // Nested operator: where[field][operator]=value
+        Object.entries(value).forEach(([operator, val]) => {
+          searchParams.set(`where[${field}][${operator}]`, String(val))
+        })
+      } else {
+        // Simple equality: where[field][equals]=value
+        searchParams.set(`where[${field}][equals]`, String(value))
+      }
+    })
+  }
 
   const query = searchParams.toString()
   return query ? `?${query}` : ''
 }
 
 export async function find<T>(collection: string, params?: PayloadQueryParams): Promise<PayloadResponse<T>> {
-  const query = buildQuery(params)
+  // Default sort by latest first if not specified
+  const queryParams = {
+    ...params,
+    sort: params?.sort || '-createdAt'
+  }
+
+  const query = buildQuery(queryParams)
   const res = await fetch(`${PAYLOAD_URL}/${collection}${query}`)
 
   if (!res.ok) {

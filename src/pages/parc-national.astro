@@ -1,9 +1,6 @@
 ---
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
 import MyImage from '@/components/my-image.astro'
-import { SelectWrapper } from '@/components/select-wrapper'
-import { Input } from '@/components/ui/input'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import type { ParcNational } from '@/types/parc-national'
@@ -18,7 +15,7 @@ const evenements = await find<ParcNational>('parc_national', {
 })
 
 const articles = await find<ParcNational>('parc_national', {
-	limit: 8,
+	limit: 6,
 	locale,
 	where: { type: { equals: 'article' } }
 })
@@ -61,8 +58,13 @@ const articles = await find<ParcNational>('parc_national', {
 												{item.title}
 											</a>
 										</h3>
-										<time class="distinguished text-sm" datetime={item.date_start}>
-											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })}
+										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
+										{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
+										{new Date(item.date_start).toLocaleTimeString(locale, {
+											hour: '2-digit',
+											minute: '2-digit',
+											hour12: false
+										})}
 										</time>
 										<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
 									</figcaption>

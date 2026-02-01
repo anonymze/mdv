@@ -1,4 +1,5 @@
 import type { Media } from "./media";
+import type { RichTextField } from "./rich-text";
 
 export interface Cinema {
   id: string;
@@ -6,21 +7,7 @@ export interface Cinema {
   archive?: boolean | null;
   thumbnail?: Media | null;
   title: string;
-  synopsis: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  synopsis: RichTextField;
   price: string;
   date_start: string;
   video: string;
@@ -30,21 +17,7 @@ export interface Cinema {
     | ('children' | 'all_public' | 'all_public_avertissment' | 'forbidden_12' | 'forbidden_16' | 'forbidden_18')
     | null;
   languages: string;
-  informations_more?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  informations_more?: RichTextField | null;
   other_images?:
     | {
         image?: Media | null;
