@@ -7,7 +7,7 @@ import Layout from '@/layouts/layout.astro'
 import type { ExpositionType, EvenementType } from '@/types/exposition'
 import { renderRichText } from '@/utils/helper'
 const locale = (Astro.currentLocale || 'fr') as I18n
-const t = createTranslator(locale)
+const t = createTranslator(locale);
 
 const exposition = (await find<ExpositionType>('exposition/current', {
 	locale

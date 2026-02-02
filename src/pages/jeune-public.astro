@@ -194,7 +194,7 @@ const cinema = await find<Cinema>('cinema', {
 				<p class="w-2/3">{t('LUDOTHEQUE_JEUNE_PUBLIC_DESC')}</p>
 			</article>
 
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-92">
+			<div class="my-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
 				{
 					ludotheque.docs.map((item) => {
 						const descText = item.description.root.children

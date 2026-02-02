@@ -104,7 +104,7 @@ export default {
 	LUDOBHEQUE: "Game library",
 	LUDOTHEQUE_DESC: "Games for the youngest",
 	LUDOTHEQUE_DESC_LONG: "Every four months, we renew our game library to offer you even more ways to have fun with family or friends. Our selection of games is suitable for all ages, from 3 years old, and appeals to both children and adults. You can play freely on site, and games can be borrowed with a media library subscription to enjoy them at home too.",
-	LUDOTHEQUE_INTRO: "Time to play",
+	LUDOTHEQUE_INTRO: "Time to play !",
 	LUDOTHEQUE_TITRE: "The game library",
 	LUDOTHEQUE_JEUNE_PUBLIC_TITRE: "The game library games",
 	LUDOTHEQUE_JEUNE_PUBLIC_INTRO: "Games to share with family, here and at home",

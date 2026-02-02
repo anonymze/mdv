@@ -104,7 +104,7 @@ export default {
 	LUDOBHEQUE: "Ludoteca",
 	LUDOTHEQUE_DESC: "Juegos para los más jóvenes",
 	LUDOTHEQUE_DESC_LONG: "Cada cuatro meses, renovamos nuestra ludoteca para ofrecerle aún más formas de divertirse en familia o con amigos. Nuestra selección de juegos está dirigida a todas las edades, desde 3 años, y seduce tanto a niños como a adultos. Puede jugar libremente in situ, y los juegos se pueden tomar prestados con una suscripción a la mediateca para disfrutarlos también en casa.",
-	LUDOTHEQUE_INTRO: "Hora de jugar",
+	LUDOTHEQUE_INTRO: "Hora de jugar !",
 	LUDOTHEQUE_TITRE: "La ludoteca",
 	LUDOTHEQUE_JEUNE_PUBLIC_TITRE: "Los juegos de la ludoteca",
 	LUDOTHEQUE_JEUNE_PUBLIC_INTRO: "Juegos para compartir en familia, aquí y en casa",
