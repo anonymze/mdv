@@ -87,64 +87,38 @@ const evenements = await find<EvenementType>('exposition', {
 						</div>
 					</article>
 
-					<div class="grid grid-cols-8 grid-rows-2 gap-5">
-						<MyImage
-							src={EspaceCultureImg}
-							alt={''}
-							width={400}
-							height={200}
-							layout="fullWidth"
-							class="col-span-2 col-start-1 row-span-1"
-						/>
-						<MyImage
-							src={EspaceCultureImg}
-							alt={''}
-							width={400}
-							height={420}
-							layout="fullWidth"
-							class="col-span-2 col-start-3 row-span-2"
-						/>
-						<MyImage
-							src={EspaceCultureImg}
-							alt={''}
-							width={250}
-							height={200}
-							layout="fullWidth"
-							class="col-span-1 col-start-5 row-span-1"
-						/>
-						<MyImage
-							src={EspaceCultureImg}
-							alt={''}
-							width={500}
-							height={200}
-							layout="fullWidth"
-							class="col-span-3 col-start-6 row-span-1"
-						/>
-						<MyImage
-							src={EspaceCultureImg}
-							alt={''}
-							width={200}
-							height={200}
-							layout="fullWidth"
-							class="col-span-1 col-start-1 row-span-1 row-start-2"
-						/>
-						<MyImage
-							src={EspaceCultureImg}
-							alt={''}
-							width={200}
-							height={200}
-							layout="fullWidth"
-							class="col-span-1 col-start-2 row-span-1 row-start-2"
-						/>
-						<MyImage
-							src={EspaceCultureImg}
-							alt={''}
-							width={700}
-							height={200}
-							layout="fullWidth"
-							class="col-span-4 col-start-5 row-span-1 row-start-2"
-						/>
-					</div>
+{
+						(() => {
+							const displayImages = exposition.images?.slice(0, 7) || []
+							const imagesToRender = Array.from({ length: 7 }, (_, i) => displayImages[i])
+
+							const layouts = [
+								{ width: 420, height: 220, class: 'col-span-2 col-start-1 row-span-1' },
+								{ width: 420, height: 460, class: 'col-span-2 col-start-3 row-span-2' },
+								{ width: 250, height: 220, class: 'col-span-1 col-start-5 row-span-1' },
+								{ width: 500, height: 220, class: 'col-span-3 col-start-6 row-span-1' },
+								{ width: 220, height: 220, class: 'col-span-1 col-start-1 row-span-1 row-start-2' },
+								{ width: 220, height: 220, class: 'col-span-1 col-start-2 row-span-1 row-start-2' },
+								{ width: 700, height: 220, class: 'col-span-4 col-start-5 row-span-1 row-start-2' }
+							]
+
+							return (
+								<div class="grid grid-cols-8 grid-rows-2 gap-5">
+									{imagesToRender.map((img, i) => (
+										<MyImage
+											src={img?.image?.url}
+											alt={img?.image?.alt ?? ''}
+											background={img?.image?.blurhash}
+											width={layouts[i].width}
+											height={layouts[i].height}
+											layout="fullWidth"
+											class={layouts[i].class}
+										/>
+									))}
+								</div>
+							)
+						})()
+					}
 				</section>
 			)
 		}
