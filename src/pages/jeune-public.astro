@@ -15,19 +15,28 @@ const t = createTranslator(locale)
 const evenements = await find<ParcNational>('parc_national', {
 	limit: 4,
 	locale,
-	where: { type: { equals: 'evenement' } }
+	where: {
+		type: { equals: 'evenement' },
+		jeunePublic: { equals: true }
+	}
 })
 
 const ludotheque = await find<Mediatheque>('mediatheque', {
 	limit: 3,
 	locale,
-	where: { type: { equals: 'ludotheque' } }
+	where: {
+		type: { equals: 'ludotheque' },
+		jeunePublic: { equals: true }
+	}
 })
 
 const cinema = await find<Cinema>('cinema', {
 	limit: 4,
 	locale,
-	where: { type: { equals: 'seance' } }
+	where: {
+		type: { equals: 'seance' },
+		jeunePublic: { equals: true }
+	}
 })
 ---
 
