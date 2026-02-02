@@ -1,3 +1,5 @@
+import type { RichTextField } from '@/types/rich-text'
+
 /**
  * @description a text replacer which return a string with %s replaced by your values in order
  */
@@ -12,4 +14,22 @@ export const sprintf = (str: string, ...args: string[]) => {
 	}
 
 	return args.reduce((acc, curr) => acc.replace(/%s/, curr), str)
+}
+
+
+export function renderRichText(richText: RichTextField): string {
+	return richText.root.children
+		.map((paragraph) => {
+			const text = paragraph.children
+				.map((node) => {
+					if (node.type === 'text') return node.text
+					if (node.type === 'linebreak') return '<br>'
+					return ''
+				})
+				.join('')
+
+			// Add <br> before paragraph if indented
+			return paragraph.indent > 0 ? `<br>${text}` : text
+		})
+		.join(' ')
 }

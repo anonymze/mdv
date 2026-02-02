@@ -44,6 +44,8 @@ export default {
 	CYBERBASE_TITRE: "La cyberbase",
 	D_OUVERTURE: "d'ouverture",
 	DATE: "Date",
+	DATE_FROM: "Du",
+	DATE_TO: "au",
 	DEMARCHE_ARTISTIQUE: "Démarche artistique de l'artiste plasticienne",
 	DES_14ANS: "Dès 14ans",
 	DIRECTRICE_ADMINISTRATIVE: "Directrice administrative",
