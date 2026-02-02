@@ -34,7 +34,6 @@ const cinema = await find<Cinema>('cinema', {
 	limit: 4,
 	locale,
 	where: {
-		type: { equals: 'seance' },
 		jeunePublic: { equals: true }
 	}
 })
