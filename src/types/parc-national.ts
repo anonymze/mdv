@@ -5,6 +5,7 @@ export interface ParcNational {
 	id: string
 	type: 'evenement' | 'article'
 	archive?: boolean | null
+	jeunePublic?: boolean | null
 	thumbnail?: Media | null
 	title: string
 	description: RichTextField

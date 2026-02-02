@@ -4,7 +4,8 @@ import type { RichTextField } from './rich-text'
 export interface AutresActualites {
 	id: string
 	type: 'evenement'
-	archive?: boolean | null
+  archive?: boolean | null
+	  jeunePublic?: boolean | null;
 	thumbnail?: Media | null
 	title: string
 	description: RichTextField

@@ -5,6 +5,7 @@ export interface ArtVivant {
 	id: string
 	type: 'evenement' | 'residence'
 	archive?: boolean | null
+	jeunePublic?: boolean | null
 	thumbnail?: Media | null
 	title: string
 	description: RichTextField
