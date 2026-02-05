@@ -1,8 +1,7 @@
 ---
 import logoSvg from '@/assets/icons/logo.svg'
 import MyImage from '@/components/my-image.astro'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { NewsletterForm } from '@/components/newsletter-form'
 import { createTranslator, type I18n } from '@/i18n/translations'
 import { getMenuNavs } from '@/lib/menu-navs'
 import BeHappyImg from '@/assets/imgs/sponsos/be-happy.webp';
@@ -102,10 +101,7 @@ const parcNational = menuNavs[1]?.subMenus || []
 		<div>
 			<h3 class="text-primary-foreground pb-8">{t('NEWSLETTER_TITRE')}</h3>
 			<p class="pb-8">{t('NEWSLETTER_INTRO')}</p>
-			<div class="flex items-center gap-4">
-				<Input className="h-12 w-full border-none bg-white text-black" placeholder={t('EMAIL_PLACEHOLDER')} />
-				<Button variant={'secondary'} size={'xl'}>{t('NEWSLETTER_BOUTON')}</Button>
-			</div>
+			<NewsletterForm client:load locale={locale} variant="footer" />
 		</div>
 	</div>
 

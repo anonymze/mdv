@@ -25,8 +25,8 @@ import EighthImg from '@/assets/imgs/home/8.png'
 import NinthImg from '@/assets/imgs/home/9.png'
 import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
+import { NewsletterForm } from '@/components/newsletter-form'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
@@ -36,6 +36,7 @@ import type { Cinema } from '@/types/cinema'
 import type { ExpositionType } from '@/types/exposition'
 import type { ParcNational } from '@/types/parc-national'
 import { renderRichText } from '@/utils/helper'
+
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
@@ -458,10 +459,7 @@ const categories: Array<{ key: keyof typeof langs.fr; href: string; image: strin
 				<p class="pb-7 italic">{t('NEWSLETTER_INTRO')}</p>
 				<p class="pb-8">{t('NEWSLETTER_DESC')}</p>
 
-				<div class="flex items-center gap-4">
-					<Input className="bg-secondary-muted/40 h-12 w-full border-none" placeholder={t('EMAIL_PLACEHOLDER')} />
-					<Button size={'xl'}>{t('NEWSLETTER_BOUTON')}</Button>
-				</div>
+				<NewsletterForm client:load locale={locale} variant="default" />
 			</article>
 		</section>
 
