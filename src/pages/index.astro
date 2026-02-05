@@ -1,6 +1,28 @@
 ---
+import { find } from '@/api/payload'
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
 import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
+
+import FirstImg from '@/assets/imgs/home/1.png'
+import TenthImg from '@/assets/imgs/home/10.png'
+import EleventhImg from '@/assets/imgs/home/11.png'
+import TwelfthImg from '@/assets/imgs/home/12.png'
+import ThirteenthImg from '@/assets/imgs/home/13.png'
+import FourteenthImg from '@/assets/imgs/home/14.png'
+import FifteenthImg from '@/assets/imgs/home/15.png'
+import SixteenthImg from '@/assets/imgs/home/16.png'
+import SeventeenImg from '@/assets/imgs/home/17.png'
+import EighteenImg from '@/assets/imgs/home/18.png'
+import NineteenImg from '@/assets/imgs/home/19.png'
+import SecondImg from '@/assets/imgs/home/2.png'
+import TwentyImg from '@/assets/imgs/home/20.png'
+import ThirdImg from '@/assets/imgs/home/3.png'
+import FourthImg from '@/assets/imgs/home/4.png'
+import FifthImg from '@/assets/imgs/home/5.png'
+import SixthImg from '@/assets/imgs/home/6.png'
+import SeventhImg from '@/assets/imgs/home/7.png'
+import EighthImg from '@/assets/imgs/home/8.png'
+import NinthImg from '@/assets/imgs/home/9.png'
 import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
 import { Button } from '@/components/ui/button'
@@ -8,403 +30,461 @@ import { Input } from '@/components/ui/input'
 import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-
+import { translatePublicField } from '@/lib/translate-fields'
+import type { ArtVivant } from '@/types/art-vivant'
+import type { Cinema } from '@/types/cinema'
+import type { ExpositionType } from '@/types/exposition'
+import type { ParcNational } from '@/types/parc-national'
+import { renderRichText } from '@/utils/helper'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
+const [spectacles, evenements] = await Promise.all([
+	find<ArtVivant>('art_vivant', {
+		limit: 4,
+		locale,
+		where: { type: { equals: 'evenement' } }
+	}),
+	find<ParcNational>('parc_national', {
+		limit: 4,
+		locale,
+		where: { type: { equals: 'evenement' } }
+	})
+])
+
+
+const latestEvents = [
+	...spectacles.docs.map((item) => ({ ...item, _href: `/art-vivant/${item.id}` })),
+	...evenements.docs.map((item) => ({ ...item, _href: `/parc-national/${item.id}` }))
+]
+	.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+	.slice(0, 4)
+
+const seances = await find<Cinema>('cinema', {
+	limit: 4,
+	locale,
+	where: {
+		type: { equals: 'seance' }
+	}
+})
+
+const exposition = (await find<ExpositionType>('exposition/current', {
+	locale
+})) as unknown as ExpositionType | null
+
+
 // Hero categories with links
-const categories: Array<{key: keyof typeof langs.fr, href: string, image: string}> = [
-    {
-        key: 'ART_VIVANT',
-        href: '/art-vivant',
-        image: ExemplePersonImg.src
-    },
-    {
-        key: 'CINEMA',
-        href: '/cinema',
-        image: ExemplePersonImg.src
-    },
-    {
-        key: 'MEDIATHEQUE',
-        href: '/mediatheque',
-        image: ExemplePersonImg.src
-    },
-    {
-        key: 'EXPOSITION',
-        href: '/exposition',
-        image: ExemplePersonImg.src
-    },
-    {
-        key: 'JEUNESSE',
-        href: '/jeunesse',
-        image: ExemplePersonImg.src
-    },
-    {
-        key: 'ARTISTE',
-        href: '/artiste',
-        image: ExemplePersonImg.src
-    }
+const categories: Array<{ key: keyof typeof langs.fr; href: string; image: string }> = [
+	{
+		key: 'ART_VIVANT',
+		href: '/art-vivant',
+		image: ExemplePersonImg.src
+	},
+	{
+		key: 'CINEMA',
+		href: '/cinema',
+		image: ExemplePersonImg.src
+	},
+	{
+		key: 'MEDIATHEQUE',
+		href: '/mediatheque',
+		image: ExemplePersonImg.src
+	},
+	{
+		key: 'EXPOSITION',
+		href: '/exposition',
+		image: ExemplePersonImg.src
+	},
+	{
+		key: 'JEUNESSE',
+		href: '/jeunesse',
+		image: ExemplePersonImg.src
+	},
+	{
+		key: 'ARTISTE',
+		href: '/artiste',
+		image: ExemplePersonImg.src
+	}
 ]
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
-    <main>
-        <!-- Hero Section -->
-        <section class="relative min-h-screen flex flex-col mt-6">
-            <!-- Background image with overlay -->
-            <div class="absolute inset-0 z-0">
-                <MyImage
-                    src={SectionBg}
-                    alt=""
-                    role="presentation"
-                    class="absolute inset-0 w-full h-full object-cover"
-                    loading="eager"
-                    fetchpriority="high"
-                    layout="fullWidth"
-                    width={600}
-                    height={600}
-                />
-                <div class="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/30"></div>
-            </div>
+	<main>
+		<section class="relative mt-6 flex min-h-screen flex-col">
+			<div class="absolute inset-0 z-0">
+				<MyImage
+					src={SectionBg}
+					alt=""
+					role="presentation"
+					class="absolute inset-0 h-full w-full object-cover"
+					loading="eager"
+					fetchpriority="high"
+					layout="fullWidth"
+					width={600}
+					height={600}
+				/>
+				<div class="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/30"></div>
+			</div>
 
-            <!-- Content Container -->
-            <div class="relative flex flex-col flex-1 px-10 py-16">
-                <!-- Main Title -->
-                <header class="mb-auto pt-8">
-                    <h1>
-                        {t('SITE_TITLE')}
-                    </h1>
-                </header>
+			<div class="relative flex flex-1 flex-col px-10 py-16">
+				<header class="mb-auto pt-8">
+					<h1>
+						{t('SITE_TITLE')}
+					</h1>
+				</header>
 
-                <!-- Category Cards Grid -->
-                <nav class="mt-auto" aria-label={t('NAVIGATION_PRINCIPALE')}>
-                    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-7 max-w-[90%] mx-auto">
-                        {categories.map((category) => (
-                            <li>
-                                <a
-                                    href={category.href}
-                                    aria-label={t(category.key)}
-                                >
-                                    <article>
-                                        <!-- Card Image -->
-                                        <!-- <figure class="relative overflow-hidden"> -->
-                                        <figure>
-                                            <MyImage
-                                                src={category.image}
-                                                alt={t(category.key)}
-                                                loading="lazy"
-                                                class="drop-shadow-2xl mx-auto"
-                                                width={200}
-                                                height={350}
-                                                layout="constrained"
-                                            />
-                                            <!-- Gradient Overlay -->
-                                            <!-- <div class="absolute inset-0 bg-linear-to-t from-black/50 via-black/5 to-transparent"></div> -->
-                                            <figcaption class="pt-2">
-                                                <h2 class="text-center text-primary-foreground">
-                                                    {t(category.key)}
-                                                </h2>
-                                            </figcaption>
-                                        </figure>
-                                    </article>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-            </div>
-        </section>
+				<nav class="mt-auto" aria-label={t('NAVIGATION_PRINCIPALE')}>
+					<ul class="mx-auto grid max-w-[90%] grid-cols-2 gap-7 md:grid-cols-3 lg:grid-cols-6">
+						{
+							categories.map((category) => (
+								<li>
+									<a href={category.href} aria-label={t(category.key)}>
+										<article>
+											<figure>
+												<MyImage
+													src={category.image}
+													alt={t(category.key)}
+													loading="lazy"
+													class="mx-auto drop-shadow-2xl"
+													width={200}
+													height={350}
+													layout="constrained"
+												/>
 
-        <section class="section-default">
-            <article class="flex gap-4 ">
-                <div class="w-2/3">
-                    <h2 class="pb-3">{t('ESPACE_CULTURE_TITRE')}</h2>
-                    <p class="pb-6 distinguished">{t('ESPACE_CULTURE_INTRO')}</p>
-                    <p>
-                        {t('ESPACE_CULTURE_DESC_PART1')}<br/><br/>
-                        {t('ESPACE_CULTURE_DESC_PART2')}<br/><br/>
-                        {t('ESPACE_CULTURE_DESC_PART3')}<br/><br/>
-                        {t('ESPACE_CULTURE_DESC_PART4')}<br/><br/>
-                        {t('ESPACE_CULTURE_DESC_PART5')}
-                    </p>
-                </div>
-                <div class="w-1/3 grid grid-cols-3 gap-4">
-                    <MyImage alt="" src={EspaceCultureImg} width={320} height={140} layout="fullWidth" class="col-span-2 h-full object-cover" />
-                    <MyImage alt="" src={EspaceCultureImg} width={200} height={140} layout="fullWidth" class="col-span-1 h-full object-cover" />
-                    <MyImage alt="" src={EspaceCultureImg} width={640} height={250} layout="constrained" class="col-span-3 h-full object-cover" />
-                    <MyImage alt="" src={EspaceCultureImg} width={200} height={140} layout="fullWidth" class="col-span-1 h-full object-cover" />
-                    <MyImage alt="" src={EspaceCultureImg} width={320} height={140} layout="fullWidth" class="col-span-2 h-full object-cover" />
-                </div>
-            </article>
+												<figcaption class="pt-2">
+													<h2 class="text-primary-foreground text-center">{t(category.key)}</h2>
+												</figcaption>
+											</figure>
+										</article>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
+			</div>
+		</section>
 
+		<section class="section-default">
+			<article class="flex gap-4">
+				<div class="w-2/3">
+					<h2 class="pb-3">{t('ESPACE_CULTURE_TITRE')}</h2>
+					<p class="distinguished pb-6">{t('ESPACE_CULTURE_INTRO')}</p>
+					<p>
+						{t('ESPACE_CULTURE_DESC_PART1')}<br /><br />
+						{t('ESPACE_CULTURE_DESC_PART2')}<br /><br />
+						{t('ESPACE_CULTURE_DESC_PART3')}<br /><br />
+						{t('ESPACE_CULTURE_DESC_PART4')}<br /><br />
+						{t('ESPACE_CULTURE_DESC_PART5')}
+					</p>
+				</div>
+				<div class="grid w-1/3 grid-cols-3 gap-4">
+					<MyImage
+						alt=""
+						src={FirstImg}
+						width={400}
+						height={160}
+						layout="fullWidth"
+						class="col-span-2 h-full object-cover"
+					/>
+					<MyImage
+						alt=""
+						src={SecondImg}
+						width={200}
+						height={160}
+						layout="fullWidth"
+						class="col-span-1 h-full object-cover"
+					/>
+					<MyImage
+						alt=""
+						src={ThirdImg}
+						width={600}
+						height={250}
+						layout="constrained"
+						class="col-span-3 h-full object-cover"
+					/>
+					<MyImage
+						alt=""
+						src={FourthImg}
+						width={200}
+						height={160}
+						layout="fullWidth"
+						class="col-span-1 h-full object-cover"
+					/>
+					<MyImage
+						alt=""
+						src={FifthImg}
+						width={400}
+						height={160}
+						layout="fullWidth"
+						class="col-span-2 h-full object-cover"
+					/>
+				</div>
+			</article>
 
-            <Button link="/"  size={"xl"} className="mt-12">{t('BOUTON_LIEN')}</Button>
+			<Button link="/" size={'xl'} className="mt-12">Découvrez nos prochains évènements</Button>
+		</section>
 
-        </section>
+		<section class="section-default bg-primary/20">
+			<article class="flex gap-5">
+				<div class="w-2/12">
+					<MyImage alt="" src={SixthImg} width={300} height={330} layout="fullWidth" class="mb-6" />
+					<MyImage alt="" src={SeventhImg} width={300} height={330} layout="fullWidth" />
+				</div>
+				<div class="w-7/12">
+					<h2 class="pb-3">{t('SPECTACLES_A_VENIR')}</h2>
+					<p class="distinguished pb-6">{t('SPECTACLES_INTRO')}</p>
+					<p>
+						{t('ESPACE_CULTURE_DESC_PART1')}<br />
+						{t('ESPACE_CULTURE_DESC_PART2')}<br />
+						{t('ESPACE_CULTURE_DESC_PART3')}<br />
+						{t('ESPACE_CULTURE_DESC_PART4')}<br />
+						{t('ESPACE_CULTURE_DESC_PART5')}
+					</p>
+				</div>
+				<div class="w-3/12">
+					<MyImage class="w-2/6" alt="" src={EighthImg} width={550} height={680} layout="fullWidth" />
+				</div>
+			</article>
+			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+				{
+					latestEvents.map((item) => {
+						const descText = item.description.root.children
+							.flatMap((para) => para.children)
+							.filter((child) => child.type === 'text')
+							.map((child) => child.text)
+							.join(' ')
 
-         <section class="section-default bg-primary/20">
-             <article class="flex gap-5">
-                 <div class="w-2/12">
-                     <MyImage alt="" src={EspaceCultureImg} width={280} height={320} layout="fullWidth" class="mb-6" />
-                     <MyImage alt="" src={EspaceCultureImg} width={280} height={320} layout="fullWidth" />
-                 </div>
-                 <div class="w-7/12">
-                     <h2 class="pb-3">{t('SPECTACLES_A_VENIR')}</h2>
-                     <p class="distinguished pb-6">{t('SPECTACLES_INTRO')}</p>
-                     <p>
-                        {t('ESPACE_CULTURE_DESC_PART1')}<br/>
-                        {t('ESPACE_CULTURE_DESC_PART2')}<br/>
-                        {t('ESPACE_CULTURE_DESC_PART3')}<br/>
-                        {t('ESPACE_CULTURE_DESC_PART4')}<br/>
-                        {t('ESPACE_CULTURE_DESC_PART5')}
-                     </p>
-                 </div>
-                 <div class="w-3/12">
-                     <MyImage class="w-2/6" alt="" src={EspaceCultureImg} width={550} height={664} layout="fullWidth" />
-                 </div>
-             </article>
+						return (
+							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
+								<div class="overflow-hidden">
+									<MyImage
+										src={item.thumbnail?.url}
+										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={item.thumbnail?.blurhash}
+										width={275}
+										height={305}
+										layout="fullWidth"
+									/>
+								</div>
+								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
+									<figcaption>
+										<h3 class="pb-3 text-black">
+											<a href={item._href} class="after:absolute after:inset-0 after:z-10">
+												{item.title}
+											</a>
+										</h3>
+										<p class="distinguished text-primary pb-1 text-xs">{item.genre}</p>
+										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
+											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
+											{new Date(item.date_start).toLocaleTimeString(locale, {
+												hour: '2-digit',
+												minute: '2-digit',
+												hour12: false
+											})}
+										</time>
+									</figcaption>
+								</figure>
+								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
+									<figcaption class="text-white">
+										<p class="line-clamp-8 text-sm">{descText}</p>
+										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
+											{t('EN_SAVOIR_PLUS')}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d="M5 12h14" />
+												<path d="m12 5 7 7-7 7" />
+											</svg>
+										</p>
+									</figcaption>
+								</figure>
+							</article>
+						)
+					})
+				}
+			</div>
 
-             <div class="my-16 grid grid-cols-4 place-items-center gap-x-5 gap-y-8 *:max-w-72">
-                 <article class="group bg-white w-full shadow-xs col-span-1">
-                     <div class="overflow-hidden">
-                         <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                     </div>
-                     <figure class="p-4">
-                         <figcaption>
-                             <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-                             <p class="text-sm text-primary italic">Théatre humour</p>
-                             <time class="italic text-sm"
-                    datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                             <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
-                         </figcaption>
-                     </figure>
-                 </article>
-                 <article class="group bg-white w-full shadow-xs col-span-1">
-                     <div class="overflow-hidden">
-                         <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                     </div>
-                     <figure class="p-4">
-                         <figcaption>
-                             <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-                              <p class="text-sm text-primary italic">Théatre humour</p>
-                             <time class="italic text-sm"
-                    datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                             <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
-                         </figcaption>
-                     </figure>
-                 </article>
-                 <article class="group bg-white w-full shadow-xs col-span-1">
-                     <div class="overflow-hidden">
-                         <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                     </div>
-                     <figure class="p-4">
-                         <figcaption>
-                             <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-                              <p class="text-sm text-primary italic">Théatre humour</p>
-                             <time class="italic text-sm"
-                    datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                             <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
-                         </figcaption>
-                     </figure>
-                 </article>
-                 <article class="group bg-white w-full shadow-xs col-span-1">
-                     <div class="overflow-hidden">
-                         <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                     </div>
-                     <figure class="p-4">
-                         <figcaption>
-                             <h3 class="pb-1">{t('EVENT_TITLE')}</h3>
-                              <p class="text-sm text-primary italic truncate">Théatre humour</p>
-                             <time class="italic text-sm"
-                    datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                             <p class="text-sm pt-3">{t('EVENT_DESC_EXAMPLE')}</p>
-                         </figcaption>
-                     </figure>
-                 </article>
-             </div>
+			<Button link="/" size={'xl'}>{t('VOIR_TOUS_SPECTACLES')}</Button>
+		</section>
 
-            <Button link="/"  size={"xl"}>{t('VOIR_TOUS_SPECTACLES')}</Button>
-         </section>
+		<section>
+			<div class="grid grid-cols-8 gap-5 pt-30">
+				<MyImage src={NinthImg} alt="" width={200} height={460} layout="fullWidth" class="col-span-1 row-span-2" />
+				<MyImage src={TenthImg} alt="" width={1300} height={460} layout="fullWidth" class="col-span-6 row-span-2" />
+				<MyImage src={EleventhImg} alt="" width={200} height={460} layout="fullWidth" class="col-span-1 row-span-1" />
+			</div>
+			<div class="section-default pt-12">
+				<div class="w-2/3">
+					<h2 class="pb-3">{t('SEANCES_A_VENIR')}</h2>
+					<p class="distinguished pb-6">{t('CINEMA_INTRO')}</p>
+					<p class="w-2/3">
+						{t('CINEMA_DESC_PART1')}
+					</p>
+				</div>
 
+				<div class="my-16 grid grid-cols-2 gap-5">
+					{
+						seances.docs.map((item) => {
+							const synopsisText = item.synopsis.root.children
+								.flatMap((para) => para.children)
+								.filter((child) => child.type === 'text')
+								.map((child) => child.text)
+								.join(' ')
 
-         <section>
-             <div class="grid grid-cols-8 grid-rows-2 gap-5 pt-24">
-                 <MyImage src={EspaceCultureImg} alt='' width={200} height={460} layout='fullWidth' class="row-span-2 col-span-1" />
-                 <MyImage src={EspaceCultureImg} alt='' width={1300} height={460} layout='fullWidth' class="row-span-2 col-span-6" />
-                 <MyImage src={EspaceCultureImg} alt='' width={200} height={220} layout='fullWidth' class="row-span-1 col-span-1" />
-                 <MyImage src={EspaceCultureImg} alt='' width={200} height={220} layout='fullWidth' class="row-span-1 col-span-1" />
-             </div>
-             <div class="section-default pt-10">
-             <article>
-                     <h2 class="pb-3">{t('SEANCES_A_VENIR')}</h2>
-                     <p class="distinguished pb-6">{t('CINEMA_INTRO')}</p>
-                     <p class="w-2/3">
-                         {t('CINEMA_DESC_PART1')}
-                     </p>
+							return (
+								<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
+									<div class="overflow-hidden">
+										<MyImage
+											src={item.thumbnail?.url}
+											alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+											background={item.thumbnail?.blurhash}
+											width={900}
+											height={145}
+											layout="fullWidth"
+										/>
+									</div>
+									<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
+										<figcaption>
+											<h3 class="pb-3 text-black">
+												<a href={`/cinema/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+													{item.title}
+												</a>
+											</h3>
+											<p class="distinguished text-primary pb-1 text-xs">
+												{translatePublicField(item.public, t)} - {item.genre} - {item.languages}
+											</p>
+											<p class="font-serif text-sm capitalize">
+												{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
+												{new Date(item.date_start).toLocaleTimeString(locale, {
+													hour: '2-digit',
+													minute: '2-digit',
+													hour12: false
+												})}
+											</p>
+										</figcaption>
+									</figure>
+									<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+									<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
+										<figcaption class="text-white">
+											<p class="line-clamp-6 text-sm">{synopsisText}</p>
+											<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
+												{t('EN_SAVOIR_PLUS')}
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width="16"
+													height="16"
+													viewBox="0 0 24 24"
+													fill="none"
+													stroke="currentColor"
+													stroke-width="2"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												>
+													<path d="M5 12h14" />
+													<path d="m12 5 7 7-7 7" />
+												</svg>
+											</p>
+										</figcaption>
+									</figure>
+								</article>
+							)
+						})
+					}
+				</div>
+				<Button link="/" size={'xl'} className="mt-12">{t('VOIR_TOUTES_SEANCES')}</Button>
+			</div>
+		</section>
 
-                     <div class="my-16 grid grid-cols-2 gap-5">
-                         <article class="group w-full">
-                             <div class="overflow-hidden">
-                                    <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                             </div>
-                             <figure class="py-4">
-                                 <figcaption>
-                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
-                                     <p class="italic text-sm pb-1 truncate"
-                           >{t('EVENT_DESC_EXAMPLE')}</p>
-                           <time class="italic text-sm"
-                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                                 </figcaption>
-                             </figure>
-                         </article>
-                         <article class="group w-full">
-                             <div class="overflow-hidden">
-                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                             </div>
-                             <figure class="py-4">
-                                 <figcaption>
-                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
-                                     <p class="italic text-sm pb-1"
-                           >{t('EVENT_DESC_EXAMPLE')}</p>
-                           <time class="italic text-sm"
-                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                                 </figcaption>
-                             </figure>
-                         </article>
-                         <article class="group w-full">
-                             <div class="overflow-hidden">
-                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                             </div>
-                             <figure class="py-4">
-                                 <figcaption>
-                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
-                                     <p class="italic text-sm pb-1"
-                           >{t('EVENT_DESC_EXAMPLE')}</p>
-                           <time class="italic text-sm"
-                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                                 </figcaption>
-                             </figure>
-                         </article>
-                         <article class="group w-full">
-                             <div class="overflow-hidden">
-                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                             </div>
-                             <figure class="py-4">
-                                 <figcaption>
-                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
-                                     <p class="italic text-sm pb-1"
-                           >{t('EVENT_DESC_EXAMPLE')}</p>
-                           <time class="italic text-sm"
-                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                                 </figcaption>
-                             </figure>
-                         </article>
-                         <article class="group w-full">
-                             <div class="overflow-hidden">
-                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                             </div>
-                             <figure class="py-4">
-                                 <figcaption>
-                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
-                                     <p class="italic text-sm pb-1"
-                           >{t('EVENT_DESC_EXAMPLE')}</p>
-                           <time class="italic text-sm"
-                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                                 </figcaption>
-                             </figure>
-                         </article>
-                         <article class="group w-full">
-                             <div class="overflow-hidden">
-                                 <MyImage src={EspaceCultureImg} alt='' width={300} height={200} layout='fullWidth' class="transition-transform duration-250 group-hover:scale-110"/>
-                             </div>
-                             <figure class="py-4">
-                                 <figcaption>
-                                     <h3 class="pb-1 text-secondary">{t('EVENT_TITLE')}</h3>
-                                     <p class="italic text-sm pb-1"
-                           >{t('EVENT_DESC_EXAMPLE')}</p>
-                           <time class="italic text-sm"
-                  datetime="2025-02-04">{t('EVENT_DATE_EXAMPLE')}</time>
-                                 </figcaption>
-                             </figure>
-                         </article>
-                     </div>
+		{exposition && (
+		<section class="section-default bg-secondary/20">
+			<article class="grid grid-cols-2 gap-5">
+				<div class="flex flex-col">
+					<h2 class="text-secondary pb-3">{t('EXPO_MOMENT_TITRE')}</h2>
+					<h3 class="text-secondary pb-3">{exposition.title}</h3>
+					<p class="distinguished pb-6">	{t('DATE_FROM')}{' '}
+					{new Date(exposition.date_start).toLocaleDateString(locale, {
+						weekday: 'long',
+						day: 'numeric',
+						month: 'long'
+					})}{' '}
+					{t('DATE_TO')}{' '}
+					{new Date(exposition.date_end).toLocaleDateString(locale, {
+						weekday: 'long',
+						day: 'numeric',
+						month: 'long',
+						year: 'numeric'
+					})}</p>
+					<h3 class="text-secondary pb-16">{exposition.title}</h3>
+					<p set:html={renderRichText(exposition.description)} />
 
-             </article>
+					<Button variant={'secondary'} link="/" size={'xl'} className="mt-auto w-fit">{t('EN_SAVOIR_PLUS')}</Button>
+				</div>
+				<div class="space-y-5">
+					<!-- Top image full width -->
+					<MyImage alt="" src={TwelfthImg} width={850} height={300} layout="fullWidth" />
 
+					<!-- Bottom grid with 2 columns -->
+					<div class="grid grid-cols-2 gap-5">
+						<!-- Left column -->
+						<div class="space-y-5">
+							<MyImage alt="" src={ThirteenthImg} width={400} height={180} layout="fullWidth" />
+							<MyImage alt="" src={FifteenthImg} width={400} height={370} layout="fullWidth" />
+						</div>
 
-             <Button link="/"  size={"xl"} className="mt-12">{t('VOIR_TOUTES_SEANCES')}</Button>
-</div>
-         </section>
+						<!-- Right column -->
+						<div class="space-y-5">
+							<MyImage alt="" src={FourteenthImg} width={400} height={430} layout="fullWidth" />
+							<MyImage alt="" src={SixteenthImg} width={400} height={120} layout="fullWidth" />
+						</div>
+					</div>
+				</div>
+			</article>
+		</section>)
+		}
 
-         <section class="section-default bg-secondary/20">
-             <article class="grid grid-cols-2 gap-5">
-                 <div class="flex flex-col">
-                     <h2 class="pb-3 text-secondary">{t('EXPO_MOMENT_TITRE')}</h2>
-                     <h3 class="pb-3 text-secondary">Cosmogénèse - Emmanuelle Williot</h3>
-                     <p class="distinguished pb-16">Du mercredi 7 au samedi 31 janvier</p>
-                     <p>
-                         Les règles qui régissent l'univers, le mettent en scène, sont les mêmes pour tous, pour toutes choses. Pour Emmanuelle Williot, l'acte de création trouve son sens dans la recherche d'une réalité qui nous dépasse, que nous ne pouvons qu'effleurer du bout des doigts. La quête du monde sensible par la pratique de la peinture amène dans un lieu qui a sa propre vie, sa temporalité, ses propres règles, et qui n'a pour limites que celles que nous nous imposons. Peindre plonge dans une condition sensible qui éclaire sous un jour nouveau l'acte de création en tant que tel et le milieu dans lequel nous évoluons. Le cheminement du peintre consiste à avancer à tâtons dans cette pénombre, à façonner et transcender les limites de nos sensations, de nos perceptions à la recherche de nouvelles interprétations de notre monde.<br><br>
-                         Ce n'est pas un hasard si les ramures des arbres ressemblent étrangement au déploiement de nos tissus pulmonaires. Il s'agit du même principe...
-                     </p>
+		<section class="section-default">
+			<article class="mx-auto max-w-200">
+				<h2 class="pb-4 text-secondary">{t('NEWSLETTER_TITRE')}</h2>
+				<p class="pb-7 italic">{t('NEWSLETTER_INTRO')}</p>
+				<p class="pb-8">{t('NEWSLETTER_DESC')}</p>
 
+				<div class="flex items-center gap-4">
+					<Input className="bg-secondary-muted/40 h-12 w-full border-none" placeholder={t('EMAIL_PLACEHOLDER')} />
+					<Button size={'xl'}>{t('NEWSLETTER_BOUTON')}</Button>
+				</div>
+			</article>
+		</section>
 
-                     <Button variant={"secondary"} link="/"  size={"xl"}  className='mt-auto w-fit'>{t('EN_SAVOIR_PLUS')}</Button>
-                 </div>
-                 <div class="space-y-5">
-                     <!-- Top image full width -->
-                     <MyImage alt="" src={EspaceCultureImg} width={800} height={300} layout="fullWidth" />
+		<section class="section-default bg-primary/20">
+			<article class="grid grid-cols-[1fr_2fr] gap-16">
+				<!-- Left side: Images grid -->
+				<div class="grid grid-cols-2 gap-5">
+					<MyImage alt="" src={SeventeenImg} width={250} height={150} layout="fullWidth" />
+					<MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
+					<MyImage alt="" src={EighteenImg} width={400} height={200} layout="fullWidth" class="col-span-2" />
+					<MyImage alt="" src={NineteenImg} width={250} height={150} layout="fullWidth" />
+					<MyImage alt="" src={TwentyImg} width={250} height={150} layout="fullWidth" />
+				</div>
 
-                     <!-- Bottom grid with 2 columns -->
-                     <div class="grid grid-cols-2 gap-5">
-                         <!-- Left column -->
-                         <div class="space-y-5">
-                             <MyImage alt="" src={EspaceCultureImg} width={400} height={180} layout="fullWidth" />
-                             <MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" />
-                         </div>
-
-                         <!-- Right column -->
-                         <div class="space-y-5">
-                             <MyImage alt="" src={EspaceCultureImg} width={400} height={430} layout="fullWidth" />
-                             <MyImage alt="" src={EspaceCultureImg} width={400} height={120} layout="fullWidth" />
-                         </div>
-                     </div>
-                 </div>
-               </article>
-         </section>
-
-         <section class="section-default">
-             <article class="max-w-200 mx-auto">
-                 <h2 class="pb-4">{t('NEWSLETTER_TITRE')}</h2>
-                 <p class="italic pb-7">{t('NEWSLETTER_INTRO')}</p>
-                <p class="pb-8">{t('NEWSLETTER_DESC')}</p>
-
-                <div class="flex items-center gap-4">
-                    <Input className="w-full h-12 bg-secondary-muted/40 border-none" placeholder={t('EMAIL_PLACEHOLDER')} />
-                    <Button size={"xl"}>{t('NEWSLETTER_BOUTON')}</Button>
-                </div>
-             </article>
-         </section>
-
-         <section class="section-default bg-primary/20">
-             <article class="grid grid-cols-[1fr_2fr] gap-16">
-                 <!-- Left side: Images grid -->
-                 <div class="grid grid-cols-2 gap-5">
-                     <MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
-                     <MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
-                     <MyImage alt="" src={EspaceCultureImg} width={400} height={200} layout="fullWidth" class="col-span-2" />
-                     <MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
-                     <MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
-                 </div>
-
-                 <!-- Right side: Content -->
-                 <div>
-                     <h2 class="pb-3 text-secondary">{t('VALEURS_TITRE')}</h2>
-                     <p class="distinguished pb-6">{t('VALEURS_INTRO')}</p>
-                     <p>
-                         {t('VALEURS_DESC')}
-                     </p>
-                 </div>
-             </article>
-         </section>
-    </main>
+				<!-- Right side: Content -->
+				<div>
+					<h2 class="text-primary pb-3">{t('VALEURS_TITRE')}</h2>
+					<p class="distinguished pb-6">{t('VALEURS_INTRO')}</p>
+					<p>
+						{t('VALEURS_DESC')}
+					</p>
+				</div>
+			</article>
+		</section>
+	</main>
 </Layout>

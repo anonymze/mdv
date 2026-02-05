@@ -73,6 +73,7 @@ export default {
 	EVENEMENT_IMMANQUABLE: "L'évènement immanquable",
 	EVENEMENTS: "Évènements",
 	EVENEMENTS_EXPO: "Évènements liés aux expositions",
+	EVENEMENTS_A_VENIR: "Les évènements à venir !",
 	EVENEMENTS_EXPO_INTRO: "Laissons l'art s'exprimer.",
 	EVENT_DATE_EXAMPLE: "Vendredi 16 janvier à 20h30",
 	EVENT_DESC_EXAMPLE: "Description text...",
