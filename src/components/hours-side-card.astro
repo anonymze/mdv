@@ -1,5 +1,8 @@
 ---
+import { findGlobal } from '@/api/payload'
 import { createTranslator, type I18n } from '@/i18n/translations'
+import { formatTime, getHoursForToday } from '@/lib/hours'
+import type { Hour } from '@/types/hours'
 import { SideCard } from './side-card'
 
 interface Props {
@@ -8,29 +11,31 @@ interface Props {
 
 const { locale } = Astro.props
 const t = createTranslator(locale)
+
+const hours = await findGlobal<Hour>('hours', { locale })
+const { isClosed, today, openStart, openEnd } = getHoursForToday(hours)
 ---
 
-<SideCard
-	client:load
-	tabText={[t('HORAIRES'), t('D_OUVERTURE')]}
-	ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}
->
-	<div class="flex h-full flex-col items-start  px-10 py-7 text-left">
+<SideCard client:load tabText={[t('HORAIRES'), t('D_OUVERTURE')]} ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}>
+	<div class="flex h-full flex-col items-start px-10 py-7 text-left">
 		<p class="text-primary-foreground pb-5 text-xl">{t('HORAIRES_OUVERTURE')}</p>
 
-		<hr class="mb-4 w-full h-px bg-white/40 border-0" />
+		<hr class="mb-4 h-px w-full border-0 bg-white/40" />
 
-		<p class="text-primary-foreground pb-3">
-			<time datetime="2024-12-02">Mardi 02 Décembre</time>
+		<p class="text-primary-foreground pb-3 capitalize">
+			<time datetime={today.toISOString().split('T')[0]}>{today.toLocaleDateString(locale, { dateStyle: 'full' })}</time>
 		</p>
 
-		<div itemscope itemtype="https://schema.org/OpeningHoursSpecification">
-			<meta itemprop="dayOfWeek" content="Tuesday" />
-			<meta itemprop="opens" content="14:00" />
-			<meta itemprop="closes" content="19:00" />
-			<p class="text-primary-foreground text-3xl font-bold" aria-label={t('OUVERT_HEURES_ARIA')}>
-				<time datetime="14:00">14h</time> - <time datetime="19:00">19h</time>
-			</p>
-		</div>
+		{isClosed ? (
+			<p class="text-primary-foreground text-3xl font-bold">{t('FERME')}</p>
+		) : openStart && openEnd ? (
+			<div itemscope itemtype="https://schema.org/OpeningHoursSpecification">
+				<meta itemprop="opens" content={openStart} />
+				<meta itemprop="closes" content={openEnd} />
+				<p class="text-primary-foreground text-3xl font-bold">
+					<time datetime={openStart}>{new Date(openStart).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}</time> - <time datetime={openEnd}>{new Date(openEnd).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}</time>
+				</p>
+			</div>
+		) : null}
 	</div>
 </SideCard>

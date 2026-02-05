@@ -81,6 +81,7 @@ export default {
 	EXPOSITION_DU_MOMENT: "Current exhibition",
 	EXPO_MOMENT_TITRE: "The current exhibition",
 	FAMILLE: "Family",
+	FERME: "Closed",
 	GENRE: "Genre",
 	HORAIRE: "Schedule",
 	HORAIRES: "Opening hours",

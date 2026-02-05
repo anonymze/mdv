@@ -81,6 +81,7 @@ export default {
 	EXPOSITION_DU_MOMENT: "Exposition du moment",
 	EXPO_MOMENT_TITRE: "L'exposition du moment",
 	FAMILLE: "Famille",
+	FERME: "Fermé",
 	GENRE: "Genre",
 	HORAIRE: "Horaire",
 	HORAIRES: "Horaires",
