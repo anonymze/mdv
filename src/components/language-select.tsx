@@ -32,7 +32,7 @@ export function LanguageSelect({ currentLocale, currentPath }: Props) {
 				</SelectTrigger>
 				<SelectContent className="bg-white">
 					{locales.map((locale) => (
-						<SelectItem key={locale.code} value={locale.code} className="py-3 [&_svg]:!text-primary">
+						<SelectItem key={locale.code} value={locale.code} className="py-3 [&_svg]:!text-primary focus:bg-primary focus:text-primary-foreground focus:[&_svg]:!text-primary-foreground">
 							{locale.label}
 						</SelectItem>
 					))}
