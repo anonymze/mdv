@@ -207,6 +207,7 @@ export default {
 	SPECTACLES_JEUNE_PUBLIC_INTRO: "Une programmation familiale pour les petits et les grands",
 	SPECTACLES_JEUNE_PUBLIC_DESC: "Tout au long de l'année, La Maison invite les enfants et leurs familles à découvrir des spectacles pensés pour le jeune public, afin d'éveiller la curiosité et le goût de l'art vivant dès le plus jeune âge.",
 	SUR_HORAIRES_OUVERTURE: "Sur les horaires d'ouverture",
+	SYNOPSIS_DETAILS: "Synopsis et détails",
 	TARIF: "Tarif",
 	TARIFICATIONS: "Tarifications",
 	TARIFS_CINEMA: "Tarifs cinéma",
