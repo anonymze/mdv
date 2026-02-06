@@ -1,9 +1,6 @@
 ---
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
-import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
-import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
-import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 
@@ -13,10 +10,9 @@ const t = createTranslator(locale)
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-
 		<section class="section-default" id="archives">
 			<h2 class="text-secondary pb-3">{t('ARCHIVES')}</h2>
-			<p class="distinguished pb-16 w-2/3">
+			<p class="distinguished w-2/3 pb-16">
 				{t('ARCHIVES_DESC')}
 			</p>
 

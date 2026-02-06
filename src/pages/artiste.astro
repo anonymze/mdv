@@ -1,10 +1,7 @@
 ---
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
-import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
-import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
 import { Button } from '@/components/ui/button'
-import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 
@@ -14,7 +11,6 @@ const t = createTranslator(locale)
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-
 		<section class="section-default" id="residence">
 			<article class="grid grid-cols-2 gap-5">
 				<div class="grid grid-cols-2 gap-5">

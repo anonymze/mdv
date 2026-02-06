@@ -1,9 +1,6 @@
 ---
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
-import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
-import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
-import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 
@@ -13,12 +10,11 @@ const t = createTranslator(locale)
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-
 		<section class="section-default">
 			<article class="grid grid-cols-3 gap-5 pb-16">
 				<div class="col-span-2 flex flex-col">
 					<h2 class="text-primary pb-3">Synopsis et déitails</h2>
-					<p class="pb-16 distinguished">Cosmogénèse - Emmanuelle Williot</p>
+					<p class="distinguished pb-16">Cosmogénèse - Emmanuelle Williot</p>
 					<p>
 						Les règles qui régissent l’univers, le mettent en scène, sont les mêmes pour tous, pour toutes choses. Pour
 						Emmanuelle Williot, l’acte de création trouve son sens dans la recherche d’une réalité qui nous dépasse, que
@@ -50,8 +46,10 @@ const t = createTranslator(locale)
 								65120 LUZ-SAINT-SAUVEUR
 							</li>
 							<li class="border-b border-black/20 px-5 pb-4">
-    								<span class="font-bold">{t('TARIF')}</span> : <span class="bg-white text-primary  inline-block px-1 py-1 ml-3">12$ - normal</span>
-							<span class="bg-white text-primary inline-block px-1 py-1 ml-3">12$ - réduit</span>
+								<span class="font-bold">{t('TARIF')}</span> : <span
+									class="text-primary ml-3 inline-block bg-white px-1 py-1">12$ - normal</span
+								>
+								<span class="text-primary ml-3 inline-block bg-white px-1 py-1">12$ - réduit</span>
 							</li>
 							<li class="border-b border-black/20 px-5 pb-4">
 								<span class="font-bold">Durée</span> : 1h33 min
@@ -59,8 +57,12 @@ const t = createTranslator(locale)
 							<li class="border-b border-black/20 px-5 pb-4">
 								<span class="font-bold">Genre</span> : Drame, Guerre
 							</li>
-							<li class="px-5 pb-4 border-b border-black/20"><span class="font-bold">Réalisation</span> : Fatih Akın</li>
-							<li class="px-5 pb-4 border-b border-black/20"><span class="font-bold">Avec</span> : Jasper Billerbeck, Laura Tonke, Diane Kruger</li>
+							<li class="border-b border-black/20 px-5 pb-4">
+								<span class="font-bold">Réalisation</span> : Fatih Akın
+							</li>
+							<li class="border-b border-black/20 px-5 pb-4">
+								<span class="font-bold">Avec</span> : Jasper Billerbeck, Laura Tonke, Diane Kruger
+							</li>
 							<li class="flex items-center justify-center gap-3">
 								<span class="bg-primary text-primary-foreground distinguished inline-block px-1 py-1">Conférence</span>
 								<span class="bg-primary text-primary-foreground distinguished inline-block px-1 py-1">Conférence</span>
@@ -167,6 +169,5 @@ const t = createTranslator(locale)
 				</iframe>
 			</article>
 		</section>
-
 	</main>
 </Layout>

@@ -98,6 +98,8 @@ export default {
 	INFORMATIONS_TECHNIQUES_DESC: "Consultez et téléchargez tous les dossiers techniques relatifs à notre salle de spectacle et à notre salle d'exposition. Le dossier de candidature pour nos résidences artistiques est également disponible.",
 	INFORMATIONS_TECHNIQUES_INTRO: "Dossiers technique et de candidature",
 	INFORMATIONS_TECHNIQUES_TITRE: "Les informations techniques",
+	DOSSIER_TECHNIQUE: "Dossier technique",
+	DOSSIER_CANDIDATURE: "Dossier de candidature",
 	JEUNESSE: "Jeunesse",
 	L_EQUIPE: "L'équipe",
 	LIBRE_ACCES: "Libre accès",
