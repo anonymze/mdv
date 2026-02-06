@@ -1,0 +1,177 @@
+---
+import { find } from '@/api/payload'
+import FirstImg from '@/assets/imgs/mediatheque/1.webp'
+import SecondImg from '@/assets/imgs/mediatheque/2.webp'
+import FourthImg from '@/assets/imgs/mediatheque/4.webp'
+import FivethImg from '@/assets/imgs/mediatheque/5.webp'
+import SixthImg from '@/assets/imgs/mediatheque/6.webp'
+import MyImage from '@/components/my-image.astro'
+import { SelectWrapper } from '@/components/select-wrapper'
+import { Input } from '@/components/ui/input'
+import { createTranslator, I18n } from '@/i18n/translations'
+import Layout from '@/layouts/layout.astro'
+import { translateLudoDuration, translateLudoPlayers, translateLudoPublic } from '@/lib/translate-fields'
+import type { Mediatheque } from '@/types/mediatheque'
+import FirstCyberbaseImg from '@/assets/imgs/cyberbase/1.webp'
+import SecondCyberbaseImg from '@/assets/imgs/cyberbase/2.webp'
+import ThirdCyberbaseImg from '@/assets/imgs/cyberbase/3.webp'
+import FirstMediaImg from '@/assets/imgs/media/1.webp'
+import SecondMediaImg from '@/assets/imgs/media/2.webp'
+import ThirdMediaImg from '@/assets/imgs/media/3.webp'
+
+const locale = (Astro.currentLocale || 'fr') as I18n
+const t = createTranslator(locale)
+
+const ludotheque = await find<Mediatheque>('mediatheque', {
+	limit: 6,
+	locale,
+	where: { type: { equals: 'ludotheque' } }
+})
+---
+
+<Layout title={t('ACCUEIL_TITLE')}>
+	<main>
+		<section class="section-default">
+			<article class="grid grid-cols-2 gap-5">
+				<div class="grid grid-cols-3 gap-5">
+					<MyImage alt="" src={FirstImg} width={400} height={370} layout="fullWidth" class="col-span-2" />
+					<MyImage alt="" src={SecondImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={FourthImg} width={400} height={370} layout="fullWidth" class="col-span-3" />
+					<MyImage alt="" src={FivethImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={SixthImg} width={400} height={150} layout="fullWidth" class="col-span-2" />
+				</div>
+				<div class="flex flex-col">
+					<h2 class="text-primary pb-3">{t('MEDIATHEQUE_TITRE')}</h2>
+					<p class="distinguished pb-16">{t('MEDIATHEQUE_INTRO')}</p>
+					<p>{t('MEDIATHEQUE_DESC')}</p>
+				</div>
+			</article>
+		</section>
+
+
+		<section class="section-default bg-primary/20">
+			<article>
+				<h2 class="pb-3">{t('LUDOTHEQUE_TITRE')}</h2>
+				<p class="distinguished pb-6">{t('LUDOTHEQUE_INTRO')}</p>
+				<p class="w-2/3">
+					{t('LUDOTHEQUE_DESC_LONG')}
+				</p>
+			</article>
+
+			<div class="bg-primary mt-12 grid grid-cols-8 grid-rows-2 gap-6 px-10 py-8 *:min-h-12">
+				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 col-span-6 bg-white" />
+				<SelectWrapper
+					placeholder={t('TEMPS_DE_JEU')}
+					options={[{ key: 'fefef', value: 'fef' }]}
+					className="col-span-2 w-full"
+				/>
+				<SelectWrapper
+					placeholder={t('NOMBRE_DE_JOUEURS')}
+					options={[{ key: 'fefef', value: 'fef' }]}
+					className="col-span-2 w-full"
+				/>
+
+				<SelectWrapper
+					placeholder={t('AGE')}
+					options={[{ key: 'fefef', value: 'fef' }]}
+					className="col-span-2 w-full"
+				/>
+			</div>
+
+			<div class="my-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
+				{
+					ludotheque.docs.map((item) => {
+						const descText = item.description.root.children
+							.flatMap((para) => para.children)
+							.filter((child) => child.type === 'text')
+							.map((child) => child.text)
+							.join(' ')
+
+						return (
+							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-xs">
+								<div class="overflow-hidden">
+									<MyImage
+										src={item.thumbnail?.url}
+										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={item.thumbnail?.blurhash}
+										width={365}
+										height={270}
+										layout="fullWidth"
+									/>
+								</div>
+								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
+									<figcaption>
+										<h3 class="pb-3 text-black">
+											<a href={`/mediatheque/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+												{item.title}
+											</a>
+										</h3>
+										<p class="text-xs font-serif text-primary pb-2">{item.genre}</p>
+										<div class="flex items-center justify-between text-xs">
+											<p>{translateLudoPublic(item.public, t)}</p>
+											<p>{translateLudoPlayers(item.players, t)}</p>
+											<p>{translateLudoDuration(item.duration, t)}</p>
+										</div>
+									</figcaption>
+								</figure>
+								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
+									<figcaption class="text-white">
+										<p class="line-clamp-8 text-sm">{descText}</p>
+										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
+											{t('EN_SAVOIR_PLUS')}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d="M5 12h14" />
+												<path d="m12 5 7 7-7 7" />
+											</svg>
+										</p>
+									</figcaption>
+								</figure>
+							</article>
+						)
+					})
+				}
+			</div>
+		</section>
+
+		<section class="section-default">
+			<article class="grid grid-cols-2 gap-5">
+				<div class="flex flex-col">
+					<h2 class="text-primary pb-3">{t('CYBERBASE_TITRE')}</h2>
+					<p class="distinguished pb-16">{t('CYBERBASE_INTRO')}</p>
+					<p>{t('CYBERBASE_DESC')}</p>
+				</div>
+				<div class="grid grid-cols-4 gap-5">
+					<MyImage alt="" src={FirstCyberbaseImg} width={200} height={400} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={SecondCyberbaseImg} width={200} height={400} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={ThirdCyberbaseImg} width={420} height={400} layout="fullWidth" class="col-span-2" />
+				</div>
+			</article>
+		</section>
+
+		<section class="section-default bg-secondary/20">
+			<article class="grid grid-cols-2 gap-5">
+				<div class="grid grid-cols-2 gap-5">
+					<MyImage alt="" src={FirstMediaImg} width={420} height={260} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={SecondMediaImg} width={420} height={260} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={ThirdMediaImg} width={900} height={200} layout="fullWidth" class="col-span-2" />
+				</div>
+				<div class="flex flex-col">
+					<h2 class="text-secondary pb-3">{t('AUTRES_MEDIAS_TITRE')}</h2>
+					<p class="distinguished pb-16">{t('AUTRES_MEDIAS_INTRO')}</p>
+					<p>{t('AUTRES_MEDIAS_DESC')}</p>
+				</div>
+			</article>
+		</section>
+	</main>
+</Layout>

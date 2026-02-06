@@ -53,7 +53,6 @@ const currentLang = Astro.currentLocale || 'fr'
 const meta = metadata[currentLang]
 const pageTitle = `${title}${meta.titleSuffix}`
 const pageDescription = description || meta.defaultDescription
-
 ---
 
 <html lang={Astro.currentLocale}>

@@ -1,14 +1,8 @@
-import type { MenuNav } from '@/types/menu'
+import PersonImg from '@/assets/imgs/exemple-person.png'
 import type { createTranslator } from '@/i18n/translations'
-import img1 from '@/assets/imgs/1.jpg'
-import img2 from '@/assets/imgs/2.jpg'
-import img3 from '@/assets/imgs/3.jpg'
-import img4 from '@/assets/imgs/4.jpg'
+import type { MenuNav } from '@/types/menu'
 
 type Translator = ReturnType<typeof createTranslator>
-
-const images = [img1.src, img2.src, img3.src, img4.src]
-const randomImg = () => images[Math.floor(Math.random() * images.length)]
 
 export const getMenuNavs = (t: Translator): MenuNav[] => [
 	{
@@ -17,63 +11,63 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 			{
 				label: t('ART_VIVANT'),
 				link: 'art-vivant',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('SPECTACLES'), link: 'art-vivant/spectacles', imageReplacement: randomImg() },
-					{ label: t('SEANCES'), link: 'art-vivant/seances', imageReplacement: randomImg() },
-					{ label: t('EVENEMENTS'), link: 'art-vivant/evenements', imageReplacement: randomImg() }
+					{ label: t('SPECTACLES'), link: 'art-vivant/spectacles', imageReplacement: PersonImg.src },
+					{ label: t('SEANCES'), link: 'art-vivant/seances', imageReplacement: PersonImg.src },
+					{ label: t('EVENEMENTS'), link: 'art-vivant/evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('CINEMA'),
 				link: 'cinema',
-				image: randomImg(),
-				subMenus: [{ label: t('RDV_CINE'), link: 'cinema/rdv-cine', imageReplacement: randomImg() }]
+				image: PersonImg.src,
+				subMenus: [{ label: t('RDV_CINE'), link: 'cinema/rdv-cine', imageReplacement: PersonImg.src }]
 			},
 			{
 				label: t('MEDIATHEQUE'),
 				link: 'mediatheque',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('BIBLIOTHEQUE'), link: 'mediatheque/bibliotheque', imageReplacement: randomImg() },
-					{ label: t('LUDOBHEQUE'), link: 'mediatheque/ludotheque', imageReplacement: randomImg() },
-					{ label: t('CYBER_BASE'), link: 'mediatheque/cyber-base', imageReplacement: randomImg() },
-					{ label: t('AUTRES_MEDIAS'), link: 'mediatheque/autres-medias', imageReplacement: randomImg() }
+					{ label: t('BIBLIOTHEQUE'), link: 'mediatheque/bibliotheque', imageReplacement: PersonImg.src },
+					{ label: t('LUDOBHEQUE'), link: 'mediatheque/ludotheque', imageReplacement: PersonImg.src },
+					{ label: t('CYBER_BASE'), link: 'mediatheque/cyber-base', imageReplacement: PersonImg.src },
+					{ label: t('AUTRES_MEDIAS'), link: 'mediatheque/autres-medias', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('EXPOSITION'),
 				link: 'exposition',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
 					{
 						label: t('EXPOSITION_DU_MOMENT'),
 						link: 'exposition/du-moment',
-						imageReplacement: randomImg()
+						imageReplacement: PersonImg.src
 					},
-					{ label: t('EVENEMENTS'), link: 'exposition/evenements', imageReplacement: randomImg() }
+					{ label: t('EVENEMENTS'), link: 'exposition/evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('JEUNESSE'),
 				link: 'jeunesse',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('SPECTACLES'), link: 'jeunesse/spectacles', imageReplacement: randomImg() },
-					{ label: t('SEANCES'), link: 'jeunesse/seances', imageReplacement: randomImg() },
-					{ label: t('EVENEMENTS'), link: 'jeunesse/evenements', imageReplacement: randomImg() }
+					{ label: t('SPECTACLES'), link: 'jeunesse/spectacles', imageReplacement: PersonImg.src },
+					{ label: t('SEANCES'), link: 'jeunesse/seances', imageReplacement: PersonImg.src },
+					{ label: t('EVENEMENTS'), link: 'jeunesse/evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('ARTISTE'),
 				link: 'artiste',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: randomImg() },
+					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: PersonImg.src },
 					{
 						label: t('INFORMATIONS_TECHNIQUES'),
 						link: 'artiste/informations-techniques',
-						imageReplacement: randomImg()
+						imageReplacement: PersonImg.src
 					}
 				]
 			}
@@ -85,60 +79,60 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 			{
 				label: t('PARC_NATIONAL'),
 				link: 'art-vivant',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles', imageReplacement: randomImg() },
-					{ label: t('EVENEMENTS'), link: 'art-vivant/seances', imageReplacement: randomImg() },
-					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements', imageReplacement: randomImg() }
+					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles', imageReplacement: PersonImg.src },
+					{ label: t('EVENEMENTS'), link: 'art-vivant/seances', imageReplacement: PersonImg.src },
+					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('ACTUALITES'),
 				link: 'cinema',
-				image: randomImg(),
-				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine', imageReplacement: randomImg() }]
+				image: PersonImg.src,
+				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine', imageReplacement: PersonImg.src }]
 			},
 			{
 				label: t('INFORMATIONS_PRATIQUES'),
 				link: 'mediatheque',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque', imageReplacement: randomImg() },
-					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque', imageReplacement: randomImg() },
-					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base', imageReplacement: randomImg() }
+					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque', imageReplacement: PersonImg.src },
+					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque', imageReplacement: PersonImg.src },
+					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('INFORMATIONS_GENERALES'),
 				link: 'exposition',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('A_PROPOS'), link: 'exposition/du-moment', imageReplacement: randomImg() },
-					{ label: t('L_EQUIPE'), link: 'exposition/evenements', imageReplacement: randomImg() },
-					{ label: t('NOS_ENGAGEMENTS'), link: 'exposition/evenements', imageReplacement: randomImg() },
-					{ label: t('NOS_PARTENAIRES'), link: 'exposition/evenements', imageReplacement: randomImg() }
+					{ label: t('A_PROPOS'), link: 'exposition/du-moment', imageReplacement: PersonImg.src },
+					{ label: t('L_EQUIPE'), link: 'exposition/evenements', imageReplacement: PersonImg.src },
+					{ label: t('NOS_ENGAGEMENTS'), link: 'exposition/evenements', imageReplacement: PersonImg.src },
+					{ label: t('NOS_PARTENAIRES'), link: 'exposition/evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('ARCHIVES'),
 				link: 'jeunesse',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles', imageReplacement: randomImg() },
-					{ label: t('ANNEE_2024'), link: 'jeunesse/seances', imageReplacement: randomImg() },
-					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements', imageReplacement: randomImg() }
+					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles', imageReplacement: PersonImg.src },
+					{ label: t('ANNEE_2024'), link: 'jeunesse/seances', imageReplacement: PersonImg.src },
+					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('ARTISTE'),
 				link: 'artiste',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: randomImg() },
+					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: PersonImg.src },
 					{
 						label: t('INFORMATIONS_TECHNIQUES'),
 						link: 'artiste/informations-techniques',
-						imageReplacement: randomImg()
+						imageReplacement: PersonImg.src
 					}
 				]
 			}
@@ -155,60 +149,60 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 			{
 				label: t('PARC_NATIONAL'),
 				link: 'art-vivant',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles', imageReplacement: randomImg() },
-					{ label: t('EVENEMENTS'), link: 'art-vivant/seances', imageReplacement: randomImg() },
-					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements', imageReplacement: randomImg() }
+					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles', imageReplacement: PersonImg.src },
+					{ label: t('EVENEMENTS'), link: 'art-vivant/seances', imageReplacement: PersonImg.src },
+					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('ACTUALITES'),
 				link: 'cinema',
-				image: randomImg(),
-				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine', imageReplacement: randomImg() }]
+				image: PersonImg.src,
+				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine', imageReplacement: PersonImg.src }]
 			},
 			{
 				label: t('INFORMATIONS_PRATIQUES'),
 				link: 'mediatheque',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque', imageReplacement: randomImg() },
-					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque', imageReplacement: randomImg() },
-					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base', imageReplacement: randomImg() }
+					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque', imageReplacement: PersonImg.src },
+					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque', imageReplacement: PersonImg.src },
+					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('INFORMATIONS_GENERALES'),
 				link: 'exposition',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('A_PROPOS'), link: 'exposition/du-moment', imageReplacement: randomImg() },
-					{ label: t('L_EQUIPE'), link: 'exposition/evenements', imageReplacement: randomImg() },
-					{ label: t('NOS_ENGAGEMENTS'), link: 'exposition/evenements', imageReplacement: randomImg() },
-					{ label: t('NOS_PARTENAIRES'), link: 'exposition/evenements', imageReplacement: randomImg() }
+					{ label: t('A_PROPOS'), link: 'exposition/du-moment', imageReplacement: PersonImg.src },
+					{ label: t('L_EQUIPE'), link: 'exposition/evenements', imageReplacement: PersonImg.src },
+					{ label: t('NOS_ENGAGEMENTS'), link: 'exposition/evenements', imageReplacement: PersonImg.src },
+					{ label: t('NOS_PARTENAIRES'), link: 'exposition/evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('ARCHIVES'),
 				link: 'jeunesse',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles', imageReplacement: randomImg() },
-					{ label: t('ANNEE_2024'), link: 'jeunesse/seances', imageReplacement: randomImg() },
-					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements', imageReplacement: randomImg() }
+					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles', imageReplacement: PersonImg.src },
+					{ label: t('ANNEE_2024'), link: 'jeunesse/seances', imageReplacement: PersonImg.src },
+					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('ARTISTE'),
 				link: 'artiste',
-				image: randomImg(),
+				image: PersonImg.src,
 				subMenus: [
-					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: randomImg() },
+					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: PersonImg.src },
 					{
 						label: t('INFORMATIONS_TECHNIQUES'),
 						link: 'artiste/informations-techniques',
-						imageReplacement: randomImg()
+						imageReplacement: PersonImg.src
 					}
 				]
 			}

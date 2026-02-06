@@ -1,5 +1,6 @@
 ---
 import { NavigationMenuDemo } from '@/components/header-menu'
+import { LanguageSelect } from '@/components/language-select'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
 import { getMenuNavs } from '@/lib/menu-navs'
@@ -10,6 +11,7 @@ import { ArrowRightIcon } from 'lucide-react'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 const menuNavs = getMenuNavs(t)
+const currentPath = Astro.url.pathname
 ---
 
 <header class="mt-4 flex h-16 gap-4">
@@ -19,7 +21,8 @@ const menuNavs = getMenuNavs(t)
 		>
 		<NavigationMenuDemo menuNavs={menuNavs} client:load />
 	</div>
-	<Button link="/" variant={'secondary'} className="group h-full"
+	<LanguageSelect client:load currentLocale={locale} currentPath={currentPath} />
+	<Button link="/" variant={'secondary'} className="group h-full w-40"
 		>{t('NOUS_CONTACTER')} <ArrowRightIcon className="transition-transform group-hover:translate-x-1" /></Button
 	>
 </header>

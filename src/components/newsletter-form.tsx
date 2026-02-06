@@ -10,9 +10,10 @@ type Status = "idle" | "loading" | "success" | "error" | "subscribed";
 interface Props {
 	locale: I18n;
 	variant?: "default" | "footer";
+	apiBaseUrl: string;
 }
 
-export function NewsletterForm({ locale, variant = "default" }: Props) {
+export function NewsletterForm({ locale, variant = "default", apiBaseUrl }: Props) {
 	const [status, setStatus] = useState<Status>("idle");
 	const [email, setEmail] = useState("");
 	const t = langs[locale];
@@ -30,7 +31,7 @@ export function NewsletterForm({ locale, variant = "default" }: Props) {
 		}
 		setStatus("loading");
 		try {
-			const res = await fetch("/api/newsletter", {
+			const res = await fetch(`${apiBaseUrl}/api/newsletter`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email }),
@@ -51,18 +52,19 @@ export function NewsletterForm({ locale, variant = "default" }: Props) {
 
 	return (
 		<div className="relative">
-			<form onSubmit={handleSubmit} className={isFooter ? "flex flex-col gap-2" : "flex items-center gap-4"} style={{ visibility: showForm ? "visible" : "hidden" }}>
+			<form onSubmit={handleSubmit} className={isFooter ? "flex items-center gap-4" : "flex items-center gap-4"} style={{ visibility: showForm ? "visible" : "hidden" }}>
 				<Input
 					type="email"
 					required
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
-					className={isFooter ? "h-10 border-white/20 bg-white/10 text-white placeholder:text-white/60" : "bg-secondary-muted/40 h-12 w-full border-none"}
+					className={isFooter ? "h-12 w-full border-none bg-white text-black" : "bg-secondary-muted/40 h-12 w-full border-none"}
 					placeholder={t.EMAIL_PLACEHOLDER}
 				/>
 				<Button
 					type="submit"
-					size={isFooter ? "default" : "xl"}
+					variant={isFooter ? "secondary" : "default"}
+					size={isFooter ? "xl" : "xl"}
 					disabled={status === "loading"}
 				>
 					{status === "loading" ? "..." : t.NEWSLETTER_BOUTON}

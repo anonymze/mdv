@@ -101,7 +101,7 @@ const parcNational = menuNavs[1]?.subMenus || []
 		<div>
 			<h3 class="text-primary-foreground pb-8">{t('NEWSLETTER_TITRE')}</h3>
 			<p class="pb-8">{t('NEWSLETTER_INTRO')}</p>
-			<NewsletterForm client:load locale={locale} variant="footer" />
+			<NewsletterForm client:load locale={locale} variant="footer" apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL} />
 		</div>
 	</div>
 
