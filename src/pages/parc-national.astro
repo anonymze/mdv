@@ -1,10 +1,11 @@
 ---
 import { find } from '@/api/payload'
+import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
 import MyImage from '@/components/my-image.astro'
+import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import type { ParcNational } from '@/types/parc-national'
-
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
@@ -23,124 +24,179 @@ const articles = await find<ParcNational>('parc_national', {
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-		<section class="section-default" id="evenements">
-			<h2 class="text-primary pb-3">{t('PARC_EVENEMENTS_TITRE')}</h2>
-			<p class="distinguished pb-6">{t('PARC_EVENEMENTS_INTRO')}</p>
-			<p class="w-2/3">
-				{t('PARC_EVENEMENTS_DESC')}
-			</p>
+		<section class="section-default" id="description">
+			<h1 class="text-primary pb-20">Parc national des Pyrénées</h1>
+			<article class="grid grid-cols-2 gap-5">
+				<div class="flex flex-col">
+					<p class="distinguished pb-16">Découvrir, s’émerveiller et partager la nature des Hautes-Pyrénées</p>
+					<p>
+						La Maison du Parc national et de la vallée est une véritable vitrine pour toutes celles et ceux qui
+						souhaitent mieux connaître le Parc national des Pyrénées. Sur place, vous trouverez une documentation riche
+						à consulter librement ainsi que des films à visionner pour découvrir le territoire sous un autre angle. Tout
+						au long de l’année, les gardes-moniteurs animent les lieux de leur présence et de leur passion. Ils
+						partagent leurs connaissances, leurs expériences et leur amour du patrimoine naturel, offrant ainsi des
+						rencontres privilégiées et authentiques.<br />La Maison est également un espace dédié à la mise en valeur
+						des produits labellisés Esprit Parc, ainsi qu’une boutique où vous pourrez retrouver divers souvenirs et
+						goodies inspirés du Parc national.
+					</p>
 
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
-				{
-					evenements.docs.map((item) => {
-						const descText = item.description.root.children
-							.flatMap((para) => para.children)
-							.filter((child) => child.type === 'text')
-							.map((child) => child.text)
-							.join(' ')
+					<Button link="/" size={'xl'} className="mt-auto w-fit">Site officiel du Parc national des Pyrénées</Button>
+				</div>
+				<div class="grid grid-cols-4 grid-rows-3 gap-5">
+					<MyImage
+						alt=""
+						src={EspaceCultureImg}
+						width={420}
+						height={670}
+						layout="fullWidth"
+						class="col-span-2 row-span-3"
+					/>
+					<MyImage
+						alt=""
+						src={EspaceCultureImg}
+						width={420}
+						height={210}
+						layout="fullWidth"
+						class="col-span-2 row-span-1"
+					/>
+					<MyImage
+						alt=""
+						src={EspaceCultureImg}
+						width={420}
+						height={210}
+						layout="fullWidth"
+						class="col-span-2 row-span-1"
+					/>
+					<MyImage
+						alt=""
+						src={EspaceCultureImg}
+						width={420}
+						height={210}
+						layout="fullWidth"
+						class="col-span-2 row-span-1"
+					/>
+				</div>
+			</article>
+		</section>
+	</main>
 
-						return (
-							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
-								<div class="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-										background={item.thumbnail?.blurhash}
-										width={275}
-										height={305}
-										layout="fullWidth"
-									/>
-								</div>
-								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
-									<figcaption>
-										<h3 class="pb-1 text-black">
-											<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
-												{item.title}
-											</a>
-										</h3>
-										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
+	<section class="section-default bg-primary/20" id="evenements">
+		<h2 class="text-primary pb-3">{t('PARC_EVENEMENTS_TITRE')}</h2>
+		<p class="distinguished pb-6">{t('PARC_EVENEMENTS_INTRO')}</p>
+		<p class="w-2/3">
+			{t('PARC_EVENEMENTS_DESC')}
+		</p>
+
+		<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			{
+				evenements.docs.map((item) => {
+					const descText = item.description.root.children
+						.flatMap((para) => para.children)
+						.filter((child) => child.type === 'text')
+						.map((child) => child.text)
+						.join(' ')
+
+					return (
+						<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
+							<div class="overflow-hidden">
+								<MyImage
+									src={item.thumbnail?.url}
+									alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+									background={item.thumbnail?.blurhash}
+									width={275}
+									height={305}
+									layout="fullWidth"
+								/>
+							</div>
+							<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
+								<figcaption>
+									<h3 class="pb-1 text-black">
+										<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											{item.title}
+										</a>
+									</h3>
+									<time class="distinguished text-sm capitalize" datetime={item.date_start}>
 										{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
 										{new Date(item.date_start).toLocaleTimeString(locale, {
 											hour: '2-digit',
 											minute: '2-digit',
 											hour12: false
 										})}
-										</time>
-										<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
-									</figcaption>
-								</figure>
-								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption class="text-white">
-										<p class="line-clamp-8 text-sm">{descText}</p>
-										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{t('EN_SAVOIR_PLUS')}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
-									</figcaption>
-								</figure>
-							</article>
-						)
-					})
-				}
-			</div>
-		</section>
+									</time>
+									<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
+								</figcaption>
+							</figure>
+							<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+							<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
+								<figcaption class="text-white">
+									<p class="line-clamp-8 text-sm">{descText}</p>
+									<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
+										{t('EN_SAVOIR_PLUS')}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="16"
+											height="16"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										>
+											<path d="M5 12h14" />
+											<path d="m12 5 7 7-7 7" />
+										</svg>
+									</p>
+								</figcaption>
+							</figure>
+						</article>
+					)
+				})
+			}
+		</div>
+	</section>
 
-		<section class="section-default bg-primary/20" id="articles">
-			<h2 class="text-primary pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
-			<p class="distinguished pb-6">{t('PARC_ARTICLES_INTRO')}</p>
-			<p class="w-2/3">
-				{t('PARC_ARTICLES_DESC')}
-			</p>
+	<section class="section-default" id="articles">
+		<h2 class="text-secondary pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
+		<p class="distinguished pb-6">{t('PARC_ARTICLES_INTRO')}</p>
+		<p class="w-2/3">
+			{t('PARC_ARTICLES_DESC')}
+		</p>
 
-			<div class="my-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
-				{
-					articles.docs.map((item) => {
-						const descText = item.description.root.children
-							.flatMap((para) => para.children)
-							.filter((child) => child.type === 'text')
-							.map((child) => child.text)
-							.join(' ')
+		<div class="my-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
+			{
+				articles.docs.map((item) => {
+					const descText = item.description.root.children
+						.flatMap((para) => para.children)
+						.filter((child) => child.type === 'text')
+						.map((child) => child.text)
+						.join(' ')
 
-						return (
-							<article class="col-span-1 w-full bg-white">
-								<div class="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-										background={item.thumbnail?.blurhash}
-										width={365}
-										height={265}
-										layout="fullWidth"
-									/>
-								</div>
-								<figure class="p-4">
-									<figcaption>
-										<h3 class="pb-1 text-black">{item.title}</h3>
-										<div class="flex items-center gap-4 pt-3">
-											<p class="line-clamp-3 text-xs">{descText}</p>
-											<p class="text-primary text-lg">9€</p>
-										</div>
-									</figcaption>
-								</figure>
-							</article>
-						)
-					})
-				}
-			</div>
-		</section>
-	</main>
+					return (
+						<article class="col-span-1 w-full bg-white">
+							<div class="overflow-hidden">
+								<MyImage
+									src={item.thumbnail?.url}
+									alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+									background={item.thumbnail?.blurhash}
+									width={365}
+									height={265}
+									layout="fullWidth"
+								/>
+							</div>
+							<figure class="p-4">
+								<figcaption>
+									<h3 class="pb-1 text-black">{item.title}</h3>
+									<div class="flex items-center gap-4 pt-3">
+										<p class="line-clamp-3 text-xs">{descText}</p>
+										<p class="text-secondary text-lg">9€</p>
+									</div>
+								</figcaption>
+							</figure>
+						</article>
+					)
+				})
+			}
+		</div>
+	</section>
 </Layout>

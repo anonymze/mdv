@@ -13,26 +13,28 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				link: 'art-vivant',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('SPECTACLES'), link: 'art-vivant', imageReplacement: PersonImg.src },
-					{ label: t('SEANCES'), link: 'cinema', imageReplacement: PersonImg.src },
-					{ label: t('EVENEMENTS'), link: 'art-vivant/evenements', imageReplacement: PersonImg.src }
+					{ label: t('SPECTACLES'), link: 'art-vivant#spectacles', imageReplacement: PersonImg.src },
+					{ label: t('RESIDENCE'), link: 'art-vivant#residence', imageReplacement: PersonImg.src },
 				]
 			},
 			{
 				label: t('CINEMA'),
 				link: 'cinema',
 				image: PersonImg.src,
-				subMenus: [{ label: t('RDV_CINE'), link: 'cinema/rdv-cine', imageReplacement: PersonImg.src }]
+				subMenus: [
+					{ label: t('SEANCES'), link: 'cinema#seances', imageReplacement: PersonImg.src },
+					{ label: t('RDV_CINE'), link: 'cinema#rdv-cinema', imageReplacement: PersonImg.src }
+				]
 			},
 			{
 				label: t('MEDIATHEQUE'),
 				link: 'mediatheque',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('BIBLIOTHEQUE'), link: 'mediatheque/bibliotheque', imageReplacement: PersonImg.src },
-					{ label: t('LUDOBHEQUE'), link: 'mediatheque/ludotheque', imageReplacement: PersonImg.src },
-					{ label: t('CYBER_BASE'), link: 'mediatheque/cyber-base', imageReplacement: PersonImg.src },
-					{ label: t('AUTRES_MEDIAS'), link: 'mediatheque/autres-medias', imageReplacement: PersonImg.src }
+					{ label: t('BIBLIOTHEQUE'), link: 'mediatheque#mediatheque', imageReplacement: PersonImg.src },
+					{ label: t('LUDOTHEQUE'), link: 'mediatheque#ludotheque', imageReplacement: PersonImg.src },
+					{ label: t('CYBER_BASE'), link: 'mediatheque#cyberbase', imageReplacement: PersonImg.src },
+					{ label: t('AUTRES_MEDIAS'), link: 'mediatheque#autres-medias', imageReplacement: PersonImg.src }
 				]
 			},
 			{
@@ -42,20 +44,20 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				subMenus: [
 					{
 						label: t('EXPOSITION_DU_MOMENT'),
-						link: 'exposition/du-moment',
+						link: 'exposition#exposition',
 						imageReplacement: PersonImg.src
 					},
-					{ label: t('EVENEMENTS'), link: 'exposition/evenements', imageReplacement: PersonImg.src }
+					{ label: t('EVENEMENTS'), link: 'exposition#evenements', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('JEUNESSE'),
-				link: 'jeunesse',
+				link: 'jeune-public',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('SPECTACLES'), link: 'jeunesse/spectacles', imageReplacement: PersonImg.src },
-					{ label: t('SEANCES'), link: 'jeunesse/seances', imageReplacement: PersonImg.src },
-					{ label: t('EVENEMENTS'), link: 'jeunesse/evenements', imageReplacement: PersonImg.src }
+					{ label: t('SPECTACLES'), link: 'jeune-public#spectacles', imageReplacement: PersonImg.src },
+					{ label: t('SEANCES'), link: 'jeune-public#cinema', imageReplacement: PersonImg.src },
+					{ label: t('LUDOTHEQUE'), link: 'jeune-public#ludotheque', imageReplacement: PersonImg.src }
 				]
 			},
 			{
@@ -63,10 +65,10 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				link: 'artiste',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: PersonImg.src },
+					{ label: t('RESIDENCE'), link: 'artiste#residence', imageReplacement: PersonImg.src },
 					{
 						label: t('INFORMATIONS_TECHNIQUES'),
-						link: 'artiste/informations-techniques',
+						link: 'artiste#informations',
 						imageReplacement: PersonImg.src
 					}
 				]
@@ -99,7 +101,7 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				subMenus: [
 					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque', imageReplacement: PersonImg.src },
 					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque', imageReplacement: PersonImg.src },
-					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyber-base', imageReplacement: PersonImg.src }
+					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyberbase', imageReplacement: PersonImg.src }
 				]
 			},
 			{
