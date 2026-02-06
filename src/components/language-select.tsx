@@ -25,14 +25,14 @@ export function LanguageSelect({ currentLocale, currentPath }: Props) {
 	};
 
 	return (
-		<div className="w-40">
+		<div className="w-32">
 			<Select value={selectedLocale} onValueChange={handleChange}>
-				<SelectTrigger className="!h-full !w-full border-4 border-primary bg-white rounded-none">
+				<SelectTrigger className="!h-full w-full border-0  bg-gray-100 rounded-none">
 					<SelectValue />
 				</SelectTrigger>
 				<SelectContent className="bg-white">
 					{locales.map((locale) => (
-						<SelectItem key={locale.code} value={locale.code} className="py-3 [&_svg]:!text-primary focus:bg-primary focus:text-primary-foreground focus:[&_svg]:!text-primary-foreground">
+						<SelectItem key={locale.code} value={locale.code} className="py-3 [&_svg]:text-primary focus:bg-primary focus:text-primary-foreground focus:[&_svg]:text-primary-foreground">
 							{locale.label}
 						</SelectItem>
 					))}

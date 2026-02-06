@@ -13,8 +13,8 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				link: 'art-vivant',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('SPECTACLES'), link: 'art-vivant/spectacles', imageReplacement: PersonImg.src },
-					{ label: t('SEANCES'), link: 'art-vivant/seances', imageReplacement: PersonImg.src },
+					{ label: t('SPECTACLES'), link: 'art-vivant', imageReplacement: PersonImg.src },
+					{ label: t('SEANCES'), link: 'cinema', imageReplacement: PersonImg.src },
 					{ label: t('EVENEMENTS'), link: 'art-vivant/evenements', imageReplacement: PersonImg.src }
 				]
 			},
