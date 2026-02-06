@@ -23,7 +23,7 @@ const articles = await find<ParcNational>('parc_national', {
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-		<section class="section-default">
+		<section class="section-default" id="evenements">
 			<h2 class="text-primary pb-3">{t('PARC_EVENEMENTS_TITRE')}</h2>
 			<p class="distinguished pb-6">{t('PARC_EVENEMENTS_INTRO')}</p>
 			<p class="w-2/3">
@@ -99,7 +99,7 @@ const articles = await find<ParcNational>('parc_national', {
 			</div>
 		</section>
 
-		<section class="section-default bg-primary/20">
+		<section class="section-default bg-primary/20" id="articles">
 			<h2 class="text-primary pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
 			<p class="distinguished pb-6">{t('PARC_ARTICLES_INTRO')}</p>
 			<p class="w-2/3">

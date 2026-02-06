@@ -9,13 +9,12 @@ import Layout from '@/layouts/layout.astro'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
-
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
 
-		<section class="section-default">
+		<section class="section-default" id="archives">
 			<h2 class="text-secondary pb-3">{t('ARCHIVES')}</h2>
 			<p class="distinguished pb-16 w-2/3">
 				{t('ARCHIVES_DESC')}

@@ -28,7 +28,7 @@ const residences = await find<ArtVivant>('art_vivant', {
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-		<section class="section-default">
+		<section class="section-default" id="spectacles">
 			<article>
 				<h2 class="pb-3">{t('SPECTACLES_A_VENIR')}</h2>
 				<p class="distinguished pb-6">{t('SPECTACLES_INTRO')}</p>
@@ -131,7 +131,7 @@ const residences = await find<ArtVivant>('art_vivant', {
 			</div>
 		</section>
 
-		<section class="section-default bg-primary/20">
+		<section class="section-default bg-primary/20" id="residence">
 			<article>
 				<h2 class="pb-3">{t('RESIDENCE_ARTISTIQUE')}</h2>
 				<p class="distinguished pb-6">{t('RESIDENCE_INTRO')}</p>

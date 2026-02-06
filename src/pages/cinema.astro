@@ -29,7 +29,7 @@ const rdv = await find<Cinema>('cinema', {
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-		<section class="section-default">
+		<section class="section-default" id="cinema">
 			<article>
 				<h2 class="pb-3">{t('CINEMA')}</h2>
 				<p class="distinguished pb-6">{t('CINEMA_INTRO')}</p>
@@ -140,7 +140,7 @@ const rdv = await find<Cinema>('cinema', {
 			</div>
 		</section>
 
-		<section class="section-default bg-primary/20">
+		<section class="section-default bg-primary/20" id="rdv-cinema">
 			<h2 class="text-primary pb-3">{t('RDV_CINEMA')}</h2>
 			<p class="distinguished pb-6">{t('RDV_CINEMA_INTRO')}</p>
 			<p class="w-2/3">{t('RDV_CINEMA_DESC')}</p>

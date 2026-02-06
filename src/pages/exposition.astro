@@ -24,7 +24,7 @@ const evenements = await find<EvenementType>('exposition', {
 	<main>
 		{
 			exposition && (
-				<section class="section-default">
+				<section class="section-default" id="exposition">
 					<article class="grid grid-cols-3 gap-5 pb-16">
 						<div class="col-span-2 flex flex-col">
 							<h2 class="text-primary pb-3">{t('EXPO_MOMENT_TITRE')}</h2>
@@ -123,7 +123,7 @@ const evenements = await find<EvenementType>('exposition', {
 			)
 		}
 
-		<section class="section-default bg-primary/20">
+		<section class="section-default bg-primary/20" id="evenements">
 			<h2 class="text-primary pb-3">{t('EVENEMENTS_EXPO')}</h2>
 			<p class="distinguished">{t('EVENEMENTS_EXPO_INTRO')}</p>
 

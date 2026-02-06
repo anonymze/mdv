@@ -31,7 +31,7 @@ const ludotheque = await find<Mediatheque>('mediatheque', {
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-		<section class="section-default">
+		<section class="section-default" id="mediatheque">
 			<article class="grid grid-cols-2 gap-5">
 				<div class="grid grid-cols-3 gap-5">
 					<MyImage alt="" src={FirstImg} width={400} height={370} layout="fullWidth" class="col-span-2" />
@@ -49,7 +49,7 @@ const ludotheque = await find<Mediatheque>('mediatheque', {
 		</section>
 
 
-		<section class="section-default bg-primary/20">
+		<section class="section-default bg-primary/20" id="ludotheque">
 			<article>
 				<h2 class="pb-3">{t('LUDOTHEQUE_TITRE')}</h2>
 				<p class="distinguished pb-6">{t('LUDOTHEQUE_INTRO')}</p>
@@ -144,7 +144,7 @@ const ludotheque = await find<Mediatheque>('mediatheque', {
 			</div>
 		</section>
 
-		<section class="section-default">
+		<section class="section-default" id="cyberbase">
 			<article class="grid grid-cols-2 gap-5">
 				<div class="flex flex-col">
 					<h2 class="text-primary pb-3">{t('CYBERBASE_TITRE')}</h2>
@@ -159,7 +159,7 @@ const ludotheque = await find<Mediatheque>('mediatheque', {
 			</article>
 		</section>
 
-		<section class="section-default bg-secondary/20">
+		<section class="section-default bg-secondary/20" id="autres-medias">
 			<article class="grid grid-cols-2 gap-5">
 				<div class="grid grid-cols-2 gap-5">
 					<MyImage alt="" src={FirstMediaImg} width={420} height={260} layout="fullWidth" class="col-span-1" />
