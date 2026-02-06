@@ -31,7 +31,6 @@ import Layout from '@/layouts/layout.astro'
 import { translatePublicField } from '@/lib/translate-fields'
 import type { ArtVivant } from '@/types/art-vivant'
 import type { Cinema } from '@/types/cinema'
-import type { ExpositionType } from '@/types/exposition'
 import type { ParcNational } from '@/types/parc-national'
 import { renderRichText } from '@/utils/helper'
 
@@ -51,7 +50,6 @@ const [spectacles, evenements] = await Promise.all([
 	})
 ])
 
-
 const latestEvents = [
 	...spectacles.docs.map((item) => ({ ...item, _href: `/art-vivant/${item.id}` })),
 	...evenements.docs.map((item) => ({ ...item, _href: `/parc-national/${item.id}` }))
@@ -66,12 +64,6 @@ const seances = await find<Cinema>('cinema', {
 		type: { equals: 'seance' }
 	}
 })
-
-const exposition = (await find<ExpositionType>('exposition/current', {
-	locale
-})) as unknown as ExpositionType | null
-
-
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
@@ -158,7 +150,7 @@ const exposition = (await find<ExpositionType>('exposition/current', {
 				</div>
 			</article>
 
-			<Button link="/" size={'xl'} className="mt-12">Découvrez nos prochains évènements</Button>
+			<Button link="/" size={'xl'} className="mt-12">{t('DECOUVREZ_PROCHAINS_EVENEMENTS')}</Button>
 		</section>
 
 		<section class="section-default bg-primary/20">
@@ -341,29 +333,18 @@ const exposition = (await find<ExpositionType>('exposition/current', {
 			</div>
 		</section>
 
-		{exposition && (
 		<section class="section-default bg-secondary/20">
 			<article class="grid grid-cols-2 gap-5">
 				<div class="flex flex-col">
-					<h2 class="text-secondary pb-3">{t('EXPO_MOMENT_TITRE')}</h2>
-					<h3 class="text-secondary pb-3">{exposition.title}</h3>
-					<p class="distinguished pb-6">	{t('DATE_FROM')}{' '}
-					{new Date(exposition.date_start).toLocaleDateString(locale, {
-						weekday: 'long',
-						day: 'numeric',
-						month: 'long'
-					})}{' '}
-					{t('DATE_TO')}{' '}
-					{new Date(exposition.date_end).toLocaleDateString(locale, {
-						weekday: 'long',
-						day: 'numeric',
-						month: 'long',
-						year: 'numeric'
-					})}</p>
-					<h3 class="text-secondary pb-16">{exposition.title}</h3>
-					<p set:html={renderRichText(exposition.description)} />
+					<h2 class="text-secondary pb-3">{t('EXPOSITIONS_TITRE')}</h2>
+					<p class="distinguished pb-6">
+						{t('EXPOSITIONS_INTRO')}
+					</p>
+					<p>
+						{t('EXPOSITIONS_DESC')}
+					</p>
 
-					<Button variant={'secondary'} link="/" size={'xl'} className="mt-auto w-fit">{t('EN_SAVOIR_PLUS')}</Button>
+					<Button variant={'secondary'} link="/exposition" size={'xl'} className="mt-auto w-fit">{t('VOIR_EXPOSITION_MOMENT')}</Button>
 				</div>
 				<div class="space-y-5">
 					<!-- Top image full width -->
@@ -385,12 +366,11 @@ const exposition = (await find<ExpositionType>('exposition/current', {
 					</div>
 				</div>
 			</article>
-		</section>)
-		}
+		</section>
 
 		<section class="section-default">
 			<article class="mx-auto max-w-200">
-				<h2 class="pb-4 text-secondary">{t('NEWSLETTER_TITRE')}</h2>
+				<h2 class="text-secondary pb-4">{t('NEWSLETTER_TITRE')}</h2>
 				<p class="pb-7 italic">{t('NEWSLETTER_INTRO')}</p>
 				<p class="pb-8">{t('NEWSLETTER_DESC')}</p>
 

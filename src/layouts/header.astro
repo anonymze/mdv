@@ -22,7 +22,7 @@ const currentPath = Astro.url.pathname
 		<NavigationMenuDemo menuNavs={menuNavs} client:load />
 	</div>
 	<LanguageSelect client:load currentLocale={locale} currentPath={currentPath} />
-	<Button link="/" variant={'secondary'} className="group h-full w-40"
+	<Button link="/informations" variant={'secondary'} className="group h-full w-40"
 		>{t('NOUS_CONTACTER')} <ArrowRightIcon className="transition-transform group-hover:translate-x-1" /></Button
 	>
 </header>

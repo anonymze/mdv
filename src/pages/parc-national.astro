@@ -25,22 +25,15 @@ const articles = await find<ParcNational>('parc_national', {
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
 		<section class="section-default" id="description">
-			<h1 class="text-primary pb-20">Parc national des Pyrénées</h1>
+			<h1 class="text-primary pb-20">{t('PARC_NATIONAL_TITRE')}</h1>
 			<article class="grid grid-cols-2 gap-5">
 				<div class="flex flex-col">
-					<p class="distinguished pb-16">Découvrir, s’émerveiller et partager la nature des Hautes-Pyrénées</p>
+					<p class="distinguished pb-16">{t('PARC_NATIONAL_INTRO')}</p>
 					<p>
-						La Maison du Parc national et de la vallée est une véritable vitrine pour toutes celles et ceux qui
-						souhaitent mieux connaître le Parc national des Pyrénées. Sur place, vous trouverez une documentation riche
-						à consulter librement ainsi que des films à visionner pour découvrir le territoire sous un autre angle. Tout
-						au long de l’année, les gardes-moniteurs animent les lieux de leur présence et de leur passion. Ils
-						partagent leurs connaissances, leurs expériences et leur amour du patrimoine naturel, offrant ainsi des
-						rencontres privilégiées et authentiques.<br />La Maison est également un espace dédié à la mise en valeur
-						des produits labellisés Esprit Parc, ainsi qu’une boutique où vous pourrez retrouver divers souvenirs et
-						goodies inspirés du Parc national.
+						{t('PARC_NATIONAL_DESC')}
 					</p>
 
-					<Button link="/" size={'xl'} className="mt-auto w-fit">Site officiel du Parc national des Pyrénées</Button>
+					<Button link="/" size={'xl'} className="mt-auto w-fit">{t('PARC_NATIONAL_SITE_OFFICIEL')}</Button>
 				</div>
 				<div class="grid grid-cols-4 grid-rows-3 gap-5">
 					<MyImage

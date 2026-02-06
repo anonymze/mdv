@@ -14,7 +14,7 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				image: PersonImg.src,
 				subMenus: [
 					{ label: t('SPECTACLES'), link: 'art-vivant#spectacles', imageReplacement: PersonImg.src },
-					{ label: t('RESIDENCE'), link: 'art-vivant#residence', imageReplacement: PersonImg.src },
+					{ label: t('RESIDENCE'), link: 'art-vivant#residence', imageReplacement: PersonImg.src }
 				]
 			},
 			{
@@ -22,7 +22,7 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				link: 'cinema',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('SEANCES'), link: 'cinema#seances', imageReplacement: PersonImg.src },
+					{ label: t('SEANCES'), link: 'cinema#cinema', imageReplacement: PersonImg.src },
 					{ label: t('RDV_CINE'), link: 'cinema#rdv-cinema', imageReplacement: PersonImg.src }
 				]
 			},
@@ -80,49 +80,51 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 		subMenus: [
 			{
 				label: t('PARC_NATIONAL'),
-				link: 'art-vivant',
+				link: 'parc-national',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles', imageReplacement: PersonImg.src },
-					{ label: t('EVENEMENTS'), link: 'art-vivant/seances', imageReplacement: PersonImg.src },
-					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements', imageReplacement: PersonImg.src }
+					{ label: t('PRESENTATION'), link: 'parc-national#description', imageReplacement: PersonImg.src },
+					{ label: t('EVENEMENTS'), link: 'parc-national#evenements', imageReplacement: PersonImg.src },
+					{ label: t('BOUTIQUE'), link: 'parc-national#articles', imageReplacement: PersonImg.src }
 				]
 			},
 			{
-				label: t('ACTUALITES'),
+				label: t('CINEMA'),
 				link: 'cinema',
 				image: PersonImg.src,
-				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine', imageReplacement: PersonImg.src }]
+				subMenus: [
+					{ label: t('SEANCES'), link: 'cinema#cinema', imageReplacement: PersonImg.src },
+					{ label: t('RDV_CINE'), link: 'cinema#rdv-cinema', imageReplacement: PersonImg.src }
+				]
 			},
 			{
 				label: t('INFORMATIONS_PRATIQUES'),
-				link: 'mediatheque',
+				link: 'informations',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('HORAIRES'), link: 'mediatheque/bibliotheque', imageReplacement: PersonImg.src },
-					{ label: t('TARIFICATIONS'), link: 'mediatheque/ludotheque', imageReplacement: PersonImg.src },
-					{ label: t('OU_NOUS_TROUVER'), link: 'mediatheque/cyberbase', imageReplacement: PersonImg.src }
+					{ label: t('HORAIRES'), link: 'informations#horaires', imageReplacement: PersonImg.src },
+					{ label: t('TARIFICATIONS'), link: 'informations#tarifs', imageReplacement: PersonImg.src },
+					{ label: t('OU_NOUS_TROUVER'), link: 'informations#horaires', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('INFORMATIONS_GENERALES'),
-				link: 'exposition',
+				link: 'informations',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('A_PROPOS'), link: 'exposition/du-moment', imageReplacement: PersonImg.src },
-					{ label: t('L_EQUIPE'), link: 'exposition/evenements', imageReplacement: PersonImg.src },
-					{ label: t('NOS_ENGAGEMENTS'), link: 'exposition/evenements', imageReplacement: PersonImg.src },
-					{ label: t('NOS_PARTENAIRES'), link: 'exposition/evenements', imageReplacement: PersonImg.src }
+					{ label: t('L_EQUIPE'), link: 'informations#equipe', imageReplacement: PersonImg.src },
+					{ label: t('NOS_ENGAGEMENTS'), link: 'informations#engagements', imageReplacement: PersonImg.src },
+					{ label: t('NOS_PARTENAIRES'), link: 'informations#partenaires', imageReplacement: PersonImg.src }
 				]
 			},
 			{
 				label: t('ARCHIVES'),
-				link: 'jeunesse',
+				link: 'archives',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles', imageReplacement: PersonImg.src },
-					{ label: t('ANNEE_2024'), link: 'jeunesse/seances', imageReplacement: PersonImg.src },
-					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements', imageReplacement: PersonImg.src }
+					{ label: t('ANNEE_2025'), link: 'archives', imageReplacement: PersonImg.src },
+					{ label: t('ANNEE_2024'), link: 'archives', imageReplacement: PersonImg.src },
+					{ label: t('ANNEE_2025'), link: 'archives', imageReplacement: PersonImg.src }
 				]
 			},
 			{
@@ -130,10 +132,10 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				link: 'artiste',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('RESIDENCE'), link: 'artiste/residence', imageReplacement: PersonImg.src },
+					{ label: t('RESIDENCE'), link: 'artiste#residence', imageReplacement: PersonImg.src },
 					{
 						label: t('INFORMATIONS_TECHNIQUES'),
-						link: 'artiste/informations-techniques',
+						link: 'artiste#informations',
 						imageReplacement: PersonImg.src
 					}
 				]
@@ -141,28 +143,30 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 		]
 	},
 	{
-		label: t('ACTUALITES'),
-		link: 'actualites'
-	},
-	{
 		label: t('INFORMATIONS'),
 		link: 'informations',
 		subMenus: [
 			{
-				label: t('PARC_NATIONAL'),
-				link: 'art-vivant',
+				label: t('ACCUEIL_TITLE'),
+				link: '/',
+				image: PersonImg.src,
+				subMenus: [{ label: t('MAISON_DU_PARC'), link: '/', imageReplacement: PersonImg.src }]
+			},
+			{
+				label: t('JEUNESSE'),
+				link: 'jeune-public',
 				image: PersonImg.src,
 				subMenus: [
-					{ label: t('PRESENTATION'), link: 'art-vivant/spectacles', imageReplacement: PersonImg.src },
-					{ label: t('EVENEMENTS'), link: 'art-vivant/seances', imageReplacement: PersonImg.src },
-					{ label: t('BOUTIQUE'), link: 'art-vivant/evenements', imageReplacement: PersonImg.src }
+					{ label: t('SPECTACLES'), link: 'jeune-public', imageReplacement: PersonImg.src },
+					{ label: t('SEANCES'), link: 'jeune-public', imageReplacement: PersonImg.src },
+					{ label: t('LUDOTHEQUE'), link: 'jeune-public', imageReplacement: PersonImg.src }
 				]
 			},
 			{
-				label: t('ACTUALITES'),
-				link: 'cinema',
+				label: t('PARC_NATIONAL'),
+				link: 'art-vivant',
 				image: PersonImg.src,
-				subMenus: [{ label: t('AGENDA'), link: 'cinema/rdv-cine', imageReplacement: PersonImg.src }]
+				subMenus: [{ label: t('PRESENTATION'), link: 'parc-national#description', imageReplacement: PersonImg.src }]
 			},
 			{
 				label: t('INFORMATIONS_PRATIQUES'),
@@ -186,16 +190,6 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				]
 			},
 			{
-				label: t('ARCHIVES'),
-				link: 'jeunesse',
-				image: PersonImg.src,
-				subMenus: [
-					{ label: t('ANNEE_2025'), link: 'jeunesse/spectacles', imageReplacement: PersonImg.src },
-					{ label: t('ANNEE_2024'), link: 'jeunesse/seances', imageReplacement: PersonImg.src },
-					{ label: t('ANNEE_2025'), link: 'jeunesse/evenements', imageReplacement: PersonImg.src }
-				]
-			},
-			{
 				label: t('ARTISTE'),
 				link: 'artiste',
 				image: PersonImg.src,
@@ -209,6 +203,10 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				]
 			}
 		]
+	},
+	{
+		label: 'Autres actualites',
+		link: '/autres-actualites'
 	},
 	{
 		label: t('ARCHIVES'),
