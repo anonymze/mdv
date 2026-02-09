@@ -34,28 +34,18 @@ import Layout from '@/layouts/layout.astro'
 import { translatePublicField } from '@/lib/translate-fields'
 import type { ArtVivant } from '@/types/art-vivant'
 import type { Cinema } from '@/types/cinema'
-import type { ParcNational } from '@/types/parc-national'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
-const [spectacles, evenements] = await Promise.all([
-	find<ArtVivant>('art_vivant', {
-		limit: 4,
-		locale,
-		where: { type: { equals: 'evenement' } }
-	}),
-	find<ParcNational>('parc_national', {
-		limit: 4,
-		locale,
-		where: { type: { equals: 'evenement' } }
-	})
-])
+const spectacles = await find<ArtVivant>('art_vivant', {
+	limit: 4,
+	locale,
+	where: { type: { equals: 'evenement' } }
+})
 
-const latestEvents = [
-	...spectacles.docs.map((item) => ({ ...item, _href: `/art-vivant/spectacle/${item.id}` })),
-	...evenements.docs.map((item) => ({ ...item, _href: `/parc-national/evenement/${item.id}` }))
-]
+const latestEvents = spectacles.docs
+	.map((item) => ({ ...item, _href: `/art-vivant/spectacle/${item.id}` }))
 	.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 	.slice(0, 4)
 

@@ -1,6 +1,11 @@
 import type { RichTextField } from '@/types/rich-text'
 
 /**
+ * Default MDV address
+ */
+export const MDV_DEFAULT_ADDRESS = 'Maison de la vallée, 24 Place Saint-Clément, 65120 Luz-Saint-Sauveur'
+
+/**
  * @description a text replacer which return a string with %s replaced by your values in order
  */
 export const sprintf = (str: string, ...args: string[]) => {
