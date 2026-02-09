@@ -1,0 +1,177 @@
+---
+export const prerender = true
+
+import { find } from '@/api/payload'
+import MyImage from '@/components/my-image.astro'
+import { createTranslator, I18n } from '@/i18n/translations'
+import Layout from '@/layouts/layout.astro'
+import type { Cinema } from '@/types/cinema'
+
+export async function getStaticPaths() {
+	const locales = ['fr', 'en', 'es']
+	const paths = []
+
+	for (const locale of locales) {
+		const data = await find<Cinema>('cinema', {
+			limit: 100,
+			locale,
+			where: {
+				jeunePublic: { equals: true }
+			}
+		})
+
+		for (const item of data.docs) {
+			paths.push({
+				params: { id: item.id },
+				props: { item, locale }
+			})
+		}
+	}
+
+	return paths
+}
+
+const { item, locale } = Astro.props
+const t = createTranslator(locale as I18n)
+
+const synopsisText = item.synopsis.root.children
+	.flatMap((para: any) => para.children)
+	.filter((child: any) => child.type === 'text')
+	.map((child: any) => child.text)
+	.join(' ')
+
+const moreInfoText = item.informations_more
+	? item.informations_more.root.children
+			.flatMap((para: any) => para.children)
+			.filter((child: any) => child.type === 'text')
+			.map((child: any) => child.text)
+			.join(' ')
+	: null
+
+const formatDate = (dateStr: string) => {
+	return new Date(dateStr).toLocaleDateString(locale, { dateStyle: 'full' })
+}
+
+const formatTime = (dateStr: string) => {
+	return new Date(dateStr).toLocaleTimeString(locale, {
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: false
+	})
+}
+---
+
+<Layout title={item.title}>
+	<main>
+		<section class="section-default">
+			<div class="grid grid-cols-2 gap-12">
+				<div class="space-y-6">
+					<div class="w-full overflow-hidden bg-gray-100">
+						<MyImage
+							src={item.thumbnail?.url}
+							alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+							background={item.thumbnail?.blurhash}
+							width={600}
+							height={700}
+							layout="fullWidth"
+							class="w-full object-cover"
+						/>
+					</div>
+
+					{item.other_images && item.other_images.length > 0 && (
+						<div class="grid grid-cols-3 gap-4">
+							{item.other_images.map((img) => (
+								img.image && (
+									<MyImage
+										src={img.image.url}
+										alt={img.image.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={img.image.blurhash}
+										width={180}
+										height={180}
+										layout="constrained"
+										class="w-full object-cover"
+									/>
+								)
+							))}
+						</div>
+					)}
+				</div>
+
+				<div class="space-y-8">
+					<div>
+						<h1 class="pb-4 text-4xl">{item.title}</h1>
+						{item.genre && (
+							<p class="distinguished text-primary pb-2 text-lg">{item.genre}</p>
+						)}
+					</div>
+
+					<div class="space-y-4">
+						<div>
+							<h3 class="distinguished pb-2 text-sm uppercase">{t('DATE')}</h3>
+							<time class="text-lg capitalize" datetime={item.date_start}>
+								{formatDate(item.date_start)} - {formatTime(item.date_start)}
+							</time>
+						</div>
+
+						{item.location && (
+							<div>
+								<h3 class="distinguished pb-2 text-sm uppercase">{t('LIEU')}</h3>
+								<p class="text-lg">{item.location}</p>
+							</div>
+						)}
+
+						<div>
+							<h3 class="distinguished pb-2 text-sm uppercase">{t('PRIX')}</h3>
+							<p class="text-lg">{item.price}</p>
+						</div>
+
+						<div>
+							<h3 class="distinguished pb-2 text-sm uppercase">{t('DUREE')}</h3>
+							<p class="text-lg">{item.duration}</p>
+						</div>
+
+						{item.directors && (
+							<div>
+								<h3 class="distinguished pb-2 text-sm uppercase">{t('REALISATION')}</h3>
+								<p class="text-lg">{item.directors}</p>
+							</div>
+						)}
+
+						{item.actors && (
+							<div>
+								<h3 class="distinguished pb-2 text-sm uppercase">{t('AVEC')}</h3>
+								<p class="text-lg">{item.actors}</p>
+							</div>
+						)}
+					</div>
+
+					<div>
+						<h3 class="distinguished pb-3 text-sm uppercase">Synopsis</h3>
+						<p class="text-base leading-relaxed">{synopsisText}</p>
+					</div>
+
+					{moreInfoText && (
+						<div>
+							<h3 class="distinguished pb-3 text-sm uppercase">{t('MORE_INFORMATION')}</h3>
+							<p class="text-base leading-relaxed">{moreInfoText}</p>
+						</div>
+					)}
+
+					{item.video && (
+						<div>
+							<h3 class="distinguished pb-3 text-sm uppercase">Bande-annonce</h3>
+							<div class="aspect-video">
+								<iframe
+									src={item.video}
+									class="h-full w-full"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowfullscreen
+								></iframe>
+							</div>
+						</div>
+					)}
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>

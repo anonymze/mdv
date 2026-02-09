@@ -1,4 +1,5 @@
 ---
+export const prerender = true
 import { find } from '@/api/payload'
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
 import MyImage from '@/components/my-image.astro'
@@ -21,6 +22,7 @@ const articles = await find<ParcNational>('parc_national', {
 	where: { type: { equals: 'article' } }
 })
 ---
+export const prerender = true
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
@@ -104,7 +106,7 @@ const articles = await find<ParcNational>('parc_national', {
 							<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 								<figcaption>
 									<h3 class="pb-1 text-black">
-										<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+										<a href={`/parc-national/evenement/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 											{item.title}
 										</a>
 									</h3>
@@ -166,7 +168,7 @@ const articles = await find<ParcNational>('parc_national', {
 						.join(' ')
 
 					return (
-						<article class="col-span-1 w-full bg-white">
+						<article class="group relative col-span-1 w-full bg-white">
 							<div class="overflow-hidden">
 								<MyImage
 									src={item.thumbnail?.url}
@@ -179,7 +181,11 @@ const articles = await find<ParcNational>('parc_national', {
 							</div>
 							<figure class="p-4">
 								<figcaption>
-									<h3 class="pb-1 text-black">{item.title}</h3>
+									<h3 class="pb-1 text-black">
+										<a href={`/parc-national/article/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											{item.title}
+										</a>
+									</h3>
 									<div class="flex items-center gap-4 pt-3">
 										<p class="line-clamp-3 text-xs">{descText}</p>
 										<p class="text-secondary text-lg">9€</p>

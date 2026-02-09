@@ -1,0 +1,146 @@
+---
+export const prerender = true
+
+import { find } from '@/api/payload'
+import MyImage from '@/components/my-image.astro'
+import { createTranslator, I18n } from '@/i18n/translations'
+import Layout from '@/layouts/layout.astro'
+import { translateLudoDuration, translateLudoPlayers, translateLudoPublic } from '@/lib/translate-fields'
+import type { Mediatheque } from '@/types/mediatheque'
+
+export async function getStaticPaths() {
+	const locales = ['fr', 'en', 'es']
+	const paths = []
+
+	for (const locale of locales) {
+		const data = await find<Mediatheque>('mediatheque', {
+			limit: 100,
+			locale,
+			where: {
+				type: { equals: 'ludotheque' }
+			}
+		})
+
+		for (const item of data.docs) {
+			paths.push({
+				params: { id: item.id },
+				props: { item, locale }
+			})
+		}
+	}
+
+	return paths
+}
+
+const { item, locale } = Astro.props
+const t = createTranslator(locale as I18n)
+
+const descText = item.description.root.children
+	.flatMap((para: any) => para.children)
+	.filter((child: any) => child.type === 'text')
+	.map((child: any) => child.text)
+	.join(' ')
+
+const moreInfoText = item.informations_more
+	? item.informations_more.root.children
+			.flatMap((para: any) => para.children)
+			.filter((child: any) => child.type === 'text')
+			.map((child: any) => child.text)
+			.join(' ')
+	: null
+---
+
+<Layout title={item.title}>
+	<main>
+		<section class="section-default">
+			<div class="grid grid-cols-2 gap-12">
+				<div class="space-y-6">
+					<div class="w-full overflow-hidden bg-gray-100">
+						<MyImage
+							src={item.thumbnail?.url}
+							alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+							background={item.thumbnail?.blurhash}
+							width={600}
+							height={700}
+							layout="fullWidth"
+							class="w-full object-cover"
+						/>
+					</div>
+
+					{item.other_images && item.other_images.length > 0 && (
+						<div class="grid grid-cols-3 gap-4">
+							{item.other_images.map((img) => (
+								img.image && (
+									<MyImage
+										src={img.image.url}
+										alt={img.image.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={img.image.blurhash}
+										width={180}
+										height={180}
+										layout="constrained"
+										class="w-full object-cover"
+									/>
+								)
+							))}
+						</div>
+					)}
+				</div>
+
+				<div class="space-y-8">
+					<div>
+						<h1 class="pb-4 text-4xl">{item.title}</h1>
+						{item.genre && (
+							<p class="distinguished text-primary pb-2 text-lg">{item.genre}</p>
+						)}
+						{item.authors && (
+							<p class="text-gray-600">{item.authors}</p>
+						)}
+					</div>
+
+					<div class="space-y-4">
+						<div>
+							<h3 class="distinguished pb-2 text-sm uppercase">{t('NOMBRE_DE_JOUEURS')}</h3>
+							<p class="text-lg">{translateLudoPlayers(item.players, t)}</p>
+						</div>
+
+						<div>
+							<h3 class="distinguished pb-2 text-sm uppercase">{t('TEMPS_DE_JEU')}</h3>
+							<p class="text-lg">{translateLudoDuration(item.duration, t)}</p>
+						</div>
+
+						<div>
+							<h3 class="distinguished pb-2 text-sm uppercase">{t('TYPE_PUBLIC')}</h3>
+							<p class="text-lg">{translateLudoPublic(item.public, t)}</p>
+						</div>
+
+						{item.location && (
+							<div>
+								<h3 class="distinguished pb-2 text-sm uppercase">{t('LIEU')}</h3>
+								<p class="text-lg">{item.location}</p>
+							</div>
+						)}
+
+						{item.materiel && (
+							<div>
+								<h3 class="distinguished pb-2 text-sm uppercase">Matériel</h3>
+								<p class="text-lg">{item.materiel}</p>
+							</div>
+						)}
+					</div>
+
+					<div>
+						<h3 class="distinguished pb-3 text-sm uppercase">{t('DESCRIPTION')}</h3>
+						<p class="text-base leading-relaxed">{descText}</p>
+					</div>
+
+					{moreInfoText && (
+						<div>
+							<h3 class="distinguished pb-3 text-sm uppercase">{t('MORE_INFORMATION')}</h3>
+							<p class="text-base leading-relaxed">{moreInfoText}</p>
+						</div>
+					)}
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>

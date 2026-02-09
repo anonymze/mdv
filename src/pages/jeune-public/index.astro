@@ -1,4 +1,5 @@
 ---
+export const prerender = true
 import { find } from '@/api/payload'
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
 import MyImage from '@/components/my-image.astro'
@@ -38,6 +39,7 @@ const cinema = await find<Cinema>('cinema', {
 	}
 })
 ---
+export const prerender = true
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
@@ -72,7 +74,7 @@ const cinema = await find<Cinema>('cinema', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-1 text-black">
-											<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={`/jeune-public/spectacles/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
@@ -148,7 +150,7 @@ const cinema = await find<Cinema>('cinema', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={`/cinema/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={`/jeune-public/seance/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
@@ -226,7 +228,7 @@ const cinema = await find<Cinema>('cinema', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={`/mediatheque/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={`/jeune-public/ludotheque/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

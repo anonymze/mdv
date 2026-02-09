@@ -66,13 +66,19 @@ export async function find<T>(collection: string, params?: PayloadQueryParams): 
   }
 
   const query = buildQuery(queryParams)
-  const res = await fetch(`${PAYLOAD_URL}/${collection}${query}`)
+  const url = `${PAYLOAD_URL}/${collection}${query}`
+  console.log('[Payload API] Fetching:', url)
+
+  const res = await fetch(url)
 
   if (!res.ok) {
+    console.error('[Payload API] Fetch failed:', res.status, res.statusText)
     throw new Error(`Payload fetch failed: ${res.status} ${res.statusText}`)
   }
 
-  return res.json()
+  const data = await res.json()
+  console.log('[Payload API] Response:', data)
+  return data
 }
 
 export async function findGlobal<T>(slug: string, params?: Pick<PayloadQueryParams, 'depth' | 'locale'>): Promise<T> {

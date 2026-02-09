@@ -1,4 +1,5 @@
 ---
+export const prerender = true
 import { find } from '@/api/payload'
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
 import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
@@ -19,6 +20,7 @@ const evenements = await find<AutresActualites>('autres_actualites', {
 	locale,
 })
 ---
+export const prerender = true
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
@@ -51,7 +53,7 @@ const evenements = await find<AutresActualites>('autres_actualites', {
 							<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 								<figcaption>
 									<h3 class="pb-1 text-black">
-										<a href={`/parc-national/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+										<a href={`/autres-actualites/evenement/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 											{item.title}
 										</a>
 									</h3>

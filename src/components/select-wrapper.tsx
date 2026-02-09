@@ -26,16 +26,16 @@ export function SelectWrapper({
 }: SelectWrapperProps) {
   return (
     <Select value={value} defaultValue={defaultValue} onValueChange={onValueChange}>
-      <SelectTrigger className={className}>
+      <SelectTrigger className={`border-0 bg-primary-foreground rounded-none h-full ${className}`}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="bg-white">
         {options.map((option) => {
           const isObject = typeof option === 'object'
           const optionValue = isObject ? option.value : option
           const optionLabel = isObject ? option.key : option
           return (
-            <SelectItem key={optionValue} value={optionValue}>
+            <SelectItem key={optionValue} value={optionValue} className="py-3 [&_svg]:text-primary focus:bg-primary focus:text-primary-foreground focus:[&_svg]:text-primary-foreground">
               {optionLabel}
             </SelectItem>
           )

@@ -2,34 +2,52 @@
 import { createTranslator, type I18n } from '@/i18n/translations'
 import { SideCard } from './side-card'
 import Image from './my-image.astro'
-import EspaceCultureImg from '@/assets/imgs/exemple-person.png'
+import type { ArtVivant } from '@/types/art-vivant'
+import type { ParcNational } from '@/types/parc-national'
 
 interface Props {
 	locale: I18n
+	event?: (ArtVivant | ParcNational) & { _href: string }
 }
 
-const { locale } = Astro.props
+const { locale, event } = Astro.props
 const t = createTranslator(locale)
 ---
 
-<SideCard
-	client:load
-	position="top-[calc(25%+13.5rem)]"
-	height="h-72"
-	width="w-100"
-	tabText={[t('EVENEMENT'), t('IMMANQUABLE')]}
-	ariaLabel={t('PANNEAU_EVENEMENT_IMMANQUABLE')}
->
-	<div class="text-primary-foreground flex h-full flex-col items-start py-7 text-left">
-		<p class="px-10 pb-2 text-xl">{t('EVENEMENT_IMMANQUABLE')}</p>
-		<Image src={EspaceCultureImg} alt="" width={600} height={128} layout='constrained' class="w-full h-32" />
+{event && (
+	<SideCard
+		client:load
+		position="top-[calc(25%+13.5rem)]"
+		height="h-72"
+		width="w-100"
+		tabText={[t('EVENEMENT'), t('IMMANQUABLE')]}
+		ariaLabel={t('PANNEAU_EVENEMENT_IMMANQUABLE')}
+	>
+		<div class="text-primary-foreground flex h-full flex-col items-start py-7 text-left">
+			<p class="px-10 pb-2 text-xl">{t('EVENEMENT_IMMANQUABLE')}</p>
+			<Image
+				src={event.thumbnail?.url}
+				alt={event.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+				background={event.thumbnail?.blurhash}
+				width={600}
+				height={128}
+				layout='constrained'
+				class="w-full h-32 object-cover"
+			/>
 
-		<p class="w-full truncate px-10 pt-2 text-lg font-semibold">Aurevoir les enfants test trop LONG</p>
+			<p class="w-full truncate px-10 pt-2 text-lg font-semibold">{event.title}</p>
 
-		<div class="flex w-full items-center gap-3 px-10">
-			<div class="text-xs text-gray-200">Mercredi 4 février</div>
-			<div class="mr-auto text-xs text-gray-200">Drame, Guerre</div>
-			<a href="/" class="ml-auto py-2 pl-2 text-xs underline underline-offset-3"> En savoir plus </a>
+			<div class="flex w-full items-center gap-3 px-10">
+				<div class="text-xs text-gray-200">
+					{new Date(event.date_start).toLocaleDateString(locale, { dateStyle: 'full' })}
+				</div>
+				{event.genre && (
+					<div class="mr-auto text-xs text-gray-200">{event.genre}</div>
+				)}
+				<a href={event._href} class="ml-auto py-2 pl-2 text-xs underline underline-offset-3">
+					{t('EN_SAVOIR_PLUS')}
+				</a>
+			</div>
 		</div>
-	</div>
-</SideCard>
+	</SideCard>
+)}
