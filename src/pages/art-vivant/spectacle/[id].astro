@@ -12,7 +12,7 @@ import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
 export async function getStaticPaths() {
 	const locale = 'fr'
 	const data = await find<ArtVivant>('art_vivant', {
-		limit: 60,
+		limit: 50,
 		locale,
 		where: {
 			type: { equals: 'evenement' }
@@ -56,6 +56,11 @@ const formatTime = (dateStr: string) => {
 		hour12: false
 	})
 }
+
+const allImages = [
+	item.thumbnail,
+	...(item.other_images?.map(img => img.image) || [])
+].filter(Boolean).slice(0, 3)
 ---
 
 <Layout title={item.title}>
@@ -108,11 +113,6 @@ const formatTime = (dateStr: string) => {
 				<div class="grid grid-cols-4 grid-rows-4 gap-5">
 					{
 						(() => {
-							const allImages = [
-								item.thumbnail,
-								...(item.other_images?.map(img => img.image) || [])
-							].filter(Boolean).slice(0, 3)
-
 							// No images: show placeholder in full grid
 							if (allImages.length === 0) {
 								return (
