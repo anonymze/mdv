@@ -67,7 +67,6 @@ export async function find<T>(collection: string, params?: PayloadQueryParams): 
 
   const query = buildQuery(queryParams)
   const url = `${PAYLOAD_URL}/${collection}${query}`
-  console.log('[Payload API] Fetching:', url)
 
   const res = await fetch(url)
 
@@ -77,7 +76,6 @@ export async function find<T>(collection: string, params?: PayloadQueryParams): 
   }
 
   const data = await res.json()
-  console.log('[Payload API] Response:', data)
   return data
 }
 
