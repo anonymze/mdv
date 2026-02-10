@@ -72,10 +72,9 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 					width={1200}
 					height={600}
 					layout="fullWidth"
-					class="h-150 w-full object-cover"
 				/>
 
-				<div class="absolute right-0 bottom-0 left-0 bg-white/95 px-16 py-8 m-8">
+				<div class="absolute right-0 bottom-0 left-0 bg-white/85 px-16 py-8 m-8">
 					<h1 class="text-primary mb-4 text-3xl font-bold">{item.title}</h1>
 
 					<p class="mb-1 text-sm italic">
@@ -130,16 +129,10 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 								<span class="font-bold">{t('GENRE')}</span> : {item.genre}
 							</li>
 							<li class="border-b border-black/20 px-5 pb-4">
-								<span class="font-bold">{t('REALISATION')}</span> : {item.realisateur}
+								<span class="font-bold">{t('REALISATION')}</span> : {item.directors}
 							</li>
-							<li class="border-b border-black/20 px-5 pb-4">
+							<li class="px-5 pb-4">
 								<span class="font-bold">{t('AVEC')}</span> : Jasper Billerbeck, Laura Tonke, Diane Kruger
-							</li>
-							<li class="flex items-center justify-center gap-3">
-								<span class="bg-primary text-primary-foreground distinguished inline-block px-1 py-1">Conférence</span>
-								<span class="bg-primary text-primary-foreground distinguished inline-block px-1 py-1">Conférence</span>
-								<span class="bg-primary text-primary-foreground distinguished inline-block px-1 py-1">Conférence</span>
-								<span class="bg-primary text-primary-foreground distinguished inline-block px-1 py-1">Conférence</span>
 							</li>
 						</ul>
 					</div>
@@ -147,17 +140,9 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 				<div class="grid grid-cols-4 grid-rows-4 gap-5">
 					{
 						(() => {
-							// No images: show placeholder in full grid
-							if (allImages.length === 0) {
-								return (
-									<div class="col-span-4 row-span-4 flex items-center justify-center bg-gray-200">
-										<span class="text-gray-400">{t('IMAGE_PLACEHOLDER')}</span>
-									</div>
-								)
-							}
 
 							// 1 image: full grid
-							if (allImages.length === 1) {
+							if (allImages.length < 2) {
 								return (
 									<MyImage
 										src={allImages?.[0]?.url}
