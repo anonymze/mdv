@@ -1,7 +1,6 @@
 export type SubMenuItem = {
 	label: string
 	link: string
-	imageReplacement: string
 }
 
 export type SubMenu = {

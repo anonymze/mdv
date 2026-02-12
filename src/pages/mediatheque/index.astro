@@ -29,7 +29,7 @@ const ludotheque = await find<Mediatheque>('mediatheque', {
 	where: { type: { equals: 'ludotheque' } }
 })
 ---
-export const prerender = true
+
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>

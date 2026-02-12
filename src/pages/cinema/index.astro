@@ -1,7 +1,6 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
 import MyImage from '@/components/my-image.astro'
 import { SelectWrapper } from '@/components/select-wrapper'
 import { Input } from '@/components/ui/input'
@@ -27,7 +26,6 @@ const rdv = await find<Cinema>('cinema', {
 	}
 })
 ---
-export const prerender = true
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>

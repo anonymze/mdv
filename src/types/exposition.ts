@@ -13,6 +13,8 @@ interface BaseExposition {
 	genre?: string | null
 	tags?: string | null
 	authors?: string | null
+  portfolio_authors?: string | null;
+  credits_photos?: string | null;
 	updatedAt: string
 	createdAt: string
 }

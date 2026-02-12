@@ -1,7 +1,7 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
+import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
 
 import FirstImg from '@/assets/imgs/home/1.png'
 import TenthImg from '@/assets/imgs/home/10.png'
@@ -60,7 +60,7 @@ const seances = await find<Cinema>('cinema', {
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-		<section class="text-primary border-primary grid min-h-screen grid-cols-3 border-b px-10 py-16">
+		<section class="text-primary  grid grid-cols-3 px-10 py-16">
 			<header class="col-span-2 flex w-full flex-col self-stretch pt-8">
 				<p class="text-md mb-20 tracking-widest uppercase">{t('HERO_LOCATION')}</p>
 				<h1 class="mb-14 font-serif text-6xl capitalize">
@@ -68,7 +68,7 @@ const seances = await find<Cinema>('cinema', {
 					<span class="mt-5 block text-6xl font-light italic">{t('HERO_TITLE_LINE2')}</span>
 				</h1>
 
-				<p class="text-xl tracking-widest text-black">
+				<p class="text-xl tracking-wide text-black">
 					{t('HERO_SUBTITLE')}
 				</p>
 
@@ -95,9 +95,9 @@ const seances = await find<Cinema>('cinema', {
 			</header>
 
 			<div class="grid grid-cols-2 grid-rows-2 gap-5">
-				<MyImage alt="" src={Section1Img} width={300} height={390} layout="fullWidth" class="col-span-1 row-span-1" />
-				<MyImage alt="" src={Section2Img} width={300} height={800} layout="fullWidth" class="ol-span-1 row-span-2" />
-				<MyImage alt="" src={Section3Img} width={300} height={390} layout="fullWidth" class="col-span-1 row-span-1" />
+				<MyImage alt="" src={Section1Img} width={300} height={400} layout="fullWidth" class="col-span-1 row-span-1" />
+				<MyImage alt="" src={Section2Img} width={300} height={820} layout="fullWidth" class="ol-span-1 row-span-2" />
+				<MyImage alt="" src={Section3Img} width={300} height={400} layout="fullWidth" class="col-span-1 row-span-1" />
 			</div>
 		</section>
 
@@ -138,10 +138,10 @@ const seances = await find<Cinema>('cinema', {
 					<h2 class="pb-3">{t('SPECTACLES_A_VENIR')}</h2>
 					<p class="distinguished pb-6">{t('SPECTACLES_INTRO')}</p>
 					<p>
-						{t('ESPACE_CULTURE_DESC_PART1')}<br />
-						{t('ESPACE_CULTURE_DESC_PART2')}<br />
-						{t('ESPACE_CULTURE_DESC_PART3')}<br />
-						{t('ESPACE_CULTURE_DESC_PART4')}<br />
+						{t('ESPACE_CULTURE_DESC_PART1')}<br /><br />
+						{t('ESPACE_CULTURE_DESC_PART2')}<br /><br />
+						{t('ESPACE_CULTURE_DESC_PART3')}<br /> <br />
+						{t('ESPACE_CULTURE_DESC_PART4')}<br /> <br />
 						{t('ESPACE_CULTURE_DESC_PART5')}
 					</p>
 				</div>

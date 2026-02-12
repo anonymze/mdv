@@ -1,11 +1,16 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
+import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import { translateLudoDuration, translateLudoPlayers, translateLudoPublic, translatePublicField } from '@/lib/translate-fields'
+import {
+	translateLudoDuration,
+	translateLudoPlayers,
+	translateLudoPublic,
+	translatePublicField
+} from '@/lib/translate-fields'
 import type { Cinema } from '@/types/cinema'
 import type { Mediatheque } from '@/types/mediatheque'
 import type { ParcNational } from '@/types/parc-national'
@@ -39,7 +44,6 @@ const cinema = await find<Cinema>('cinema', {
 	}
 })
 ---
-export const prerender = true
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
@@ -199,7 +203,7 @@ export const prerender = true
 
 		<section class="section-default" id="ludotheque">
 			<article>
-				<h2 class="pb-3 text-secondary">{t('LUDOTHEQUE_JEUNE_PUBLIC_TITRE')}</h2>
+				<h2 class="text-secondary pb-3">{t('LUDOTHEQUE_JEUNE_PUBLIC_TITRE')}</h2>
 				<p class="distinguished pb-6">{t('LUDOTHEQUE_JEUNE_PUBLIC_INTRO')}</p>
 				<p class="w-2/3">{t('LUDOTHEQUE_JEUNE_PUBLIC_DESC')}</p>
 			</article>
@@ -232,7 +236,7 @@ export const prerender = true
 												{item.title}
 											</a>
 										</h3>
-										<p class="text-xs font-serif text-secondary pb-2">{item.genre}</p>
+										<p class="text-secondary pb-2 font-serif text-xs">{item.genre}</p>
 										<div class="flex items-center justify-between text-xs">
 											<p>{translateLudoPublic(item.public, t)}</p>
 											<p>{translateLudoPlayers(item.players, t)}</p>

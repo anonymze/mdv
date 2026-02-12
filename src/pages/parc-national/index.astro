@@ -1,7 +1,7 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
+import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
 import MyImage from '@/components/my-image.astro'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
@@ -22,7 +22,6 @@ const articles = await find<ParcNational>('parc_national', {
 	where: { type: { equals: 'article' } }
 })
 ---
-export const prerender = true
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>

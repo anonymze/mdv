@@ -1,6 +1,16 @@
 ---
 export const prerender = true
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
+import FirstImg from '@/assets/imgs/artiste/1.webp'
+import TenImg from '@/assets/imgs/artiste/10.webp'
+import SecondImg from '@/assets/imgs/artiste/2.webp'
+import ThirdImg from '@/assets/imgs/artiste/3.webp'
+import FourthImg from '@/assets/imgs/artiste/4.webp'
+import FifthImg from '@/assets/imgs/artiste/5.webp'
+import SixthImg from '@/assets/imgs/artiste/6.webp'
+import SeventhImg from '@/assets/imgs/artiste/7.webp'
+import EighthImg from '@/assets/imgs/artiste/8.webp'
+import NinthImg from '@/assets/imgs/artiste/9.webp'
+import ElevenImg from '@/assets/imgs/artiste/11.webp'
 import MyImage from '@/components/my-image.astro'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
@@ -9,18 +19,17 @@ import Layout from '@/layouts/layout.astro'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 ---
-export const prerender = true
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
 		<section class="section-default" id="residence">
 			<article class="grid grid-cols-2 gap-5">
 				<div class="grid grid-cols-2 gap-5">
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-2" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={FirstImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={SecondImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={FourthImg} width={400} height={370} layout="fullWidth" class="col-span-2" />
+					<MyImage alt="" src={ThirdImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={FifthImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
 				</div>
 				<div class="flex flex-col">
 					<h2 class="text-primary pb-3">{t('RESIDENCE_ACCUEIL_TITRE')}</h2>
@@ -45,11 +54,11 @@ export const prerender = true
 					<Button link="/" size={'xl'} className="mt-6 w-fit">{t('DOSSIER_CANDIDATURE')}</Button>
 				</div>
 				<div class="grid grid-cols-2 gap-5">
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-2" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={EspaceCultureImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={SixthImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={SeventhImg} width={400} height={150} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={ElevenImg} width={400} height={370} layout="fullWidth" class="col-span-2" />
+					<MyImage alt="" src={NinthImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={TenImg} width={400} height={370} layout="fullWidth" class="col-span-1" />
 				</div>
 			</article>
 		</section>

@@ -1,6 +1,6 @@
 ---
 export const prerender = true
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
+import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
 import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
 import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
@@ -11,7 +11,6 @@ import Layout from '@/layouts/layout.astro'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 ---
-export const prerender = true
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>

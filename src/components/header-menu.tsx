@@ -118,6 +118,9 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 													loading="lazy"
 													className="h-full w-full object-cover"
 												/>
+												<div className="absolute top-4 left-4 bg-white px-3 py-2">
+													<span className="text-primary text-sm font-medium uppercase">{subMenu.label}</span>
+												</div>
 											</div>
 										</div>
 									)

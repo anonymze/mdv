@@ -4,6 +4,7 @@ import type { RichTextField } from '@/types/rich-text'
  * Default MDV address
  */
 export const MDV_DEFAULT_ADDRESS = 'Maison de la vallée, 24 Place Saint-Clément, 65120 Luz-Saint-Sauveur'
+export const PARKING_DEFAULT_ADDRESS = 'Place du 8 Mai, 65120 Luz-Saint-Sauveur '
 
 /**
  * @description a text replacer which return a string with %s replaced by your values in order
@@ -27,7 +28,17 @@ export function renderRichText(richText: RichTextField): string {
 		.map((paragraph) => {
 			const text = paragraph.children
 				.map((node) => {
-					if (node.type === 'text') return node.text
+					if (node.type === 'text') {
+						let content = node.text
+						// format is a bitmask: 1=bold, 2=italic, 4=strikethrough, 8=underline
+						if (node.format) {
+							if (node.format & 1) content = `<strong>${content}</strong>`
+							if (node.format & 2) content = `<em>${content}</em>`
+							if (node.format & 8) content = `<u>${content}</u>`
+							if (node.format & 4) content = `<s>${content}</s>`
+						}
+						return content
+					}
 					if (node.type === 'linebreak') return '<br>'
 					return ''
 				})

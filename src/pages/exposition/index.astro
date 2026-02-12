@@ -1,14 +1,14 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.png'
+import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import type { ExpositionType, EvenementType } from '@/types/exposition'
-import { renderRichText } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, renderRichText } from '@/utils/helper'
 const locale = (Astro.currentLocale || 'fr') as I18n
-const t = createTranslator(locale);
+const t = createTranslator(locale)
 
 const exposition = (await find<ExpositionType>('exposition/current', {
 	locale
@@ -20,7 +20,6 @@ const evenements = await find<EvenementType>('exposition', {
 	where: { type: { equals: 'evenement' } }
 })
 ---
-export const prerender = true
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
@@ -68,8 +67,7 @@ export const prerender = true
 									<span class="font-bold">{t('HORAIRE')}</span> : {t('SUR_HORAIRES_OUVERTURE')}
 								</li>
 								<li class="border-b border-black/20 px-5 pb-4">
-									<span class="font-bold">{t('ADRESSE')}</span> : Salle des voûtes, Maison de la Valée, 24 Place Saint
-									Clément, 65120 LUZ-SAINT-SAUVEUR
+									<span class="font-bold">{t('ADRESSE')}</span> : {MDV_DEFAULT_ADDRESS}
 								</li>
 								<li class="border-b border-black/20 px-5 pb-4">
 									<span class="font-bold">{t('TARIF')}</span> : {t('LIBRE_ACCES')}
@@ -82,45 +80,43 @@ export const prerender = true
 								</li>
 								<li class="flex items-center justify-center gap-3">
 									{exposition?.tags?.split(';').map((tag) => (
-										<span class="text-primary-foreground bg-primary px-1.5 py-1 distinguished">{tag}</span>
+										<span class="text-primary-foreground bg-primary distinguished px-1.5 py-1">{tag}</span>
 									))}
 								</li>
 							</ul>
 						</div>
 					</article>
 
-{
-						(() => {
-							const displayImages = exposition.images?.slice(0, 7) || []
-							const imagesToRender = Array.from({ length: 7 }, (_, i) => displayImages[i])
+					{(() => {
+						const displayImages = exposition.images?.slice(0, 7) || []
+						const imagesToRender = Array.from({ length: 7 }, (_, i) => displayImages[i])
 
-							const layouts = [
-								{ width: 420, height: 220, class: 'col-span-2 col-start-1 row-span-1' },
-								{ width: 420, height: 460, class: 'col-span-2 col-start-3 row-span-2' },
-								{ width: 250, height: 220, class: 'col-span-1 col-start-5 row-span-1' },
-								{ width: 500, height: 220, class: 'col-span-3 col-start-6 row-span-1' },
-								{ width: 220, height: 220, class: 'col-span-1 col-start-1 row-span-1 row-start-2' },
-								{ width: 220, height: 220, class: 'col-span-1 col-start-2 row-span-1 row-start-2' },
-								{ width: 700, height: 220, class: 'col-span-4 col-start-5 row-span-1 row-start-2' }
-							]
+						const layouts = [
+							{ width: 420, height: 220, class: 'col-span-2 col-start-1 row-span-1' },
+							{ width: 420, height: 460, class: 'col-span-2 col-start-3 row-span-2' },
+							{ width: 250, height: 220, class: 'col-span-1 col-start-5 row-span-1' },
+							{ width: 500, height: 220, class: 'col-span-3 col-start-6 row-span-1' },
+							{ width: 220, height: 220, class: 'col-span-1 col-start-1 row-span-1 row-start-2' },
+							{ width: 220, height: 220, class: 'col-span-1 col-start-2 row-span-1 row-start-2' },
+							{ width: 700, height: 220, class: 'col-span-4 col-start-5 row-span-1 row-start-2' }
+						]
 
-							return (
-								<div class="grid grid-cols-8 grid-rows-2 gap-5">
-									{imagesToRender.map((img, i) => (
-										<MyImage
-											src={img?.image?.url}
-											alt={img?.image?.alt ?? ''}
-											background={img?.image?.blurhash}
-											width={layouts[i].width}
-											height={layouts[i].height}
-											layout="fullWidth"
-											class={layouts[i].class}
-										/>
-									))}
-								</div>
-							)
-						})()
-					}
+						return (
+							<div class="grid grid-cols-8 grid-rows-2 gap-5">
+								{imagesToRender.map((img, i) => (
+									<MyImage
+										src={img?.image?.url}
+										alt={img?.image?.alt ?? ''}
+										background={img?.image?.blurhash}
+										width={layouts[i].width}
+										height={layouts[i].height}
+										layout="fullWidth"
+										class={layouts[i].class}
+									/>
+								))}
+							</div>
+						)
+					})()}
 				</section>
 			)
 		}
@@ -158,12 +154,12 @@ export const prerender = true
 											</a>
 										</h3>
 										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
-										{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
-										{new Date(item.date_start).toLocaleTimeString(locale, {
-											hour: '2-digit',
-											minute: '2-digit',
-											hour12: false
-										})}
+											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
+											{new Date(item.date_start).toLocaleTimeString(locale, {
+												hour: '2-digit',
+												minute: '2-digit',
+												hour12: false
+											})}
 										</time>
 										<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
 									</figcaption>
