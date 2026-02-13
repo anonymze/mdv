@@ -52,7 +52,7 @@ export function NewsletterForm({ locale, variant = "default", apiBaseUrl }: Prop
 
 	return (
 		<div className="relative">
-			<form onSubmit={handleSubmit} className={isFooter ? "flex items-center gap-4" : "flex items-center gap-4"} style={{ visibility: showForm ? "visible" : "hidden" }}>
+			<form onSubmit={handleSubmit} className="flex flex-col lg:flex-row items-stretch lg:items-center gap-4" style={{ visibility: showForm ? "visible" : "hidden" }}>
 				<Input
 					type="email"
 					required
@@ -66,6 +66,7 @@ export function NewsletterForm({ locale, variant = "default", apiBaseUrl }: Prop
 					variant={isFooter ? "secondary" : "default"}
 					size={isFooter ? "xl" : "xl"}
 					disabled={status === "loading"}
+					className="lg:w-auto"
 				>
 					{status === "loading" ? "..." : t.NEWSLETTER_BOUTON}
 				</Button>

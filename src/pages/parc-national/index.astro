@@ -26,24 +26,24 @@ const articles = await find<ParcNational>('parc_national', {
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
 		<section class="section-default" id="description">
-			<h1 class="text-primary pb-20">{t('PARC_NATIONAL_TITRE')}</h1>
-			<article class="grid grid-cols-2 gap-5">
-				<div class="flex flex-col">
-					<p class="distinguished pb-16">{t('PARC_NATIONAL_INTRO')}</p>
+			<h1 class="text-primary pb-8 lg:pb-20">{t('PARC_NATIONAL_TITRE')}</h1>
+			<article class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
+				<div class="flex flex-col order-1">
+					<p class="distinguished pb-8 lg:pb-16">{t('PARC_NATIONAL_INTRO')}</p>
 					<p>
 						{t('PARC_NATIONAL_DESC')}
 					</p>
 
 					<Button link="/" size={'xl'} className="mt-auto w-fit">{t('PARC_NATIONAL_SITE_OFFICIEL')}</Button>
 				</div>
-				<div class="grid grid-cols-4 grid-rows-3 gap-5">
+				<div class="grid grid-cols-2 lg:grid-cols-4 lg:grid-rows-3 gap-2 lg:gap-5 order-2">
 					<MyImage
 						alt=""
 						src={EspaceCultureImg}
 						width={420}
 						height={670}
 						layout="fullWidth"
-						class="col-span-2 row-span-3"
+						class="col-span-2 lg:row-span-3 max-h-48 lg:max-h-none object-cover"
 					/>
 					<MyImage
 						alt=""
@@ -51,7 +51,7 @@ const articles = await find<ParcNational>('parc_national', {
 						width={420}
 						height={210}
 						layout="fullWidth"
-						class="col-span-2 row-span-1"
+						class="col-span-1 lg:col-span-2 lg:row-span-1 max-h-24 lg:max-h-none object-cover"
 					/>
 					<MyImage
 						alt=""
@@ -59,7 +59,7 @@ const articles = await find<ParcNational>('parc_national', {
 						width={420}
 						height={210}
 						layout="fullWidth"
-						class="col-span-2 row-span-1"
+						class="col-span-1 lg:col-span-2 lg:row-span-1 max-h-24 lg:max-h-none object-cover"
 					/>
 					<MyImage
 						alt=""
@@ -67,7 +67,7 @@ const articles = await find<ParcNational>('parc_national', {
 						width={420}
 						height={210}
 						layout="fullWidth"
-						class="col-span-2 row-span-1"
+						class="col-span-2 lg:row-span-1 max-h-24 lg:max-h-none object-cover"
 					/>
 				</div>
 			</article>
@@ -75,13 +75,13 @@ const articles = await find<ParcNational>('parc_national', {
 	</main>
 
 	<section class="section-default bg-primary/20" id="evenements">
-		<h2 class="text-primary pb-3">{t('PARC_EVENEMENTS_TITRE')}</h2>
-		<p class="distinguished pb-6">{t('PARC_EVENEMENTS_INTRO')}</p>
-		<p class="w-2/3">
+		<h2 class="text-primary pb-2 lg:pb-3">{t('PARC_EVENEMENTS_TITRE')}</h2>
+		<p class="distinguished pb-3 lg:pb-6">{t('PARC_EVENEMENTS_INTRO')}</p>
+		<p class="lg:w-2/3">
 			{t('PARC_EVENEMENTS_DESC')}
 		</p>
 
-		<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+		<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
 			{
 				evenements.docs.map((item) => {
 					const descText = item.description.root.children
@@ -151,13 +151,13 @@ const articles = await find<ParcNational>('parc_national', {
 	</section>
 
 	<section class="section-default" id="articles">
-		<h2 class="text-secondary pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
-		<p class="distinguished pb-6">{t('PARC_ARTICLES_INTRO')}</p>
-		<p class="w-2/3">
+		<h2 class="text-secondary pb-2 lg:pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
+		<p class="distinguished pb-3 lg:pb-6">{t('PARC_ARTICLES_INTRO')}</p>
+		<p class="lg:w-2/3">
 			{t('PARC_ARTICLES_DESC')}
 		</p>
 
-		<div class="my-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
+		<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
 			{
 				articles.docs.map((item) => {
 					const descText = item.description.root.children

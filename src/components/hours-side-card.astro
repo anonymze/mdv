@@ -16,7 +16,7 @@ const hours = await findGlobal<Hour>('hours', { locale })
 const { isClosed, today, openStart, openEnd } = getHoursForToday(hours)
 ---
 
-<SideCard client:load tabText={[t('HORAIRES'), t('D_OUVERTURE')]} ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}>
+<SideCard client:media="(min-width: 1280px)" tabText={[t('HORAIRES'), t('D_OUVERTURE')]} ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}>
 	<div class="flex h-full flex-col items-start px-10 py-7 text-left">
 		<p class="text-primary-foreground pb-5 text-xl">{t('HORAIRES_OUVERTURE')}</p>
 

@@ -6,6 +6,7 @@ import { createTranslator, I18n } from '@/i18n/translations'
 import { getMenuNavs } from '@/lib/menu-navs'
 
 import LogoImg from '@/assets/icons/logo-icon-only.svg'
+import BurgerIcon from '@/assets/icons/burger.svg'
 import { ArrowRightIcon } from 'lucide-react'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
@@ -14,15 +15,18 @@ const menuNavs = getMenuNavs(t)
 const currentPath = Astro.url.pathname
 ---
 
-<header class="mt-4 flex h-16 gap-4">
+<header class="lg:mt-4 flex h-16 gap-4">
 	<div class="bg-primary flex h-full flex-1 justify-between px-5 py-2">
 		<a class="flex items-center justify-center" href="/"
 			><img src={LogoImg.src} alt={t('LOGO_ALT')} loading="eager" class="w-15" /></a
 		>
-		<NavigationMenuDemo menuNavs={menuNavs} client:load />
+		<NavigationMenuDemo menuNavs={menuNavs} client:media="(min-width: 1280px)" className="hidden lg:flex" />
+		<Button variant={'default'} className="lg:hidden flex items-center justify-center h-full" aria-label="Menu">
+			<img src={BurgerIcon.src} alt="Menu" class="w-9 h-5" />
+		</Button>
 	</div>
-	<LanguageSelect client:load currentLocale={locale} currentPath={currentPath} />
-	<Button link="/informations" variant={'secondary'} className="group h-full w-40"
+	<LanguageSelect client:media="(min-width: 1280px)" currentLocale={locale} currentPath={currentPath} className="hidden lg:block" />
+	<Button link="/informations" variant={'secondary'} client:media="(min-width: 1280px)" className="group h-full w-40 hidden lg:flex"
 		>{t('NOUS_CONTACTER')} <ArrowRightIcon className="transition-transform group-hover:translate-x-1" /></Button
 	>
 </header>

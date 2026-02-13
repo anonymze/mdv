@@ -48,12 +48,12 @@ export function SideCard({
 		<>
 			{/* Backdrop when open */}
 			{isOpen && (
-				<div className="fixed inset-0 z-40 transition-opacity" onClick={() => setIsOpen(false)} aria-hidden="true" />
+				<div className="fixed inset-0 z-40 transition-opacity hidden lg:block max-h-dvh" onClick={() => setIsOpen(false)} aria-hidden="true" />
 			)}
 
 			{/* Side card - main container */}
 			<aside
-				className={`fixed ${position} right-0 z-50 transition-transform duration-300 ${
+				className={`hidden lg:block fixed ${position} right-0 z-50 transition-transform duration-300 ${
 					isOpen
 						? 'translate-x-0'
 						: `translate-x-[calc(100%-56px)] ${!justClosed ? 'hover:translate-x-[calc(100%-70px)]' : ''} cursor-pointer`

@@ -23,18 +23,18 @@ const espacesArtistiques = menuNavs[0]?.subMenus || []
 const parcNational = menuNavs[1]?.subMenus || []
 ---
 
-<footer class="bg-primary text-primary-foreground space-y-14 px-10 py-20 mt-16">
+<footer class="bg-primary text-primary-foreground space-y-8 lg:space-y-14 px-5 lg:px-10 py-10 lg:py-20 mt-8 lg:mt-16">
 	<!-- Top section: Logo, Info, Site Map, Newsletter -->
-	<div class="flex items-start gap-6">
+	<div class="flex flex-col lg:flex-row items-start gap-6">
 		<!-- Logo -->
 
-		<img src={logoSvg.src} width={180} alt={t('LOGO_ALT')} />
+		<img src={logoSvg.src} width={180} alt={t('LOGO_ALT')} class="hidden lg:block" />
 
 		<!-- Informations pratiques -->
 		<div class="w-full">
-			<h3 class="text-primary-foreground pb-8">{t('INFORMATIONS_PRATIQUES')}</h3>
+			<h3 class="text-primary-foreground pb-4 lg:pb-8">{t('INFORMATIONS_PRATIQUES')}</h3>
 
-			<div class="grid grid-cols-2 space-y-4 gap-x-20 gap-y-3">
+			<div class="grid grid-cols-1 lg:grid-cols-2 space-y-4 gap-x-20 gap-y-3">
 				<div>
 					<h4 class="font-bold uppercase font-serif">{t('ADRESSE_DU_LIEU')}</h4>
 					<hr class="mb-4 border-white/40" />
@@ -61,11 +61,11 @@ const parcNational = menuNavs[1]?.subMenus || []
 		</div>
 	</div>
 
-	<div class="grid grid-cols-2 gap-20">
+	<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
 		<div>
-			<h3 class="text-primary-foreground pb-8">{t('PLAN_DU_SITE')}</h3>
+			<h3 class="text-primary-foreground pb-4 lg:pb-8">{t('PLAN_DU_SITE')}</h3>
 
-			<div class="grid grid-cols-2 gap-20">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
 				<div>
 					<h4 class="tracking-wider">{t('ESPACES_ARTISTIQUES')}</h4>
 					<hr class="mb-4 border-white/40" />
@@ -99,23 +99,23 @@ const parcNational = menuNavs[1]?.subMenus || []
 			</div>
 		</div>
 		<div>
-			<h3 class="text-primary-foreground pb-8">{t('NEWSLETTER_TITRE')}</h3>
-			<p class="pb-8">{t('NEWSLETTER_INTRO')}</p>
+			<h3 class="text-primary-foreground pb-4 lg:pb-8">{t('NEWSLETTER_TITRE')}</h3>
+			<p class="pb-4 lg:pb-8">{t('NEWSLETTER_INTRO')}</p>
 			<NewsletterForm client:load locale={locale} variant="footer" apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL} />
 		</div>
 	</div>
 
 	<!-- Partners section -->
 	<div>
-		<h3 class="text-primary-foreground pb-8">{t('NOS_PARTENAIRES')}</h3>
+		<h3 class="text-primary-foreground pb-4 lg:pb-8">{t('NOS_PARTENAIRES')}</h3>
 
-		<div class="flex items-center justify-center gap-5">
-			<MyImage src={BeHappyImg} alt="Be Happy partenaire" width={80} height={80}  />
-			<MyImage src={HautesPyreneesImg} alt="Hautes-Pyrénées partenaire" width={80} height={80}  />
-			<MyImage src={OccitanieImg} alt="Parc National partenaire" width={80} height={80}  />
-			<MyImage src={PrefetImg} alt="Préfet partenaire" width={80} height={80}  />
-			<MyImage src={ParcNationalImg} alt="Parc National partenaire" width={160} height={80}  />
-			<MyImage src={EuropeImg} alt="Europe partenaire" width={454} height={80}  />
+		<div class="flex flex-wrap items-center justify-center gap-4 lg:gap-5">
+			<MyImage src={BeHappyImg} alt="Be Happy partenaire" width={80} height={80} class="w-12 lg:w-20" />
+			<MyImage src={HautesPyreneesImg} alt="Hautes-Pyrénées partenaire" width={80} height={80} class="w-12 lg:w-20" />
+			<MyImage src={OccitanieImg} alt="Parc National partenaire" width={80} height={80} class="w-12 lg:w-20" />
+			<MyImage src={PrefetImg} alt="Préfet partenaire" width={80} height={80} class="w-12 lg:w-20" />
+			<MyImage src={ParcNationalImg} alt="Parc National partenaire" width={160} height={80} class="w-24 lg:w-40" />
+			<MyImage src={EuropeImg} alt="Europe partenaire" width={454} height={80} class="w-40 lg:w-auto" />
 		</div>
 	</div>
 </footer>

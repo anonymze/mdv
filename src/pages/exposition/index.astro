@@ -26,10 +26,10 @@ const evenements = await find<EvenementType>('exposition', {
 		{
 			exposition && (
 				<section class="section-default" id="exposition">
-					<article class="grid grid-cols-3 gap-5 pb-16">
-						<div class="col-span-2 flex flex-col">
-							<h2 class="text-primary pb-3">{t('EXPO_MOMENT_TITRE')}</h2>
-							<p class="distinguished pb-6">
+					<article class="grid grid-cols-1 lg:grid-cols-3 gap-5 pb-8 lg:pb-16">
+						<div class="lg:col-span-2 flex flex-col">
+							<h2 class="text-primary pb-2 lg:pb-3">{t('EXPO_MOMENT_TITRE')}</h2>
+							<p class="distinguished pb-3 lg:pb-6">
 								{t('DATE_FROM')}{' '}
 								{new Date(exposition.date_start).toLocaleDateString(locale, {
 									weekday: 'long',
@@ -44,11 +44,11 @@ const evenements = await find<EvenementType>('exposition', {
 									year: 'numeric'
 								})}
 							</p>
-							<h3 class="text-primary pb-16">{exposition.title}</h3>
+							<h3 class="text-primary pb-8 lg:pb-16">{exposition.title}</h3>
 							<p set:html={renderRichText(exposition.description)} />
 						</div>
-						<div class="bg-primary/20 px-5 py-8">
-							<ul class="space-y-5">
+						<div class="bg-primary/20 px-4 lg:px-5 py-6 lg:py-8">
+							<ul class="space-y-4 lg:space-y-5">
 								<li class="border-b border-black/20 px-5 pb-4">
 									<span class="font-bold">{t('DATE')}</span> : {t('DATE_FROM')}{' '}
 									{new Date(exposition.date_start).toLocaleDateString(locale, {
@@ -78,6 +78,13 @@ const evenements = await find<EvenementType>('exposition', {
 								<li class="border-b border-black/20 px-5 pb-4">
 									<span class="font-bold">{t('AUTEURS')}</span> : {exposition.authors}
 								</li>
+
+								<li class="border-b border-black/20 px-5 pb-4">
+									<span class="font-bold">{t('CREDITS_PHOTOS')}</span> : {exposition.credits_photos}
+								</li>
+								<li class="border-b border-black/20 px-5 pb-4">
+									<span class="font-bold">{t('PORTFOLIO')}</span> : {exposition.portfolio_authors}
+								</li>
 								<li class="flex items-center justify-center gap-3">
 									{exposition?.tags?.split(';').map((tag) => (
 										<span class="text-primary-foreground bg-primary distinguished px-1.5 py-1">{tag}</span>
@@ -88,32 +95,50 @@ const evenements = await find<EvenementType>('exposition', {
 					</article>
 
 					{(() => {
-						const displayImages = exposition.images?.slice(0, 7) || []
-						const imagesToRender = Array.from({ length: 7 }, (_, i) => displayImages[i])
+						const displayImages = exposition.images?.slice(0, 3) || []
+						const count = displayImages.filter(Boolean).length
 
-						const layouts = [
-							{ width: 420, height: 220, class: 'col-span-2 col-start-1 row-span-1' },
-							{ width: 420, height: 460, class: 'col-span-2 col-start-3 row-span-2' },
-							{ width: 250, height: 220, class: 'col-span-1 col-start-5 row-span-1' },
-							{ width: 500, height: 220, class: 'col-span-3 col-start-6 row-span-1' },
-							{ width: 220, height: 220, class: 'col-span-1 col-start-1 row-span-1 row-start-2' },
-							{ width: 220, height: 220, class: 'col-span-1 col-start-2 row-span-1 row-start-2' },
-							{ width: 700, height: 220, class: 'col-span-4 col-start-5 row-span-1 row-start-2' }
-						]
+						if (count === 0) return null
+
+						const gridClass = count === 3
+							? 'grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5'
+							: count === 2
+							? 'grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5'
+							: 'grid grid-cols-1 gap-3 lg:gap-5'
 
 						return (
-							<div class="grid grid-cols-8 grid-rows-2 gap-5">
-								{imagesToRender.map((img, i) => (
+							<div class={gridClass}>
+								{displayImages[0] && (
 									<MyImage
-										src={img?.image?.url}
-										alt={img?.image?.alt ?? ''}
-										background={img?.image?.blurhash}
-										width={layouts[i].width}
-										height={layouts[i].height}
+										src={displayImages[0]?.image?.url}
+										alt={displayImages[0]?.image?.alt ?? ''}
+										background={displayImages[0]?.image?.blurhash}
+										width={400}
+										height={300}
 										layout="fullWidth"
-										class={layouts[i].class}
 									/>
-								))}
+								)}
+								{displayImages[1] && (
+									<MyImage
+										src={displayImages[1]?.image?.url}
+										alt={displayImages[1]?.image?.alt ?? ''}
+										background={displayImages[1]?.image?.blurhash}
+										width={400}
+										height={300}
+										layout="fullWidth"
+									/>
+								)}
+								{displayImages[2] && (
+									<MyImage
+										src={displayImages[2]?.image?.url}
+										alt={displayImages[2]?.image?.alt ?? ''}
+										background={displayImages[2]?.image?.blurhash}
+										width={800}
+										height={300}
+										layout="fullWidth"
+										class="col-span-2 lg:col-span-1"
+									/>
+								)}
 							</div>
 						)
 					})()}
@@ -122,10 +147,10 @@ const evenements = await find<EvenementType>('exposition', {
 		}
 
 		<section class="section-default bg-primary/20" id="evenements">
-			<h2 class="text-primary pb-3">{t('EVENEMENTS_EXPO')}</h2>
-			<p class="distinguished">{t('EVENEMENTS_EXPO_INTRO')}</p>
+			<h2 class="text-primary pb-2 lg:pb-3">{t('EVENEMENTS_EXPO')}</h2>
+			<p class="distinguished pb-3 lg:pb-6">{t('EVENEMENTS_EXPO_INTRO')}</p>
 
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
 				{
 					evenements.docs.map((item) => {
 						const descText = item.description.root.children

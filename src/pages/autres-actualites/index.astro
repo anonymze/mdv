@@ -24,10 +24,10 @@ const evenements = await find<AutresActualites>('autres_actualites', {
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
 		<section class="section-default" id="evenements">
-			<h2 class="text-primary pb-3">{t('AUTRES_EVENEMENTS_TITRE')}</h2>
+			<h2 class="text-primary pb-2 lg:pb-3">{t('AUTRES_EVENEMENTS_TITRE')}</h2>
 			<p class="distinguished">{t('AUTRES_EVENEMENTS_INTRO')}</p>
 
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
 				{
 					evenements.docs.map((item) => {
 						const descText = item.description.root.children

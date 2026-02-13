@@ -10,8 +10,9 @@ import {
 	navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
 import type { MenuNav } from '@/types/menu'
+import { cn } from '@/lib/utils'
 
-export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
+export function NavigationMenuDemo({ menuNavs, className }: { menuNavs: MenuNav[]; className?: string }) {
 	const [headerWidth, setHeaderWidth] = React.useState(0)
 	const [value, setValue] = React.useState('')
 	const itemRefs = React.useRef<(HTMLLIElement | null)[]>([])
@@ -51,8 +52,8 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 	}
 
 	return (
-		<NavigationMenu viewport={false} value={value} onValueChange={handleValueChange} className='z-20'>
-			<NavigationMenuList className="flex-wrap">
+		<NavigationMenu viewport={false} value={value} onValueChange={handleValueChange} className={cn('z-20', className)}>
+			<NavigationMenuList className="flex-wrap gap-1 xl:gap-4">
 				{menuNavs.map((menu, index) => {
 					// No submenus or only 1 submenu without children = simple link
 					if (!menu.subMenus || (menu.subMenus.length === 1 && !menu.subMenus[0].subMenus)) {
@@ -72,7 +73,7 @@ export function NavigationMenuDemo({ menuNavs }: { menuNavs: MenuNav[] }) {
 							value={`menu-${index}`}
 							ref={(el) => {
 								itemRefs.current[index] = el
-							}}
+              }}
 						>
 							<NavigationMenuTrigger
 								onPointerDown={() => {

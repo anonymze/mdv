@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 interface Props {
 	currentLocale: string;
 	currentPath: string;
+	className?: string;
 }
 
 const locales = [
@@ -12,7 +14,7 @@ const locales = [
 	{ code: "es", label: "Español" },
 ];
 
-export function LanguageSelect({ currentLocale, currentPath }: Props) {
+export function LanguageSelect({ currentLocale, currentPath, className }: Props) {
 	const [selectedLocale, setSelectedLocale] = useState(currentLocale);
 
 	const handleChange = (value: string) => {
@@ -25,7 +27,7 @@ export function LanguageSelect({ currentLocale, currentPath }: Props) {
 	};
 
 	return (
-		<div className="w-32">
+		<div className={cn("w-32", className)}>
 			<Select value={selectedLocale} onValueChange={handleChange}>
 				<SelectTrigger className="!h-full w-full border-0  bg-gray-100 rounded-none">
 					<SelectValue />

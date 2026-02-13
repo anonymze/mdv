@@ -139,37 +139,37 @@ export function SpectaclesGrid({
 	return (
 		<>
 			{showFilters && (
-				<div className="bg-primary mt-12 grid grid-cols-8 grid-rows-2 gap-6 px-10 py-8 *:min-h-12">
-					<Input placeholder={translations.MOTS_CLES} className="rows-span-1 col-span-6 bg-primary-foreground border-0 rounded-none" />
+				<div className="bg-primary mt-6 lg:mt-12 grid grid-cols-1 lg:grid-cols-8 lg:grid-rows-2 gap-4 lg:gap-6 px-5 lg:px-10 py-6 lg:py-8 *:min-h-12">
+					<Input placeholder={translations.MOTS_CLES} className="rows-span-1 lg:col-span-6 bg-primary-foreground border-0 rounded-none" />
 					<SelectWrapper
 						placeholder={translations.HORAIRES}
 						options={[{ key: 'fefef', value: 'fef' }]}
-						className="col-span-2 w-full"
+						className="lg:col-span-2 w-full"
 					/>
 					<SelectWrapper
 						placeholder={translations.TYPE_PUBLIC}
 						options={[{ key: 'fefef', value: 'fef' }]}
-						className="col-span-2 w-full"
+						className="lg:col-span-2 w-full"
 					/>
 					<SelectWrapper
 						placeholder={translations.PRIX}
 						options={[{ key: 'fefef', value: 'fef' }]}
-						className="col-span-2 w-full"
+						className="lg:col-span-2 w-full"
 					/>
 					<SelectWrapper
 						placeholder={translations.LIEU}
 						options={[{ key: 'fefef', value: 'fef' }]}
-						className="col-span-2 w-full"
+						className="lg:col-span-2 w-full"
 					/>
 				</div>
 			)}
 
 			<div
-				className="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80"
+				className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80"
 				style={{ minHeight: `${CARD_HEIGHT}px` }}
 			>
 				{loading ? (
-					<div className="col-span-4 flex h-full w-full items-center justify-center" style={{ height: CARD_HEIGHT }}>
+					<div className="col-span-full flex h-full w-full items-center justify-center" style={{ height: CARD_HEIGHT }}>
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
 					</div>
 				) : (

@@ -8,26 +8,10 @@
 	width: 100%;
 	max-width: 120rem;
 	margin-inline: auto;
-	padding-inline: 1.5rem;
+	padding-inline: 0;
 
-	/* tablet */
-	@media (width >= 26.875rem) {
-		max-width: 120rem;
-		padding-inline: 3rem;
-	}
-	/* desktop */
-	@media (width >= 48rem) {
-		max-width: 120rem;
-		padding-inline: 4rem;
-	}
-	/* big screen */
-	@media (width >= 80rem) {
-		max-width: 120rem;
-		padding-inline: 4rem;
-	}
-	/* bigger screen */
-	@media (width >= 96rem) {
-		max-width: 120rem;
+	/* desktop and up */
+	@media (width >= 1280px) {
 		padding-inline: 4rem;
 	}
 }
@@ -179,18 +163,30 @@
 	}
 
 	h1 {
-		font-size: 32px;
+		font-size: 28px;
+		@media (min-width: 1280px) {
+			font-size: 32px;
+		}
 	}
 
 	h2 {
-		font-size: 20px;
+		font-size: 16px;
+		@media (min-width: 1280px) {
+			font-size: 20px;
+		}
 	}
 
 	h3 {
-		font-size: 16px;
+		font-size: 14px;
+		@media (min-width: 1280px) {
+			font-size: 16px;
+		}
 	}
 	h4 {
-		font-size: 14px;
+		font-size: 12px;
+		@media (min-width: 1280px) {
+			font-size: 14px;
+		}
 	}
 
 	code {
@@ -208,5 +204,11 @@
 		margin-block: 0.75rem;
 		padding-block: 6rem;
 		padding-inline: 2rem;
+
+		@media (max-width: 1279px) {
+			margin-block: 0.5rem;
+			padding-block: 3rem;
+			padding-inline: 1rem;
+		}
 	}
 }

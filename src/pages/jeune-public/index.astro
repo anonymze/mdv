@@ -48,13 +48,13 @@ const cinema = await find<Cinema>('cinema', {
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
 		<section class="section-default" id="spectacles">
-			<h2 class="text-primary pb-3">{t('SPECTACLES_JEUNE_PUBLIC_TITRE')}</h2>
-			<p class="distinguished pb-6">{t('SPECTACLES_JEUNE_PUBLIC_INTRO')}</p>
-			<p class="w-2/3">
+			<h2 class="text-primary pb-2 lg:pb-3">{t('SPECTACLES_JEUNE_PUBLIC_TITRE')}</h2>
+			<p class="distinguished pb-3 lg:pb-6">{t('SPECTACLES_JEUNE_PUBLIC_INTRO')}</p>
+			<p class="lg:w-2/3">
 				{t('SPECTACLES_JEUNE_PUBLIC_DESC')}
 			</p>
 
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
 				{
 					evenements.docs.map((item) => {
 						const descText = item.description.root.children
@@ -125,12 +125,12 @@ const cinema = await find<Cinema>('cinema', {
 
 		<section class="section-default bg-primary/20 pb-4" id="cinema">
 			<article>
-				<h2 class="pb-3">{t('CINEMA_JEUNE_PUBLIC_TITRE')}</h2>
-				<p class="distinguished pb-6">{t('CINEMA_JEUNE_PUBLIC_INTRO')}</p>
-				<p class="w-2/3">{t('CINEMA_JEUNE_PUBLIC_DESC')}</p>
+				<h2 class="pb-2 lg:pb-3">{t('CINEMA_JEUNE_PUBLIC_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-6">{t('CINEMA_JEUNE_PUBLIC_INTRO')}</p>
+				<p class="lg:w-2/3">{t('CINEMA_JEUNE_PUBLIC_DESC')}</p>
 			</article>
 
-			<div class="my-16 grid grid-cols-2 gap-5">
+			<div class="my-8 lg:my-16 grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
 				{
 					cinema.docs.map((item) => {
 						const synopsisText = item.synopsis.root.children
@@ -203,12 +203,12 @@ const cinema = await find<Cinema>('cinema', {
 
 		<section class="section-default" id="ludotheque">
 			<article>
-				<h2 class="text-secondary pb-3">{t('LUDOTHEQUE_JEUNE_PUBLIC_TITRE')}</h2>
-				<p class="distinguished pb-6">{t('LUDOTHEQUE_JEUNE_PUBLIC_INTRO')}</p>
-				<p class="w-2/3">{t('LUDOTHEQUE_JEUNE_PUBLIC_DESC')}</p>
+				<h2 class="text-secondary pb-2 lg:pb-3">{t('LUDOTHEQUE_JEUNE_PUBLIC_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-6">{t('LUDOTHEQUE_JEUNE_PUBLIC_INTRO')}</p>
+				<p class="lg:w-2/3">{t('LUDOTHEQUE_JEUNE_PUBLIC_DESC')}</p>
 			</article>
 
-			<div class="my-16 grid grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
+			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
 				{
 					ludotheque.docs.map((item) => {
 						const descText = item.description.root.children

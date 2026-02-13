@@ -31,45 +31,45 @@ const rdv = await find<Cinema>('cinema', {
 	<main>
 		<section class="section-default" id="cinema">
 			<article>
-				<h2 class="pb-3">{t('CINEMA')}</h2>
-				<p class="distinguished pb-6">{t('CINEMA_INTRO')}</p>
-				<p class="w-2/3">
+				<h2 class="pb-2 lg:pb-3">{t('CINEMA')}</h2>
+				<p class="distinguished pb-3 lg:pb-6">{t('CINEMA_INTRO')}</p>
+				<p class="lg:w-2/3">
 					{t('CINEMA_DESC_PART1')}<br /><br />
 					{t('CINEMA_DESC_PART2')}<br /><br />
 					{t('CINEMA_DESC_PART3')}
 				</p>
 			</article>
 
-			<div class="bg-primary mt-12 grid grid-cols-8 grid-rows-2 gap-6 px-10 py-8 *:min-h-12">
-				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 col-span-6 bg-white" />
+			<div class="bg-primary mt-6 lg:mt-12 grid grid-cols-1 lg:grid-cols-8 lg:grid-rows-2 gap-4 lg:gap-6 px-5 lg:px-10 py-6 lg:py-8 *:min-h-12">
+				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 lg:col-span-6 bg-white" />
 				<SelectWrapper
 					placeholder={t('HORAIRES')}
 					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
+					className="lg:col-span-2 w-full"
 				/>
 				<SelectWrapper
 					placeholder={t('TYPE_PUBLIC')}
 					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
+					className="lg:col-span-2 w-full"
 				/>
 				<SelectWrapper
 					placeholder={t('PRIX')}
 					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
+					className="lg:col-span-2 w-full"
 				/>
 				<SelectWrapper
 					placeholder={t('LIEU')}
 					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
+					className="lg:col-span-2 w-full"
 				/>
 				<SelectWrapper
 					placeholder={t('GENRE')}
 					options={[{ key: 'fefef', value: 'fef' }]}
-					className="col-span-2 w-full"
+					className="lg:col-span-2 w-full"
 				/>
 			</div>
 
-			<div class="my-16 grid grid-cols-2 gap-5">
+			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-5">
 				{
 					seances.docs.map((item) => {
 						const synopsisText = item.synopsis.root.children
@@ -141,11 +141,11 @@ const rdv = await find<Cinema>('cinema', {
 		</section>
 
 		<section class="section-default bg-primary/20" id="rdv-cinema">
-			<h2 class="text-primary pb-3">{t('RDV_CINEMA')}</h2>
-			<p class="distinguished pb-6">{t('RDV_CINEMA_INTRO')}</p>
-			<p class="w-2/3">{t('RDV_CINEMA_DESC')}</p>
+			<h2 class="text-primary pb-2 lg:pb-3">{t('RDV_CINEMA')}</h2>
+			<p class="distinguished pb-3 lg:pb-6">{t('RDV_CINEMA_INTRO')}</p>
+			<p class="lg:w-2/3">{t('RDV_CINEMA_DESC')}</p>
 
-			<div class="my-16 grid grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
 				{
 					rdv.docs.map((item) => {
 						const descText = item.synopsis.root.children
