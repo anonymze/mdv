@@ -4,6 +4,7 @@ import type { RichTextField } from './rich-text'
 interface BaseExposition {
 	id: string
 	archive?: boolean | null
+	immanquable?: boolean | null
 	title: string
 	description: RichTextField
 	date_start: string
