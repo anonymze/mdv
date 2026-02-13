@@ -1,7 +1,6 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
@@ -54,7 +53,9 @@ const cinema = await find<Cinema>('cinema', {
 				{t('SPECTACLES_JEUNE_PUBLIC_DESC')}
 			</p>
 
-			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+			>
 				{
 					evenements.docs.map((item) => {
 						const descText = item.description.root.children
@@ -130,7 +131,7 @@ const cinema = await find<Cinema>('cinema', {
 				<p class="lg:w-2/3">{t('CINEMA_JEUNE_PUBLIC_DESC')}</p>
 			</article>
 
-			<div class="my-8 lg:my-16 grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
+			<div class="my-8 grid grid-cols-1 gap-3 lg:my-16 lg:grid-cols-2 lg:gap-5">
 				{
 					cinema.docs.map((item) => {
 						const synopsisText = item.synopsis.root.children
@@ -208,7 +209,9 @@ const cinema = await find<Cinema>('cinema', {
 				<p class="lg:w-2/3">{t('LUDOTHEQUE_JEUNE_PUBLIC_DESC')}</p>
 			</article>
 
-			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
+			<div
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:my-16 lg:grid-cols-3"
+			>
 				{
 					ludotheque.docs.map((item) => {
 						const descText = item.description.root.children

@@ -19,6 +19,7 @@ interface SpectaclesGridProps {
 	limit: number
 	payloadUrl: string
 	showFilters?: boolean
+	filterType?: 'basic' | 'archives'
 	translations: {
 		PRECEDENT: string
 		SUIVANT: string
@@ -29,10 +30,9 @@ interface SpectaclesGridProps {
 		TYPE_PUBLIC?: string
 		PRIX?: string
 		LIEU?: string
+		ANNEE?: string
 	}
 }
-
-const CARD_HEIGHT = 417
 
 export function SpectaclesGrid({
 	initialData,
@@ -40,6 +40,7 @@ export function SpectaclesGrid({
 	limit,
 	payloadUrl,
 	showFilters = false,
+	filterType = 'basic',
 	translations
 }: SpectaclesGridProps) {
 	const [data, setData] = useState<PayloadResponse<ArtVivant>>(initialData)
@@ -91,9 +92,9 @@ export function SpectaclesGrid({
 
 	const getDescText = (item: ArtVivant) => {
 		return item.description.root.children
-			.flatMap((para: any) => para.children)
-			.filter((child: any) => child.type === 'text')
-			.map((child: any) => child.text)
+			.flatMap((para) => para.children)
+			.filter((child) => child.type === 'text')
+			.map((child) => child.text)
 			.join(' ')
 	}
 
@@ -136,10 +137,19 @@ export function SpectaclesGrid({
 		return pages
 	}
 
+	const generateYearOptions = () => {
+		const currentYear = new Date().getFullYear()
+		const years = []
+		for (let year = currentYear; year >= 2019; year--) {
+			years.push({ key: year.toString(), value: year.toString() })
+		}
+		return years
+	}
+
 	return (
 		<>
 			{showFilters && (
-				<div className="bg-primary mt-6 lg:mt-12 grid grid-cols-1 lg:grid-cols-8 lg:grid-rows-2 gap-4 lg:gap-6 px-5 lg:px-10 py-6 lg:py-8 *:min-h-12">
+				<div className={`bg-primary mt-6 lg:mt-12 grid grid-cols-1 lg:grid-cols-8 lg:grid-rows-2 gap-4 lg:gap-6 px-5 lg:px-10 py-6 lg:py-8 *:min-h-12`}>
 					<Input placeholder={translations.MOTS_CLES} className="rows-span-1 lg:col-span-6 bg-primary-foreground border-0 rounded-none" />
 					<SelectWrapper
 						placeholder={translations.HORAIRES}
@@ -161,15 +171,19 @@ export function SpectaclesGrid({
 						options={[{ key: 'fefef', value: 'fef' }]}
 						className="lg:col-span-2 w-full"
 					/>
+					{filterType === 'archives' && (
+						<SelectWrapper
+							placeholder={translations.ANNEE || 'Année'}
+							options={generateYearOptions()}
+							className="lg:col-span-2 w-full"
+						/>
+					)}
 				</div>
 			)}
 
-			<div
-				className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80"
-				style={{ minHeight: `${CARD_HEIGHT}px` }}
-			>
+			<div className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
 				{loading ? (
-					<div className="col-span-full flex h-full w-full items-center justify-center" style={{ height: CARD_HEIGHT }}>
+					<div className="col-span-full flex h-96 w-full items-center justify-center">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
 					</div>
 				) : (
@@ -179,7 +193,6 @@ export function SpectaclesGrid({
 							<article
 								key={item.id}
 								className="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm"
-								style={{ height: CARD_HEIGHT }}
 							>
 								<div className="overflow-hidden">
 									<MyImage

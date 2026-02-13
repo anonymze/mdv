@@ -85,7 +85,7 @@ const evenements = await find<EvenementType>('exposition', {
 								<li class="border-b border-black/20 px-5 pb-4">
 									<span class="font-bold">{t('PORTFOLIO')}</span> : {exposition.portfolio_authors}
 								</li>
-								<li class="flex items-center justify-center gap-3">
+								<li class="flex flex-wrap items-center justify-center gap-3">
 									{exposition?.tags?.split(';').map((tag) => (
 										<span class="text-primary-foreground bg-primary distinguished px-1.5 py-1">{tag}</span>
 									))}

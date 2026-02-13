@@ -1,0 +1,57 @@
+---
+export const prerender = true
+import { find } from '@/api/payload'
+import { SpectaclesGrid } from '@/components/spectacles-grid'
+import { createTranslator, I18n } from '@/i18n/translations'
+import Layout from '@/layouts/layout.astro'
+import type { ArtVivant } from '@/types/art-vivant'
+
+const locale = (Astro.currentLocale || 'fr') as I18n
+const t = createTranslator(locale)
+
+const SPECTACLES_LIMIT = 8
+
+// Build time: fetch only first page
+const spectacles = await find<ArtVivant>('archives', {
+	limit: SPECTACLES_LIMIT,
+	page: 1,
+	locale
+})
+
+const spectacleTranslations = {
+	PRECEDENT: t('PRECEDENT'),
+	SUIVANT: t('SUIVANT'),
+	IMAGE_PLACEHOLDER: t('IMAGE_PLACEHOLDER'),
+	EN_SAVOIR_PLUS: t('EN_SAVOIR_PLUS'),
+	MOTS_CLES: t('MOTS_CLES'),
+	HORAIRES: t('HORAIRES'),
+	TYPE_PUBLIC: t('TYPE_PUBLIC'),
+	PRIX: t('PRIX'),
+	LIEU: t('LIEU'),
+	ANNEE: t('ANNEE')
+}
+
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
+---
+
+<Layout title={t('ACCUEIL_TITLE')}>
+	<main>
+		<section class="section-default" id="spectacles">
+			<article>
+				<h2 class="pb-2 lg:pb-3">{t('ARCHIVES')}</h2>
+				<p class="distinguished pb-3 lg:pb-6">{t('ARCHIVES_DESC')}</p>
+			</article>
+
+			<SpectaclesGrid
+				client:load
+				initialData={spectacles}
+				locale={locale}
+				limit={SPECTACLES_LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				showFilters={true}
+				filterType="archives"
+				translations={spectacleTranslations}
+			/>
+		</section>
+	</main>
+</Layout>
