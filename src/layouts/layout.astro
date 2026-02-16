@@ -7,8 +7,7 @@ import Header from './header.astro'
 import Footer from './footer.astro'
 import EventsSideCard from '@/components/events-side-card.astro'
 import { find } from '@/api/payload'
-import type { ArtVivant } from '@/types/art-vivant'
-import type { ParcNational } from '@/types/parc-national'
+import type { ImmanquableResponse } from '@/types/immanquable'
 
 export interface Props {
 	title: string
@@ -18,24 +17,9 @@ export interface Props {
 const { title, description = '' } = Astro.props
 const locale = (Astro.currentLocale || 'fr') as I18n
 
-const [spectacles, evenements] = await Promise.all([
-	find<ArtVivant>('art_vivant', {
-		limit: 1,
-		locale,
-		where: { type: { equals: 'evenement' } }
-	}),
-	find<ParcNational>('parc_national', {
-		limit: 1,
-		locale,
-		where: { type: { equals: 'evenement' } }
-	})
-])
-
-const featuredEvent = spectacles.docs[0]
-	? { ...spectacles.docs[0], _href: `/art-vivant/${spectacles.docs[0].id}` }
-	: evenements.docs[0]
-	? { ...evenements.docs[0], _href: `/parc-national/${evenements.docs[0].id}` }
-	: undefined
+const immanquable = await find('immanquable', {
+	locale
+}) as unknown as ImmanquableResponse
 
 // Multilingual metadata
 const metadata: {
@@ -122,6 +106,6 @@ const pageDescription = description || meta.defaultDescription
 			<Footer locale={locale} />
 		</div>
 		<HoursSideCard locale={locale} />
-		<EventsSideCard locale={locale} event={featuredEvent} />
+		{immanquable.doc && <EventsSideCard locale={locale} event={immanquable.doc} />}
 	</body>
 </html>

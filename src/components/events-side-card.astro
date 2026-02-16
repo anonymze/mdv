@@ -2,16 +2,37 @@
 import { createTranslator, type I18n } from '@/i18n/translations'
 import { SideCard } from './side-card'
 import Image from './my-image.astro'
-import type { ArtVivant } from '@/types/art-vivant'
-import type { ParcNational } from '@/types/parc-national'
+import type { ImmanquableDoc } from '@/types/immanquable'
 
 interface Props {
 	locale: I18n
-	event?: (ArtVivant | ParcNational) & { _href: string }
+	event?: ImmanquableDoc
 }
 
 const { locale, event } = Astro.props
 const t = createTranslator(locale)
+
+const getThumbnail = (event: ImmanquableDoc) => {
+	if (event._collection === 'exposition' && 'images' in event) {
+		return event.images?.[0]?.image
+	}
+	return 'thumbnail' in event ? event.thumbnail : undefined
+}
+
+const getEventHref = (event: ImmanquableDoc) => {
+	switch (event._collection) {
+		case 'art_vivant':
+			return `/art-vivant/${event.id}`
+		case 'cinema':
+			return `/cinema/${event.id}`
+		case 'exposition':
+			return `/exposition/${event.id}`
+		case 'parc_national':
+			return `/parc-national/${event.id}`
+	}
+}
+
+const eventHref = event ? getEventHref(event) : undefined
 ---
 
 {event && (
@@ -25,15 +46,17 @@ const t = createTranslator(locale)
 	>
 		<div class="text-primary-foreground flex h-full flex-col items-start py-7 text-left">
 			<p class="px-10 pb-2 text-xl">{t('EVENEMENT_IMMANQUABLE')}</p>
-			<Image
-				src={event.thumbnail?.url}
-				alt={event.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-				background={event.thumbnail?.blurhash}
-				width={600}
-				height={128}
-				layout='constrained'
-				class="w-full h-32 object-cover"
-			/>
+			{getThumbnail(event) && (
+				<Image
+					src={getThumbnail(event)?.url}
+					alt={getThumbnail(event)?.alt ?? t('IMAGE_PLACEHOLDER')}
+					background={getThumbnail(event)?.blurhash}
+					width={600}
+					height={128}
+					layout='constrained'
+					class="w-full h-32 object-cover"
+				/>
+			)}
 
 			<p class="w-full truncate px-10 pt-2 text-lg font-semibold">{event.title}</p>
 
@@ -44,7 +67,7 @@ const t = createTranslator(locale)
 				{event.genre && (
 					<div class="mr-auto text-xs text-gray-200">{event.genre}</div>
 				)}
-				<a href={event._href} class="ml-auto py-2 pl-2 text-xs underline underline-offset-3">
+				<a href={eventHref} class="ml-auto py-2 pl-2 text-xs underline underline-offset-3">
 					{t('EN_SAVOIR_PLUS')}
 				</a>
 			</div>
