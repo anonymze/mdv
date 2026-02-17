@@ -6,8 +6,10 @@ import '../styles/global.css'
 import Header from './header.astro'
 import Footer from './footer.astro'
 import EventsSideCard from '@/components/events-side-card.astro'
-import { find } from '@/api/payload'
+import { find, findGlobal } from '@/api/payload'
 import type { ImmanquableResponse } from '@/types/immanquable'
+import { getHoursForToday } from '@/lib/hours'
+import type { Hour } from '@/types/hours'
 
 export interface Props {
 	title: string
@@ -17,9 +19,12 @@ export interface Props {
 const { title, description = '' } = Astro.props
 const locale = (Astro.currentLocale || 'fr') as I18n
 
-const immanquable = await find('immanquable', {
-	locale
-}) as unknown as ImmanquableResponse
+const [immanquable, hoursData] = await Promise.all([
+	find('immanquable', { locale }) as unknown as Promise<ImmanquableResponse>,
+	findGlobal<Hour>('hours', { locale })
+])
+
+const hoursForToday = getHoursForToday(hoursData)
 
 // Multilingual metadata
 const metadata: {
@@ -101,7 +106,7 @@ const pageDescription = description || meta.defaultDescription
 	</head>
 	<body>
 		<div class="container">
-			<Header />
+			<Header hoursForToday={hoursForToday} immanquableEvent={immanquable.doc} />
 			<slot />
 			<Footer locale={locale} />
 		</div>

@@ -2,17 +2,80 @@
 import { NavigationMenuDemo } from '@/components/header-menu'
 import { LanguageSelect } from '@/components/language-select'
 import { Button } from '@/components/ui/button'
+import { MobileMenu } from '@/components/mobile-menu'
 import { createTranslator, I18n } from '@/i18n/translations'
 import { getMenuNavs } from '@/lib/menu-navs'
 
 import LogoImg from '@/assets/icons/logo-icon-only.svg'
 import BurgerIcon from '@/assets/icons/burger.svg'
 import { ArrowRightIcon } from 'lucide-react'
+import type { ImmanquableDoc } from '@/types/immanquable'
 
+interface HoursForToday {
+	isClosed: boolean
+	today: Date
+	openStart: string | null
+	openEnd: string | null
+}
+
+interface Props {
+	hoursForToday: HoursForToday
+	immanquableEvent?: ImmanquableDoc | null
+}
+
+const { hoursForToday, immanquableEvent } = Astro.props
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 const menuNavs = getMenuNavs(t)
 const currentPath = Astro.url.pathname
+
+const mobileLinks = [
+	{ label: t('ART_VIVANT'), href: '/art-vivant' },
+	{ label: t('PARC_NATIONAL'), href: '/parc-national' },
+	{ label: t('CINEMA'), href: '/cinema' },
+	{ label: t('MEDIATHEQUE'), href: '/mediatheque' },
+	{ label: t('EXPOSITION'), href: '/exposition' },
+	{ label: t('JEUNESSE'), href: '/jeune-public' }
+]
+
+const formatTime = (iso: string) =>
+	new Date(iso).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
+
+const hoursInfo = {
+	isClosed: hoursForToday.isClosed,
+	todayLabel: hoursForToday.today.toLocaleDateString(locale, { dateStyle: 'full' }),
+	openLabel:
+		hoursForToday.openStart && hoursForToday.openEnd
+			? `${formatTime(hoursForToday.openStart)} - ${formatTime(hoursForToday.openEnd)}`
+			: undefined
+}
+
+const getEventHref = (event: ImmanquableDoc) => {
+	switch (event._collection) {
+		case 'art_vivant': return `/art-vivant/${event.id}`
+		case 'cinema': return `/cinema/${event.id}`
+		case 'exposition': return `/exposition/${event.id}`
+		case 'parc_national': return `/parc-national/${event.id}`
+	}
+}
+
+const getEventThumbnail = (event: ImmanquableDoc) => {
+	if (event._collection === 'exposition' && 'images' in event) {
+		return event.images?.[0]?.image
+	}
+	return 'thumbnail' in event ? event.thumbnail : undefined
+}
+
+const mobileEvent = immanquableEvent
+	? {
+			title: immanquableEvent.title,
+			href: getEventHref(immanquableEvent),
+			imageUrl: getEventThumbnail(immanquableEvent)?.url,
+			imageAlt: getEventThumbnail(immanquableEvent)?.alt,
+			date: new Date(immanquableEvent.date_start).toLocaleDateString(locale, { dateStyle: 'full' }),
+			genre: immanquableEvent.genre
+		}
+	: undefined
 ---
 
 <header class="lg:mt-4 flex h-16 gap-4">
@@ -21,9 +84,23 @@ const currentPath = Astro.url.pathname
 			><img src={LogoImg.src} alt={t('LOGO_ALT')} loading="eager" class="w-15" /></a
 		>
 		<NavigationMenuDemo menuNavs={menuNavs} client:media="(min-width: 1280px)" className="hidden lg:flex" />
-		<Button variant={'default'} className="lg:hidden flex items-center justify-center h-full" aria-label="Menu">
-			<img src={BurgerIcon.src} alt="Menu" class="w-9 h-5" />
-		</Button>
+		<MobileMenu
+			client:load
+			logoSrc={LogoImg.src}
+			logoAlt={t('LOGO_ALT')}
+			burgerSrc={BurgerIcon.src}
+			locale={locale}
+			currentPath={currentPath}
+			links={mobileLinks}
+			contactLabel={t('NOUS_CONTACTER')}
+			hoursLabel={t('HORAIRES_OUVERTURE')}
+			closedLabel={t('FERME')}
+			eventLabel={t('EVENEMENT_IMMANQUABLE')}
+			learnMoreLabel={t('EN_SAVOIR_PLUS')}
+			hours={hoursInfo}
+			event={mobileEvent}
+			className="lg:hidden"
+		/>
 	</div>
 	<LanguageSelect client:media="(min-width: 1280px)" currentLocale={locale} currentPath={currentPath} className="hidden lg:block" />
 	<Button link="/informations" variant={'secondary'} client:media="(min-width: 1280px)" className="group h-full w-40 hidden lg:flex"
