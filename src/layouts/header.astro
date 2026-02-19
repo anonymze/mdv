@@ -52,10 +52,16 @@ const hoursInfo = {
 
 const getEventHref = (event: ImmanquableDoc) => {
 	switch (event._collection) {
-		case 'art_vivant': return `/art-vivant/${event.id}`
-		case 'cinema': return `/cinema/${event.id}`
-		case 'exposition': return `/exposition/${event.id}`
-		case 'parc_national': return `/parc-national/${event.id}`
+		case 'art_vivant':
+			return `/art-vivant/spectacle/${event.id}`
+		case 'cinema':
+			if (event.type === 'scolaire') return `/cinema/scolaire/${event.id}`
+			if (event.type === 'rdv_cinema') return `/cinema/rdv-cinema/${event.id}`
+			return `/cinema/seance/${event.id}`
+		case 'exposition':
+			return event.type === 'evenement' ? `/exposition/evenement/${event.id}` : `/exposition`
+		case 'parc_national':
+			return `/parc-national/evenement/${event.id}`
 	}
 }
 
