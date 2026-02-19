@@ -71,9 +71,9 @@ const mobileEvent = immanquableEvent
 			title: immanquableEvent.title,
 			href: getEventHref(immanquableEvent),
 			imageUrl: getEventThumbnail(immanquableEvent)?.url,
-			imageAlt: getEventThumbnail(immanquableEvent)?.alt,
+			imageAlt: getEventThumbnail(immanquableEvent)?.alt ?? t('IMAGE_PLACEHOLDER'),
 			date: new Date(immanquableEvent.date_start).toLocaleDateString(locale, { dateStyle: 'full' }),
-			genre: immanquableEvent.genre
+			genre: immanquableEvent.genre,
 		}
 	: undefined
 ---
@@ -99,6 +99,7 @@ const mobileEvent = immanquableEvent
 			learnMoreLabel={t('EN_SAVOIR_PLUS')}
 			hours={hoursInfo}
 			event={mobileEvent}
+			payloadUrl={import.meta.env.PUBLIC_PAYLOAD_URL}
 			className="lg:hidden"
 		/>
 	</div>
