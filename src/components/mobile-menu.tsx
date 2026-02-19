@@ -103,7 +103,7 @@ export function MobileMenu({
 				</div>
 
 				{/* Nav links */}
-				<nav className="py- flex flex-col items-end gap-2 px-8">
+				<nav className="flex flex-col items-end gap-1.5 px-8 py-1">
 					{links.map((link) => (
 						<a
 							key={link.href}
@@ -119,7 +119,7 @@ export function MobileMenu({
 				{/* Hours + Contact */}
 				<div className="mt-auto mb-auto flex items-end justify-between gap-4 px-5 pb-6">
 					<div>
-						<p className="pb-2 font-serif uppercase">{hoursLabel}</p>
+						<p className="whitespace-nowrap pb-2 text-xs font-serif uppercase">{hoursLabel}</p>
 						<hr className="mb-3 border-white/40" />
 						<p className="pb-1 text-sm capitalize">{hours.todayLabel}</p>
 						<p className="text-xl font-bold">{hours.isClosed ? closedLabel : hours.openLabel}</p>
@@ -127,7 +127,7 @@ export function MobileMenu({
 					<a
 						href="/informations"
 						onClick={() => setOpen(false)}
-						className="bg-secondary text-secondary-foreground flex shrink-0 items-center gap-2 px-5 py-3 text-sm font-medium"
+						className="bg-secondary text-secondary-foreground flex shrink-0 items-center gap-2 px-2 py-3 text-xs font-medium mb-1.5"
 					>
 						{contactLabel}
 						<ArrowRight className="h-4 w-4" />
@@ -136,8 +136,8 @@ export function MobileMenu({
 
 				{/* Immanquable event */}
 				{event && (
-					<div className="mt-auto px-5 pb-8">
-						<p className="pb-2 font-serif text-lg uppercase">{eventLabel}</p>
+					<div className="mt-auto px-5 pb-2">
+						<p className="pb-2 text-xs font-serif uppercase">{eventLabel}</p>
 						<hr className="mb-3 border-white/40" />
 						<MyImage
 							payloadUrl={payloadUrl}
