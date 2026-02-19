@@ -25,6 +25,13 @@ const rdv = await find<Cinema>('cinema', {
 		type: { equals: 'rdv_cinema' }
 	}
 })
+const scolaire = await find<Cinema>('cinema', {
+	limit: 6,
+	locale,
+	where: {
+		type: { equals: 'scolaire' }
+	}
+})
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
@@ -185,6 +192,80 @@ const rdv = await find<Cinema>('cinema', {
 									</figcaption>
 								</figure>
 								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
+									<figcaption class="text-white">
+										<p class="line-clamp-8 text-sm">{descText}</p>
+										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
+											{t('EN_SAVOIR_PLUS')}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d="M5 12h14" />
+												<path d="m12 5 7 7-7 7" />
+											</svg>
+										</p>
+									</figcaption>
+								</figure>
+							</article>
+						)
+					})
+				}
+			</div>
+		</section>
+
+		<section class="section-default" id="rdv-cinema">
+			<h2 class="text-secondary pb-2 lg:pb-3">{t('CINEMA_SCOLAIRE_TITRE')}</h2>
+			<p class="distinguished pb-3 lg:pb-6">{t('CINEMA_SCOLAIRE_INTRO')}</p>
+			<p class="lg:w-2/3">{t('CINEMA_SCOLAIRE_DESC')}</p>
+
+			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+				{
+					scolaire.docs.map((item) => {
+						const descText = item.synopsis.root.children
+							.flatMap((para) => para.children)
+							.filter((child) => child.type === 'text')
+							.map((child) => child.text)
+							.join(' ')
+
+						return (
+							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
+								<div class="overflow-hidden">
+									<MyImage
+										src={item.thumbnail?.url}
+										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={item.thumbnail?.blurhash}
+										width={275}
+										height={305}
+										layout="fullWidth"
+									/>
+								</div>
+								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
+									<figcaption>
+										<h3 class="pb-3 text-black">
+											<a href={`/cinema/seance/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+												{item.title}
+											</a>
+										</h3>
+										<p class="distinguished text-primary pb-1 text-xs">{item.genre}</p>
+										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
+											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
+											{new Date(item.date_start).toLocaleTimeString(locale, {
+												hour: '2-digit',
+												minute: '2-digit',
+												hour12: false
+											})}
+										</time>
+									</figcaption>
+								</figure>
+								<div class="bg-secondary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
 								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
 									<figcaption class="text-white">
 										<p class="line-clamp-8 text-sm">{descText}</p>

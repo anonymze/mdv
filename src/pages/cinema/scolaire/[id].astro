@@ -5,18 +5,19 @@ import { find, findByID } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
+import { translatePublicField } from '@/lib/translate-fields'
 import { cn } from '@/lib/utils'
 import type { ArtVivant } from '@/types/art-vivant'
-import type { EvenementType } from '@/types/exposition'
+import type { Cinema } from '@/types/cinema'
 import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
 
 export async function getStaticPaths() {
 	const locale = 'fr'
-	const data = await find<EvenementType>('exposition', {
+	const data = await find<Cinema>('cinema', {
 		limit: 50,
 		locale,
 		where: {
-			type: { equals: 'evenement' }
+			type: { equals: 'scolaire' }
 		}
 	})
 
@@ -29,10 +30,10 @@ const locale = (Astro.currentLocale || 'fr') as I18n
 const { id } = Astro.params
 
 // Fetch item for current locale
-const item = await findByID<EvenementType>('exposition', id, { locale })
+const item = await findByID<Cinema>('cinema', id, { locale })
 const t = createTranslator(locale)
 
-const descText = item.description.root.children
+const descText = item.synopsis.root.children
 	.flatMap((para) => para.children)
 	.filter((child) => child.type === 'text')
 	.map((child) => child.text)
@@ -63,25 +64,34 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 <Layout title={item.title}>
 	<main>
 		<section class="section-default bg-primary/20">
-			<article class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-8">
-				<div class="flex items-center justify-center order-2 lg:order-1">
-					<MyImage
-						src={item.thumbnail?.url}
-						alt={item.thumbnail?.alt ?? item.title}
-						background={item.thumbnail?.blurhash}
-						width={850}
-						height={850}
-						layout="constrained"
-					/>
-				</div>
+			<article class="relative">
+				<MyImage
+					src={item.thumbnail?.url}
+					alt={item.thumbnail?.alt ?? item.title}
+					background={item.thumbnail?.blurhash}
+					width={1200}
+					height={600}
+					layout="fullWidth"
+				/>
 
-				<div class="flex flex-col order-1 lg:order-2">
-					<p class="distinguished mb-4 lg:mb-8 text-sm">{item.location || MDV_DEFAULT_ADDRESS}</p>
+				<div class="absolute right-0 bottom-0 left-0 m-3 lg:m-8 bg-white/85 px-4 lg:px-16 py-4 lg:py-8">
+					<h1 class="text-primary mb-2 lg:mb-4 text-xl lg:text-3xl font-bold">{item.title}</h1>
 
-					<h1 class="pb-6 lg:pb-12 text-4xl font-bold text-black">{item.title}</h1>
+					<p class="distinguished mb-1 text-xs lg:text-sm">
+						{translatePublicField(item.public, t)} - {item.genre} - {item.languages}
+					</p>
 
-					<p class="pb-4">{item.genre}</p>
+					<p class="distinguished mb-3 lg:mb-6 text-xs lg:text-sm capitalize">
+						{formatDate(item.date_start)} - {formatTime(item.date_start)}
+					</p>
 
+					<div class="flex flex-wrap gap-3">
+						{
+							item.price
+								.split(';')
+								.map((price: string) => <span class="bg-primary/80 px-4 py-2 text-sm text-white">{price.trim()}</span>)
+						}
+					</div>
 				</div>
 			</article>
 		</section>
@@ -89,9 +99,10 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 		<section class="section-default">
 			<article class="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-5 pb-8 lg:pb-16">
 				<div class="lg:col-span-2 flex flex-col order-1">
-					<h2 class={cn('pb-2 lg:pb-3', !moreInfoText ? 'pb-8 lg:pb-16' : 'pb-2 lg:pb-3')}>{item.title}</h2>
+					<h2 class={cn('pb-2 lg:pb-3', !moreInfoText ? 'pb-8 lg:pb-16' : 'pb-2 lg:pb-3')}>{t('SYNOPSIS_DETAILS')}</h2>
 					{moreInfoText && <p class="distinguished pb-8 lg:pb-16">{moreInfoText}</p>}
 					<p>{descText}</p>
+
 					<div class="bg-primary/20 mt-8 lg:mt-16 px-5 py-8">
 						<ul class="space-y-5">
 							<li class="border-b border-black/20 px-5 pb-4 capitalize">
@@ -102,49 +113,48 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 							<li class="border-b border-black/20 px-5 pb-4">
 								<span class="font-bold">{t('LIEU')}</span> : {item.location || MDV_DEFAULT_ADDRESS}
 							</li>
+							<li class="flex flex-wrap items-center gap-3 border-b border-black/20 px-5 pb-4">
+								<span class="font-bold">{t('PRIX')}</span> :
+								{
+									item.price
+										.split(';')
+										.map((price: string) => (
+											<span class="text-primary inline-block bg-white px-2 py-1">{price.trim()}</span>
+										))
+								}
+							</li>
+							<li class="border-b border-black/20 px-5 pb-4">
+								<span class="font-bold">{t('DURATION')}</span> : {item.duration}
+							</li>
 							<li class="border-b border-black/20 px-5 pb-4">
 								<span class="font-bold">{t('GENRE')}</span> : {item.genre}
 							</li>
 							<li class="border-b border-black/20 px-5 pb-4">
-								<span class="font-bold">{t('AUTEURS')}</span> : {item.authors}
+								<span class="font-bold">{t('REALISATION')}</span> : {item.directors}
 							</li>
-							<li class="border-b border-black/20 px-5 pb-4">
-								<span class="font-bold">{t('CREDITS_PHOTOS')}</span> : {item.credits_photos}
+							<li class="px-5 pb-4">
+								<span class="font-bold">{t('AVEC')}</span> : Jasper Billerbeck, Laura Tonke, Diane Kruger
 							</li>
-							<li class="border-b border-black/20 px-5 pb-4">
-								<span class="font-bold">{t('PORTFOLIO')}</span> : {item.portfolio_authors}
-							</li>
-							{
-								item.tags && (
-									<li class="flex items-center justify-center gap-3">
-										{item.tags.split(';').map((tag: string) => (
-											<span class="bg-primary text-primary-foreground distinguished inline-block px-2 py-1">
-												{tag.trim()}
-											</span>
-										))}
-									</li>
-								)
-							}
 						</ul>
 					</div>
 				</div>
 				<div class="grid grid-cols-2 lg:grid-cols-4 lg:grid-rows-4 gap-2 lg:gap-5 order-2">
 					{
 						(() => {
-						// 1 image: full grid
-						if (allImages.length < 2) {
-							return (
-								<MyImage
-									src={allImages?.[0]?.url}
-									alt={allImages?.[0]?.alt ?? t('IMAGE_PLACEHOLDER')}
-									background={allImages?.[0]?.blurhash}
-									width={600}
-									height={880}
-									layout="fullWidth"
-									class="col-span-2 lg:col-span-4 lg:row-span-4 max-h-96 lg:max-h-none object-cover"
-								/>
-							)
-						}
+							// 1 image: full grid
+							if (allImages.length < 2) {
+								return (
+									<MyImage
+										src={allImages?.[0]?.url}
+										alt={allImages?.[0]?.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={allImages?.[0]?.blurhash}
+										width={600}
+										height={880}
+										layout="fullWidth"
+										class="col-span-2 lg:col-span-4 lg:row-span-4 max-h-96 lg:max-h-none object-cover"
+									/>
+								)
+							}
 
 							// 2 images: stacked vertically
 							if (allImages.length === 2) {

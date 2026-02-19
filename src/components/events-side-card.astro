@@ -24,9 +24,11 @@ const getEventHref = (event: ImmanquableDoc) => {
 		case 'art_vivant':
 			return `/art-vivant/spectacle/${event.id}`
 		case 'cinema':
+			if (event.type === 'scolaire') return `/cinema/scolaire/${event.id}`
+			if (event.type === 'rdv_cinema') return `/cinema/rdv-cinema/${event.id}`
 			return `/cinema/seance/${event.id}`
 		case 'exposition':
-			return `/exposition`
+			return event.type === 'evenement' ? `/exposition/evenement/${event.id}` : `/exposition`
 		case 'parc_national':
 			return `/parc-national/evenement/${event.id}`
 	}
@@ -61,11 +63,11 @@ const eventHref = event ? getEventHref(event) : undefined
 				<p class="w-full truncate px-10 pt-2 text-lg font-semibold">{event.title}</p>
 
 				<div class="flex w-full items-center gap-3 px-10">
-					<div class="text-xs text-gray-200">
+					<div class="min-w-0 shrink truncate text-xs text-gray-200 capitalize">
 						{new Date(event.date_start).toLocaleDateString(locale, { dateStyle: 'full' })}
 					</div>
-					{event.genre && <div class="mr-auto text-xs text-gray-200">{event.genre}</div>}
-					<a href={eventHref} class="ml-auto py-2 pl-2 text-xs underline underline-offset-3">
+					{event.genre && <div class="mr-auto min-w-0 shrink truncate text-xs text-gray-200">{event.genre}</div>}
+					<a href={eventHref} class="ml-auto shrink-0 py-2 pl-2 text-xs underline underline-offset-3">
 						{t('EN_SAVOIR_PLUS')}
 					</a>
 				</div>
