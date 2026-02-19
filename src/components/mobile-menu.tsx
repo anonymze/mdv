@@ -117,7 +117,7 @@ export function MobileMenu({
 				</nav>
 
 				{/* Hours + Contact */}
-				<div className="mt-auto mb-auto flex items-end justify-between gap-4 px-5 pb-6">
+				<div className="mt-auto mb-auto flex items-end justify-between gap-1  px-5 pb-6">
 					<div>
 						<p className="whitespace-nowrap pb-2 text-xs font-serif uppercase">{hoursLabel}</p>
 						<hr className="mb-3 border-white/40" />
