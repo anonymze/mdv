@@ -103,7 +103,7 @@ export function MobileMenu({
 				</div>
 
 				{/* Nav links */}
-				<nav className="flex flex-col items-end gap-1.5 px-8 py-1">
+				<nav className="flex flex-col items-end gap-1.5 px-8">
 					{links.map((link) => (
 						<a
 							key={link.href}
@@ -117,7 +117,7 @@ export function MobileMenu({
 				</nav>
 
 				{/* Hours + Contact */}
-				<div className="mt-auto mb-auto flex items-end justify-between gap-1  px-5 pb-6">
+				<div className="mt-auto mb-auto flex items-end justify-between gap-1  px-5 py-2">
 					<div>
 						<p className="whitespace-nowrap pb-2 text-xs font-serif uppercase">{hoursLabel}</p>
 						<hr className="mb-3 border-white/40" />
@@ -144,7 +144,7 @@ export function MobileMenu({
 							src={event.imageUrl}
 							alt={event.imageAlt}
 							layout="constrained"
-							className="mb-3 h-32 w-full object-cover"
+							className="mb-3 h-28 w-full object-cover"
 						/>
 						<div className="flex w-full items-center gap-3">
 							<div className="min-w-0 shrink truncate text-xs text-gray-200 capitalize">{event.date}</div>
