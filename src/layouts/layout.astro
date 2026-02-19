@@ -24,6 +24,8 @@ const [immanquable, hoursData] = await Promise.all([
 	findGlobal<Hour>('hours', { locale })
 ])
 
+console.log(immanquable)
+
 const hoursForToday = getHoursForToday(hoursData)
 
 // Multilingual metadata

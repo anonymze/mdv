@@ -174,7 +174,7 @@ const evenements = await find<EvenementType>('exposition', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-1 text-black">
-											<a href={`/exposition`} class="after:absolute after:inset-0 after:z-10">
+											<a href={`/exposition/evenement/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

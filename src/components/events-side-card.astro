@@ -1,8 +1,8 @@
 ---
 import { createTranslator, type I18n } from '@/i18n/translations'
-import { SideCard } from './side-card'
-import Image from './my-image.astro'
 import type { ImmanquableDoc } from '@/types/immanquable'
+import Image from './my-image.astro'
+import { SideCard } from './side-card'
 
 interface Props {
 	locale: I18n
@@ -22,56 +22,54 @@ const getThumbnail = (event: ImmanquableDoc) => {
 const getEventHref = (event: ImmanquableDoc) => {
 	switch (event._collection) {
 		case 'art_vivant':
-			return `/art-vivant/${event.id}`
+			return `/art-vivant/spectacle/${event.id}`
 		case 'cinema':
-			return `/cinema/${event.id}`
+			return `/cinema/seance/${event.id}`
 		case 'exposition':
-			return `/exposition/${event.id}`
+			return `/exposition`
 		case 'parc_national':
-			return `/parc-national/${event.id}`
+			return `/parc-national/evenement/${event.id}`
 	}
 }
 
 const eventHref = event ? getEventHref(event) : undefined
 ---
 
-{event && (
-	<SideCard
-		client:media="(min-width: 1280px)"
-		position="top-[calc(25%+13.5rem)]"
-		height="h-72"
-		width="w-100"
-		tabText={[t('EVENEMENT'), t('IMMANQUABLE')]}
-		ariaLabel={t('PANNEAU_EVENEMENT_IMMANQUABLE')}
-	>
-		<div class="text-primary-foreground flex h-full flex-col items-start py-7 text-left">
-			<p class="px-10 pb-2 text-xl">{t('EVENEMENT_IMMANQUABLE')}</p>
-			{getThumbnail(event) && (
+{
+	event && (
+		<SideCard
+			client:media="(min-width: 1280px)"
+			position="top-[calc(25%+13.5rem)]"
+			height="h-72"
+			width="w-100"
+			tabText={[t('EVENEMENT'), t('IMMANQUABLE')]}
+			ariaLabel={t('PANNEAU_EVENEMENT_IMMANQUABLE')}
+		>
+			<div class="text-primary-foreground flex h-full flex-col items-start py-7 text-left">
+				<p class="px-10 pb-2 text-xl">{t('EVENEMENT_IMMANQUABLE')}</p>
+
 				<Image
 					src={getThumbnail(event)?.url}
 					alt={getThumbnail(event)?.alt ?? t('IMAGE_PLACEHOLDER')}
 					background={getThumbnail(event)?.blurhash}
-					width={600}
+					width={400}
 					height={128}
-					layout='constrained'
-					class="w-full h-32 object-cover"
+					layout="constrained"
+					class="h-32 w-full object-cover"
 				/>
-			)}
 
+				<p class="w-full truncate px-10 pt-2 text-lg font-semibold">{event.title}</p>
 
-			<p class="w-full truncate px-10 pt-2 text-lg font-semibold">{event.title}</p>
-
-			<div class="flex w-full items-center gap-3 px-10">
-				<div class="text-xs text-gray-200">
-					{new Date(event.date_start).toLocaleDateString(locale, { dateStyle: 'full' })}
+				<div class="flex w-full items-center gap-3 px-10">
+					<div class="text-xs text-gray-200">
+						{new Date(event.date_start).toLocaleDateString(locale, { dateStyle: 'full' })}
+					</div>
+					{event.genre && <div class="mr-auto text-xs text-gray-200">{event.genre}</div>}
+					<a href={eventHref} class="ml-auto py-2 pl-2 text-xs underline underline-offset-3">
+						{t('EN_SAVOIR_PLUS')}
+					</a>
 				</div>
-				{event.genre && (
-					<div class="mr-auto text-xs text-gray-200">{event.genre}</div>
-				)}
-				<a href={eventHref} class="ml-auto py-2 pl-2 text-xs underline underline-offset-3">
-					{t('EN_SAVOIR_PLUS')}
-				</a>
 			</div>
-		</div>
-	</SideCard>
-)}
+		</SideCard>
+	)
+}

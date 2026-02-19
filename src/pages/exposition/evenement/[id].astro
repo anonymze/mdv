@@ -5,14 +5,14 @@ import { find } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import type { ParcNational } from '@/types/parc-national'
+import type { EvenementType } from '@/types/exposition'
 
 export async function getStaticPaths() {
 	const locales = ['fr', 'en', 'es']
 	const paths = []
 
 	for (const locale of locales) {
-		const data = await find<ParcNational>('parc_national', {
+		const data = await find<EvenementType>('exposition', {
 			limit: 100,
 			locale,
 			where: { type: { equals: 'evenement' } }
@@ -121,16 +121,6 @@ const formatTime = (dateStr: string) => {
 								<p class="text-lg">{item.location}</p>
 							</div>
 						)}
-
-						<div>
-							<h3 class="distinguished pb-2 text-sm uppercase">{t('PRIX')}</h3>
-							<p class="text-lg">{item.price}</p>
-						</div>
-
-						<div>
-							<h3 class="distinguished pb-2 text-sm uppercase">{t('DURATION')}</h3>
-							<p class="text-lg">{item.duration}</p>
-						</div>
 					</div>
 
 					<div>

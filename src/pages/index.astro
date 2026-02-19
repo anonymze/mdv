@@ -359,7 +359,7 @@ const seances = await find<Cinema>('cinema', {
 			<article class="mx-auto max-w-200">
 				<h2 class="text-secondary pb-2 lg:pb-4">{t('NEWSLETTER_TITRE')}</h2>
 				<p class="pb-3 lg:pb-7 italic">{t('NEWSLETTER_INTRO')}</p>
-				<p class="pb-4 lg:pb-8">{t('NEWSLETTER_DESC')}</p>
+				<p class="pb-8">{t('NEWSLETTER_DESC')}</p>
 
 				<NewsletterForm client:load locale={locale} variant="default" apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL} />
 			</article>
