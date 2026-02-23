@@ -58,11 +58,23 @@ function buildQuery(params?: PayloadQueryParams): string {
   return query ? `?${query}` : ''
 }
 
-export async function find<T>(collection: string, params?: PayloadQueryParams): Promise<PayloadResponse<T>> {
-  // Default sort by latest first if not specified
-  const queryParams = {
-    ...params,
-    sort: params?.sort || '-createdAt'
+interface FindOptions extends PayloadQueryParams {
+  /** Filter to only get documents with date_start >= today, sorted closest first. Default: true */
+  upcomingOnly?: boolean
+}
+
+export async function find<T>(collection: string, params?: FindOptions): Promise<PayloadResponse<T>> {
+  const { upcomingOnly = true, ...rest } = params || {}
+
+  const queryParams: PayloadQueryParams = {
+    ...rest,
+    sort: rest.sort || (upcomingOnly ? 'date_start' : '-createdAt'),
+    where: {
+      ...rest.where,
+      ...(upcomingOnly && {
+        date_start: { greater_than_equal: new Date().toISOString().split('T')[0] }
+      })
+    }
   }
 
   const query = buildQuery(queryParams)
