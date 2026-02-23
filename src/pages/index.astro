@@ -173,7 +173,7 @@ const seances = await find<Cinema>('cinema', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={item._href} class="after:absolute after:inset-0 after:z-10">
+											<a href={`/art-vivant/spectacle/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

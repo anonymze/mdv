@@ -16,11 +16,11 @@ const t = createTranslator(locale)
 const SPECTACLES_LIMIT = 8
 
 // Build time: fetch only first page
-const spectacles = await find<ArtVivant | Cinema | ParcNational | AutresActualites | Exposition>('archives', {
-	limit: SPECTACLES_LIMIT,
-	page: 1,
-	locale
-})
+// const spectacles = await find<ArtVivant | Cinema | ParcNational | AutresActualites | Exposition>('archives', {
+// 	limit: SPECTACLES_LIMIT,
+// 	page: 1,
+// 	locale
+// })
 
 const spectacleTranslations = {
 	PRECEDENT: t('PRECEDENT'),
@@ -46,16 +46,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				<p class="distinguished pb-3 lg:pb-6">{t('ARCHIVES_DESC')}</p>
 			</article>
 
-			<!-- <SpectaclesGrid
-				client:load
-				initialData={spectacles}
-				locale={locale}
-				limit={SPECTACLES_LIMIT}
-				payloadUrl={PAYLOAD_URL}
-				showFilters={true}
-				filterType="archives"
-				translations={spectacleTranslations}
-			/> -->
+
 		</section>
 	</main>
 </Layout>
