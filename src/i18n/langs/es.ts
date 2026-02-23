@@ -242,6 +242,7 @@ export default {
 	SUR_HORAIRES_OUVERTURE: "En los horarios de apertura",
 	SYNOPSIS_DETAILS: "Sinopsis y detalles",
 	TAGS: "Etiquetas",
+	TAGS_FILTER: "Etiquetas",
 	TARIF: "Tarifa",
 	TARIFICATIONS: "Tarifas",
 	TARIFS_CINEMA: "Tarifas cine",

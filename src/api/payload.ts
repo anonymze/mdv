@@ -66,14 +66,24 @@ interface FindOptions extends PayloadQueryParams {
 export async function find<T>(collection: string, params?: FindOptions): Promise<PayloadResponse<T>> {
   const { upcomingOnly = true, ...rest } = params || {}
 
+  // Extract custom date range if provided
+  const dateMin = rest.where?.date_start_min
+  const dateMax = rest.where?.date_start_max
+  const cleanWhere = { ...rest.where }
+  delete cleanWhere.date_start_min
+  delete cleanWhere.date_start_max
+
   const queryParams: PayloadQueryParams = {
     ...rest,
     sort: rest.sort || (upcomingOnly ? 'date_start' : '-createdAt'),
     where: {
-      ...rest.where,
-      ...(upcomingOnly && {
-        date_start: { greater_than_equal: new Date().toISOString().split('T')[0] }
-      })
+      ...cleanWhere,
+      ...(upcomingOnly || dateMin || dateMax ? {
+        date_start: {
+          ...(dateMin ? { greater_than_equal: dateMin } : upcomingOnly ? { greater_than_equal: new Date().toISOString().split('T')[0] } : {}),
+          ...(dateMax && { less_than_equal: dateMax })
+        }
+      } : {})
     }
   }
 

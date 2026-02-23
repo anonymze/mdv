@@ -28,6 +28,7 @@ interface SpectaclesGridProps {
 		MOTS_CLES?: string
 		GENRE?: string
 		TAGS?: string
+		TAGS_FILTER?: string
 		DATE?: string
 		ANNEE?: string
 		AUCUN_CONTENU?: string
@@ -50,13 +51,23 @@ export function SpectaclesGrid({
 
 	// Filter states
 	const [searchKeyword, setSearchKeyword] = useState('')
+	const [debouncedSearchKeyword, setDebouncedSearchKeyword] = useState('')
 	const [selectedGenre, setSelectedGenre] = useState('')
 	const [selectedTags, setSelectedTags] = useState('')
 	const [selectedDate, setSelectedDate] = useState('')
 	const [selectedYear, setSelectedYear] = useState('')
 
+	// Debounce search keyword (300ms)
 	useEffect(() => {
-		const hasFilters = searchKeyword || selectedGenre || selectedTags || selectedDate || selectedYear
+		const timer = setTimeout(() => {
+			setDebouncedSearchKeyword(searchKeyword)
+		}, 300)
+
+		return () => clearTimeout(timer)
+	}, [searchKeyword])
+
+	useEffect(() => {
+		const hasFilters = debouncedSearchKeyword || selectedGenre || selectedTags || selectedDate || selectedYear
 
 		// Use initial data only on page 1 with no filters
 		if (page === 1 && !hasFilters) {
@@ -73,8 +84,8 @@ export function SpectaclesGrid({
 			}
 
 			// Keyword search (title only, case-insensitive contains)
-			if (searchKeyword) {
-				where.title = { contains: searchKeyword }
+			if (debouncedSearchKeyword) {
+				where.title = { contains: debouncedSearchKeyword }
 			}
 
 			// Genre filter (case-insensitive contains)
@@ -87,43 +98,39 @@ export function SpectaclesGrid({
 				where.tags = { contains: selectedTags }
 			}
 
-			// Date filter
+			// Date filter - all filters show events FROM date onwards (no end limit)
 			if (selectedDate && selectedDate !== 'all') {
 				const now = new Date()
+				let startDate: Date
+
 				switch (selectedDate) {
 					case 'semaine_prochaine':
-						const endOfWeek = new Date(now)
-						endOfWeek.setDate(now.getDate() + 7)
-						where.date_start = {
-							greater_than_equal: now.toISOString(),
-							less_than_equal: endOfWeek.toISOString()
-						}
+						// All events starting from next week onwards
+						const nextWeek = new Date(now)
+						const daysUntilNextMonday = (8 - now.getDay()) % 7 || 7
+						nextWeek.setDate(now.getDate() + daysUntilNextMonday)
+						startDate = nextWeek
 						break
 					case 'mois_prochain':
-						const endOfMonth = new Date(now)
-						endOfMonth.setMonth(now.getMonth() + 1)
-						where.date_start = {
-							greater_than_equal: now.toISOString(),
-							less_than_equal: endOfMonth.toISOString()
-						}
+						// All events starting from next month onwards
+						startDate = new Date(now.getFullYear(), now.getMonth() + 1, 1)
 						break
 					case '6_mois':
-						const end6Months = new Date(now)
-						end6Months.setMonth(now.getMonth() + 6)
-						where.date_start = {
-							greater_than_equal: now.toISOString(),
-							less_than_equal: end6Months.toISOString()
-						}
+						// All events starting from +6 months onwards
+						startDate = new Date(now)
+						startDate.setMonth(now.getMonth() + 6)
 						break
 					case '1_an':
-						const endYear = new Date(now)
-						endYear.setFullYear(now.getFullYear() + 1)
-						where.date_start = {
-							greater_than_equal: now.toISOString(),
-							less_than_equal: endYear.toISOString()
-						}
+						// All events starting from +1 year onwards
+						startDate = new Date(now)
+						startDate.setFullYear(now.getFullYear() + 1)
 						break
+					default:
+						startDate = now
 				}
+
+				// Override upcomingOnly with custom start date
+				where.date_start_min = startDate.toISOString()
 			}
 
 			// Year filter (for archives)
@@ -163,12 +170,12 @@ export function SpectaclesGrid({
 		}
 
 		fetchData()
-	}, [page, locale, limit, initialData, searchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
+	}, [page, locale, limit, initialData, debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
 
 	// Reset to page 1 when filters change
 	useEffect(() => {
 		setPage(1)
-	}, [searchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
+	}, [debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
 
 
 	const getDescText = (item: ArtVivant) => {
@@ -233,7 +240,7 @@ export function SpectaclesGrid({
 					{/* Row 1: Keywords full width */}
 					<div className="relative w-full">
 						<Input
-							placeholder={translations.MOTS_CLES}
+							placeholder={translations.TAGS}
 							className="w-full bg-primary-foreground border-0 rounded-none min-h-12 pr-10"
 							value={searchKeyword}
 							onChange={(e) => setSearchKeyword(e.target.value)}
@@ -269,12 +276,11 @@ export function SpectaclesGrid({
 							onValueChange={setSelectedGenre}
 						/>
 						<SelectWrapper
-							placeholder={translations.TAGS || 'Tags'}
+							placeholder={translations.TAGS_FILTER || 'Tags'}
 							options={[
 								{ key: translations.TOUS || 'Tous', value: 'all' },
-								{ key: 'Jeune Public', value: 'Jeune Public' },
-								{ key: 'Tout Public', value: 'Tout Public' },
-								{ key: 'Famille', value: 'Famille' }
+								{ key: 'Famille', value: 'Famille' },
+								{ key: 'Tout Public', value: 'Tout Public' }
 							]}
 							className="w-full"
 							value={selectedTags}

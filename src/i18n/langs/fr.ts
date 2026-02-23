@@ -61,6 +61,7 @@ export default {
 	DURATION: "Durée",
 	MORE_INFORMATION: "Plus d'informations",
 	TAGS: "Mots-clés",
+	TAGS_FILTER: "Tags",
 	DECOUVREZ_PROCHAINS_EVENEMENTS: "Découvrez nos prochains évènements",
 	DES_14ANS: "Dès 14 ans",
 	DIRECTRICE_ADMINISTRATIVE: "Directrice administrative",
