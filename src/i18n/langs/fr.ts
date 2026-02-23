@@ -249,6 +249,7 @@ export default {
 	TARIFS_SPECTACLE: "Tarifs spectacle",
 	TECHNICIEN_REGISSEUR: "Technicien régisseur",
 	TEMPS_DE_JEU: "Temps de jeu",
+	TOUS: "Tous",
 	TRANSPORT_PUBLIC: "Transport public : vélo, bus, covoiturage",
 	TYPE_ARTICLE: "Type d'article",
 	TYPE_PUBLIC: "Type de public",

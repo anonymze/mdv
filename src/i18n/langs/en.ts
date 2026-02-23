@@ -249,6 +249,7 @@ export default {
 	TARIFS_SPECTACLE: "Show rates",
 	TECHNICIEN_REGISSEUR: "Technician stage manager",
 	TEMPS_DE_JEU: "Playing time",
+	TOUS: "All",
 	TRANSPORT_PUBLIC: "Public transport: bike, bus, carpool",
 	TYPE_ARTICLE: "Article type",
 	TYPE_PUBLIC: "Audience type",

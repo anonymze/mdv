@@ -31,6 +31,7 @@ interface SpectaclesGridProps {
 		DATE?: string
 		ANNEE?: string
 		AUCUN_CONTENU?: string
+		TOUS?: string
 	}
 }
 
@@ -77,17 +78,17 @@ export function SpectaclesGrid({
 			}
 
 			// Genre filter (case-insensitive contains)
-			if (selectedGenre) {
+			if (selectedGenre && selectedGenre !== 'all') {
 				where.genre = { contains: selectedGenre }
 			}
 
 			// Tags filter (case-insensitive contains)
-			if (selectedTags) {
+			if (selectedTags && selectedTags !== 'all') {
 				where.tags = { contains: selectedTags }
 			}
 
 			// Date filter
-			if (selectedDate) {
+			if (selectedDate && selectedDate !== 'all') {
 				const now = new Date()
 				switch (selectedDate) {
 					case 'semaine_prochaine':
@@ -230,18 +231,33 @@ export function SpectaclesGrid({
 			{showFilters && (
 				<div className="bg-primary mt-6 lg:mt-12 px-5 lg:px-10 py-6 lg:py-8 space-y-4 lg:space-y-6">
 					{/* Row 1: Keywords full width */}
-					<Input
-						placeholder={translations.MOTS_CLES}
-						className="w-full bg-primary-foreground border-0 rounded-none min-h-12"
-						value={searchKeyword}
-						onChange={(e) => setSearchKeyword(e.target.value)}
-					/>
+					<div className="relative w-full">
+						<Input
+							placeholder={translations.MOTS_CLES}
+							className="w-full bg-primary-foreground border-0 rounded-none min-h-12 pr-10"
+							value={searchKeyword}
+							onChange={(e) => setSearchKeyword(e.target.value)}
+						/>
+						{searchKeyword && (
+							<button
+								onClick={() => setSearchKeyword('')}
+								className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+								type="button"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+									<path d="M18 6 6 18" />
+									<path d="m6 6 12 12" />
+								</svg>
+							</button>
+						)}
+					</div>
 
 					{/* Row 2: 3 filters in same row on desktop, stacked on mobile */}
 					<div className={`grid grid-cols-1 ${filterType === 'archives' ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-4 lg:gap-6 *:min-h-12`}>
 						<SelectWrapper
 							placeholder={translations.GENRE || 'Genre'}
 							options={[
+								{ key: translations.TOUS || 'Tous', value: 'all' },
 								{ key: 'Humour', value: 'Humour' },
 								{ key: 'Théâtre', value: 'Théâtre' },
 								{ key: 'Danse', value: 'Danse' },
@@ -255,6 +271,7 @@ export function SpectaclesGrid({
 						<SelectWrapper
 							placeholder={translations.TAGS || 'Tags'}
 							options={[
+								{ key: translations.TOUS || 'Tous', value: 'all' },
 								{ key: 'Jeune Public', value: 'Jeune Public' },
 								{ key: 'Tout Public', value: 'Tout Public' },
 								{ key: 'Famille', value: 'Famille' }
@@ -266,6 +283,7 @@ export function SpectaclesGrid({
 						<SelectWrapper
 							placeholder={translations.DATE || 'Date'}
 							options={[
+								{ key: translations.TOUS || 'Tous', value: 'all' },
 								{ key: 'Semaine prochaine', value: 'semaine_prochaine' },
 								{ key: 'Mois prochain', value: 'mois_prochain' },
 								{ key: '6 mois après', value: '6_mois' },

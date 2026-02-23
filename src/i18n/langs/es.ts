@@ -249,6 +249,7 @@ export default {
 	TARIFS_SPECTACLE: "Tarifas espectáculo",
 	TECHNICIEN_REGISSEUR: "Técnico regidor",
 	TEMPS_DE_JEU: "Tiempo de juego",
+	TOUS: "Todos",
 	TRANSPORT_PUBLIC: "Transporte público: bicicleta, autobús, coche compartido",
 	TYPE_ARTICLE: "Tipo de artículo",
 	TYPE_PUBLIC: "Tipo de público",
