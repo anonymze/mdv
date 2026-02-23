@@ -26,11 +26,11 @@ interface SpectaclesGridProps {
 		IMAGE_PLACEHOLDER: string
 		EN_SAVOIR_PLUS: string
 		MOTS_CLES?: string
-		HORAIRES?: string
-		TYPE_PUBLIC?: string
-		PRIX?: string
-		LIEU?: string
+		GENRE?: string
+		TAGS?: string
+		DATE?: string
 		ANNEE?: string
+		AUCUN_CONTENU?: string
 	}
 }
 
@@ -47,24 +47,100 @@ export function SpectaclesGrid({
 	const [page, setPage] = useState(1)
 	const [loading, setLoading] = useState(false)
 
+	// Filter states
+	const [searchKeyword, setSearchKeyword] = useState('')
+	const [selectedGenre, setSelectedGenre] = useState('')
+	const [selectedTags, setSelectedTags] = useState('')
+	const [selectedDate, setSelectedDate] = useState('')
+	const [selectedYear, setSelectedYear] = useState('')
+
 	useEffect(() => {
-		if (page === 1) {
-			console.log('[Spectacles] Using initial data for page 1')
+		const hasFilters = searchKeyword || selectedGenre || selectedTags || selectedDate || selectedYear
+
+		// Use initial data only on page 1 with no filters
+		if (page === 1 && !hasFilters) {
 			setData(initialData)
 			return
 		}
 
 		const fetchData = async () => {
 			setLoading(true)
-			console.log('[Spectacles] Fetching page:', page, 'limit:', limit, 'locale:', locale)
+
+			// Build where clause
+			const where: any = {
+				type: { equals: 'evenement' }
+			}
+
+			// Keyword search (title only, case-insensitive contains)
+			if (searchKeyword) {
+				where.title = { contains: searchKeyword }
+			}
+
+			// Genre filter (case-insensitive contains)
+			if (selectedGenre) {
+				where.genre = { contains: selectedGenre }
+			}
+
+			// Tags filter (case-insensitive contains)
+			if (selectedTags) {
+				where.tags = { contains: selectedTags }
+			}
+
+			// Date filter
+			if (selectedDate) {
+				const now = new Date()
+				switch (selectedDate) {
+					case 'semaine_prochaine':
+						const endOfWeek = new Date(now)
+						endOfWeek.setDate(now.getDate() + 7)
+						where.date_start = {
+							greater_than_equal: now.toISOString(),
+							less_than_equal: endOfWeek.toISOString()
+						}
+						break
+					case 'mois_prochain':
+						const endOfMonth = new Date(now)
+						endOfMonth.setMonth(now.getMonth() + 1)
+						where.date_start = {
+							greater_than_equal: now.toISOString(),
+							less_than_equal: endOfMonth.toISOString()
+						}
+						break
+					case '6_mois':
+						const end6Months = new Date(now)
+						end6Months.setMonth(now.getMonth() + 6)
+						where.date_start = {
+							greater_than_equal: now.toISOString(),
+							less_than_equal: end6Months.toISOString()
+						}
+						break
+					case '1_an':
+						const endYear = new Date(now)
+						endYear.setFullYear(now.getFullYear() + 1)
+						where.date_start = {
+							greater_than_equal: now.toISOString(),
+							less_than_equal: endYear.toISOString()
+						}
+						break
+				}
+			}
+
+			// Year filter (for archives)
+			if (selectedYear) {
+				const yearStart = new Date(`${selectedYear}-01-01T00:00:00Z`)
+				const yearEnd = new Date(`${selectedYear}-12-31T23:59:59Z`)
+				where.date_start = {
+					greater_than_equal: yearStart.toISOString(),
+					less_than_equal: yearEnd.toISOString()
+				}
+			}
+
 			try {
 				const result = await find<ArtVivant>('art_vivant', {
 					limit,
 					page,
 					locale,
-					where: {
-						type: { equals: 'evenement' }
-					}
+					where
 				})
 				console.log('[Spectacles] Received data:', {
 					totalDocs: result.totalDocs,
@@ -81,13 +157,17 @@ export function SpectaclesGrid({
 					stack: error instanceof Error ? error.stack : undefined
 				})
 			} finally {
-				console.log('[Spectacles] Fetch complete, loading:', false)
 				setLoading(false)
 			}
 		}
 
 		fetchData()
-	}, [page, locale, limit, initialData])
+	}, [page, locale, limit, initialData, searchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
+
+	// Reset to page 1 when filters change
+	useEffect(() => {
+		setPage(1)
+	}, [searchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
 
 
 	const getDescText = (item: ArtVivant) => {
@@ -111,7 +191,6 @@ export function SpectaclesGrid({
 	}
 
 	const handlePageChange = (newPage: number) => {
-		console.log('[Spectacles] handlePageChange called:', newPage, 'totalPages:', data.totalPages)
 		if (newPage < 1 || newPage > data.totalPages) return
 		setPage(newPage)
 	}
@@ -149,42 +228,74 @@ export function SpectaclesGrid({
 	return (
 		<>
 			{showFilters && (
-				<div className={`bg-primary mt-6 lg:mt-12 grid grid-cols-1 lg:grid-cols-8 lg:grid-rows-2 gap-4 lg:gap-6 px-5 lg:px-10 py-6 lg:py-8 *:min-h-12`}>
-					<Input placeholder={translations.MOTS_CLES} className="rows-span-1 lg:col-span-6 bg-primary-foreground border-0 rounded-none" />
-					<SelectWrapper
-						placeholder={translations.HORAIRES}
-						options={[{ key: 'fefef', value: 'fef' }]}
-						className="lg:col-span-2 w-full"
+				<div className="bg-primary mt-6 lg:mt-12 px-5 lg:px-10 py-6 lg:py-8 space-y-4 lg:space-y-6">
+					{/* Row 1: Keywords full width */}
+					<Input
+						placeholder={translations.MOTS_CLES}
+						className="w-full bg-primary-foreground border-0 rounded-none min-h-12"
+						value={searchKeyword}
+						onChange={(e) => setSearchKeyword(e.target.value)}
 					/>
-					<SelectWrapper
-						placeholder={translations.TYPE_PUBLIC}
-						options={[{ key: 'fefef', value: 'fef' }]}
-						className="lg:col-span-2 w-full"
-					/>
-					<SelectWrapper
-						placeholder={translations.PRIX}
-						options={[{ key: 'fefef', value: 'fef' }]}
-						className="lg:col-span-2 w-full"
-					/>
-					<SelectWrapper
-						placeholder={translations.LIEU}
-						options={[{ key: 'fefef', value: 'fef' }]}
-						className="lg:col-span-2 w-full"
-					/>
-					{filterType === 'archives' && (
+
+					{/* Row 2: 3 filters in same row on desktop, stacked on mobile */}
+					<div className={`grid grid-cols-1 ${filterType === 'archives' ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-4 lg:gap-6 *:min-h-12`}>
 						<SelectWrapper
-							placeholder={translations.ANNEE || 'Année'}
-							options={generateYearOptions()}
-							className="lg:col-span-2 w-full"
+							placeholder={translations.GENRE || 'Genre'}
+							options={[
+								{ key: 'Humour', value: 'Humour' },
+								{ key: 'Théâtre', value: 'Théâtre' },
+								{ key: 'Danse', value: 'Danse' },
+								{ key: 'Musique', value: 'Musique' },
+								{ key: 'Cirque', value: 'Cirque' }
+							]}
+							className="w-full"
+							value={selectedGenre}
+							onValueChange={setSelectedGenre}
 						/>
-					)}
+						<SelectWrapper
+							placeholder={translations.TAGS || 'Tags'}
+							options={[
+								{ key: 'Jeune Public', value: 'Jeune Public' },
+								{ key: 'Tout Public', value: 'Tout Public' },
+								{ key: 'Famille', value: 'Famille' }
+							]}
+							className="w-full"
+							value={selectedTags}
+							onValueChange={setSelectedTags}
+						/>
+						<SelectWrapper
+							placeholder={translations.DATE || 'Date'}
+							options={[
+								{ key: 'Semaine prochaine', value: 'semaine_prochaine' },
+								{ key: 'Mois prochain', value: 'mois_prochain' },
+								{ key: '6 mois après', value: '6_mois' },
+								{ key: '1 an après', value: '1_an' }
+							]}
+							className="w-full"
+							value={selectedDate}
+							onValueChange={setSelectedDate}
+						/>
+						{filterType === 'archives' && (
+							<SelectWrapper
+								placeholder={translations.ANNEE || 'Année'}
+								options={generateYearOptions()}
+								className="w-full"
+								value={selectedYear}
+								onValueChange={setSelectedYear}
+							/>
+						)}
+					</div>
 				</div>
 			)}
 
-			<div className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 min-h-104">
 				{loading ? (
-					<div className="col-span-full flex h-96 w-full items-center justify-center">
+					<div className="col-span-full flex w-full items-center justify-center">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
+					</div>
+				) : data.docs.length === 0 ? (
+					<div className="col-span-full flex w-full items-center justify-center">
+						<p className="text-lg text-gray-400">{translations.AUCUN_CONTENU}</p>
 					</div>
 				) : (
 					data.docs.map((item) => {

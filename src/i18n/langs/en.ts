@@ -21,6 +21,7 @@ export default {
 	ARCHIVES_DESC: "Dive back into the history of the House of the National Park and Valley through our archives: past shows, notable exhibitions, cultural events that have shaped our venue since its creation in 1982.",
 	ART_VIVANT: 'Living Art',
 	ARTISTE: "Artist",
+	AUCUN_CONTENU: "No content available",
 	AUTRES_MEDIAS: "Other media",
 	AUTRES_MEDIAS_DESC: "The media library also offers a wide selection of multimedia formats: CDs, DVDs and vinyl for all tastes. Your subscription also gives you access to a multitude of online resources, to listen, watch or discover content from home or on site. Music, films, online press, tutorials, documentaries and more: everything is at your fingertips to enrich your leisure time and discoveries.",
 	AUTRES_MEDIAS_INTRO: "CDs, DVDs, vinyl and online clicks!",

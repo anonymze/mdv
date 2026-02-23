@@ -21,6 +21,7 @@ export default {
 	ARCHIVES_DESC: "Replongez dans l'histoire de la Maison du Parc national et de la Vallée à travers nos archives : spectacles passés, expositions marquantes, événements culturels qui ont façonné notre lieu depuis sa création en 1982.",
 	ART_VIVANT: 'Art vivant',
 	ARTISTE: "Artiste",
+	AUCUN_CONTENU: "Aucun contenu disponible",
 	AUTRES_MEDIAS: "Autres médias",
 	AUTRES_MEDIAS_DESC: "La médiathèque propose également un large choix de supports multimédias : CD, DVD et vinyles pour tous les goûts. Votre abonnement vous permet aussi d'accéder à une multitude de ressources en ligne, pour écouter, regarder ou découvrir des contenus depuis chez vous ou sur place. Musique, films, presse en ligne, tutoriels, documentaires et plus encore : tout est à portée de main pour enrichir vos loisirs et vos découvertes.",
 	AUTRES_MEDIAS_INTRO: "CD, DVD, vinyles et clics en ligne !",

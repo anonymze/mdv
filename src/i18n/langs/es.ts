@@ -21,6 +21,7 @@ export default {
 	ARCHIVES_DESC: "Sumérjase de nuevo en la historia de la Casa del Parque Nacional y del Valle a través de nuestros archivos: espectáculos pasados, exposiciones destacadas, eventos culturales que han dado forma a nuestro lugar desde su creación en 1982.",
 	ART_VIVANT: 'Arte vivo',
 	ARTISTE: "Artista",
+	AUCUN_CONTENU: "Ningún contenido disponible",
 	AUTRES_MEDIAS: "Otros medios",
 	AUTRES_MEDIAS_DESC: "La mediateca también ofrece una amplia selección de soportes multimedia: CD, DVD y vinilos para todos los gustos. Su suscripción también le permite acceder a una multitud de recursos en línea, para escuchar, ver o descubrir contenidos desde su casa o in situ. Música, películas, prensa en línea, tutoriales, documentales y más: todo está al alcance de la mano para enriquecer sus momentos de ocio y descubrimientos.",
 	AUTRES_MEDIAS_INTRO: "¡CD, DVD, vinilos y clics en línea!",
