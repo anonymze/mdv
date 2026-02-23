@@ -11,7 +11,7 @@ import {
 	PaginationPrevious
 } from '@/components/ui/pagination'
 import type { ArtVivant } from '@/types/art-vivant'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 interface SpectaclesGridProps {
 	initialData: PayloadResponse<ArtVivant>
@@ -48,6 +48,7 @@ export function SpectaclesGrid({
 	const [data, setData] = useState<PayloadResponse<ArtVivant>>(initialData)
 	const [page, setPage] = useState(1)
 	const [loading, setLoading] = useState(false)
+	const gridRef = useRef<HTMLDivElement>(null)
 
 	// Filter states
 	const [searchKeyword, setSearchKeyword] = useState('')
@@ -201,6 +202,10 @@ export function SpectaclesGrid({
 	const handlePageChange = (newPage: number) => {
 		if (newPage < 1 || newPage > data.totalPages) return
 		setPage(newPage)
+		// Scroll to grid only on mobile
+		if (window.innerWidth < 1024) {
+			gridRef.current?.scrollIntoView({ behavior: 'auto' })
+		}
 	}
 
 	const renderPageNumbers = () => {
@@ -312,7 +317,7 @@ export function SpectaclesGrid({
 				</div>
 			)}
 
-			<div className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 min-h-104">
+			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 min-h-104">
 				{loading ? (
 					<div className="col-span-full flex w-full items-center justify-center">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
