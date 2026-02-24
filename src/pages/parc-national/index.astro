@@ -1,8 +1,13 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
+import FirstMediaImg from '@/assets/imgs/parc/1.webp'
+import SecondMediaImg from '@/assets/imgs/parc/2.webp'
+import ThirdMediaImg from '@/assets/imgs/parc/3.webp'
+import FourthMediaImg from '@/assets/imgs/parc/4.webp'
 import MyImage from '@/components/my-image.astro'
+import { SpectaclesGrid } from '@/components/spectacles-grid'
+import { ArticleGrid } from '@/components/article-grid'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
@@ -10,64 +15,91 @@ import type { ParcNational } from '@/types/parc-national'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
+const EVENEMENTS_LIMIT = 4
+
 const evenements = await find<ParcNational>('parc_national', {
-	limit: 4,
+	limit: EVENEMENTS_LIMIT,
+	page: 1,
 	locale,
 	where: { type: { equals: 'evenement' } }
 })
 
+const ARTICLES_LIMIT = 6
+
 const articles = await find<ParcNational>('parc_national', {
-	limit: 6,
+	limit: ARTICLES_LIMIT,
+	page: 1,
 	locale,
-	where: { type: { equals: 'article' } }
+	upcomingOnly: false,
+	where: {
+		type: { equals: 'article' },
+	}
 })
+
+const evenementsTranslations = {
+	PRECEDENT: t('PRECEDENT'),
+	SUIVANT: t('SUIVANT'),
+	IMAGE_PLACEHOLDER: t('IMAGE_PLACEHOLDER'),
+	EN_SAVOIR_PLUS: t('EN_SAVOIR_PLUS')
+}
+
+const articlesTranslations = {
+	PRECEDENT: t('PRECEDENT'),
+	SUIVANT: t('SUIVANT'),
+	IMAGE_PLACEHOLDER: t('IMAGE_PLACEHOLDER'),
+	AUCUN_CONTENU: t('AUCUN_CONTENU')
+}
+
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
 		<section class="section-default" id="description">
 			<h1 class="text-primary pb-8 lg:pb-20">{t('PARC_NATIONAL_TITRE')}</h1>
-			<article class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
-				<div class="flex flex-col order-1">
+			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
+				<div class="order-1 flex flex-col">
 					<p class="distinguished pb-8 lg:pb-16">{t('PARC_NATIONAL_INTRO')}</p>
 					<p>
 						{t('PARC_NATIONAL_DESC')}
 					</p>
 
-					<Button link="/" size={'xl'} className="mt-auto w-fit">{t('PARC_NATIONAL_SITE_OFFICIEL')}</Button>
+					<Button link="https://www.pyrenees-parcnational.fr/fr" openInNewTab size={'xl'} className="mt-auto w-fit"
+						>{t('PARC_NATIONAL_SITE_OFFICIEL')}</Button
+					>
 				</div>
-				<div class="grid grid-cols-2 lg:grid-cols-4 lg:grid-rows-3 gap-2 lg:gap-5 order-2">
+				<div class="order-2 grid grid-cols-2 gap-2 lg:grid-cols-4 lg:grid-rows-3 lg:gap-5">
 					<MyImage
 						alt=""
-						src={EspaceCultureImg}
+						src={FirstMediaImg}
 						width={420}
 						height={670}
 						layout="fullWidth"
-						class="col-span-2 lg:row-span-3 max-h-48 lg:max-h-none object-cover"
+						class="col-span-2 max-h-48 object-cover lg:row-span-3 lg:max-h-none"
 					/>
 					<MyImage
 						alt=""
-						src={EspaceCultureImg}
+						src={SecondMediaImg}
 						width={420}
 						height={210}
 						layout="fullWidth"
-						class="col-span-1 lg:col-span-2 lg:row-span-1 max-h-24 lg:max-h-none object-cover"
+						class="col-span-1 max-h-24 object-cover lg:col-span-2 lg:row-span-1 lg:max-h-none"
 					/>
 					<MyImage
 						alt=""
-						src={EspaceCultureImg}
+						src={ThirdMediaImg}
 						width={420}
 						height={210}
 						layout="fullWidth"
-						class="col-span-1 lg:col-span-2 lg:row-span-1 max-h-24 lg:max-h-none object-cover"
+						class="col-span-1 max-h-24 object-cover lg:col-span-2 lg:row-span-1 lg:max-h-none"
 					/>
 					<MyImage
 						alt=""
-						src={EspaceCultureImg}
+						src={FourthMediaImg}
 						width={420}
 						height={210}
 						layout="fullWidth"
-						class="col-span-2 lg:row-span-1 max-h-24 lg:max-h-none object-cover"
+						class="col-span-2 max-h-24 object-cover lg:row-span-1 lg:max-h-none"
 					/>
 				</div>
 			</article>
@@ -81,73 +113,16 @@ const articles = await find<ParcNational>('parc_national', {
 			{t('PARC_EVENEMENTS_DESC')}
 		</p>
 
-		<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
-			{
-				evenements.docs.map((item) => {
-					const descText = item.description.root.children
-						.flatMap((para) => para.children)
-						.filter((child) => child.type === 'text')
-						.map((child) => child.text)
-						.join(' ')
-
-					return (
-						<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
-							<div class="overflow-hidden">
-								<MyImage
-									src={item.thumbnail?.url}
-									alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-									background={item.thumbnail?.blurhash}
-									width={275}
-									height={305}
-									layout="fullWidth"
-								/>
-							</div>
-							<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
-								<figcaption>
-									<h3 class="pb-1 text-black">
-										<a href={`/parc-national/evenement/${item.id}`} class="after:absolute after:inset-0 after:z-10">
-											{item.title}
-										</a>
-									</h3>
-									<time class="distinguished text-sm capitalize" datetime={item.date_start}>
-										{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
-										{new Date(item.date_start).toLocaleTimeString(locale, {
-											hour: '2-digit',
-											minute: '2-digit',
-											hour12: false
-										})}
-									</time>
-									<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
-								</figcaption>
-							</figure>
-							<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-							<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-								<figcaption class="text-white">
-									<p class="line-clamp-8 text-sm">{descText}</p>
-									<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-										{t('EN_SAVOIR_PLUS')}
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="16"
-											height="16"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										>
-											<path d="M5 12h14" />
-											<path d="m12 5 7 7-7 7" />
-										</svg>
-									</p>
-								</figcaption>
-							</figure>
-						</article>
-					)
-				})
-			}
-		</div>
+		<SpectaclesGrid
+			client:load
+			initialData={evenements}
+			locale={locale}
+			limit={EVENEMENTS_LIMIT}
+			payloadUrl={PAYLOAD_URL}
+			collection="parc_national"
+			showFilters={false}
+			translations={evenementsTranslations}
+		/>
 	</section>
 
 	<section class="section-default" id="articles">
@@ -157,44 +132,13 @@ const articles = await find<ParcNational>('parc_national', {
 			{t('PARC_ARTICLES_DESC')}
 		</p>
 
-		<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
-			{
-				articles.docs.map((item) => {
-					const descText = item.description.root.children
-						.flatMap((para) => para.children)
-						.filter((child) => child.type === 'text')
-						.map((child) => child.text)
-						.join(' ')
-
-					return (
-						<article class="group relative col-span-1 w-full bg-white">
-							<div class="overflow-hidden">
-								<MyImage
-									src={item.thumbnail?.url}
-									alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-									background={item.thumbnail?.blurhash}
-									width={365}
-									height={265}
-									layout="fullWidth"
-								/>
-							</div>
-							<figure class="p-4">
-								<figcaption>
-									<h3 class="pb-1 text-black">
-										<a href={`/parc-national/article/${item.id}`} class="after:absolute after:inset-0 after:z-10">
-											{item.title}
-										</a>
-									</h3>
-									<div class="flex items-center gap-4 pt-3">
-										<p class="line-clamp-3 text-xs">{descText}</p>
-										<p class="text-secondary text-lg">9€</p>
-									</div>
-								</figcaption>
-							</figure>
-						</article>
-					)
-				})
-			}
-		</div>
+		<ArticleGrid
+			client:load
+			initialData={articles}
+			locale={locale}
+			limit={ARTICLES_LIMIT}
+			payloadUrl={PAYLOAD_URL}
+			translations={articlesTranslations}
+		/>
 	</section>
 </Layout>

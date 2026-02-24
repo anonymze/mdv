@@ -41,17 +41,20 @@ function Button({
 	size,
 	asChild = false,
 	link = false,
+	openInNewTab = false,
 	children,
 	...props
 }: React.ComponentProps<'button'> &
 	VariantProps<typeof buttonVariants> & {
 		asChild?: boolean
 		link?: false | string
+		openInNewTab?: boolean
 	}) {
 	if (link) {
 		return (
 			<a
 				href={link}
+				{...(openInNewTab && { target: '_blank', rel: 'noopener noreferrer' })}
 				data-slot="button"
 				className={cn(buttonVariants({ variant, size, className }))}
 			>

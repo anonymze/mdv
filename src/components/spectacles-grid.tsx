@@ -12,12 +12,15 @@ import {
 } from '@/components/ui/pagination'
 import type { ArtVivant } from '@/types/art-vivant'
 import { useEffect, useState, useRef } from 'react'
+import type { ParcNational } from '@/types/parc-national'
 
+type CollectionType = ArtVivant | ParcNational;
 interface SpectaclesGridProps {
-	initialData: PayloadResponse<ArtVivant>
+	initialData: PayloadResponse<CollectionType>
 	locale: string
 	limit: number
 	payloadUrl: string
+	collection: string
 	showFilters?: boolean
 	filterType?: 'basic' | 'archives'
 	translations: {
@@ -36,16 +39,18 @@ interface SpectaclesGridProps {
 	}
 }
 
+
 export function SpectaclesGrid({
 	initialData,
 	locale,
 	limit,
 	payloadUrl,
+	collection,
 	showFilters = false,
 	filterType = 'basic',
 	translations
 }: SpectaclesGridProps) {
-	const [data, setData] = useState<PayloadResponse<ArtVivant>>(initialData)
+	const [data, setData] = useState<PayloadResponse<CollectionType>>(initialData)
 	const [page, setPage] = useState(1)
 	const [loading, setLoading] = useState(false)
 	const gridRef = useRef<HTMLDivElement>(null)
@@ -145,7 +150,7 @@ export function SpectaclesGrid({
 			}
 
 			try {
-				const result = await find<ArtVivant>('art_vivant', {
+				const result = await find<ArtVivant>(collection, {
 					limit,
 					page,
 					locale,
@@ -179,7 +184,7 @@ export function SpectaclesGrid({
 	}, [debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
 
 
-	const getDescText = (item: ArtVivant) => {
+	const getDescText = (item: CollectionType) => {
 		return item.description.root.children
 			.flatMap((para) => para.children)
 			.filter((child) => child.type === 'text')

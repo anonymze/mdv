@@ -26,7 +26,10 @@ const t = createTranslator(locale)
 const ludotheque = await find<Mediatheque>('mediatheque', {
 	limit: 6,
 	locale,
-	where: { type: { equals: 'ludotheque' } }
+	upcomingOnly: false,
+	where: {
+		type: { equals: 'ludotheque' }
+	}
 })
 ---
 
