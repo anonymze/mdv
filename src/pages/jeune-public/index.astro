@@ -5,10 +5,10 @@ import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import {
-	translateLudoDuration,
-	translateLudoPlayers,
-	translateLudoPublic,
-	translatePublicField
+translateLudoDuration,
+translateLudoPlayers,
+translateLudoPublic,
+translatePublicField
 } from '@/lib/translate-fields'
 import type { Cinema } from '@/types/cinema'
 import type { Mediatheque } from '@/types/mediatheque'
@@ -29,9 +29,11 @@ const evenements = await find<ParcNational>('parc_national', {
 const ludotheque = await find<Mediatheque>('mediatheque', {
 	limit: 3,
 	locale,
+		upcomingOnly: false,
 	where: {
 		type: { equals: 'ludotheque' },
-		jeunePublic: { equals: true }
+		jeunePublic: { equals: true },
+
 	}
 })
 
