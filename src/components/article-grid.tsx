@@ -16,6 +16,7 @@ interface ArticleGridProps {
 	locale: string
 	limit: number
 	payloadUrl: string
+	mobileScrollOnly?: boolean
 	translations: {
 		PRECEDENT: string
 		SUIVANT: string
@@ -29,6 +30,7 @@ export function ArticleGrid({
 	locale,
 	limit,
 	payloadUrl,
+	mobileScrollOnly = false,
 	translations
 }: ArticleGridProps) {
 	const [data, setData] = useState<PayloadResponse<ParcNational>>(initialData)
@@ -77,8 +79,12 @@ export function ArticleGrid({
 	const handlePageChange = (newPage: number) => {
 		if (newPage < 1 || newPage > data.totalPages) return
 		setPage(newPage)
-		if (window.innerWidth < 1024) {
-			gridRef.current?.scrollIntoView({ behavior: 'auto' })
+		if (!mobileScrollOnly || window.innerWidth < 1024) {
+			const el = gridRef.current
+			if (el) {
+				const y = el.getBoundingClientRect().top + window.scrollY - 32
+				window.scrollTo({ top: y, behavior: 'auto' })
+			}
 		}
 	}
 

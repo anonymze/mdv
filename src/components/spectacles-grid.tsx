@@ -23,6 +23,7 @@ interface SpectaclesGridProps {
 	collection: string
 	showFilters?: boolean
 	filterType?: 'basic' | 'archives'
+	mobileScrollOnly?: boolean
 	translations: {
 		PRECEDENT: string
 		SUIVANT: string
@@ -48,6 +49,7 @@ export function SpectaclesGrid({
 	collection,
 	showFilters = false,
 	filterType = 'basic',
+	mobileScrollOnly = false,
 	translations
 }: SpectaclesGridProps) {
 	const [data, setData] = useState<PayloadResponse<CollectionType>>(initialData)
@@ -207,9 +209,12 @@ export function SpectaclesGrid({
 	const handlePageChange = (newPage: number) => {
 		if (newPage < 1 || newPage > data.totalPages) return
 		setPage(newPage)
-		// Scroll to grid only on mobile
-		if (window.innerWidth < 1024) {
-			gridRef.current?.scrollIntoView({ behavior: 'auto' })
+		if (!mobileScrollOnly || window.innerWidth < 1024) {
+			const el = gridRef.current
+			if (el) {
+				const y = el.getBoundingClientRect().top + window.scrollY - 32
+				window.scrollTo({ top: y, behavior: 'auto' })
+			}
 		}
 	}
 
