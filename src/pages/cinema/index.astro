@@ -1,37 +1,75 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
+import { CinemaGrid } from '@/components/cinema-grid'
 import MyImage from '@/components/my-image.astro'
-import { SelectWrapper } from '@/components/select-wrapper'
-import { Input } from '@/components/ui/input'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import { translatePublicField } from '@/lib/translate-fields'
 import type { Cinema } from '@/types/cinema'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
+const SEANCES_LIMIT = 6
+
 const seances = await find<Cinema>('cinema', {
-	limit: 6,
+	limit: SEANCES_LIMIT,
+	page: 1,
 	locale,
 	where: {
 		type: { equals: 'seance' }
 	}
 })
+
 const rdv = await find<Cinema>('cinema', {
-	limit: 6,
+	limit: 4,
 	locale,
 	where: {
 		type: { equals: 'rdv_cinema' }
 	}
 })
 const scolaire = await find<Cinema>('cinema', {
-	limit: 6,
+	limit: 4,
 	locale,
 	where: {
 		type: { equals: 'scolaire' }
 	}
 })
+
+const cinemaTranslations = {
+	PRECEDENT: t('PRECEDENT'),
+	SUIVANT: t('SUIVANT'),
+	IMAGE_PLACEHOLDER: t('IMAGE_PLACEHOLDER'),
+	EN_SAVOIR_PLUS: t('EN_SAVOIR_PLUS'),
+	MOTS_CLES: t('MOTS_CLES'),
+	GENRE: t('GENRE'),
+	TAGS_FILTER: t('TYPE_PUBLIC'),
+	DATE: t('DATE'),
+	AUCUN_CONTENU: t('AUCUN_CONTENU'),
+	TOUS: t('TOUS'),
+	publicLabels: {
+		children: t('PUBLIC_ENFANTS'),
+		all_public: t('PUBLIC_TOUT_PUBLIC'),
+		all_public_avertissment: t('PUBLIC_TOUT_PUBLIC_AVERTISSEMENT'),
+		forbidden_12: t('PUBLIC_INTERDIT_12'),
+		forbidden_16: t('PUBLIC_INTERDIT_16'),
+		forbidden_18: t('PUBLIC_INTERDIT_18')
+	},
+	genreOptions: [
+		{ key: t('GENRE_COMEDIE'), value: 'Comédie' },
+		{ key: t('GENRE_DRAME'), value: 'Drame' },
+		{ key: t('GENRE_ACTION'), value: 'Action' },
+		{ key: t('GENRE_ANIMATION'), value: 'Animation' },
+		{ key: t('GENRE_DOCUMENTAIRE'), value: 'Documentaire' }
+	],
+	dateOptions: [
+		{ key: t('DATE_SEMAINE_PROCHAINE'), value: 'semaine_prochaine' },
+		{ key: t('DATE_MOIS_PROCHAIN'), value: 'mois_prochain' },
+		{ key: t('DATE_6_MOIS'), value: '6_mois' },
+		{ key: t('DATE_1_AN'), value: '1_an' }
+	]
+}
+
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
@@ -47,104 +85,15 @@ const scolaire = await find<Cinema>('cinema', {
 				</p>
 			</article>
 
-			<div class="bg-primary mt-6 lg:mt-12 grid grid-cols-1 lg:grid-cols-8 lg:grid-rows-2 gap-4 lg:gap-6 px-5 lg:px-10 py-6 lg:py-8 *:min-h-12">
-				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 lg:col-span-6 bg-white" />
-				<SelectWrapper
-					placeholder={t('HORAIRES')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="lg:col-span-2 w-full"
-				/>
-				<SelectWrapper
-					placeholder={t('TYPE_PUBLIC')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="lg:col-span-2 w-full"
-				/>
-				<SelectWrapper
-					placeholder={t('PRIX')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="lg:col-span-2 w-full"
-				/>
-				<SelectWrapper
-					placeholder={t('LIEU')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="lg:col-span-2 w-full"
-				/>
-				<SelectWrapper
-					placeholder={t('GENRE')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="lg:col-span-2 w-full"
-				/>
-			</div>
-
-			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-5">
-				{
-					seances.docs.map((item) => {
-						const synopsisText = item.synopsis.root.children
-							.flatMap((para) => para.children)
-							.filter((child) => child.type === 'text')
-							.map((child) => child.text)
-							.join(' ')
-
-						return (
-							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
-								<div class="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-										background={item.thumbnail?.blurhash}
-										width={900}
-										height={145}
-										layout="fullWidth"
-									/>
-								</div>
-								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
-									<figcaption>
-										<h3 class="pb-3 text-black">
-											<a href={`/cinema/seance/${item.id}`} class="after:absolute after:inset-0 after:z-10">
-												{item.title}
-											</a>
-										</h3>
-										<p class="distinguished text-primary pb-1 text-xs">
-											{translatePublicField(item.public, t)} - {item.genre} - {item.languages}
-										</p>
-										<p class="font-serif text-sm capitalize">
-											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
-											{new Date(item.date_start).toLocaleTimeString(locale, {
-												hour: '2-digit',
-												minute: '2-digit',
-												hour12: false
-											})}
-										</p>
-									</figcaption>
-								</figure>
-								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption class="text-white">
-										<p class="line-clamp-6 text-sm">{synopsisText}</p>
-										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{t('EN_SAVOIR_PLUS')}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
-									</figcaption>
-								</figure>
-							</article>
-						)
-					})
-				}
-			</div>
+			<CinemaGrid
+				client:load
+				initialData={seances}
+				locale={locale}
+				limit={SEANCES_LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				showFilters={true}
+				translations={cinemaTranslations}
+			/>
 		</section>
 
 		<section class="section-default bg-primary/20" id="rdv-cinema">
@@ -152,7 +101,9 @@ const scolaire = await find<Cinema>('cinema', {
 			<p class="distinguished pb-3 lg:pb-6">{t('RDV_CINEMA_INTRO')}</p>
 			<p class="lg:w-2/3">{t('RDV_CINEMA_DESC')}</p>
 
-			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+			>
 				{
 					rdv.docs.map((item) => {
 						const descText = item.synopsis.root.children
@@ -226,7 +177,9 @@ const scolaire = await find<Cinema>('cinema', {
 			<p class="distinguished pb-3 lg:pb-6">{t('CINEMA_SCOLAIRE_INTRO')}</p>
 			<p class="lg:w-2/3">{t('CINEMA_SCOLAIRE_DESC')}</p>
 
-			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+			>
 				{
 					scolaire.docs.map((item) => {
 						const descText = item.synopsis.root.children

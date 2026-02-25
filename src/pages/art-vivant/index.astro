@@ -41,7 +41,24 @@ const spectacleTranslations = {
 	TAGS_FILTER: t('TAGS_FILTER'),
 	DATE: t('DATE'),
 	AUCUN_CONTENU: t('AUCUN_CONTENU'),
-	TOUS: t('TOUS')
+	TOUS: t('TOUS'),
+	genreOptions: [
+		{ key: t('SPECTACLE_GENRE_HUMOUR'), value: 'Humour' },
+		{ key: t('SPECTACLE_GENRE_THEATRE'), value: 'Théâtre' },
+		{ key: t('SPECTACLE_GENRE_DANSE'), value: 'Danse' },
+		{ key: t('SPECTACLE_GENRE_MUSIQUE'), value: 'Musique' },
+		{ key: t('SPECTACLE_GENRE_CIRQUE'), value: 'Cirque' }
+	],
+	tagsOptions: [
+		{ key: t('TAG_FAMILLE'), value: 'Famille' },
+		{ key: t('TAG_TOUT_PUBLIC'), value: 'Tout Public' }
+	],
+	dateOptions: [
+		{ key: t('DATE_SEMAINE_PROCHAINE'), value: 'semaine_prochaine' },
+		{ key: t('DATE_MOIS_PROCHAIN'), value: 'mois_prochain' },
+		{ key: t('DATE_6_MOIS'), value: '6_mois' },
+		{ key: t('DATE_1_AN'), value: '1_an' }
+	]
 }
 
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL

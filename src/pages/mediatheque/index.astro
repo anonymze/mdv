@@ -6,12 +6,10 @@ import SecondImg from '@/assets/imgs/mediatheque/2.webp'
 import FourthImg from '@/assets/imgs/mediatheque/4.webp'
 import FivethImg from '@/assets/imgs/mediatheque/5.webp'
 import SixthImg from '@/assets/imgs/mediatheque/6.webp'
+import { LudothequeGrid } from '@/components/ludotheque-grid'
 import MyImage from '@/components/my-image.astro'
-import { SelectWrapper } from '@/components/select-wrapper'
-import { Input } from '@/components/ui/input'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import { translateLudoDuration, translateLudoPlayers, translateLudoPublic } from '@/lib/translate-fields'
 import type { Mediatheque } from '@/types/mediatheque'
 import FirstCyberbaseImg from '@/assets/imgs/cyberbase/1.webp'
 import SecondCyberbaseImg from '@/assets/imgs/cyberbase/2.webp'
@@ -23,14 +21,72 @@ import ThirdMediaImg from '@/assets/imgs/media/3.webp'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
+const LUDO_LIMIT = 6
+
 const ludotheque = await find<Mediatheque>('mediatheque', {
-	limit: 6,
+	limit: LUDO_LIMIT,
+	page: 1,
 	locale,
 	upcomingOnly: false,
 	where: {
 		type: { equals: 'ludotheque' }
 	}
 })
+
+const ludoTranslations = {
+	PRECEDENT: t('PRECEDENT'),
+	SUIVANT: t('SUIVANT'),
+	IMAGE_PLACEHOLDER: t('IMAGE_PLACEHOLDER'),
+	EN_SAVOIR_PLUS: t('EN_SAVOIR_PLUS'),
+	MOTS_CLES: t('MOTS_CLES'),
+	TEMPS_DE_JEU: t('TEMPS_DE_JEU'),
+	NOMBRE_DE_JOUEURS: t('NOMBRE_DE_JOUEURS'),
+	AGE: t('AGE'),
+	AUCUN_CONTENU: t('AUCUN_CONTENU'),
+	TOUS: t('TOUS'),
+	durationOptions: [
+		{ key: t('LUDO_DURATION_15'), value: '15' },
+		{ key: t('LUDO_DURATION_30'), value: '30' },
+		{ key: t('LUDO_DURATION_1H'), value: '1h' },
+		{ key: t('LUDO_DURATION_1H_PLUS'), value: '1h+' }
+	],
+	playersOptions: [
+		{ key: t('LUDO_PLAYERS_1'), value: '1' },
+		{ key: t('LUDO_PLAYERS_1_2'), value: '1-2' },
+		{ key: t('LUDO_PLAYERS_1_4'), value: '1-4' },
+		{ key: t('LUDO_PLAYERS_1_8'), value: '1-8' },
+		{ key: t('LUDO_PLAYERS_4_PLUS'), value: '4+' }
+	],
+	publicOptions: [
+		{ key: t('LUDO_PUBLIC_MINUS_3'), value: '-3' },
+		{ key: t('LUDO_PUBLIC_3_PLUS'), value: '3+' },
+		{ key: t('LUDO_PUBLIC_12_PLUS'), value: '12+' },
+		{ key: t('LUDO_PUBLIC_16_PLUS'), value: '16+' },
+		{ key: t('LUDO_PUBLIC_18_PLUS'), value: '18+' }
+	],
+	publicLabels: {
+		'-3': t('LUDO_PUBLIC_MINUS_3'),
+		'3+': t('LUDO_PUBLIC_3_PLUS'),
+		'12+': t('LUDO_PUBLIC_12_PLUS'),
+		'16+': t('LUDO_PUBLIC_16_PLUS'),
+		'18+': t('LUDO_PUBLIC_18_PLUS')
+	},
+	playersLabels: {
+		'1': t('LUDO_PLAYERS_1'),
+		'1-2': t('LUDO_PLAYERS_1_2'),
+		'1-4': t('LUDO_PLAYERS_1_4'),
+		'1-8': t('LUDO_PLAYERS_1_8'),
+		'4+': t('LUDO_PLAYERS_4_PLUS')
+	},
+	durationLabels: {
+		'15': t('LUDO_DURATION_15'),
+		'30': t('LUDO_DURATION_30'),
+		'1h': t('LUDO_DURATION_1H'),
+		'1h+': t('LUDO_DURATION_1H_PLUS')
+	}
+}
+
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
 
@@ -63,90 +119,15 @@ const ludotheque = await find<Mediatheque>('mediatheque', {
 				</p>
 			</article>
 
-			<div class="bg-primary mt-6 lg:mt-12 grid grid-cols-1 lg:grid-cols-8 lg:grid-rows-2 gap-4 lg:gap-6 px-5 lg:px-10 py-6 lg:py-8 *:min-h-12">
-				<Input placeholder={t('MOTS_CLES')} className="rows-span-1 lg:col-span-6 bg-white" />
-				<SelectWrapper
-					placeholder={t('TEMPS_DE_JEU')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="lg:col-span-2 w-full"
-				/>
-				<SelectWrapper
-					placeholder={t('NOMBRE_DE_JOUEURS')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="lg:col-span-2 w-full"
-				/>
-
-				<SelectWrapper
-					placeholder={t('AGE')}
-					options={[{ key: 'fefef', value: 'fef' }]}
-					className="lg:col-span-2 w-full"
-				/>
-			</div>
-
-			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92">
-				{
-					ludotheque.docs.map((item) => {
-						const descText = item.description.root.children
-							.flatMap((para) => para.children)
-							.filter((child) => child.type === 'text')
-							.map((child) => child.text)
-							.join(' ')
-
-						return (
-							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-xs">
-								<div class="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-										background={item.thumbnail?.blurhash}
-										width={365}
-										height={270}
-										layout="fullWidth"
-									/>
-								</div>
-								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
-									<figcaption>
-										<h3 class="pb-3 text-black">
-											<a href={`/mediatheque/ludotheque/${item.id}`} class="after:absolute after:inset-0 after:z-10">
-												{item.title}
-											</a>
-										</h3>
-										<p class="text-xs font-serif text-primary pb-2">{item.genre}</p>
-										<div class="flex items-center justify-between text-xs">
-											<p>{translateLudoPublic(item.public, t)}</p>
-											<p>{translateLudoPlayers(item.players, t)}</p>
-											<p>{translateLudoDuration(item.duration, t)}</p>
-										</div>
-									</figcaption>
-								</figure>
-								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption class="text-white">
-										<p class="line-clamp-8 text-sm">{descText}</p>
-										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{t('EN_SAVOIR_PLUS')}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
-									</figcaption>
-								</figure>
-							</article>
-						)
-					})
-				}
-			</div>
+			<LudothequeGrid
+				client:load
+				initialData={ludotheque}
+				locale={locale}
+				limit={LUDO_LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				showFilters={true}
+				translations={ludoTranslations}
+			/>
 		</section>
 
 		<section class="section-default" id="cyberbase">
