@@ -213,7 +213,7 @@ export default {
 	LUDO_PLAYERS_1_2: "1 to 2 players",
 	LUDO_PLAYERS_1_4: "1 to 4 players",
 	LUDO_PLAYERS_1_8: "1 to 8 players",
-	LUDO_PLAYERS_4_PLUS: "4+ players",
+	LUDO_PLAYERS_4_PLUS: "8+ players",
 	LUDO_DURATION_15: "15 min",
 	LUDO_DURATION_30: "30 min",
 	LUDO_DURATION_1H: "1h",
