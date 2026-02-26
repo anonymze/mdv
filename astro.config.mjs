@@ -12,7 +12,7 @@ export default defineConfig({
 	adapter: vercel({
 		imageService: true,
 		imagesConfig: {
-			sizes: [80, 120, 150, 160, 200, 240, 250, 275, 300, 365, 400, 420, 454, 550, 600, 700, 800, 850, 900, 1200, 1300]
+			sizes: [400, 640, 750, 828, 960, 1080, 1280, 1668, 1920, 2048, 2560, 3200, 3840, 4480, 5120, 6016]
 		}
 	}),
 	integrations: [react()],
