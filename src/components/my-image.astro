@@ -42,6 +42,9 @@ const {
 
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 
+// Cap breakpoints at 2x the display width to avoid loading huge images for small slots
+const effectiveBreakpoints = breakpoints ?? [width, width * 2].filter(w => w <= 3840)
+
 // Handle Astro image imports (ImageMetadata) and string URLs
 let imageSrc: string | ImageMetadata
 
@@ -71,7 +74,7 @@ if (typeof src === 'string') {
 	layout={layout}
 	placeholder={placeholder}
 	background={background ?? undefined}
-	breakpoints={breakpoints}
+	breakpoints={effectiveBreakpoints}
 	sizes={sizes}
 	priority={priority}
 	{...rest}
