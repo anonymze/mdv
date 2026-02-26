@@ -1,7 +1,7 @@
 import type { Hour } from '@/types/hours'
 
 export function getHoursForToday(hours: Hour) {
-	const today = new Date()
+	const today = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' }))
 
 	const isClosed =
 		hours.closed_dates?.some(({ date }) => {

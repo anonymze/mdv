@@ -23,7 +23,7 @@ const { isClosed, today, openStart, openEnd } = getHoursForToday(hours)
 		<hr class="mb-4 h-px w-full border-0 bg-white/40" />
 
 		<p class="text-primary-foreground pb-3 capitalize">
-			<time datetime={today.toISOString().split('T')[0]}>{today.toLocaleDateString(locale, { dateStyle: 'full' })}</time>
+			<time datetime={today.toISOString().split('T')[0]}>{today.toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })}</time>
 		</p>
 
 		{isClosed ? (
@@ -33,7 +33,7 @@ const { isClosed, today, openStart, openEnd } = getHoursForToday(hours)
 				<meta itemprop="opens" content={openStart} />
 				<meta itemprop="closes" content={openEnd} />
 				<p class="text-primary-foreground text-3xl font-bold">
-					<time datetime={openStart}>{new Date(openStart).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}</time> - <time datetime={openEnd}>{new Date(openEnd).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}</time>
+					<time datetime={openStart}>{new Date(openStart).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' })}</time> - <time datetime={openEnd}>{new Date(openEnd).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' })}</time>
 				</p>
 			</div>
 		) : null}
