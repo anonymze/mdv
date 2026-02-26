@@ -1,17 +1,11 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
-import ExemplePersonImg from '@/assets/imgs/exemple-person.png'
-import SectionBg from '@/assets/imgs/section-image.png'
 import MyImage from '@/components/my-image.astro'
-import { SelectWrapper } from '@/components/select-wrapper'
-import { Input } from '@/components/ui/input'
-import langs from '@/i18n/langs'
 import { createTranslator, I18n } from '@/i18n/translations'
-import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import type { AutresActualites } from '@/types/autres-actualites'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
@@ -28,7 +22,9 @@ const evenements = await find<AutresActualites>('autres_actualites', {
 			<h2 class="text-primary pb-2 lg:pb-3">{t('AUTRES_EVENEMENTS_TITRE')}</h2>
 			<p class="distinguished">{t('AUTRES_EVENEMENTS_INTRO')}</p>
 
-			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+			>
 				{
 					evenements.docs.map((item) => {
 						const descText = item.description.root.children

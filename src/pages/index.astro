@@ -1,8 +1,7 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
-
+import EspaceCultureImg from '@/assets/imgs/header/espace-culture-nature.webp'
 
 import FirstImg from '@/assets/imgs/home/1.png'
 import TenthImg from '@/assets/imgs/home/10.png'
@@ -18,24 +17,24 @@ import NineteenImg from '@/assets/imgs/home/19.png'
 import SecondImg from '@/assets/imgs/home/2.png'
 import TwentyImg from '@/assets/imgs/home/20.png'
 import ThirdImg from '@/assets/imgs/home/3.png'
+import Section1Img from '@/assets/imgs/home/31.png'
+import Section2Img from '@/assets/imgs/home/32.png'
+import Section3Img from '@/assets/imgs/home/33.png'
 import FourthImg from '@/assets/imgs/home/4.png'
 import FifthImg from '@/assets/imgs/home/5.png'
 import SixthImg from '@/assets/imgs/home/6.png'
 import SeventhImg from '@/assets/imgs/home/7.png'
 import EighthImg from '@/assets/imgs/home/8.png'
 import NinthImg from '@/assets/imgs/home/9.png'
-import Section1Img from '@/assets/imgs/home/31.png'
-import Section2Img from '@/assets/imgs/home/32.png'
-import Section3Img from '@/assets/imgs/home/33.png'
 import MyImage from '@/components/my-image.astro'
 import { NewsletterForm } from '@/components/newsletter-form'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
-import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import { translatePublicField } from '@/lib/translate-fields'
 import type { ArtVivant } from '@/types/art-vivant'
 import type { Cinema } from '@/types/cinema'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
@@ -57,19 +56,19 @@ const seances = await find<Cinema>('cinema', {
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-		<section class="text-primary grid grid-cols-1 lg:grid-cols-3 gap-2 px-4 py-8 lg:px-10 lg:py-16">
-			<header class="lg:col-span-2 flex w-full flex-col self-stretch pb-8 lg:pb-0">
-				<p class="text-md mb-8 lg:mb-20 tracking-widest uppercase">{t('HERO_LOCATION')}</p>
-				<h1 class="mb-8 lg:mb-14 font-serif text-4xl lg:text-6xl capitalize">
+		<section class="text-primary grid grid-cols-1 gap-2 px-4 py-8 lg:grid-cols-3 lg:px-10 lg:py-16">
+			<header class="flex w-full flex-col self-stretch pb-8 lg:col-span-2 lg:pb-0">
+				<p class="text-md mb-8 tracking-widest uppercase lg:mb-20">{t('HERO_LOCATION')}</p>
+				<h1 class="mb-8 font-serif text-4xl capitalize lg:mb-14 lg:text-6xl">
 					{t('HERO_TITLE_LINE1')}
-					<span class="mt-5 block text-4xl lg:text-6xl font-light italic">{t('HERO_TITLE_LINE2')}</span>
+					<span class="mt-5 block text-4xl font-light italic lg:text-6xl">{t('HERO_TITLE_LINE2')}</span>
 				</h1>
 
-				<p class="text-lg lg:text-xl distinguished text-black">
+				<p class="distinguished text-lg text-black lg:text-xl">
 					{t('HERO_SUBTITLE')}
 				</p>
 
-				<nav class="mt-auto flex flex-wrap w-full gap-5 lg:gap-6 pt-10 lg:pt-20">
+				<nav class="mt-auto flex w-full flex-wrap gap-5 pt-10 lg:gap-6 lg:pt-20">
 					<Button link={getRelativeLocaleUrl(locale, 'art-vivant')} className="p-6">
 						{t('ART_VIVANT')}
 					</Button>
@@ -99,7 +98,7 @@ const seances = await find<Cinema>('cinema', {
 		</section>
 
 		<section class="section-default">
-			<article class="grid grid-cols-1 lg:flex gap-4">
+			<article class="grid grid-cols-1 gap-4 lg:flex">
 				<div class="lg:w-2/3">
 					<h2 class="pb-2 lg:pb-3">{t('ESPACE_CULTURE_TITRE')}</h2>
 					<p class="distinguished pb-3 lg:pb-6">{t('ESPACE_CULTURE_INTRO')}</p>
@@ -111,7 +110,7 @@ const seances = await find<Cinema>('cinema', {
 						{t('ESPACE_CULTURE_DESC_PART5')}
 					</p>
 				</div>
-				<div class="grid lg:w-1/3 grid-cols-3 gap-3 lg:gap-5">
+				<div class="grid grid-cols-3 gap-3 lg:w-1/3 lg:gap-5">
 					<MyImage alt="" src={FirstImg} width={400} height={160} layout="fullWidth" class="col-span-2" />
 					<MyImage alt="" src={SecondImg} width={200} height={160} layout="fullWidth" class="col-span-1" />
 					<MyImage alt="" src={ThirdImg} width={600} height={250} layout="fullWidth" class="col-span-3" />
@@ -120,14 +119,15 @@ const seances = await find<Cinema>('cinema', {
 				</div>
 			</article>
 
-			<Button link={`${getRelativeLocaleUrl(locale, 'parc-national')}#evenements`} className="mt-6 lg:mt-12 h-10 px-6 lg:h-12 lg:px-8"
-				>{t('DECOUVREZ_PROCHAINS_EVENEMENTS')}</Button
+			<Button
+				link={`${getRelativeLocaleUrl(locale, 'parc-national')}#evenements`}
+				className="mt-6 h-10 px-6 lg:mt-12 lg:h-12 lg:px-8">{t('DECOUVREZ_PROCHAINS_EVENEMENTS')}</Button
 			>
 		</section>
 
 		<section class="section-default bg-primary/20">
-			<article class="grid grid-cols-1 lg:flex gap-5">
-				<div class="lg:w-2/12 hidden lg:block">
+			<article class="grid grid-cols-1 gap-5 lg:flex">
+				<div class="hidden lg:block lg:w-2/12">
 					<MyImage alt="" src={SixthImg} width={300} height={330} layout="fullWidth" class="mb-6" />
 					<MyImage alt="" src={SeventhImg} width={300} height={330} layout="fullWidth" />
 				</div>
@@ -137,21 +137,23 @@ const seances = await find<Cinema>('cinema', {
 					<p>
 						{t('ESPACE_CULTURE_DESC_PART1')}<br /><br />
 						{t('ESPACE_CULTURE_DESC_PART2')}<br /><br />
-						{t('ESPACE_CULTURE_DESC_PART3')}<br /> <br />
-						{t('ESPACE_CULTURE_DESC_PART4')}<br /> <br />
+						{t('ESPACE_CULTURE_DESC_PART3')}<br />
+						<br />
+						{t('ESPACE_CULTURE_DESC_PART4')}<br />
+						<br />
 						{t('ESPACE_CULTURE_DESC_PART5')}
 					</p>
 				</div>
-				<div class="lg:w-3/12 hidden lg:block">
+				<div class="hidden lg:block lg:w-3/12">
 					<MyImage class="w-2/6" alt="" src={EighthImg} width={550} height={680} layout="fullWidth" />
 				</div>
-				<div class="grid grid-cols-2 gap-3 lg:hidden mt-4">
-					<MyImage alt="" src={SixthImg} width={300} height={330} layout="fullWidth" class="max-h-40 " />
-					<MyImage alt="" src={SeventhImg} width={300} height={330} layout="fullWidth" class="max-h-40 " />
-					<MyImage alt="" src={EighthImg} width={550} height={680} layout="fullWidth" class="col-span-2 max-h-80 " />
+				<div class="mt-4 grid grid-cols-2 gap-3 lg:hidden">
+					<MyImage alt="" src={SixthImg} width={300} height={330} layout="fullWidth" class="max-h-40" />
+					<MyImage alt="" src={SeventhImg} width={300} height={330} layout="fullWidth" class="max-h-40" />
+					<MyImage alt="" src={EighthImg} width={550} height={680} layout="fullWidth" class="col-span-2 max-h-80" />
 				</div>
 			</article>
-			<div class="my-16 grid lg:grid-cols-4 grid-cols-1 md:grid-cols-2 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div class="my-16 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:grid-cols-4">
 				{
 					spectacles.docs.map((item) => {
 						const descText = item.description.root.children
@@ -175,7 +177,10 @@ const seances = await find<Cinema>('cinema', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={getRelativeLocaleUrl(locale, `art-vivant/spectacle/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
+											<a
+												href={getRelativeLocaleUrl(locale, `art-vivant/spectacle/${item.id}`)}
+												class="after:absolute after:inset-0 after:z-10"
+											>
 												{item.title}
 											</a>
 										</h3>
@@ -219,16 +224,18 @@ const seances = await find<Cinema>('cinema', {
 				}
 			</div>
 
-			<Button link={`${getRelativeLocaleUrl(locale, 'art-vivant')}#spectacles`} size={'xl'}>{t('VOIR_TOUS_SPECTACLES')}</Button>
+			<Button link={`${getRelativeLocaleUrl(locale, 'art-vivant')}#spectacles`} size={'xl'}
+				>{t('VOIR_TOUS_SPECTACLES')}</Button
+			>
 		</section>
 
 		<section>
-			<div class="hidden lg:grid grid-cols-8 gap-5 pt-30">
+			<div class="hidden grid-cols-8 gap-5 pt-30 lg:grid">
 				<MyImage src={NinthImg} alt="" width={200} height={460} layout="fullWidth" class="col-span-1 row-span-2" />
 				<MyImage src={TenthImg} alt="" width={1300} height={460} layout="fullWidth" class="col-span-6 row-span-2" />
 				<MyImage src={EleventhImg} alt="" width={200} height={460} layout="fullWidth" class="col-span-1 row-span-1" />
 			</div>
-			<div class="grid lg:hidden grid-cols-2 gap-3 pt-14 px-5">
+			<div class="grid grid-cols-2 gap-3 px-5 pt-14 lg:hidden">
 				<MyImage src={TenthImg} alt="" width={1300} height={460} layout="fullWidth" class="col-span-2 max-h-48" />
 				<MyImage src={NinthImg} alt="" width={200} height={460} layout="fullWidth" class="max-h-40" />
 				<MyImage src={EleventhImg} alt="" width={200} height={460} layout="fullWidth" class="max-h-40" />
@@ -242,7 +249,7 @@ const seances = await find<Cinema>('cinema', {
 					</p>
 				</div>
 
-				<div class="my-8 lg:my-16 grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
+				<div class="my-8 grid grid-cols-1 gap-3 lg:my-16 lg:grid-cols-2 lg:gap-5">
 					{
 						seances.docs.map((item) => {
 							const synopsisText = item.synopsis.root.children
@@ -266,7 +273,10 @@ const seances = await find<Cinema>('cinema', {
 									<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 										<figcaption>
 											<h3 class="pb-3 text-black">
-												<a href={getRelativeLocaleUrl(locale, `cinema/seance/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
+												<a
+													href={getRelativeLocaleUrl(locale, `cinema/seance/${item.id}`)}
+													class="after:absolute after:inset-0 after:z-10"
+												>
 													{item.title}
 												</a>
 											</h3>
@@ -311,12 +321,14 @@ const seances = await find<Cinema>('cinema', {
 						})
 					}
 				</div>
-				<Button link={`${getRelativeLocaleUrl(locale, 'cinema')}#cinema`} size={'xl'} className="mt-6 lg:mt-12">{t('VOIR_TOUTES_SEANCES')}</Button>
+				<Button link={`${getRelativeLocaleUrl(locale, 'cinema')}#cinema`} size={'xl'} className="mt-6 lg:mt-12"
+					>{t('VOIR_TOUTES_SEANCES')}</Button
+				>
 			</div>
 		</section>
 
 		<section class="section-default bg-secondary/20">
-			<article class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+			<article class="grid grid-cols-1 gap-5 lg:grid-cols-2">
 				<div class="flex flex-col">
 					<h2 class="text-secondary pb-2 lg:pb-3">{t('EXPOSITIONS_TITRE')}</h2>
 					<p class="distinguished pb-3 lg:pb-6">
@@ -326,8 +338,11 @@ const seances = await find<Cinema>('cinema', {
 						{t('EXPOSITIONS_DESC')}
 					</p>
 
-					<Button variant={'secondary'} link={`${getRelativeLocaleUrl(locale, 'exposition')}#exposition`} size={'xl'} className="mt-6 lg:mt-auto w-fit"
-						>{t('VOIR_EXPOSITION_MOMENT')}</Button
+					<Button
+						variant={'secondary'}
+						link={`${getRelativeLocaleUrl(locale, 'exposition')}#exposition`}
+						size={'xl'}
+						className="mt-6 w-fit lg:mt-auto">{t('VOIR_EXPOSITION_MOMENT')}</Button
 					>
 				</div>
 				<div class="space-y-3 lg:space-y-5">
@@ -355,7 +370,7 @@ const seances = await find<Cinema>('cinema', {
 		<section class="section-default">
 			<article class="mx-auto max-w-200">
 				<h2 class="text-secondary pb-2 lg:pb-4">{t('NEWSLETTER_TITRE')}</h2>
-				<p class="pb-3 lg:pb-7 italic">{t('NEWSLETTER_INTRO')}</p>
+				<p class="pb-3 italic lg:pb-7">{t('NEWSLETTER_INTRO')}</p>
 				<p class="pb-8">{t('NEWSLETTER_DESC')}</p>
 
 				<NewsletterForm client:load locale={locale} variant="default" apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL} />
@@ -363,7 +378,7 @@ const seances = await find<Cinema>('cinema', {
 		</section>
 
 		<section class="section-default bg-primary/20">
-			<article class="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-16">
+			<article class="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_2fr] lg:gap-16">
 				<!-- Right side: Content (first on mobile) -->
 				<div class="lg:order-2">
 					<h2 class="text-primary pb-2 lg:pb-3">{t('VALEURS_TITRE')}</h2>
@@ -374,7 +389,7 @@ const seances = await find<Cinema>('cinema', {
 				</div>
 
 				<!-- Left side: Images grid (second on mobile) -->
-				<div class="grid grid-cols-2 gap-3 lg:gap-5 lg:order-1">
+				<div class="grid grid-cols-2 gap-3 lg:order-1 lg:gap-5">
 					<MyImage alt="" src={SeventeenImg} width={250} height={150} layout="fullWidth" />
 					<MyImage alt="" src={EspaceCultureImg} width={250} height={150} layout="fullWidth" />
 					<MyImage alt="" src={EighteenImg} width={400} height={200} layout="fullWidth" class="col-span-2" />

@@ -1,13 +1,12 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
-import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
-import type { ExpositionType, EvenementType } from '@/types/exposition'
+import type { EvenementType, ExpositionType } from '@/types/exposition'
 import { MDV_DEFAULT_ADDRESS, renderRichText } from '@/utils/helper'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
@@ -27,8 +26,8 @@ const evenements = await find<EvenementType>('exposition', {
 		{
 			exposition && (
 				<section class="section-default" id="exposition">
-					<article class="grid grid-cols-1 lg:grid-cols-3 gap-5 pb-8 lg:pb-16">
-						<div class="lg:col-span-2 flex flex-col">
+					<article class="grid grid-cols-1 gap-5 pb-8 lg:grid-cols-3 lg:pb-16">
+						<div class="flex flex-col lg:col-span-2">
 							<h2 class="text-primary pb-2 lg:pb-3">{t('EXPO_MOMENT_TITRE')}</h2>
 							<p class="distinguished pb-3 lg:pb-6">
 								{t('DATE_FROM')}{' '}
@@ -48,7 +47,7 @@ const evenements = await find<EvenementType>('exposition', {
 							<h3 class="text-primary pb-8 lg:pb-16">{exposition.title}</h3>
 							<p set:html={renderRichText(exposition.description)} />
 						</div>
-						<div class="bg-primary/20 px-4 lg:px-5 py-6 lg:py-8">
+						<div class="bg-primary/20 px-4 py-6 lg:px-5 lg:py-8">
 							<ul class="space-y-4 lg:space-y-5">
 								<li class="border-b border-black/20 px-5 pb-4">
 									<span class="font-bold">{t('DATE')}</span> : {t('DATE_FROM')}{' '}
@@ -101,11 +100,12 @@ const evenements = await find<EvenementType>('exposition', {
 
 						if (count === 0) return null
 
-						const gridClass = count === 3
-							? 'grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5'
-							: count === 2
-							? 'grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5'
-							: 'grid grid-cols-1 gap-3 lg:gap-5'
+						const gridClass =
+							count === 3
+								? 'grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5'
+								: count === 2
+									? 'grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5'
+									: 'grid grid-cols-1 gap-3 lg:gap-5'
 
 						return (
 							<div class={gridClass}>
@@ -151,7 +151,9 @@ const evenements = await find<EvenementType>('exposition', {
 			<h2 class="text-primary pb-2 lg:pb-3">{t('EVENEMENTS_EXPO')}</h2>
 			<p class="distinguished pb-3 lg:pb-6">{t('EVENEMENTS_EXPO_INTRO')}</p>
 
-			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+			>
 				{
 					evenements.docs.map((item) => {
 						const descText = item.description.root.children
@@ -175,7 +177,10 @@ const evenements = await find<EvenementType>('exposition', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-1 text-black">
-											<a href={getRelativeLocaleUrl(locale, `exposition/evenement/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
+											<a
+												href={getRelativeLocaleUrl(locale, `exposition/evenement/${item.id}`)}
+												class="after:absolute after:inset-0 after:z-10"
+											>
 												{item.title}
 											</a>
 										</h3>

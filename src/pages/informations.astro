@@ -1,7 +1,6 @@
 ---
 export const prerender = true
 import { findGlobal } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
 import BeHappyImg from '@/assets/imgs/sponsos/be-happy.webp'
 import EuropeImg from '@/assets/imgs/sponsos/europe.webp'
 import HautesPyreneesImg from '@/assets/imgs/sponsos/hautes-pyrenees.webp'
@@ -29,11 +28,11 @@ const formatTime = (dateStr: string) => {
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
 		<section class="section-default" id="horaires">
-			<article class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
+			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
 				<div class="flex flex-col">
 					<h2 class="text-primary pb-2 lg:pb-3">{t('OU_NOUS_TROUVER_TITRE')}</h2>
 					<p class="distinguished pb-8 lg:pb-16">{t('MAISON_DU_PARC_COMPLET')}</p>
-					<div class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
+					<div class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
 						<div class="bg-primary/20 px-5 py-8">
 							<ul class="space-y-5">
 								<li class="border-b border-black/20 px-5 pb-4">
@@ -52,7 +51,7 @@ const formatTime = (dateStr: string) => {
 									</div>
 								</li>
 
-								<li class="px-5 ">
+								<li class="px-5">
 									<span class="font-bold">{t('ADRESSE')}</span> :
 									<p>{MDV_DEFAULT_ADDRESS}</p>
 								</li>
@@ -91,8 +90,8 @@ const formatTime = (dateStr: string) => {
 				<h2 class="text-primary pb-2 lg:pb-3">{t('NOS_TARIFS')}</h2>
 				<p class="distinguished pb-8 lg:pb-16">{t('NOS_TARIFS_INTRO')}</p>
 
-				<div class="grid grid-cols-1 lg:grid-cols-9 gap-3 lg:gap-5">
-					<div class="bg-primary text-primary-foreground lg:col-span-2 p-6">
+				<div class="grid grid-cols-1 gap-3 lg:grid-cols-9 lg:gap-5">
+					<div class="bg-primary text-primary-foreground p-6 lg:col-span-2">
 						<h3 class="text-primary-foreground pb-10">{t('TARIFS_MEDIATHEQUE')}</h3>
 						<p><span class="font-bold">{t('ADULTE')}</span> : 10€</p>
 						<p class="distinguished mb-6 border-b border-white/20">{t('ANNEE')}</p>
@@ -101,8 +100,8 @@ const formatTime = (dateStr: string) => {
 						<p><span class="text-primary-foreground font-bold">{t('FAMILLE')}</span> : 5€</p>
 						<p class="distinguished mb-6 border-b border-white/20">3 {t('SEMAINES')}</p>
 					</div>
-					<MyImage src={EspaceCultureImg} alt="" width={200} height={380} class="hidden lg:block" />
-					<div class="bg-primary text-primary-foreground lg:col-span-2 p-6">
+					<MyImage src={""} alt="" width={200} height={380} class="hidden lg:block" />
+					<div class="bg-primary text-primary-foreground p-6 lg:col-span-2">
 						<h3 class="text-primary-foreground pb-10">{t('TARIFS_SPECTACLE')}</h3>
 						<p><span class="font-bold">{t('NORMAL')}</span> : 10€</p>
 						<p class="distinguished mb-6 border-b border-white/20">{t('DES_14ANS')}</p>
@@ -111,15 +110,15 @@ const formatTime = (dateStr: string) => {
 						<p><span class="text-primary-foreground font-bold">{t('ENFANT')}</span> : {t('OFFERT')}</p>
 						<p class="distinguished mb-6 border-b border-white/20">{t('MOINS_3ANS')}</p>
 					</div>
-					<MyImage src={EspaceCultureImg} alt="" width={200} height={380} class="hidden lg:block" />
-					<div class="bg-primary text-primary-foreground lg:col-span-2 p-6">
+					<MyImage src={""} alt="" width={200} height={380} class="hidden lg:block" />
+					<div class="bg-primary text-primary-foreground p-6 lg:col-span-2">
 						<h3 class="text-primary-foreground pb-10">{t('TARIFS_CINEMA')}</h3>
 						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ADULTE')}</span> : 7€</p>
 						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ETUDIANT')}</span> : 6€</p>
 						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ENFANT_MOINS_13')}</span> : 5€</p>
 						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ABONNE')}</span> : 5,80€</p>
 					</div>
-					<MyImage src={EspaceCultureImg} alt="" width={200} height={380} class="hidden lg:block" />
+					<MyImage src={""} alt="" width={200} height={380} class="hidden lg:block" />
 				</div>
 			</article>
 		</section>
@@ -128,55 +127,57 @@ const formatTime = (dateStr: string) => {
 			<article>
 				<h2 class="text-secondary pb-2 lg:pb-3">{t('EQUIPE_TITRE')}</h2>
 				<p class="distinguished pb-8 lg:pb-16">{t('EQUIPE_INTRO')}</p>
-				<p class="lg:w-2/3 pb-8 lg:pb-16">
+				<p class="pb-8 lg:w-2/3 lg:pb-16">
 					{t('EQUIPE_DESC')}
 				</p>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap items-center justify-center gap-x-5 gap-y-12 lg:gap-y-20 lg:*:w-[20%]">
+				<div
+					class="grid grid-cols-1 items-center justify-center gap-x-5 gap-y-12 md:grid-cols-2 lg:flex lg:flex-wrap lg:gap-y-20 lg:*:w-[20%]"
+				>
 					<figure>
-						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<MyImage src={""} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
 							<h2 class="text-secondary">Marque Cathy</h2>
 							<p>{t('DIRECTRICE_ADMINISTRATIVE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
-						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<MyImage src={""} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
 							<h2 class="text-secondary">Lay Marie</h2>
 							<p>{t('DIRECTRICE_ARTISTIQUE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
-						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<MyImage src={""} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
 							<h2 class="text-secondary">Boussac Chantal</h2>
 							<p>{t('COMPTABLE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
-						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<MyImage src={""} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
 							<h2 class="text-secondary">Loo Santos Andréa</h2>
 							<p>{t('RESPONSABLE_MEDIATHEQUE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
-						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<MyImage src={""} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
 							<h2 class="text-secondary">Bouillon Marie-Jade</h2>
 							<p>{t('RESPONSABLE_CINEMA_EXPO')}</p>
 						</figcaption>
 					</figure>
 					<figure>
-						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<MyImage src={""} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
 							<h2 class="text-secondary">Poulalion Léo-Polde</h2>
 							<p>{t('TECHNICIEN_REGISSEUR')}</p>
 						</figcaption>
 					</figure>
 					<figure>
-						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
+						<MyImage src={""} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
 							<h2 class="text-secondary">Bouillon Mélinda</h2>
 							<p>{t('AGENT_ENTRETIEN_ACCUEIL')}</p>
@@ -187,8 +188,8 @@ const formatTime = (dateStr: string) => {
 		</section>
 
 		<section class="section-default bg-secondary/20" id="engagements">
-			<article class="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-0">
-				<div class="lg:col-span-2 order-1">
+			<article class="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-0">
+				<div class="order-1 lg:col-span-2">
 					<h2 class="text-secondary pb-2 lg:pb-3">{t('ENGAGEMENTS_VALEURS_TITRE')}</h2>
 					<p class="distinguished pb-8 lg:pb-16">{t('ENGAGEMENTS_VALEURS_INTRO')}</p>
 					<p class="whitespace-pre-line">
@@ -196,24 +197,24 @@ const formatTime = (dateStr: string) => {
 					</p>
 				</div>
 
-				<div class="lg:col-span-1 flex items-center justify-center gap-3 order-2">
-					<MyImage src={EspaceCultureImg} alt="" width={150} height={150} />
-					<MyImage src={EspaceCultureImg} alt="" width={150} height={150} />
-					<MyImage src={EspaceCultureImg} alt="" width={150} height={150} />
+				<div class="order-2 flex items-center justify-center gap-3 lg:col-span-1">
+					<MyImage src={""} alt="" width={150} height={150} />
+					<MyImage src={""} alt="" width={150} height={150} />
+					<MyImage src={""} alt="" width={150} height={150} />
 				</div>
 			</article>
 		</section>
 
 		<section class="section-default" id="partenaires">
-			<article class="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-5">
-				<div class="lg:col-span-2 order-1 lg:order-2">
+			<article class="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-5">
+				<div class="order-1 lg:order-2 lg:col-span-2">
 					<h2 class="text-primary pb-2 lg:pb-3">{t('PARTENAIRES_TITRE')}</h2>
 					<p class="distinguished pb-8 lg:pb-16">{t('PARTENAIRES_INTRO')}</p>
 					<p>
 						{t('PARTENAIRES_DESC')}
 					</p>
 				</div>
-				<div class="lg:col-span-1 grid grid-cols-3 grid-rows-3 place-items-center gap-3 lg:pt-48 order-2 lg:order-1">
+				<div class="order-2 grid grid-cols-3 grid-rows-3 place-items-center gap-3 lg:order-1 lg:col-span-1 lg:pt-48">
 					<MyImage src={BeHappyImg} alt="" width={120} height={120} class="col-span-1" />
 					<MyImage src={HautesPyreneesImg} alt="" width={120} height={120} class="col-span-1" />
 					<MyImage src={OccitanieImg} alt="" width={120} height={120} class="col-span-1" />

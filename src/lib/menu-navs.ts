@@ -1,14 +1,14 @@
+import HeaderAccueil from '@/assets/imgs/header/espace-culture-nature.webp'
+import HeaderArchives from '@/assets/imgs/header/header-archives.webp'
 import HeaderArtVivant from '@/assets/imgs/header/header-art-vivant.webp'
-import HeaderJeunePublic from '@/assets/imgs/header/header-jeune-public.webp'
-import HeaderParcNational from '@/assets/imgs/header/header-parc-national.webp'
 import HeaderArtiste from '@/assets/imgs/header/header-artiste.webp'
 import HeaderCinema from '@/assets/imgs/header/header-cinema.webp'
 import HeaderExposition from '@/assets/imgs/header/header-exposition.webp'
-import HeaderMediatheque from '@/assets/imgs/header/header-mediatheque.webp'
 import HeaderInformationsGenerales from '@/assets/imgs/header/header-informations-generales.webp'
 import HeaderInformationsPratiques from '@/assets/imgs/header/header-informations-pratiques.webp'
-import HeaderArchives from '@/assets/imgs/header/header-archives.webp'
-import HeaderAccueil from '@/assets/imgs/espace-culture-nature.webp'
+import HeaderJeunePublic from '@/assets/imgs/header/header-jeune-public.webp'
+import HeaderMediatheque from '@/assets/imgs/header/header-mediatheque.webp'
+import HeaderParcNational from '@/assets/imgs/header/header-parc-national.webp'
 import type { createTranslator } from '@/i18n/translations'
 import type { MenuNav } from '@/types/menu'
 
@@ -54,7 +54,7 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				subMenus: [
 					{
 						label: t('EXPOSITION_DU_MOMENT'),
-						link: '/exposition#exposition',
+						link: '/exposition#exposition'
 					},
 					{ label: t('EVENEMENTS'), link: '/exposition#evenements' }
 				]
@@ -129,9 +129,7 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				label: t('ARCHIVES'),
 				link: '/archives',
 				image: HeaderArchives.src,
-				subMenus: [
-					{ label: t('ARCHIVES'), link: '/archives' },
-				]
+				subMenus: [{ label: t('ARCHIVES'), link: '/archives' }]
 			},
 			{
 				label: t('ARTISTE'),
