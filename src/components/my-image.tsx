@@ -1,7 +1,7 @@
 import { Image } from '@unpic/react'
 import PlaceholderImg from '@/assets/imgs/placeholder.webp'
 
-const DEFAULT_BREAKPOINTS = [100, 150, 200, 250, 400, 640, 750, 828, 850, 960, 1080, 1280, 1300, 1500, 1668, 1920, 2048, 2560, 3200, 3840, 4480, 5120, 6016]
+const ALL_BREAKPOINTS = [100, 150, 200, 250, 400, 640, 750, 828, 850, 960, 1080, 1280, 1300, 1500, 1668, 1920, 2048, 2560, 3200, 3840, 4480, 5120, 6016]
 
 interface MyImageProps {
 	src?: string | null
@@ -42,7 +42,7 @@ export function MyImage({
 				background={background ?? undefined}
 				className={className}
 				priority={priority}
-			breakpoints={DEFAULT_BREAKPOINTS}
+				breakpoints={ALL_BREAKPOINTS}
 			/>
 		)
 	}
@@ -59,7 +59,7 @@ export function MyImage({
 			background={background ?? undefined}
 			className={className}
 			priority={priority}
-			breakpoints={DEFAULT_BREAKPOINTS}
+			breakpoints={ALL_BREAKPOINTS}
 		/>
 	)
 }

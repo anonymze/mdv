@@ -42,7 +42,7 @@ const {
 
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 
-const DEFAULT_BREAKPOINTS = [100, 150, 200, 250, 400, 640, 750, 828, 850, 960, 1080, 1280, 1300, 1500, 1668, 1920, 2048, 2560, 3200, 3840, 4480, 5120, 6016]
+const ALL_BREAKPOINTS = [100, 150, 200, 250, 400, 640, 750, 828, 850, 960, 1080, 1280, 1300, 1500, 1668, 1920, 2048, 2560, 3200, 3840, 4480, 5120, 6016]
 
 // Handle Astro image imports (ImageMetadata) and string URLs
 let imageSrc: string | ImageMetadata
@@ -73,7 +73,7 @@ if (typeof src === 'string') {
 	layout={layout}
 	placeholder={placeholder}
 	background={background ?? undefined}
-	breakpoints={breakpoints ?? DEFAULT_BREAKPOINTS}
+	breakpoints={breakpoints ?? ALL_BREAKPOINTS}
 	sizes={sizes}
 	priority={priority}
 	{...rest}
