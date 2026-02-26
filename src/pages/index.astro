@@ -30,6 +30,7 @@ import MyImage from '@/components/my-image.astro'
 import { NewsletterForm } from '@/components/newsletter-form'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import { translatePublicField } from '@/lib/translate-fields'
 import type { ArtVivant } from '@/types/art-vivant'
@@ -68,22 +69,22 @@ const seances = await find<Cinema>('cinema', {
 				</p>
 
 				<nav class="mt-auto flex flex-wrap w-full gap-5 lg:gap-6 pt-10 lg:pt-20">
-					<Button link="/art-vivant" className="p-6">
+					<Button link={getRelativeLocaleUrl(locale, 'art-vivant')} className="p-6">
 						{t('ART_VIVANT')}
 					</Button>
-					<Button link="/parc-national" className="p-6">
+					<Button link={getRelativeLocaleUrl(locale, 'parc-national')} className="p-6">
 						{t('PARC_NATIONAL')}
 					</Button>
-					<Button link="/cinema" className="p-6">
+					<Button link={getRelativeLocaleUrl(locale, 'cinema')} className="p-6">
 						{t('CINEMA')}
 					</Button>
-					<Button link="/mediatheque" className="p-6">
+					<Button link={getRelativeLocaleUrl(locale, 'mediatheque')} className="p-6">
 						{t('MEDIATHEQUE')}
 					</Button>
-					<Button link="/exposition" className="p-6">
+					<Button link={getRelativeLocaleUrl(locale, 'exposition')} className="p-6">
 						{t('EXPOSITION')}
 					</Button>
-					<Button link="/jeune-public" className="p-6">
+					<Button link={getRelativeLocaleUrl(locale, 'jeune-public')} className="p-6">
 						{t('JEUNESSE')}
 					</Button>
 				</nav>
@@ -118,7 +119,7 @@ const seances = await find<Cinema>('cinema', {
 				</div>
 			</article>
 
-			<Button link="/parc-national#evenements" className="mt-6 lg:mt-12 h-10 px-6 lg:h-12 lg:px-8"
+			<Button link={`${getRelativeLocaleUrl(locale, 'parc-national')}#evenements`} className="mt-6 lg:mt-12 h-10 px-6 lg:h-12 lg:px-8"
 				>{t('DECOUVREZ_PROCHAINS_EVENEMENTS')}</Button
 			>
 		</section>
@@ -173,7 +174,7 @@ const seances = await find<Cinema>('cinema', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={`/art-vivant/spectacle/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={getRelativeLocaleUrl(locale, `art-vivant/spectacle/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
@@ -217,7 +218,7 @@ const seances = await find<Cinema>('cinema', {
 				}
 			</div>
 
-			<Button link="/art-vivant#spectacles" size={'xl'}>{t('VOIR_TOUS_SPECTACLES')}</Button>
+			<Button link={`${getRelativeLocaleUrl(locale, 'art-vivant')}#spectacles`} size={'xl'}>{t('VOIR_TOUS_SPECTACLES')}</Button>
 		</section>
 
 		<section>
@@ -264,7 +265,7 @@ const seances = await find<Cinema>('cinema', {
 									<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 										<figcaption>
 											<h3 class="pb-3 text-black">
-												<a href={`/cinema/seance/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+												<a href={getRelativeLocaleUrl(locale, `cinema/seance/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
 													{item.title}
 												</a>
 											</h3>
@@ -309,7 +310,7 @@ const seances = await find<Cinema>('cinema', {
 						})
 					}
 				</div>
-				<Button link="/cinema#cinema" size={'xl'} className="mt-6 lg:mt-12">{t('VOIR_TOUTES_SEANCES')}</Button>
+				<Button link={`${getRelativeLocaleUrl(locale, 'cinema')}#cinema`} size={'xl'} className="mt-6 lg:mt-12">{t('VOIR_TOUTES_SEANCES')}</Button>
 			</div>
 		</section>
 
@@ -324,7 +325,7 @@ const seances = await find<Cinema>('cinema', {
 						{t('EXPOSITIONS_DESC')}
 					</p>
 
-					<Button variant={'secondary'} link="/exposition#exposition" size={'xl'} className="mt-6 lg:mt-auto w-fit"
+					<Button variant={'secondary'} link={`${getRelativeLocaleUrl(locale, 'exposition')}#exposition`} size={'xl'} className="mt-6 lg:mt-auto w-fit"
 						>{t('VOIR_EXPOSITION_MOMENT')}</Button
 					>
 				</div>

@@ -3,12 +3,13 @@ export const prerender = true
 import { find } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import {
-translateLudoDuration,
-translateLudoPlayers,
-translateLudoPublic,
-translatePublicField
+	translateLudoDuration,
+	translateLudoPlayers,
+	translateLudoPublic,
+	translatePublicField
 } from '@/lib/translate-fields'
 import type { Cinema } from '@/types/cinema'
 import type { Mediatheque } from '@/types/mediatheque'
@@ -29,11 +30,10 @@ const evenements = await find<ParcNational>('parc_national', {
 const ludotheque = await find<Mediatheque>('mediatheque', {
 	limit: 3,
 	locale,
-		upcomingOnly: false,
+	upcomingOnly: false,
 	where: {
 		type: { equals: 'ludotheque' },
-		jeunePublic: { equals: true },
-
+		jeunePublic: { equals: true }
 	}
 })
 
@@ -81,7 +81,7 @@ const cinema = await find<Cinema>('cinema', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-1 text-black">
-											<a href={`/jeune-public/spectacles/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={getRelativeLocaleUrl(locale, `jeune-public/spectacles/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
@@ -157,7 +157,7 @@ const cinema = await find<Cinema>('cinema', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={`/jeune-public/seance/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={getRelativeLocaleUrl(locale, `jeune-public/seance/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
@@ -237,7 +237,7 @@ const cinema = await find<Cinema>('cinema', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={`/jeune-public/ludotheque/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={getRelativeLocaleUrl(locale, `jeune-public/ludotheque/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

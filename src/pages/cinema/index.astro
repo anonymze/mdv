@@ -4,10 +4,12 @@ import { find } from '@/api/payload'
 import { CinemaGrid } from '@/components/cinema-grid'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import type { Cinema } from '@/types/cinema'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
+const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
 const SEANCES_LIMIT = 6
 
@@ -66,6 +68,12 @@ const cinemaTranslations = {
 		{ key: t('DATE_MOIS_PROCHAIN'), value: 'mois_prochain' },
 		{ key: t('DATE_6_MOIS'), value: '6_mois' },
 		{ key: t('DATE_1_AN'), value: '1_an' }
+	],
+	LANGUE: t('LANGUE'),
+	langueOptions: [
+		{ key: t('LANGUE_VO'), value: 'VO' },
+		{ key: t('LANGUE_VF'), value: 'VF' },
+		{ key: t('LANGUE_VOSTFR'), value: 'VOSTFR' }
 	]
 }
 
@@ -89,6 +97,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				client:load
 				initialData={seances}
 				locale={locale}
+				localePrefix={localePrefix}
 				limit={SEANCES_LIMIT}
 				payloadUrl={PAYLOAD_URL}
 				showFilters={true}
@@ -127,7 +136,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={`/cinema/seance/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={`${localePrefix}/cinema/rdv-cinema/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
@@ -203,7 +212,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={`/cinema/seance/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={`${localePrefix}/cinema/scolaire/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

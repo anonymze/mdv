@@ -16,6 +16,7 @@ import { useEffect, useState, useRef } from 'react'
 interface CinemaGridProps {
 	initialData: PayloadResponse<Cinema>
 	locale: string
+	localePrefix: string
 	limit: number
 	payloadUrl: string
 	showFilters?: boolean
@@ -32,15 +33,18 @@ interface CinemaGridProps {
 		DATE?: string
 		AUCUN_CONTENU?: string
 		TOUS?: string
+		LANGUE?: string
 		publicLabels?: Record<string, string>
 		genreOptions?: { key: string; value: string }[]
 		dateOptions?: { key: string; value: string }[]
+		langueOptions?: { key: string; value: string }[]
 	}
 }
 
 export function CinemaGrid({
 	initialData,
 	locale,
+	localePrefix,
 	limit,
 	payloadUrl,
 	showFilters = false,
@@ -58,6 +62,7 @@ export function CinemaGrid({
 	const [selectedGenre, setSelectedGenre] = useState('')
 	const [selectedTags, setSelectedTags] = useState('')
 	const [selectedDate, setSelectedDate] = useState('')
+	const [selectedLanguage, setSelectedLanguage] = useState('')
 
 	// Debounce search keyword (300ms)
 	useEffect(() => {
@@ -68,7 +73,7 @@ export function CinemaGrid({
 	}, [searchKeyword])
 
 	useEffect(() => {
-		const hasFilters = debouncedSearchKeyword || selectedGenre || selectedTags || selectedDate
+		const hasFilters = debouncedSearchKeyword || selectedGenre || selectedTags || selectedDate || selectedLanguage
 
 		if (page === 1 && !hasFilters) {
 			setData(initialData)
@@ -92,6 +97,10 @@ export function CinemaGrid({
 
 			if (selectedTags && selectedTags !== 'all') {
 				where.public = { equals: selectedTags }
+			}
+
+			if (selectedLanguage && selectedLanguage !== 'all') {
+				where.languages = { contains: selectedLanguage }
 			}
 
 			if (selectedDate && selectedDate !== 'all') {
@@ -138,11 +147,11 @@ export function CinemaGrid({
 		}
 
 		fetchData()
-	}, [page, locale, limit, initialData, debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate])
+	}, [page, locale, limit, initialData, debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate, selectedLanguage])
 
 	useEffect(() => {
 		setPage(1)
-	}, [debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate])
+	}, [debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate, selectedLanguage])
 
 	const getSynopsisText = (item: Cinema) => {
 		return item.synopsis.root.children
@@ -228,17 +237,7 @@ export function CinemaGrid({
 						)}
 					</div>
 
-					<div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 *:min-h-12">
-						<SelectWrapper
-							placeholder={translations.GENRE || 'Genre'}
-							options={[
-								{ key: translations.TOUS || 'Tous', value: 'all' },
-								...(translations.genreOptions || [])
-							]}
-							className="w-full"
-							value={selectedGenre}
-							onValueChange={setSelectedGenre}
-						/>
+					<div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-6 *:min-h-12">
 						<SelectWrapper
 							placeholder={translations.TAGS_FILTER || 'Public'}
 							options={[
@@ -253,6 +252,26 @@ export function CinemaGrid({
 							className="w-full"
 							value={selectedTags}
 							onValueChange={setSelectedTags}
+						/>
+						<SelectWrapper
+							placeholder={translations.GENRE || 'Genre'}
+							options={[
+								{ key: translations.TOUS || 'Tous', value: 'all' },
+								...(translations.genreOptions || [])
+							]}
+							className="w-full"
+							value={selectedGenre}
+							onValueChange={setSelectedGenre}
+						/>
+						<SelectWrapper
+							placeholder={translations.LANGUE || 'Langue'}
+							options={[
+								{ key: translations.TOUS || 'Tous', value: 'all' },
+								...(translations.langueOptions || [])
+							]}
+							className="w-full"
+							value={selectedLanguage}
+							onValueChange={setSelectedLanguage}
 						/>
 						<SelectWrapper
 							placeholder={translations.DATE || 'Date'}
@@ -299,7 +318,7 @@ export function CinemaGrid({
 								<figure className="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 className="pb-3 text-black">
-											<a href={`/cinema/seance/${item.id}`} className="after:absolute after:inset-0 after:z-10">
+											<a href={`${localePrefix}/cinema/seance/${item.id}`} className="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

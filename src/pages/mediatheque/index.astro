@@ -9,6 +9,7 @@ import SixthImg from '@/assets/imgs/mediatheque/6.webp'
 import { LudothequeGrid } from '@/components/ludotheque-grid'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import type { Mediatheque } from '@/types/mediatheque'
 import FirstCyberbaseImg from '@/assets/imgs/cyberbase/1.webp'
@@ -20,6 +21,7 @@ import ThirdMediaImg from '@/assets/imgs/media/3.webp'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
+const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
 const LUDO_LIMIT = 6
 
@@ -123,6 +125,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				client:load
 				initialData={ludotheque}
 				locale={locale}
+				localePrefix={localePrefix}
 				limit={LUDO_LIMIT}
 				payloadUrl={PAYLOAD_URL}
 				showFilters={true}

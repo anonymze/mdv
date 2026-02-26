@@ -1,5 +1,6 @@
 ---
 import { createTranslator, type I18n } from '@/i18n/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import type { ImmanquableDoc } from '@/types/immanquable'
 import Image from './my-image.astro'
 import { SideCard } from './side-card'
@@ -22,15 +23,17 @@ const getThumbnail = (event: ImmanquableDoc) => {
 const getEventHref = (event: ImmanquableDoc) => {
 	switch (event._collection) {
 		case 'art_vivant':
-			return `/art-vivant/spectacle/${event.id}`
+			return getRelativeLocaleUrl(locale, `art-vivant/spectacle/${event.id}`)
 		case 'cinema':
-			if (event.type === 'scolaire') return `/cinema/scolaire/${event.id}`
-			if (event.type === 'rdv_cinema') return `/cinema/rdv-cinema/${event.id}`
-			return `/cinema/seance/${event.id}`
+			if (event.type === 'scolaire') return getRelativeLocaleUrl(locale, `cinema/scolaire/${event.id}`)
+			if (event.type === 'rdv_cinema') return getRelativeLocaleUrl(locale, `cinema/rdv-cinema/${event.id}`)
+			return getRelativeLocaleUrl(locale, `cinema/seance/${event.id}`)
 		case 'exposition':
-			return event.type === 'evenement' ? `/exposition/evenement/${event.id}` : `/exposition`
+			return event.type === 'evenement'
+				? getRelativeLocaleUrl(locale, `exposition/evenement/${event.id}`)
+				: getRelativeLocaleUrl(locale, 'exposition')
 		case 'parc_national':
-			return `/parc-national/evenement/${event.id}`
+			return getRelativeLocaleUrl(locale, `parc-national/evenement/${event.id}`)
 	}
 }
 

@@ -4,11 +4,13 @@ import { find } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
 import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import type { ArtVivant } from '@/types/art-vivant'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
+const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
 const SPECTACLES_LIMIT = 8
 const RESIDENCE_LIMIT = 4
@@ -80,9 +82,10 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				client:load
 				initialData={spectacles}
 				locale={locale}
+				localePrefix={localePrefix}
 				limit={SPECTACLES_LIMIT}
 				payloadUrl={PAYLOAD_URL}
-			collection="art_vivant"
+				collection="art_vivant"
 				showFilters={true}
 				translations={spectacleTranslations}
 			/>
@@ -122,7 +125,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={`/art-vivant/residence/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={`${localePrefix}/art-vivant/residence/${item.id}`} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

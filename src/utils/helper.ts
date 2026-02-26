@@ -3,8 +3,9 @@ import type { RichTextField } from '@/types/rich-text'
 /**
  * Default MDV address
  */
-export const MDV_DEFAULT_ADDRESS = 'Maison de la vallée, 24 Place Saint-Clément, 65120 Luz-Saint-Sauveur'
-export const PARKING_DEFAULT_ADDRESS = 'Place du 8 Mai, 65120 Luz-Saint-Sauveur '
+export const MDV_DEFAULT_ADDRESS = '24 Place Saint-Clément, 65120 Luz-Saint-Sauveur'
+export const PARKING_DEFAULT_ADDRESS = 'Place du 8 Mai, 65120 Luz-Saint-Sauveur'
+export const TELEPHONE_DEFAULT = '05 62 92 38 38'
 
 /**
  * @description a text replacer which return a string with %s replaced by your values in order

@@ -12,7 +12,7 @@ import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import type { Hour } from '@/types/hours'
-import { MDV_DEFAULT_ADDRESS, PARKING_DEFAULT_ADDRESS } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, PARKING_DEFAULT_ADDRESS, TELEPHONE_DEFAULT } from '@/utils/helper'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
@@ -61,12 +61,13 @@ const formatTime = (dateStr: string) => {
 						<div class="bg-primary/20 px-5 py-8">
 							<ul class="space-y-5">
 								<li class="border-b border-black/20 px-5 pb-4 lg:pb-13">
-									<span class="font-bold">{t('ADRESSE')}</span> :
-									<p>{PARKING_DEFAULT_ADDRESS}</p>
+									<span class="font-bold">{t('TELEPHONE')}</span> :
+									<a class="block" href={`tel:${TELEPHONE_DEFAULT}`}>{TELEPHONE_DEFAULT}</a>
 								</li>
 
 								<li class="px-5">
 									<span class="font-bold">{t('ACCES_TRANSPORT_PUBLIC')}</span> :
+									<p>{t('PARKING')}</p>
 									<p>{t('ACCES_TRANSPORT_PUBLIC_DESC')}</p>
 								</li>
 							</ul>
@@ -142,42 +143,42 @@ const formatTime = (dateStr: string) => {
 					<figure>
 						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2>Lay Marie</h2>
+							<h2 class="text-secondary">Lay Marie</h2>
 							<p>{t('DIRECTRICE_ARTISTIQUE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2>Boussac Chantal</h2>
+							<h2 class="text-secondary">Boussac Chantal</h2>
 							<p>{t('COMPTABLE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2>Loo Santos Andréa</h2>
+							<h2 class="text-secondary">Loo Santos Andréa</h2>
 							<p>{t('RESPONSABLE_MEDIATHEQUE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2>Bouillon Marie-Jade</h2>
+							<h2 class="text-secondary">Bouillon Marie-Jade</h2>
 							<p>{t('RESPONSABLE_CINEMA_EXPO')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2>Poulalion Léo-Polde</h2>
+							<h2 class="text-secondary">Poulalion Léo-Polde</h2>
 							<p>{t('TECHNICIEN_REGISSEUR')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={EspaceCultureImg} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2>Bouillon Mélinda</h2>
+							<h2 class="text-secondary">Bouillon Mélinda</h2>
 							<p>{t('AGENT_ENTRETIEN_ACCUEIL')}</p>
 						</figcaption>
 					</figure>

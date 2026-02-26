@@ -18,6 +18,7 @@ type CollectionType = ArtVivant | ParcNational;
 interface SpectaclesGridProps {
 	initialData: PayloadResponse<CollectionType>
 	locale: string
+	localePrefix: string
 	limit: number
 	payloadUrl: string
 	collection: string
@@ -47,6 +48,7 @@ interface SpectaclesGridProps {
 export function SpectaclesGrid({
 	initialData,
 	locale,
+	localePrefix,
 	limit,
 	payloadUrl,
 	collection,
@@ -188,6 +190,11 @@ export function SpectaclesGrid({
 		setPage(1)
 	}, [debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
 
+
+	const getLink = (id: string) => {
+		const base = collection === 'parc_national' ? '/parc-national/evenement' : '/art-vivant/spectacle'
+		return `${localePrefix}${base}/${id}`
+	}
 
 	const getDescText = (item: CollectionType) => {
 		return item.description.root.children
@@ -355,7 +362,7 @@ export function SpectaclesGrid({
 								<figure className="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 className="pb-3 text-black">
-											<a href={`/art-vivant/spectacle/${item.id}`} className="after:absolute after:inset-0 after:z-10">
+											<a href={getLink(item.id)} className="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

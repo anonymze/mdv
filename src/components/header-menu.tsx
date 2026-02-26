@@ -12,7 +12,7 @@ import {
 import type { MenuNav } from '@/types/menu'
 import { cn } from '@/lib/utils'
 
-export function NavigationMenuDemo({ menuNavs, className }: { menuNavs: MenuNav[]; className?: string }) {
+export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menuNavs: MenuNav[]; localePrefix: string; className?: string }) {
 	const [headerWidth, setHeaderWidth] = React.useState(0)
 	const [value, setValue] = React.useState('')
 	const itemRefs = React.useRef<(HTMLLIElement | null)[]>([])
@@ -57,7 +57,8 @@ export function NavigationMenuDemo({ menuNavs, className }: { menuNavs: MenuNav[
 				{menuNavs.map((menu, index) => {
 					// No submenus or only 1 submenu without children = simple link
 					if (!menu.subMenus || (menu.subMenus.length === 1 && !menu.subMenus[0].subMenus)) {
-						const href = menu.link || menu.subMenus?.[0]?.link
+						const rawHref = menu.link || menu.subMenus?.[0]?.link
+						const href = rawHref ? `${localePrefix}${rawHref}` : undefined
 						return (
 							<NavigationMenuItem key={index}>
 								<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
@@ -104,7 +105,7 @@ export function NavigationMenuDemo({ menuNavs, className }: { menuNavs: MenuNav[
 												{subMenu.subMenus?.map((item, itemIndex) => (
 													<ListItem
 														key={itemIndex}
-														href={item.link}
+														href={`${localePrefix}${item.link}`}
                             title={item.label}
                             className='z-20'
 													/>

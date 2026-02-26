@@ -31,6 +31,8 @@ interface Props {
 	locale: string
 	currentPath: string
 	links: Link[]
+	homeHref: string
+	contactHref: string
 	// labels
 	contactLabel: string
 	hoursLabel: string
@@ -51,6 +53,8 @@ export function MobileMenu({
 	locale,
 	currentPath,
 	links,
+	homeHref,
+	contactHref,
 	contactLabel,
 	hoursLabel,
 	closedLabel,
@@ -89,7 +93,7 @@ export function MobileMenu({
 			>
 				{/* Top bar — same height as header (h-16) so X sits where burger was */}
 				<div className="flex h-16 shrink-0 items-center justify-between px-5">
-					<a href="/" onClick={() => setOpen(false)}>
+					<a href={homeHref} onClick={() => setOpen(false)}>
 						<img src={logoSrc} alt={logoAlt} className="w-14" />
 					</a>
 					<div className="flex h-full items-center gap-5">
@@ -125,7 +129,7 @@ export function MobileMenu({
 						<p className="text-xl font-bold">{hours.isClosed ? closedLabel : hours.openLabel}</p>
 					</div>
 					<a
-						href="/informations"
+						href={contactHref}
 						onClick={() => setOpen(false)}
 						className="bg-secondary text-secondary-foreground flex shrink-0 items-center gap-2 px-2 py-3 text-xs font-medium mb-1.5"
 					>

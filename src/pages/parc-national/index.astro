@@ -10,10 +10,12 @@ import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { ArticleGrid } from '@/components/article-grid'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import type { ParcNational } from '@/types/parc-national'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
+const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
 const EVENEMENTS_LIMIT = 4
 
@@ -117,6 +119,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 			client:load
 			initialData={evenements}
 			locale={locale}
+			localePrefix={localePrefix}
 			limit={EVENEMENTS_LIMIT}
 			payloadUrl={PAYLOAD_URL}
 			collection="parc_national"

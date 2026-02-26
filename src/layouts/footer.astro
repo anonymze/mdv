@@ -4,6 +4,7 @@ import MyImage from '@/components/my-image.astro'
 import { NewsletterForm } from '@/components/newsletter-form'
 import { createTranslator, type I18n } from '@/i18n/translations'
 import { getMenuNavs } from '@/lib/menu-navs'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import BeHappyImg from '@/assets/imgs/sponsos/be-happy.webp';
 import EuropeImg from '@/assets/imgs/sponsos/europe.webp';
 import HautesPyreneesImg from '@/assets/imgs/sponsos/hautes-pyrenees.webp';
@@ -73,7 +74,7 @@ const parcNational = menuNavs[1]?.subMenus || []
 						{
 							espacesArtistiques.map((item) => (
 								<li>
-									<a href={`/${item.link}`} class="text-sm hover:underline">
+									<a href={getRelativeLocaleUrl(locale, item.link.replace(/^\//, ''))} class="text-sm hover:underline">
 										{item.label}
 									</a>
 								</li>
@@ -88,7 +89,7 @@ const parcNational = menuNavs[1]?.subMenus || []
 						{
 							parcNational.map((item) => (
 								<li>
-									<a href={`/${item.link}`} class="text-sm hover:underline">
+									<a href={getRelativeLocaleUrl(locale, item.link.replace(/^\//, ''))} class="text-sm hover:underline">
 										{item.label}
 									</a>
 								</li>

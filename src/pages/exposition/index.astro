@@ -4,6 +4,7 @@ import { find } from '@/api/payload'
 import EspaceCultureImg from '@/assets/imgs/espace-culture-nature.webp'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import type { ExpositionType, EvenementType } from '@/types/exposition'
 import { MDV_DEFAULT_ADDRESS, renderRichText } from '@/utils/helper'
@@ -174,7 +175,7 @@ const evenements = await find<EvenementType>('exposition', {
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-1 text-black">
-											<a href={`/exposition/evenement/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a href={getRelativeLocaleUrl(locale, `exposition/evenement/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

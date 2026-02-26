@@ -16,6 +16,7 @@ import { useEffect, useState, useRef } from 'react'
 interface LudothequeGridProps {
 	initialData: PayloadResponse<Mediatheque>
 	locale: string
+	localePrefix: string
 	limit: number
 	payloadUrl: string
 	showFilters?: boolean
@@ -42,6 +43,7 @@ interface LudothequeGridProps {
 export function LudothequeGrid({
 	initialData,
 	locale,
+	localePrefix,
 	limit,
 	payloadUrl,
 	showFilters = false,
@@ -266,7 +268,7 @@ export function LudothequeGrid({
 								<figure className="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 className="pb-3 text-black">
-											<a href={`/mediatheque/ludotheque/${item.id}`} className="after:absolute after:inset-0 after:z-10">
+											<a href={`${localePrefix}/mediatheque/ludotheque/${item.id}`} className="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
