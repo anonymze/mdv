@@ -9,8 +9,10 @@ import tailwindcss from '@tailwindcss/vite'
 // https://astro.build/config
 export default defineConfig({
 	output: 'server',
-	adapter: vercel({
-		imagesConfig: {
+  adapter: vercel({
+    imageService: true,
+    imagesConfig: {
+
 			sizes: [100, 150, 200,250, 400, 640, 750, 828, 850, 960, 1080, 1280, 1300, 1500, 1668, 1920, 2048, 2560, 3200, 3840, 4480, 5120, 6016]
     }
 
