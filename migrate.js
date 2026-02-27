@@ -10,14 +10,19 @@ const unixToISO = (unix) => new Date(unix * 1000).toISOString();
 // Helper: Escape for PostgreSQL
 const escape = (str) => {
   if (!str) return null;
-  return str.replace(/'/g, "''").replace(/\\/g, '\\\\');
+  return str
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "''")
+    .replace(/\n/g, ' ')
+    .replace(/\r/g, '')
+    .replace(/\t/g, ' ')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
 };
 
-// Helper: Convert HTML to JSONB rich text
+// Helper: Convert HTML to Payload Lexical JSONB
 const htmlToRichText = (html) => {
-  if (!html) return null;
-  const escaped = escape(html);
-  return `'[{"type":"paragraph","children":[{"text":"${escaped}"}]}]'`;
+  const text = html ? escape(html) : '';
+  return `'{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"${text}","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'`;
 };
 
 // Taxonomy mapping
@@ -257,14 +262,14 @@ events.forEach(event => {
     sqlOutput += `('${id}', '${type}', true, false, ${jeunePublic ? 'true' : 'false'}, NULL, '${dateStart}', '12€ Normal; 8 € Abonnée; 6 €; 6€ Réduit - 26 ans', '2h', NULL, NULL, NULL, NULL, '${dateStart}', '${dateStart}');\n\n`;
     stats.parc_national++;
   } else if (table === 'autres_actualites') {
-    sqlOutput += `INSERT INTO autres_actualites (id, type, archive, immanquable, jeune_public, thumbnail_id, date_start, price, duration, authors, portfolio_authors, tags, location, updated_at, created_at) VALUES\n`;
-    sqlOutput += `('${id}', '${type}', true, false, ${jeunePublic ? 'true' : 'false'}, NULL, '${dateStart}', '12€ Normal; 8 € Abonnée; 6 €; 6€ Réduit - 26 ans', '2h', NULL, NULL, NULL, NULL, '${dateStart}', '${dateStart}');\n\n`;
+    sqlOutput += `INSERT INTO autres_actualites (id, type, archive, jeune_public, thumbnail_id, date_start, price, duration, authors, portfolio_authors, tags, location, updated_at, created_at) VALUES\n`;
+    sqlOutput += `('${id}', '${type}', true, ${jeunePublic ? 'true' : 'false'}, NULL, '${dateStart}', '12€ Normal; 8 € Abonnée; 6 €; 6€ Réduit - 26 ans', '2h', NULL, NULL, NULL, NULL, '${dateStart}', '${dateStart}');\n\n`;
     stats.autres_actualites++;
   }
 
   // Insert all 3 locales with French content
   ['fr', 'en', 'es'].forEach(locale => {
-    sqlOutput += `INSERT INTO ${table}_locales (title, synopsis, informations_more, _locale, _parent_id) VALUES ('${title}', ${synopsisJson}, NULL, '${locale}', '${id}');\n`;
+    sqlOutput += `INSERT INTO ${table}_locales (title, description, informations_more, _locale, _parent_id) VALUES ('${title}', ${synopsisJson}, NULL, '${locale}', '${id}');\n`;
   });
   sqlOutput += '\n';
 });
