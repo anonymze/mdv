@@ -1,12 +1,15 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
+import FirstMediaImg from '@/assets/imgs/art_vivant/1.webp'
+import SecondMediaImg from '@/assets/imgs/art_vivant/2.webp'
+import ThirdMediaImg from '@/assets/imgs/art_vivant/3.webp'
 import MyImage from '@/components/my-image.astro'
 import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
-import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import type { ArtVivant } from '@/types/art-vivant'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
@@ -68,7 +71,47 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-		<section class="section-default" id="spectacles">
+		<section class="section-default" id="description">
+			<h1 class="text-primary pb-8 lg:pb-20">{t('ART_VIVANT')}</h1>
+			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
+				<div class="order-1 flex flex-col">
+					<p class="distinguished pb-8 lg:pb-16">{t('SPECTACLES_INTRO')}</p>
+					<p>
+						{t('ART_VIVANT_DESC_PART1')}<br /><br />
+						{t('ART_VIVANT_DESC_PART2')}<br /><br />
+						{t('ART_VIVANT_DESC_PART3')}
+					</p>
+				</div>
+				<div class="order-2 grid grid-cols-2 grid-rows-2 gap-2 lg:gap-5">
+					<MyImage
+						alt=""
+						src={ThirdMediaImg}
+						width={420}
+						height={310}
+						layout="fullWidth"
+						class="col-start-1 row-start-1 h-40 w-full object-cover lg:h-full"
+					/>
+					<MyImage
+						alt=""
+						src={SecondMediaImg}
+						width={420}
+						height={310}
+						layout="fullWidth"
+						class="col-start-1 row-start-2 h-40 w-full object-cover lg:h-full"
+					/>
+					<MyImage
+						alt=""
+						src={FirstMediaImg}
+						width={420}
+						height={640}
+						layout="fullWidth"
+						class="col-start-2 row-span-2 h-80 w-full object-cover lg:h-full"
+					/>
+				</div>
+			</article>
+		</section>
+
+		<section class="section-default bg-primary/20" id="spectacles">
 			<article>
 				<h2 class="pb-2 lg:pb-3">{t('SPECTACLES_A_VENIR')}</h2>
 				<p class="distinguished pb-3 lg:pb-6">{t('SPECTACLES_INTRO')}</p>
@@ -91,9 +134,9 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 			/>
 		</section>
 
-		<section class="section-default bg-primary/20" id="residence">
+		<section class="section-default" id="residence">
 			<article>
-				<h2 class="pb-2 lg:pb-3">{t('RESIDENCE_ARTISTIQUE')}</h2>
+				<h2 class="text-secondary pb-2 lg:pb-3">{t('RESIDENCE_ARTISTIQUE')}</h2>
 				<p class="distinguished pb-3 lg:pb-6">{t('RESIDENCE_INTRO')}</p>
 				<p class="lg:w-2/3">
 					{t('RESIDENCE_DESC_PART1')}<br /><br />
@@ -101,7 +144,9 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				</p>
 			</article>
 
-			<div class="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80">
+			<div
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+			>
 				{
 					residences.docs.map((item) => {
 						const descText = item.description.root.children
@@ -125,7 +170,10 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="pb-3 text-black">
-											<a href={`${localePrefix}/art-vivant/residence/${item.id}`} class="after:absolute after:inset-0 after:z-10">
+											<a
+												href={`${localePrefix}/art-vivant/residence/${item.id}`}
+												class="after:absolute after:inset-0 after:z-10"
+											>
 												{item.title}
 											</a>
 										</h3>
@@ -140,7 +188,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 										</time>
 									</figcaption>
 								</figure>
-								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+								<div class="bg-secondary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
 								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
 									<figcaption class="text-white">
 										<p class="line-clamp-8 text-sm">{descText}</p>

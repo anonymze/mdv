@@ -5,14 +5,14 @@ import FirstMediaImg from '@/assets/imgs/parc/1.webp'
 import SecondMediaImg from '@/assets/imgs/parc/2.webp'
 import ThirdMediaImg from '@/assets/imgs/parc/3.webp'
 import FourthMediaImg from '@/assets/imgs/parc/4.webp'
+import { ArticleGrid } from '@/components/article-grid'
 import MyImage from '@/components/my-image.astro'
 import { SpectaclesGrid } from '@/components/spectacles-grid'
-import { ArticleGrid } from '@/components/article-grid'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
-import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import type { ParcNational } from '@/types/parc-national'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
@@ -34,7 +34,7 @@ const articles = await find<ParcNational>('parc_national', {
 	locale,
 	upcomingOnly: false,
 	where: {
-		type: { equals: 'article' },
+		type: { equals: 'article' }
 	}
 })
 
@@ -66,8 +66,11 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 						{t('PARC_NATIONAL_DESC')}
 					</p>
 
-					<Button link="https://www.pyrenees-parcnational.fr/fr" openInNewTab size={'xl'} className="w-fit my-4 lg:mb-0 lg:mt-auto"
-						>{t('PARC_NATIONAL_SITE_OFFICIEL')}</Button
+					<Button
+						link="https://www.pyrenees-parcnational.fr/fr"
+						openInNewTab
+						size={'xl'}
+						className="my-4 w-fit lg:mt-auto lg:mb-0">{t('PARC_NATIONAL_SITE_OFFICIEL')}</Button
 					>
 				</div>
 				<div class="order-2 grid grid-cols-2 gap-2 lg:grid-cols-4 lg:grid-rows-3 lg:gap-5">
@@ -106,43 +109,43 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				</div>
 			</article>
 		</section>
+
+		<section class="section-default bg-primary/20" id="evenements">
+			<h2 class="text-primary pb-2 lg:pb-3">{t('PARC_EVENEMENTS_TITRE')}</h2>
+			<p class="distinguished pb-3 lg:pb-6">{t('PARC_EVENEMENTS_INTRO')}</p>
+			<p class="lg:w-2/3">
+				{t('PARC_EVENEMENTS_DESC')}
+			</p>
+
+			<SpectaclesGrid
+				client:load
+				initialData={evenements}
+				locale={locale}
+				localePrefix={localePrefix}
+				limit={EVENEMENTS_LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				collection="parc_national"
+				showFilters={false}
+				mobileScrollOnly={true}
+				translations={evenementsTranslations}
+			/>
+		</section>
+
+		<section class="section-default" id="articles">
+			<h2 class="text-secondary pb-2 lg:pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
+			<p class="distinguished pb-3 lg:pb-6">{t('PARC_ARTICLES_INTRO')}</p>
+			<p class="lg:w-2/3">
+				{t('PARC_ARTICLES_DESC')}
+			</p>
+
+			<ArticleGrid
+				client:load
+				initialData={articles}
+				locale={locale}
+				limit={ARTICLES_LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				translations={articlesTranslations}
+			/>
+		</section>
 	</main>
-
-	<section class="section-default bg-primary/20" id="evenements">
-		<h2 class="text-primary pb-2 lg:pb-3">{t('PARC_EVENEMENTS_TITRE')}</h2>
-		<p class="distinguished pb-3 lg:pb-6">{t('PARC_EVENEMENTS_INTRO')}</p>
-		<p class="lg:w-2/3">
-			{t('PARC_EVENEMENTS_DESC')}
-		</p>
-
-		<SpectaclesGrid
-			client:load
-			initialData={evenements}
-			locale={locale}
-			localePrefix={localePrefix}
-			limit={EVENEMENTS_LIMIT}
-			payloadUrl={PAYLOAD_URL}
-			collection="parc_national"
-			showFilters={false}
-			mobileScrollOnly={true}
-			translations={evenementsTranslations}
-		/>
-	</section>
-
-	<section class="section-default" id="articles">
-		<h2 class="text-secondary pb-2 lg:pb-3">{t('PARC_ARTICLES_TITRE')}</h2>
-		<p class="distinguished pb-3 lg:pb-6">{t('PARC_ARTICLES_INTRO')}</p>
-		<p class="lg:w-2/3">
-			{t('PARC_ARTICLES_DESC')}
-		</p>
-
-		<ArticleGrid
-			client:load
-			initialData={articles}
-			locale={locale}
-			limit={ARTICLES_LIMIT}
-			payloadUrl={PAYLOAD_URL}
-			translations={articlesTranslations}
-		/>
-	</section>
 </Layout>

@@ -21,6 +21,11 @@ export default {
 	ARCHIVES_DESC:
 		"Replongez dans l'histoire de la Maison du Parc national et de la Vallée à travers nos archives : spectacles passés, expositions marquantes, événements culturels qui ont façonné notre lieu depuis sa création en 1982.",
 	ART_VIVANT: 'Art vivant',
+	ART_VIVANT_DESC_PART1:
+		"De septembre à juin, la Maison propose une programmation pluridisciplinaire, augmentée aux périodes d'affluence touristique. Une programmation à destination du jeune public est également proposée aux établissements scolaires tout au long de l'année. Chaque été la culture s'empare du village avec une proposition de spectacle de rue chaque mercredi !",
+	ART_VIVANT_DESC_PART2: "Tout au long de l'année des équipes artistiques sont accueillies en résidence dans les locaux. Une résidence d'artiste, c'est quoi ?",
+	ART_VIVANT_DESC_PART3:
+		"Une résidence artistique permet à un artiste-auteur de consacrer un temps de création dans un espace de travail mis à sa disposition, ainsi qu'un hébergement, un accompagnement et des moyens financiers. Elle contribue ainsi aux échanges avec l'équipe du lieu, mais également avec les publics au travers de rencontres et médiations, dans des formats variés qui favorisent une approche personnelle et sensible des œuvres et des démarches artistiques : sortie de résidence, bords de scènes avec les publics scolaires, ateliers…",
 	ARTISTE: 'Artiste',
 	AUCUN_CONTENU: 'Aucun contenu disponible',
 	AUTRES_MEDIAS: 'Autres médias',
