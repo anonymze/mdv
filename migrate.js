@@ -19,10 +19,33 @@ const escape = (str) => {
     .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
 };
 
+// Helper: Clean body text for Lexical JSON
+const cleanBody = (html) => {
+  if (!html) return '';
+  return html
+    .replace(/\\'/g, "'")
+    .replace(/\\"/g, '"')
+    .replace(/\\\\/g, '\\')
+    .replace(/\\r\\n/g, ' ')
+    .replace(/\\n/g, ' ')
+    .replace(/&#39;/g, "'")
+    .replace(/\r\n/g, ' ')
+    .replace(/\n/g, ' ')
+    .replace(/\r/g, '')
+    .replace(/\t/g, ' ')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
+};
+
 // Helper: Convert HTML to Payload Lexical JSONB
 const htmlToRichText = (html) => {
-  const text = html ? escape(html) : '';
-  return `'{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"${text}","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'`;
+  const text = cleanBody(html);
+  const obj = {
+    root: {
+      children: [{ children: [{ detail: 0, format: 0, mode: 'normal', style: '', text, type: 'text', version: 1 }], direction: 'ltr', format: '', indent: 0, type: 'paragraph', version: 1 }],
+      direction: 'ltr', format: '', indent: 0, type: 'root', version: 1
+    }
+  };
+  return `'${JSON.stringify(obj).replace(/'/g, "''")}'`;
 };
 
 // Taxonomy mapping
@@ -47,10 +70,10 @@ const nodeData = [];
 
 if (nodeMatches) {
   nodeMatches.forEach(insert => {
-    const rows = insert.match(/\((\d+),\s*(\d+),\s*'([^']+)',\s*'([^']+)',\s*'([^']+)',\s*(\d+),\s*(\d+),\s*(\d+),\s*(\d+)/g);
+    const rows = insert.match(/\((\d+),\s*(\d+),\s*'([^']+)',\s*'([^']+)',\s*'(?:[^'\\]|\\.)+',\s*(\d+),\s*(\d+),\s*(\d+),\s*(\d+)/g);
     if (rows) {
       rows.forEach(row => {
-        const match = row.match(/\((\d+),\s*(\d+),\s*'([^']+)',\s*'([^']+)',\s*'(.+?)',\s*(\d+),\s*(\d+),\s*(\d+),\s*(\d+)/);
+        const match = row.match(/\((\d+),\s*(\d+),\s*'([^']+)',\s*'([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*(\d+),\s*(\d+),\s*(\d+),\s*(\d+)/);
         if (match) {
           const [, nid, vid, type, lang, title, uid, status, created, changed] = match;
           nodeData.push({
@@ -58,7 +81,7 @@ if (nodeMatches) {
             vid: parseInt(vid),
             type,
             lang,
-            title: title.replace(/\\'/g, "'"),
+            title: title.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/\\\\/g, '\\'),
             status: parseInt(status),
             created: parseInt(created),
             changed: parseInt(changed),
@@ -156,7 +179,7 @@ for (let i = 0; i < bodyLines.length; i++) {
       if (parts.length >= 10 && (parts[1] === 'event' || parts[1] === 'film')) {
         const nid = parseInt(parts[3]);
         let body = parts[7];
-        body = body.replace(/\\'/g, "'").replace(/\\\\/g, '\\').replace(/\\r\\n/g, '\n').replace(/\\n/g, '\n').replace(/&#39;/g, "'");
+        // body is cleaned later in cleanBody() inside htmlToRichText
         bodyMap.set(nid, body);
       }
     }
@@ -164,6 +187,29 @@ for (let i = 0; i < bodyLines.length; i++) {
 }
 
 console.log(`Found ${bodyMap.size} body contents`);
+
+// Extract actual event dates from field_data_field_event_date
+const eventDateMatches = sqlDump.match(/INSERT INTO `field_data_field_event_date`[^;]+;/gs);
+const eventDateMap = new Map();
+
+if (eventDateMatches) {
+  eventDateMatches.forEach(insert => {
+    const rows = insert.match(/\('node',\s*'event',\s*\d+,\s*(\d+),\s*\d+,\s*'[^']+',\s*\d+,\s*'([^']+)'(?:,\s*'([^']*)')?\)/g);
+    if (rows) {
+      rows.forEach(row => {
+        const match = row.match(/\('node',\s*'event',\s*\d+,\s*(\d+),\s*\d+,\s*'[^']+',\s*\d+,\s*'([^']+)'(?:,\s*'([^']*)')?\)/);
+        if (match) {
+          const nid = parseInt(match[1]);
+          if (!eventDateMap.has(nid)) {
+            eventDateMap.set(nid, { date_start: match[2], date_end: match[3] || null });
+          }
+        }
+      });
+    }
+  });
+}
+
+console.log(`Found ${eventDateMap.size} event dates`);
 
 // Generate SQL
 let sqlOutput = '-- Migration SQL for Maison de la Vallée\n';
@@ -186,8 +232,14 @@ const nowTimestamp = Math.floor(Date.now() / 1000);
 // Skip all films
 console.log('Skipping all film nodes (no cinema migration)');
 
-// Process events only
-const events = nodeData.filter(n => n.type === 'event' && n.status === 1 && n.created < nowTimestamp);
+// Process events only — keep past events (archives), skip future
+const now = new Date();
+const events = nodeData.filter(n => {
+  if (n.type !== 'event' || n.status !== 1) return false;
+  const eventDate = eventDateMap.get(n.nid);
+  const date = eventDate ? new Date(eventDate.date_start) : new Date(n.created * 1000);
+  return date < now;
+});
 events.forEach(event => {
   const tids = taxonomyMap.get(event.nid) || [];
 
@@ -231,18 +283,21 @@ events.forEach(event => {
   const title = escape(event.title);
   const synopsis = bodyMap.get(event.nid) || '';
   const synopsisJson = htmlToRichText(synopsis);
-  const dateStart = unixToISO(event.created);
+
+  // Use actual event date if available, fallback to node created
+  const eventDate = eventDateMap.get(event.nid);
+  const dateStart = eventDate ? new Date(eventDate.date_start).toISOString() : unixToISO(event.created);
 
   // Calculate date_end
   let dateEnd;
-  if (table === 'exposition' && type === 'exposition') {
-    // +1 month for exhibitions
-    const date = new Date(event.created * 1000);
+  if (eventDate?.date_end) {
+    dateEnd = new Date(eventDate.date_end).toISOString();
+  } else if (table === 'exposition' && type === 'exposition') {
+    const date = new Date(dateStart);
     date.setMonth(date.getMonth() + 1);
     dateEnd = date.toISOString();
   } else {
-    // +2 hours for events
-    const date = new Date(event.created * 1000);
+    const date = new Date(dateStart);
     date.setHours(date.getHours() + 2);
     dateEnd = date.toISOString();
   }

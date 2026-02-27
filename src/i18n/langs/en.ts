@@ -24,6 +24,7 @@ export default {
 	ART_VIVANT_DESC_PART2: "Throughout the year, artistic teams are welcomed in residency on the premises. What is an artist residency?",
 	ART_VIVANT_DESC_PART3: "An artistic residency allows an artist-author to dedicate time to creation in a workspace made available to them, along with accommodation, support and financial resources. It contributes to exchanges with the venue's team, but also with audiences through meetings and mediation, in varied formats that encourage a personal and sensitive approach to works and artistic processes: residency showcases, post-show discussions with school audiences, workshops...",
 	ARTISTE: "Artist",
+	AUTRES_ACTUALITES: "Other news",
 	AUCUN_CONTENU: "No content available",
 	AUTRES_MEDIAS: "Other media",
 	AUTRES_MEDIAS_DESC: "The media library also offers a wide selection of multimedia formats: CDs, DVDs and vinyl for all tastes. Your subscription also gives you access to a multitude of online resources, to listen, watch or discover content from home or on site. Music, films, online press, tutorials, documentaries and more: everything is at your fingertips to enrich your leisure time and discoveries.",

@@ -24,6 +24,7 @@ export default {
 	ART_VIVANT_DESC_PART2: "A lo largo del año, equipos artísticos son acogidos en residencia en las instalaciones. ¿Qué es una residencia de artista?",
 	ART_VIVANT_DESC_PART3: "Una residencia artística permite a un artista-autor dedicar un tiempo de creación en un espacio de trabajo puesto a su disposición, así como alojamiento, acompañamiento y medios económicos. Contribuye así a los intercambios con el equipo del lugar, pero también con el público a través de encuentros y mediaciones, en formatos variados que favorecen un enfoque personal y sensible de las obras y los procesos artísticos: presentaciones de residencia, coloquios con el público escolar, talleres...",
 	ARTISTE: "Artista",
+	AUTRES_ACTUALITES: "Otras noticias",
 	AUCUN_CONTENU: "Ningún contenido disponible",
 	AUTRES_MEDIAS: "Otros medios",
 	AUTRES_MEDIAS_DESC: "La mediateca también ofrece una amplia selección de soportes multimedia: CD, DVD y vinilos para todos los gustos. Su suscripción también le permite acceder a una multitud de recursos en línea, para escuchar, ver o descubrir contenidos desde su casa o in situ. Música, películas, prensa en línea, tutoriales, documentales y más: todo está al alcance de la mano para enriquecer sus momentos de ocio y descubrimientos.",

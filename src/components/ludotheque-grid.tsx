@@ -2,14 +2,7 @@ import { find, type PayloadResponse } from '@/api/payload'
 import { MyImage } from '@/components/my-image'
 import { Input } from '@/components/ui/input'
 import { SelectWrapper } from '@/components/select-wrapper'
-import {
-	Pagination,
-	PaginationContent,
-	PaginationItem,
-	PaginationLink,
-	PaginationNext,
-	PaginationPrevious
-} from '@/components/ui/pagination'
+import { SmartPagination } from '@/components/smart-pagination'
 import type { Mediatheque } from '@/types/mediatheque'
 import { useEffect, useState, useRef } from 'react'
 
@@ -156,27 +149,6 @@ export function LudothequeGrid({
 		}
 	}
 
-	const renderPageNumbers = () => {
-		const pages = []
-		for (let i = 1; i <= data.totalPages; i++) {
-			pages.push(
-				<PaginationItem key={i}>
-					<PaginationLink
-						href="#ludotheque"
-						isActive={i === page}
-						onClick={(e) => {
-							e.preventDefault()
-							handlePageChange(i)
-						}}
-					>
-						{i}
-					</PaginationLink>
-				</PaginationItem>
-			)
-		}
-		return pages
-	}
-
 	return (
 		<>
 			{showFilters && (
@@ -309,31 +281,7 @@ export function LudothequeGrid({
 				)}
 			</div>
 
-			<Pagination>
-				<PaginationContent>
-					<PaginationItem>
-						<PaginationPrevious
-							href="#ludotheque"
-							onClick={(e) => {
-								e.preventDefault()
-								handlePageChange(page - 1)
-							}}
-							className={page === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-						/>
-					</PaginationItem>
-					{renderPageNumbers()}
-					<PaginationItem>
-						<PaginationNext
-							href="#ludotheque"
-							onClick={(e) => {
-								e.preventDefault()
-								handlePageChange(page + 1)
-							}}
-							className={page === data.totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-						/>
-					</PaginationItem>
-				</PaginationContent>
-			</Pagination>
+			<SmartPagination page={page} totalPages={data.totalPages} anchor="ludotheque" onPageChange={handlePageChange} labelPrev={translations.PRECEDENT} labelNext={translations.SUIVANT} />
 		</>
 	)
 }

@@ -1,39 +1,32 @@
 ---
 export const prerender = true
-import { find } from '@/api/payload'
-import { SpectaclesGrid } from '@/components/spectacles-grid'
+import { ArchivesGrid } from '@/components/archives-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import type { ArtVivant } from '@/types/art-vivant'
-import type { AutresActualites } from '@/types/autres-actualites'
-import type { Cinema } from '@/types/cinema'
-import type { Exposition } from '@/types/exposition'
-import type { ParcNational } from '@/types/parc-national'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
+const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
-const SPECTACLES_LIMIT = 8
+const LIMIT = 8
 
-// Build time: fetch only first page
-// const spectacles = await find<ArtVivant | Cinema | ParcNational | AutresActualites | Exposition>('archives', {
-// 	limit: SPECTACLES_LIMIT,
-// 	page: 1,
-// 	locale
-// })
-
-
-const spectacleTranslations = {
+const translations = {
 	PRECEDENT: t('PRECEDENT'),
 	SUIVANT: t('SUIVANT'),
 	IMAGE_PLACEHOLDER: t('IMAGE_PLACEHOLDER'),
 	EN_SAVOIR_PLUS: t('EN_SAVOIR_PLUS'),
 	MOTS_CLES: t('MOTS_CLES'),
-	HORAIRES: t('HORAIRES'),
-	TYPE_PUBLIC: t('TYPE_PUBLIC'),
-	PRIX: t('PRIX'),
-	LIEU: t('LIEU'),
-	ANNEE: t('ANNEE')
+	ANNEE: t('ANNEE'),
+	AUCUN_CONTENU: t('AUCUN_CONTENU'),
+	TOUS: t('TOUS'),
+	collectionOptions: [
+		{ key: t('ART_VIVANT'), value: 'art_vivant' },
+		{ key: t('PARC_NATIONAL'), value: 'parc_national' },
+		{ key: t('EXPOSITION'), value: 'exposition' },
+		{ key: t('AUTRES_ACTUALITES'), value: 'autres_actualites' },
+		{ key: t('CINEMA'), value: 'cinema' }
+	]
 }
 
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
@@ -41,13 +34,20 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main>
-		<section class="section-default" id="spectacles">
+		<section class="section-default" id="archives">
 			<article>
 				<h2 class="pb-2 lg:pb-3">{t('ARCHIVES')}</h2>
 				<p class="distinguished pb-3 lg:pb-6">{t('ARCHIVES_DESC')}</p>
 			</article>
 
-
+			<ArchivesGrid
+				client:load
+				locale={locale}
+				localePrefix={localePrefix}
+				limit={LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				translations={translations}
+			/>
 		</section>
 	</main>
 </Layout>

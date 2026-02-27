@@ -27,6 +27,7 @@ export default {
 	ART_VIVANT_DESC_PART3:
 		"Une résidence artistique permet à un artiste-auteur de consacrer un temps de création dans un espace de travail mis à sa disposition, ainsi qu'un hébergement, un accompagnement et des moyens financiers. Elle contribue ainsi aux échanges avec l'équipe du lieu, mais également avec les publics au travers de rencontres et médiations, dans des formats variés qui favorisent une approche personnelle et sensible des œuvres et des démarches artistiques : sortie de résidence, bords de scènes avec les publics scolaires, ateliers…",
 	ARTISTE: 'Artiste',
+	AUTRES_ACTUALITES: 'Autres actualités',
 	AUCUN_CONTENU: 'Aucun contenu disponible',
 	AUTRES_MEDIAS: 'Autres médias',
 	AUTRES_MEDIAS_DESC:

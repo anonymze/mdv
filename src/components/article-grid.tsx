@@ -1,13 +1,6 @@
 import { find, type PayloadResponse } from '@/api/payload'
 import { MyImage } from '@/components/my-image'
-import {
-	Pagination,
-	PaginationContent,
-	PaginationItem,
-	PaginationLink,
-	PaginationNext,
-	PaginationPrevious
-} from '@/components/ui/pagination'
+import { SmartPagination } from '@/components/smart-pagination'
 import type { ParcNational } from '@/types/parc-national'
 import { useEffect, useState, useRef } from 'react'
 
@@ -88,27 +81,6 @@ export function ArticleGrid({
 		}
 	}
 
-	const renderPageNumbers = () => {
-		const pages = []
-		for (let i = 1; i <= data.totalPages; i++) {
-			pages.push(
-				<PaginationItem key={i}>
-					<PaginationLink
-						href="#articles"
-						isActive={i === page}
-						onClick={(e) => {
-							e.preventDefault()
-							handlePageChange(i)
-						}}
-					>
-						{i}
-					</PaginationLink>
-				</PaginationItem>
-			)
-		}
-		return pages
-	}
-
 	return (
 		<>
 			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92 min-h-92">
@@ -154,31 +126,7 @@ export function ArticleGrid({
 				)}
 			</div>
 
-			<Pagination>
-				<PaginationContent>
-					<PaginationItem>
-						<PaginationPrevious
-							href="#articles"
-							onClick={(e) => {
-								e.preventDefault()
-								handlePageChange(page - 1)
-							}}
-							className={page === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-						/>
-					</PaginationItem>
-					{renderPageNumbers()}
-					<PaginationItem>
-						<PaginationNext
-							href="#articles"
-							onClick={(e) => {
-								e.preventDefault()
-								handlePageChange(page + 1)
-							}}
-							className={page === data.totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
-						/>
-					</PaginationItem>
-				</PaginationContent>
-			</Pagination>
+			<SmartPagination page={page} totalPages={data.totalPages} anchor="articles" onPageChange={handlePageChange} labelPrev={translations.PRECEDENT} labelNext={translations.SUIVANT} />
 		</>
 	)
 }
