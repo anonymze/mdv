@@ -20,9 +20,9 @@ function getPageItems(page: number, totalPages: number): number[] {
 }
 
 export function SmartPagination({ page, totalPages, anchor, onPageChange, labelPrev, labelNext }: SmartPaginationProps) {
-	if (totalPages <= 1) return null
-
-	const items = getPageItems(page, totalPages)
+	const items = totalPages > 1 ? getPageItems(page, totalPages) : []
+	const disablePrev = page <= 1 || totalPages <= 1
+	const disableNext = page >= totalPages || totalPages <= 1
 
 	return (
 		<Pagination>
@@ -31,8 +31,8 @@ export function SmartPagination({ page, totalPages, anchor, onPageChange, labelP
 					<PaginationLink
 						href={`#${anchor}`}
 						size="default"
-						onClick={(e) => { e.preventDefault(); onPageChange(page - 1) }}
-						className={`gap-1 px-2.5 sm:pl-2.5 hover:bg-primary/20 ${page === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
+						onClick={(e) => { e.preventDefault(); if (!disablePrev) onPageChange(page - 1) }}
+						className={`gap-1 px-2.5 sm:pl-2.5 hover:bg-primary/20 ${disablePrev ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
 					>
 						<ChevronLeftIcon className="size-4" />
 						<span className="hidden sm:block">{labelPrev}</span>
@@ -55,8 +55,8 @@ export function SmartPagination({ page, totalPages, anchor, onPageChange, labelP
 					<PaginationLink
 						href={`#${anchor}`}
 						size="default"
-						onClick={(e) => { e.preventDefault(); onPageChange(page + 1) }}
-						className={`gap-1 px-2.5 sm:pr-2.5 hover:bg-primary/20 ${page === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
+						onClick={(e) => { e.preventDefault(); if (!disableNext) onPageChange(page + 1) }}
+						className={`gap-1 px-2.5 sm:pr-2.5 hover:bg-primary/20 ${disableNext ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
 					>
 						<span className="hidden sm:block">{labelNext}</span>
 						<ChevronRightIcon className="size-4" />
