@@ -46,6 +46,7 @@ export default {
 		"Nous organisons régulièrement des séances pour les familles, les scolaires, les résidents d'EHPAD, ainsi que pour les cinéphiles en quête de pépites sans oublier les grandes sorties du moment attendues de toutes et tous !",
 	CINEMA_DESC_PART3:
 		'Notre plus belle force ? Être à votre écoute. Vos envies et vos recommandations nous inspirent afin que la programmation vous ressemble et vous fasse vibrer.',
+	CINEMA_DECOUVREZ_PROGRAMME: 'Découvrez le programme',
 	CINEMA_INTRO: 'Le programme cinéma à découvrir',
 	CINEMA_JEUNE_PUBLIC_TITRE: 'Les séances de cinéma',
 	CINEMA_JEUNE_PUBLIC_INTRO: 'Envie de partager une séance cinéma en famille ?',

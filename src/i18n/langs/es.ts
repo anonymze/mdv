@@ -39,6 +39,7 @@ export default {
 	CINEMA_DESC_PART1: "Nuestro encantador cine, clasificado Arte y Ensayo, es una verdadera sala de proximidad, diseñada para abrir horizontes y despertar la curiosidad a través del séptimo arte. Bajo su hermosa estructura atípica, proponemos durante todo el año una programación diversificada, mezclando descubrimientos, emociones y citas de cine.",
 	CINEMA_DESC_PART2: "Organizamos regularmente sesiones para familias, escolares, residentes de residencias de ancianos, así como para cinéfilos en busca de joyas sin olvidar los grandes estrenos del momento esperados por todos!",
 	CINEMA_DESC_PART3: "¿Nuestra mayor fortaleza? Escucharle. Sus deseos y recomendaciones nos inspiran para que la programación se le parezca y le haga vibrar.",
+	CINEMA_DECOUVREZ_PROGRAMME: "Descubra el programa",
 	CINEMA_INTRO: "El programa de cine por descubrir",
 	CINEMA_JEUNE_PUBLIC_TITRE: "Las sesiones de cine",
 	CINEMA_JEUNE_PUBLIC_INTRO: "¿Quiere compartir una sesión de cine en familia?",

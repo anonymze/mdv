@@ -39,6 +39,7 @@ export default {
 	CINEMA_DESC_PART1: "Our charming cinema, classified Art & Essai, is a true neighborhood venue, designed to broaden horizons and awaken curiosity through the 7th art. Under its beautiful atypical framework, we offer a diverse program throughout the year, blending discoveries, emotions and cinema meetups.",
 	CINEMA_DESC_PART2: "We regularly organize screenings for families, schools, nursing home residents, as well as for cinephiles seeking hidden gems, without forgetting the big releases of the moment awaited by everyone!",
 	CINEMA_DESC_PART3: "Our greatest strength? Listening to you. Your wishes and recommendations inspire us so that the program reflects and moves you.",
+	CINEMA_DECOUVREZ_PROGRAMME: "Discover the program",
 	CINEMA_INTRO: "The cinema program to discover",
 	CINEMA_JEUNE_PUBLIC_TITRE: "Cinema screenings",
 	CINEMA_JEUNE_PUBLIC_INTRO: "Want to share a family movie screening?",
