@@ -123,6 +123,7 @@ export default {
 	HORAIRES_OUVERTURE: "Horarios de apertura",
 	HORAIRES_PART1: "De lunes a sábado de 14h a 19h, domingo de 17h a 19h",
 	HORAIRES_PART2: "Vacaciones de verano e invierno, de lunes a domingo de 14h a 19h",
+	HORAIRES_TAB: "Horarios",
 	HERO_LOCATION: "LUZ-SAINT-SAUVEUR · PIRINEOS",
 	HERO_TITLE_LINE1: "Casa del Parque",
 	HERO_TITLE_LINE2: "Nacional y del Valle",

@@ -206,7 +206,7 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 		]
 	},
 	{
-		label: 'Autres actualites',
+		label: t('AUTRES_ACTUALITES'),
 		link: '/autres-actualites'
 	},
 	{

@@ -63,6 +63,7 @@ export default {
 	CYBERBASE_INTRO: 'Votre espace de travail pas comme les autres',
 	CYBERBASE_TITRE: 'La cyberbase',
 	D_OUVERTURE: "d'ouverture",
+	HORAIRES_TAB: 'Horaires',
 	DATE: 'Date',
 	DATE_DISPONIBILITE: 'Date de disponibilité',
 	DUREE: 'Durée',

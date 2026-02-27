@@ -16,14 +16,14 @@ const hours = await findGlobal<Hour>('hours', { locale })
 const { isClosed, today, openStart, openEnd } = getHoursForToday(hours)
 ---
 
-<SideCard client:media="(min-width: 1280px)" tabText={[t('HORAIRES'), t('D_OUVERTURE')]} ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}>
+<SideCard client:media="(min-width: 1280px)" tabText={[t('HORAIRES_TAB'), t('D_OUVERTURE')]} ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}>
 	<div class="flex h-full flex-col items-start px-10 py-7 text-left">
-		<p class="text-primary-foreground pb-5 text-xl">{t('HORAIRES_OUVERTURE')}</p>
+		<p class="text-primary-foreground pb-5 text-[19px]">{t('HORAIRES_OUVERTURE')}</p>
 
 		<hr class="mb-4 h-px w-full border-0 bg-white/40" />
 
 		<p class="text-primary-foreground pb-3 capitalize">
-			<time datetime={today.toISOString().split('T')[0]}>{today.toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })}</time>
+			<time datetime={today.toISOString().split('T')[0]}>{today.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' })}</time>
 		</p>
 
 		{isClosed ? (
@@ -33,7 +33,7 @@ const { isClosed, today, openStart, openEnd } = getHoursForToday(hours)
 				<meta itemprop="opens" content={openStart} />
 				<meta itemprop="closes" content={openEnd} />
 				<p class="text-primary-foreground text-3xl font-bold">
-					<time datetime={openStart}>{new Date(openStart).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' })}</time> - <time datetime={openEnd}>{new Date(openEnd).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' })}</time>
+					<time datetime={openStart}>{new Date(openStart).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Paris' })}</time> - <time datetime={openEnd}>{new Date(openEnd).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Paris' })}</time>
 				</p>
 			</div>
 		) : null}
