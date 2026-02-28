@@ -15,7 +15,7 @@ import type { Hour } from '@/types/hours'
 export interface Props {
 	title: string
 	description?: string
-	image?: string
+	image?: string | null
 }
 
 const { title, description = '', image } = Astro.props
