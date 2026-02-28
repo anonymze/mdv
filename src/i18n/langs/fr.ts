@@ -284,6 +284,7 @@ export default {
 	SEANCES_A_VENIR: 'Séances à venir',
 	SEMAINES: 'semaines',
 	SITE_TITLE: 'Maison du Parc national et de la vallée',
+	SKIP_TO_CONTENT: 'Aller au contenu principal',
 	SPECTACLES: 'Spectacles',
 	SPECTACLES_A_VENIR: 'Spectacles à venir',
 	SPECTACLES_DESC_PART1:

@@ -46,9 +46,9 @@ const formatDate = (dateStr: string) =>
 	})
 ---
 
-<Layout title={item.title}>
-	<main>
-		<section class="mt-8 lg:mt-16">
+<Layout title={item.title} image={itemImage?.url}>
+	<main id="main-content">
+		<section class="section-default">
 			<MyImage
 				src={itemImage?.url}
 				alt={itemImage?.alt ?? item.title}

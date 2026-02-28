@@ -21,14 +21,14 @@ const evenements = await find<EvenementType>('exposition', {
 })
 ---
 
-<Layout title={t('ACCUEIL_TITLE')}>
-	<main>
+<Layout title={t('EXPOSITION')}>
+	<main id="main-content">
 		{
 			exposition && (
 				<section class="section-default" id="exposition">
 					<article class="grid grid-cols-1 gap-5 pb-8 lg:grid-cols-3 lg:pb-16">
 						<div class="flex flex-col lg:col-span-2">
-							<h2 class="text-primary pb-2 lg:pb-3">{t('EXPO_MOMENT_TITRE')}</h2>
+							<h1 class="text-primary pb-2 lg:pb-3">{t('EXPO_MOMENT_TITRE')}</h1>
 							<p class="distinguished pb-3 lg:pb-6">
 								{t('DATE_FROM')}{' '}
 								{new Date(exposition.date_start).toLocaleDateString(locale, {

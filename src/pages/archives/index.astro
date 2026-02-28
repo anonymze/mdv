@@ -46,11 +46,11 @@ const initialData = await find<ArchiveDoc>('art_vivant', {
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
-<Layout title={t('ACCUEIL_TITLE')}>
-	<main>
+<Layout title={t('ARCHIVES')}>
+	<main id="main-content">
 		<section class="section-default" id="archives">
 			<article>
-				<h2 class="pb-2 lg:pb-3">{t('ARCHIVES')}</h2>
+				<h1 class="pb-2 lg:pb-3">{t('ARCHIVES')}</h2>
 				<p class="distinguished pb-3 lg:pb-6">{t('ARCHIVES_DESC')}</p>
 			</article>
 

@@ -33,7 +33,8 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				image: HeaderCinema.src,
 				subMenus: [
 					{ label: t('SEANCES'), link: '/cinema#cinema' },
-					{ label: t('RDV_CINE'), link: '/cinema#rdv-cinema' }
+					{ label: t('RDV_CINE'), link: '/cinema#rdv-cinema' },
+					{ label: t('CINEMA_SCOLAIRE_TITRE'), link: '/cinema#cinema-scolaire' }
 				]
 			},
 			{
@@ -102,7 +103,8 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				image: HeaderCinema.src,
 				subMenus: [
 					{ label: t('SEANCES'), link: '/cinema#cinema' },
-					{ label: t('RDV_CINE'), link: '/cinema#rdv-cinema' }
+					{ label: t('RDV_CINE'), link: '/cinema#rdv-cinema' },
+					{ label: t('CINEMA_SCOLAIRE_TITRE'), link: '/cinema#cinema-scolaire' }
 				]
 			},
 			{

@@ -46,9 +46,10 @@ const cinema = await find<Cinema>('cinema', {
 })
 ---
 
-<Layout title={t('ACCUEIL_TITLE')}>
-	<main>
+<Layout title={t('JEUNESSE')}>
+	<main id="main-content">
 		<section class="section-default" id="spectacles">
+			<h1 class="text-primary pb-2 lg:pb-3">{t('JEUNESSE')}</h1>
 			<h2 class="text-primary pb-2 lg:pb-3">{t('SPECTACLES_JEUNE_PUBLIC_TITRE')}</h2>
 			<p class="distinguished pb-3 lg:pb-6">{t('SPECTACLES_JEUNE_PUBLIC_INTRO')}</p>
 			<p class="lg:w-2/3">

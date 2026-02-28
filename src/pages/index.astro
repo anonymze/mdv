@@ -55,7 +55,7 @@ const seances = await find<Cinema>('cinema', {
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
-	<main>
+	<main id="main-content">
 		<section class="text-primary grid grid-cols-1 gap-2 px-4 py-8 lg:grid-cols-3 lg:px-10 lg:py-16">
 			<header class="flex w-full flex-col self-stretch pb-8 lg:col-span-2 lg:pb-0">
 				<p class="text-md mb-8 tracking-widest uppercase lg:mb-20">{t('HERO_LOCATION')}</p>

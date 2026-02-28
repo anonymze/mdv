@@ -19,8 +19,9 @@ const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 ---
 
-<Layout title={t('ACCUEIL_TITLE')}>
-	<main>
+<Layout title={t('ARTISTE')}>
+	<main id="main-content">
+		<h1 class="sr-only">{t('ARTISTE')}</h1>
 		<section class="section-default" id="residence">
 			<article class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
 				<div class="grid grid-cols-2 gap-2 lg:gap-5 order-2 lg:order-1">

@@ -249,6 +249,7 @@ export default {
 	SEANCES_A_VENIR: "Upcoming screenings",
 	SEMAINES: "weeks",
 	SITE_TITLE: "House of the National Park and Valley",
+	SKIP_TO_CONTENT: "Skip to main content",
 	SPECTACLES: "Shows",
 	SPECTACLES_A_VENIR: "Upcoming shows",
 	SPECTACLES_DESC_PART1: "Throughout the year, we invite you to experience fabulous moments thanks to a rich and vibrant live arts program.",

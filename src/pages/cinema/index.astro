@@ -83,8 +83,8 @@ const cinemaTranslations = {
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
-<Layout title={t('ACCUEIL_TITLE')}>
-	<main>
+<Layout title={t('CINEMA')}>
+	<main id="main-content">
 		<section class="section-default" id="description">
 			<h1 class="text-primary pb-8 lg:pb-20">{t('CINEMA')}</h1>
 			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
@@ -230,7 +230,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 			</div>
 		</section>
 
-		<section class="section-default bg-secondary/20" id="rdv-cinema">
+		<section class="section-default bg-secondary/20" id="cinema-scolaire">
 			<h2 class="text-secondary pb-2 lg:pb-3">{t('CINEMA_SCOLAIRE_TITRE')}</h2>
 			<p class="distinguished pb-3 lg:pb-6">{t('CINEMA_SCOLAIRE_INTRO')}</p>
 			<p class="lg:w-2/3">{t('CINEMA_SCOLAIRE_DESC')}</p>

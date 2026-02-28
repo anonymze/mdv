@@ -60,8 +60,8 @@ const formatTime = (dateStr: string) => {
 const allImages = (item.other_images?.map((img) => img.image) || []).filter(Boolean).slice(0, 3)
 ---
 
-<Layout title={item.title}>
-	<main>
+<Layout title={item.title} image={item.thumbnail?.url}>
+	<main id="main-content">
 		<section class="section-default bg-primary/20">
 			<article class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-8">
 				<div class="flex items-center justify-center order-2 lg:order-1">

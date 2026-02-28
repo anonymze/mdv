@@ -249,6 +249,7 @@ export default {
 	SEANCES_A_VENIR: "Sesiones próximas",
 	SEMAINES: "semanas",
 	SITE_TITLE: "Casa del Parque Nacional y del Valle",
+	SKIP_TO_CONTENT: "Ir al contenido principal",
 	SPECTACLES: "Espectáculos",
 	SPECTACLES_A_VENIR: "Espectáculos próximos",
 	SPECTACLES_DESC_PART1: "A lo largo del año, le invitamos a vivir momentos fabulosos gracias a una programación de arte vivo rica y vibrante.",

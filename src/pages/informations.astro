@@ -25,8 +25,9 @@ const formatTime = (dateStr: string) => {
 }
 ---
 
-<Layout title={t('ACCUEIL_TITLE')}>
-	<main>
+<Layout title={t('INFORMATIONS')}>
+	<main id="main-content">
+		<h1 class="sr-only">{t('INFORMATIONS')}</h1>
 		<section class="section-default" id="horaires">
 			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
 				<div class="flex flex-col">
@@ -80,6 +81,7 @@ const formatTime = (dateStr: string) => {
 					referrerpolicy="no-referrer-when-downgrade"
 					src="https://www.google.com/maps?q=24+Place+Saint+Clément,+65120+Luz-Saint-Sauveur&output=embed"
 					allowfullscreen
+					title="Maison du Parc National et de la Vallée — Luz-Saint-Sauveur"
 				>
 				</iframe>
 			</article>
@@ -137,49 +139,49 @@ const formatTime = (dateStr: string) => {
 					<figure>
 						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2 class="text-secondary">Marque Cathy</h2>
+							<h3 class="text-secondary">Marque Cathy</h3>
 							<p>{t('DIRECTRICE_ADMINISTRATIVE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2 class="text-secondary">Lay Marie</h2>
+							<h3 class="text-secondary">Lay Marie</h3>
 							<p>{t('DIRECTRICE_ARTISTIQUE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2 class="text-secondary">Boussac Chantal</h2>
+							<h3 class="text-secondary">Boussac Chantal</h3>
 							<p>{t('COMPTABLE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2 class="text-secondary">Loo Santos Andréa</h2>
+							<h3 class="text-secondary">Loo Santos Andréa</h3>
 							<p>{t('RESPONSABLE_MEDIATHEQUE')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2 class="text-secondary">Bouillon Marie-Jade</h2>
+							<h3 class="text-secondary">Bouillon Marie-Jade</h3>
 							<p>{t('RESPONSABLE_CINEMA_EXPO')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2 class="text-secondary">Poulalion Léo-Polde</h2>
+							<h3 class="text-secondary">Poulalion Léo-Polde</h3>
 							<p>{t('TECHNICIEN_REGISSEUR')}</p>
 						</figcaption>
 					</figure>
 					<figure>
 						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h2 class="text-secondary">Bouillon Mélinda</h2>
+							<h3 class="text-secondary">Bouillon Mélinda</h3>
 							<p>{t('AGENT_ENTRETIEN_ACCUEIL')}</p>
 						</figcaption>
 					</figure>
@@ -215,12 +217,12 @@ const formatTime = (dateStr: string) => {
 					</p>
 				</div>
 				<div class="order-2 grid grid-cols-3 grid-rows-3 place-items-center gap-3 lg:order-1 lg:col-span-1 lg:pt-48">
-					<MyImage src={BeHappyImg} alt="" width={120} height={120} class="col-span-1" />
-					<MyImage src={HautesPyreneesImg} alt="" width={120} height={120} class="col-span-1" />
-					<MyImage src={OccitanieImg} alt="" width={120} height={120} class="col-span-1" />
-					<MyImage src={PrefetImg} alt="" width={120} height={120} class="col-span-1" />
-					<MyImage src={ParcNationalImg} alt="" width={240} height={120} class="col-span-2" />
-					<MyImage src={EuropeImg} alt="" width={700} height={120} class="col-span-3" />
+					<MyImage src={BeHappyImg} alt="Be Happy" width={120} height={120} class="col-span-1" />
+					<MyImage src={HautesPyreneesImg} alt="Département des Hautes-Pyrénées" width={120} height={120} class="col-span-1" />
+					<MyImage src={OccitanieImg} alt="Région Occitanie" width={120} height={120} class="col-span-1" />
+					<MyImage src={PrefetImg} alt="Préfet des Hautes-Pyrénées" width={120} height={120} class="col-span-1" />
+					<MyImage src={ParcNationalImg} alt="Parc National des Pyrénées" width={240} height={120} class="col-span-2" />
+					<MyImage src={EuropeImg} alt="Union Européenne – Fonds Européen de Développement Régional" width={700} height={120} class="col-span-3" />
 				</div>
 			</article>
 		</section>
