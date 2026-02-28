@@ -23,7 +23,9 @@ export interface ParcNational {
 	genre?: string | null
 	authors?: string | null
 	tags?: string | null
-	location?: string | null
+  location?: string | null
+  portfolio_authors?: string | null;
+  credits_photos?: string | null;
 	updatedAt: string
 	createdAt: string
 }
