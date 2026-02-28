@@ -3,6 +3,7 @@ import { MyImage } from '@/components/my-image'
 import { Input } from '@/components/ui/input'
 import { SelectWrapper } from '@/components/select-wrapper'
 import { SmartPagination } from '@/components/smart-pagination'
+import { stripTextAlign } from '@/utils/helper'
 import { useEffect, useState, useRef } from 'react'
 
 export type ArchiveDoc = {
@@ -232,7 +233,7 @@ const fetchData = async () => {
 								<div className="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
 								<figure className="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
 									<figcaption className="text-white">
-										<p className="line-clamp-8 text-sm">{descText}</p>
+										<div className="line-clamp-8 text-sm" dangerouslySetInnerHTML={{ __html: stripTextAlign(descText) }} />
 										<p className="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
 											{translations.EN_SAVOIR_PLUS}
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

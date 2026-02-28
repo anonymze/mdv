@@ -3,7 +3,7 @@ import { findByID } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
+import { stripTextAlign } from '@/utils/helper'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
@@ -65,8 +65,8 @@ const formatDate = (dateStr: string) =>
 				<h1 class="text-primary pb-2">{item.title}</h1>
 				{item.genre && <p class="text-xs font-serif text-primary pb-2">{item.genre}</p>}
 				{item.date_start && <p class="distinguished capitalize">{formatDate(item.date_start)}</p>}
-				<p class="distinguished pb-8">{item.location || MDV_DEFAULT_ADDRESS}</p>
-				{descText && <div set:html={descText} />}
+				{item.location && <p class="distinguished">{item.location}</p>}
+				{descText && <div class="pt-8" set:html={stripTextAlign(descText)} />}
 			</article>
 		</section>
 	</main>

@@ -24,6 +24,9 @@ export const sprintf = (str: string, ...args: string[]) => {
 }
 
 
+export const stripTextAlign = (html: string) =>
+	html.replace(/text-align\s*:\s*[^;}"]+;?/g, '')
+
 export function renderRichText(richText: RichTextField): string {
 	return richText.root.children
 		.map((paragraph) => {
