@@ -1,9 +1,4 @@
-BA agence educative enseignement superieur, ecolle de commerce (marketing digital), IUT, faculté, matière plutot généraliste (marketing, commerce, finance...) et aussi des thémtiques plus spécifiques IA, informatique...
+TO DO
 
-5 janvier demi journée au 27 janvier
-
-facture entre 15 et 30 jours
-
-carte identité, diplome, kabi, associate d'affiliation, casier judiciaire
-
-calendar / process / linear
+newletter new IP website
+IA translations sur les contenus
