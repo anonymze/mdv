@@ -20,7 +20,7 @@ export default defineConfig({
 		}
 	}),
 	integrations: [react()],
-	site: 'https://mdv-chi.vercel.app',
+	site: 'https://www.maisondelavallee.org',
 	i18n: {
 		locales: ['es', 'en', 'fr'],
 		defaultLocale: 'fr',
