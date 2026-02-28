@@ -5,7 +5,7 @@ import { SelectWrapper } from '@/components/select-wrapper'
 import { SmartPagination } from '@/components/smart-pagination'
 import { useEffect, useState, useRef } from 'react'
 
-type ArchiveDoc = {
+export type ArchiveDoc = {
 	id: string
 	type?: string
 	title: string
@@ -13,6 +13,7 @@ type ArchiveDoc = {
 	synopsis?: any
 	date_start: string
 	thumbnail?: { url?: string; alt?: string; blurhash?: string } | null
+	images?: { image?: { url?: string; alt?: string; blurhash?: string } | null }[] | null
 }
 
 
@@ -34,6 +35,7 @@ interface ArchivesGridProps {
 	localePrefix: string
 	limit: number
 	payloadUrl: string
+	initialData?: PayloadResponse<ArchiveDoc>
 	translations: {
 		PRECEDENT: string
 		SUIVANT: string
@@ -47,13 +49,13 @@ interface ArchivesGridProps {
 	}
 }
 
-export function ArchivesGrid({ locale, localePrefix, limit, payloadUrl, translations }: ArchivesGridProps) {
+export function ArchivesGrid({ locale, localePrefix, limit, payloadUrl, initialData, translations }: ArchivesGridProps) {
 	const [collection, setCollection] = useState('art_vivant')
 	const [year, setYear] = useState('')
 	const [keyword, setKeyword] = useState('')
 	const [debouncedKeyword, setDebouncedKeyword] = useState('')
-	const [data, setData] = useState<PayloadResponse<ArchiveDoc>>(EMPTY_DATA)
-	const [loading, setLoading] = useState(true)
+	const [data, setData] = useState<PayloadResponse<ArchiveDoc>>(initialData ?? EMPTY_DATA)
+	const [loading, setLoading] = useState(!initialData)
 	const [page, setPage] = useState(1)
 	const gridRef = useRef<HTMLDivElement>(null)
 
@@ -67,9 +69,19 @@ export function ArchivesGrid({ locale, localePrefix, limit, payloadUrl, translat
 	}, [collection, year, debouncedKeyword])
 
 	useEffect(() => {
-		const fetchData = async () => {
+		if (page === 1 && !year && !debouncedKeyword && collection === 'art_vivant' && initialData) {
+			setData(initialData)
+			setLoading(false)
+			return
+		}
+const fetchData = async () => {
 			setLoading(true)
-			const where: any = { archive: { equals: true } }
+			const twoWeeksAgo = new Date()
+			twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14)
+			const where: any = {
+				archive: { equals: true },
+				date_start: { less_than: twoWeeksAgo.toISOString() }
+			}
 
 			if (debouncedKeyword) {
 				where.title = { contains: debouncedKeyword }
@@ -96,6 +108,8 @@ export function ArchivesGrid({ locale, localePrefix, limit, payloadUrl, translat
 
 	const getLink = (item: ArchiveDoc) => `${localePrefix}/archives/evenement/${item.id}`
 
+	const getImage = (item: ArchiveDoc) => item.thumbnail ?? item.images?.[0]?.image ?? null
+
 	const getDescText = (item: ArchiveDoc) => {
 		const richText = item.description ?? item.synopsis
 		return (
@@ -109,9 +123,6 @@ export function ArchivesGrid({ locale, localePrefix, limit, payloadUrl, translat
 
 	const formatDate = (dateStr: string) =>
 		new Date(dateStr).toLocaleDateString(locale, { dateStyle: 'full' })
-
-	const formatTime = (dateStr: string) =>
-		new Date(dateStr).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', hour12: false })
 
 	const handlePageChange = (newPage: number) => {
 		if (newPage < 1 || newPage > data.totalPages) return
@@ -195,15 +206,15 @@ export function ArchivesGrid({ locale, localePrefix, limit, payloadUrl, translat
 							>
 								<div className="overflow-hidden">
 									<MyImage
-										src={item.thumbnail?.url}
+										src={getImage(item)?.url}
 										payloadUrl={payloadUrl}
-										alt={item.thumbnail?.alt ?? translations.IMAGE_PLACEHOLDER}
+										alt={getImage(item)?.alt ?? translations.IMAGE_PLACEHOLDER}
 										width={275}
 										height={305}
 										className="h-[305px] w-full object-cover"
 										loading="lazy"
 										layout="fullWidth"
-										background={item.thumbnail?.blurhash}
+										background={getImage(item)?.blurhash}
 									/>
 								</div>
 								<figure className="p-4 transition-opacity duration-250 group-hover:opacity-0">

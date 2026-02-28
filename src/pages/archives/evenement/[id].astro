@@ -1,0 +1,73 @@
+---
+import { findByID } from '@/api/payload'
+import MyImage from '@/components/my-image.astro'
+import { createTranslator, I18n } from '@/i18n/translations'
+import Layout from '@/layouts/layout.astro'
+import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
+
+const locale = (Astro.currentLocale || 'fr') as I18n
+const t = createTranslator(locale)
+const { id } = Astro.params
+
+const COLLECTIONS = ['art_vivant', 'parc_national', 'exposition', 'autres_actualites', 'cinema']
+
+const results = await Promise.allSettled(
+	COLLECTIONS.map((col) => findByID<any>(col, id!, { locale }))
+)
+
+const found = results.find((r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled')
+
+if (!found) {
+	return Astro.redirect('/archives')
+}
+
+const item = found.value
+const itemImage = item.thumbnail ?? item.images?.[0]?.image ?? null
+
+const getDescText = (item: any) => {
+	const richText = item.description ?? item.synopsis
+	return (
+		richText?.root?.children
+			?.flatMap((p: any) => p.children ?? [])
+			?.filter((c: any) => c.type === 'text')
+			?.map((c: any) => c.text)
+			?.join(' ') ?? ''
+	)
+}
+
+const descText = getDescText(item)
+
+const formatDate = (dateStr: string) =>
+	new Date(dateStr).toLocaleDateString(locale, {
+		weekday: 'long',
+		day: 'numeric',
+		month: 'long',
+		year: 'numeric'
+	})
+---
+
+<Layout title={item.title}>
+	<main>
+		<section class="mt-8 lg:mt-16">
+			<MyImage
+				src={itemImage?.url}
+				alt={itemImage?.alt ?? item.title}
+				background={itemImage?.blurhash}
+				width={1200}
+				height={600}
+				layout="fullWidth"
+				class="w-full max-h-125 object-cover"
+			/>
+		</section>
+
+		<section class="section-default">
+			<article>
+				<h1 class="text-primary pb-2">{item.title}</h1>
+				{item.genre && <p class="text-xs font-serif text-primary pb-2">{item.genre}</p>}
+				{item.date_start && <p class="distinguished capitalize">{formatDate(item.date_start)}</p>}
+				<p class="distinguished pb-8">{item.location || MDV_DEFAULT_ADDRESS}</p>
+				{descText && <div set:html={descText} />}
+			</article>
+		</section>
+	</main>
+</Layout>

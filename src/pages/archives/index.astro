@@ -1,6 +1,7 @@
 ---
 export const prerender = true
-import { ArchivesGrid } from '@/components/archives-grid'
+import { find } from '@/api/payload'
+import { ArchivesGrid, type ArchiveDoc } from '@/components/archives-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -29,6 +30,19 @@ const translations = {
 	]
 }
 
+const twoWeeksAgo = new Date()
+twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14)
+const initialData = await find<ArchiveDoc>('art_vivant', {
+	limit: LIMIT,
+	page: 1,
+	locale,
+	upcomingOnly: false,
+	where: {
+		archive: { equals: true },
+		date_start: { less_than: twoWeeksAgo.toISOString() }
+	}
+})
+
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
@@ -46,6 +60,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				localePrefix={localePrefix}
 				limit={LIMIT}
 				payloadUrl={PAYLOAD_URL}
+				initialData={initialData}
 				translations={translations}
 			/>
 		</section>
