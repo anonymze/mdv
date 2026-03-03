@@ -5,7 +5,7 @@ import { find, findByID } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import { translateLudoDuration, translateLudoPlayers, translateLudoPublic } from '@/lib/translate-fields'
+import { translateLudoDuration } from '@/lib/translate-fields'
 import { cn } from '@/lib/utils'
 import type { Mediatheque } from '@/types/mediatheque'
 import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
@@ -71,8 +71,8 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 					<p class="distinguished mb-4 text-sm lg:mb-8">{item.genre}</p>
 
 					<div class="flex flex-wrap gap-3 text-center">
-						<span class="text-primary inline-block bg-white px-2 py-1">{translateLudoPublic(item.public, t)}</span>
-						<span class="text-primary inline-block bg-white px-2 py-1">{translateLudoPlayers(item.players, t)}</span>
+						<span class="text-primary inline-block bg-white px-2 py-1">{item.public}</span>
+						<span class="text-primary inline-block bg-white px-2 py-1">{item.players}</span>
 						<span class="text-primary inline-block bg-white px-2 py-1">{translateLudoDuration(item.duration, t)}</span>
 					</div>
 				</div>

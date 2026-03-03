@@ -13,7 +13,7 @@ export interface Cinema {
 	price: string
 	date_start: string
 	video: string
-	duration: string
+	duration?: string
 	genre: string
 	public?:
 		| ('children' | 'all_public' | 'all_public_avertissment' | 'forbidden_12' | 'forbidden_16' | 'forbidden_18')

@@ -12,7 +12,7 @@ export interface AutresActualites {
 	date_start: string
 	informations_more?: RichTextField | null
 	price: string
-	duration: string
+	duration?: string
 	other_images?:
 		| {
 				/**

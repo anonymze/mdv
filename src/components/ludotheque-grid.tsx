@@ -27,8 +27,6 @@ interface LudothequeGridProps {
 		durationOptions?: { key: string; value: string }[]
 		playersOptions?: { key: string; value: string }[]
 		publicOptions?: { key: string; value: string }[]
-		publicLabels?: Record<string, string>
-		playersLabels?: Record<string, string>
 		durationLabels?: Record<string, string>
 	}
 }
@@ -86,11 +84,11 @@ export function LudothequeGrid({
 			}
 
 			if (selectedPlayers && selectedPlayers !== 'all') {
-				where.players = { equals: selectedPlayers }
+				where.players = { contains: selectedPlayers }
 			}
 
 			if (selectedPublic && selectedPublic !== 'all') {
-				where.public = { equals: selectedPublic }
+				where.public = { contains: selectedPublic }
 			}
 
 			try {
@@ -122,16 +120,6 @@ export function LudothequeGrid({
 			.filter((child) => child.type === 'text')
 			.map((child) => child.text)
 			.join(' ')
-	}
-
-	const translatePublic = (value: string | null | undefined) => {
-		if (!value) return ''
-		return translations.publicLabels?.[value] || value
-	}
-
-	const translatePlayers = (value: string | null | undefined) => {
-		if (!value) return ''
-		return translations.playersLabels?.[value] || value
 	}
 
 	const translateDuration = (value: string | null | undefined) => {
@@ -247,8 +235,8 @@ export function LudothequeGrid({
 										<p className="text-xs font-serif text-primary pb-2">{item.genre}</p>
 										<div className="flex items-center justify-between text-xs">
 											<p>{translateDuration(item.duration)}</p>
-											<p>{translatePlayers(item.players)}</p>
-											<p>{translatePublic(item.public)}</p>
+											<p>{item.players}</p>
+											<p>{item.public}</p>
 										</div>
 									</figcaption>
 								</figure>

@@ -7,8 +7,6 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
 import {
 	translateLudoDuration,
-	translateLudoPlayers,
-	translateLudoPublic,
 	translatePublicField
 } from '@/lib/translate-fields'
 import type { Cinema } from '@/types/cinema'
@@ -244,8 +242,8 @@ const cinema = await find<Cinema>('cinema', {
 										</h3>
 										<p class="text-secondary pb-2 font-serif text-xs">{item.genre}</p>
 										<div class="flex items-center justify-between text-xs">
-											<p>{translateLudoPublic(item.public, t)}</p>
-											<p>{translateLudoPlayers(item.players, t)}</p>
+											<p>{item.public}</p>
+											<p>{item.players}</p>
 											<p>{translateLudoDuration(item.duration, t)}</p>
 										</div>
 									</figcaption>

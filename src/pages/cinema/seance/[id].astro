@@ -124,7 +124,7 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 								}
 							</li>
 							<li class="border-b border-black/20 px-5 pb-4">
-								<span class="font-bold">{t('DURATION')}</span> : {item.duration}
+								<span class="font-bold">{t('DURATION')}</span> : {item.duration || t('INCONNU')}
 							</li>
 							<li class="border-b border-black/20 px-5 pb-4">
 								<span class="font-bold">{t('GENRE')}</span> : {item.genre}
