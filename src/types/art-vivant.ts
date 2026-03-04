@@ -27,6 +27,7 @@ export interface ArtVivant {
 		| null
 	genre?: string | null
 	authors?: string | null
+	distribution?: string | null
 	tags?: string | null
 	location?: string | null
 	portfolio_authors?: string | null

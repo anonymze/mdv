@@ -11,7 +11,7 @@ import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
-import type { Mediatheque } from '@/types/mediatheque'
+import type { Ludotheque, Mediatheque } from '@/types/mediatheque'
 import FirstCyberbaseImg from '@/assets/imgs/cyberbase/1.webp'
 import SecondCyberbaseImg from '@/assets/imgs/cyberbase/2.webp'
 import ThirdCyberbaseImg from '@/assets/imgs/cyberbase/3.webp'
@@ -25,7 +25,7 @@ const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
 const LUDO_LIMIT = 6
 
-const ludotheque = await find<Mediatheque>('mediatheque', {
+const ludotheque = await find<Ludotheque>('mediatheque', {
 	limit: LUDO_LIMIT,
 	page: 1,
 	locale,

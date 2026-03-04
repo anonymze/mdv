@@ -7,11 +7,11 @@ import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import { translateLudoDuration } from '@/lib/translate-fields'
 import { cn } from '@/lib/utils'
-import type { Mediatheque } from '@/types/mediatheque'
+import type { Ludotheque, Mediatheque } from '@/types/mediatheque'
 import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
 export async function getStaticPaths() {
 	const locale = 'fr'
-	const data = await find<Mediatheque>('mediatheque', {
+	const data = await find<Ludotheque>('mediatheque', {
 		limit: 50,
 		locale,
 		upcomingOnly: false,
@@ -29,7 +29,7 @@ const locale = (Astro.currentLocale || 'fr') as I18n
 const { id } = Astro.params
 
 // Fetch item for current locale
-const item = await findByID<Mediatheque>('mediatheque', id, { locale })
+const item = await findByID<Ludotheque>('mediatheque', id, { locale })
 const t = createTranslator(locale)
 
 const descText = item.description.root.children

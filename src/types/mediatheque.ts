@@ -1,17 +1,12 @@
 import type { Media } from './media'
 import type { RichTextField } from './rich-text'
 
-export interface Mediatheque {
+interface BaseMediatheque {
 	id: string
-	type: 'ludotheque' | 'mediatheque'
-	jeunePublic?: boolean | null
 	thumbnail?: Media | null
 	title: string
 	description: RichTextField
 	price: string
-	players: string
-	public: string
-	duration: '5' | '10' | '15' | '30' | '1h' | '1h+'
 	informations_more?: RichTextField | null
 	other_images?:
 		| {
@@ -21,9 +16,33 @@ export interface Mediatheque {
 		| null
 	availability_date?: string | null
 	genre?: string | null
-	materiel?: string | null
 	authors?: string | null
 	location?: string | null
 	updatedAt: string
 	createdAt: string
 }
+
+export interface Ludotheque extends BaseMediatheque {
+	type: 'ludotheque'
+	jeunePublic?: boolean | null
+	players: string
+	public: string
+	duration: '5' | '10' | '15' | '30' | '1h' | '1h+'
+	materiel?: string | null
+}
+
+export interface MediathequeSpectacle extends BaseMediatheque {
+	type: 'mediatheque'
+	archive?: boolean | null
+	immanquable?: boolean | null
+	jeunePublic?: boolean | null
+	date_start?: string | null
+	duration?: string | null
+	public?: string | null
+	video?: string | null
+	distribution?: string | null
+	portfolio_authors?: string | null
+	credits_photos?: string | null
+}
+
+export type Mediatheque = Ludotheque | MediathequeSpectacle
