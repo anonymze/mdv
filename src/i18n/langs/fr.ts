@@ -55,7 +55,7 @@ export default {
 	CINEMA_SCOLAIRE_TITRE: 'Scolaire',
 	CINEMA_SCOLAIRE_INTRO: 'Les évènements scolaires',
 	CINEMA_SCOLAIRE_DESC: 'Vous pouvez suivre les évènements scolaires autour du cinéma',
-	COMPAGNIE_ARTISTES: 'Compagnie / Artistes',
+	COMPAGNIE_ARTISTES: 'Compagnie / Artiste(s)',
 	COMPTABLE: 'Comptable',
 	CREDITS_PHOTOS: 'Crédits photos',
 	CYBER_BASE: 'Cyberbase',
