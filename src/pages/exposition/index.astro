@@ -2,12 +2,14 @@
 export const prerender = true
 import { find } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
-import { createTranslator } from '@/i18n/translations'
+import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import { cn } from '@/lib/utils'
 import type { EvenementType, ExpositionType } from '@/types/exposition'
 import { MDV_DEFAULT_ADDRESS, renderRichText } from '@/utils/helper'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
 const exposition = (await find<ExpositionType>('exposition/current', {
