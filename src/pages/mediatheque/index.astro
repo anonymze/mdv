@@ -1,6 +1,12 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
+import FirstCyberbaseImg from '@/assets/imgs/cyberbase/1.webp'
+import SecondCyberbaseImg from '@/assets/imgs/cyberbase/2.webp'
+import ThirdCyberbaseImg from '@/assets/imgs/cyberbase/3.webp'
+import FirstMediaImg from '@/assets/imgs/media/1.webp'
+import SecondMediaImg from '@/assets/imgs/media/2.webp'
+import ThirdMediaImg from '@/assets/imgs/media/3.webp'
 import FirstImg from '@/assets/imgs/mediatheque/1.webp'
 import SecondImg from '@/assets/imgs/mediatheque/2.webp'
 import FourthImg from '@/assets/imgs/mediatheque/4.webp'
@@ -9,19 +15,21 @@ import SixthImg from '@/assets/imgs/mediatheque/6.webp'
 import { LudothequeGrid } from '@/components/ludotheque-grid'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
-import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
-import type { Ludotheque, Mediatheque } from '@/types/mediatheque'
-import FirstCyberbaseImg from '@/assets/imgs/cyberbase/1.webp'
-import SecondCyberbaseImg from '@/assets/imgs/cyberbase/2.webp'
-import ThirdCyberbaseImg from '@/assets/imgs/cyberbase/3.webp'
-import FirstMediaImg from '@/assets/imgs/media/1.webp'
-import SecondMediaImg from '@/assets/imgs/media/2.webp'
-import ThirdMediaImg from '@/assets/imgs/media/3.webp'
+import type { Ludotheque, MediathequeSpectacle } from '@/types/mediatheque'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
+
+const evenements = await find<MediathequeSpectacle>('mediatheque', {
+	limit: 4,
+	locale,
+	where: {
+		type: { equals: 'mediatheque' }
+	}
+})
 
 const LUDO_LIMIT = 6
 
@@ -56,8 +64,14 @@ const ludoTranslations = {
 	],
 	playersOptions: [
 		{ key: '1', value: '1' },
+		{ key: '2', value: '2' },
+		{ key: '3', value: '3' },
 		{ key: '4', value: '4' },
-		{ key: '8', value: '8' }
+		{ key: '5', value: '5' },
+		{ key: '6', value: '6' },
+		{ key: '7', value: '7' },
+		{ key: '8', value: '8' },
+		{ key: '8+', value: '8+' }
 	],
 	publicOptions: [
 		{ key: '3', value: '3' },
@@ -78,30 +92,143 @@ const ludoTranslations = {
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
-
 <Layout title={t('MEDIATHEQUE')}>
 	<main id="main-content">
 		<section class="section-default" id="mediatheque">
-			<article class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
-				<div class="flex flex-col order-1 lg:order-2">
-					<h1 class="text-primary pb-2 lg:pb-3">{t('MEDIATHEQUE_TITRE')}</h2>
+			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
+				<div class="order-1 flex flex-col lg:order-2">
+					<h1 class="text-primary pb-2 lg:pb-3">{t('MEDIATHEQUE_TITRE')}</h1>
 					<p class="distinguished pb-8 lg:pb-16">{t('MEDIATHEQUE_INTRO')}</p>
 					<p>{t('MEDIATHEQUE_DESC')}</p>
 				</div>
-				<div class="grid grid-cols-3 gap-2 lg:gap-5 order-2 lg:order-1 overflow-hidden">
-					<MyImage alt="" src={FirstImg} width={400} height={370} layout="fullWidth" class="col-span-2 max-h-48 lg:max-h-none object-cover w-full" />
-					<MyImage alt="" src={SecondImg} width={400} height={370} layout="fullWidth" class="col-span-1 max-h-48 lg:max-h-none object-cover w-full" />
-					<MyImage alt="" src={FourthImg} width={400} height={370} layout="fullWidth" class="col-span-3 max-h-32 lg:max-h-none object-cover w-full" />
-					<MyImage alt="" src={FivethImg} width={400} height={150} layout="fullWidth" class="col-span-1 max-h-24 lg:max-h-none object-cover w-full" />
-					<MyImage alt="" src={SixthImg} width={400} height={150} layout="fullWidth" class="col-span-2 max-h-24 lg:max-h-none object-cover w-full" />
+				<div class="order-2 grid grid-cols-3 gap-2 overflow-hidden lg:order-1 lg:gap-5">
+					<MyImage
+						alt=""
+						src={FirstImg}
+						width={400}
+						height={370}
+						layout="fullWidth"
+						class="col-span-2 max-h-48 w-full object-cover lg:max-h-none"
+					/>
+					<MyImage
+						alt=""
+						src={SecondImg}
+						width={400}
+						height={370}
+						layout="fullWidth"
+						class="col-span-1 max-h-48 w-full object-cover lg:max-h-none"
+					/>
+					<MyImage
+						alt=""
+						src={FourthImg}
+						width={400}
+						height={370}
+						layout="fullWidth"
+						class="col-span-3 max-h-32 w-full object-cover lg:max-h-none"
+					/>
+					<MyImage
+						alt=""
+						src={FivethImg}
+						width={400}
+						height={150}
+						layout="fullWidth"
+						class="col-span-1 max-h-24 w-full object-cover lg:max-h-none"
+					/>
+					<MyImage
+						alt=""
+						src={SixthImg}
+						width={400}
+						height={150}
+						layout="fullWidth"
+						class="col-span-2 max-h-24 w-full object-cover lg:max-h-none"
+					/>
 				</div>
 			</article>
 		</section>
 
+		<section class="section-default bg-primary/20" id="evenements">
+			<h2 class="pb-2 lg:pb-3">{t('MEDIATHEQUE_EVENEMENTS_TITRE')}</h2>
+			<p class="distinguished pb-3 lg:pb-6">{t('MEDIATHEQUE_EVENEMENTS_DESC')}</p>
 
-		<section class="section-default bg-primary/20" id="ludotheque">
+			<div
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+			>
+				{
+					evenements.docs.map((item) => {
+						const descText = item.description.root.children
+							.flatMap((para) => para.children)
+							.filter((child) => child.type === 'text')
+							.map((child) => child.text)
+							.join(' ')
+
+						return (
+							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
+								<div class="overflow-hidden">
+									<MyImage
+										src={item.thumbnail?.url}
+										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+										background={item.thumbnail?.blurhash}
+										width={275}
+										height={305}
+										layout="fullWidth"
+									/>
+								</div>
+								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
+									<figcaption>
+										<h3 class="pb-1 text-black">
+											<a
+												href={getRelativeLocaleUrl(locale, `mediatheque/evenement/${item.id}`)}
+												class="after:absolute after:inset-0 after:z-10"
+											>
+												{item.title}
+											</a>
+										</h3>
+										{item.date_start && (
+											<time class="distinguished text-sm capitalize" datetime={item.date_start}>
+												{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
+												{new Date(item.date_start).toLocaleTimeString(locale, {
+													hour: '2-digit',
+													minute: '2-digit',
+													hour12: false
+												})}
+											</time>
+										)}
+										<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
+									</figcaption>
+								</figure>
+								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
+								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
+									<figcaption class="text-white">
+										<p class="line-clamp-8 text-sm">{descText}</p>
+										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
+											{t('EN_SAVOIR_PLUS')}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="16"
+												height="16"
+												viewBox="0 0 24 24"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path d="M5 12h14" />
+												<path d="m12 5 7 7-7 7" />
+											</svg>
+										</p>
+									</figcaption>
+								</figure>
+							</article>
+						)
+					})
+				}
+			</div>
+		</section>
+
+		<section class="section-default" id="ludotheque">
 			<article>
-				<h2 class="pb-2 lg:pb-3">{t('LUDOTHEQUE_TITRE')}</h2>
+				<h2 class="text-secondary pb-2 lg:pb-3">{t('LUDOTHEQUE_TITRE')}</h2>
 				<p class="distinguished pb-3 lg:pb-6">{t('LUDOTHEQUE_INTRO')}</p>
 				<p class="lg:w-2/3">
 					{t('LUDOTHEQUE_DESC_LONG')}
@@ -120,29 +247,50 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 			/>
 		</section>
 
-		<section class="section-default" id="cyberbase">
-			<article class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
-				<div class="flex flex-col order-1">
-					<h2 class="text-primary pb-2 lg:pb-3">{t('CYBERBASE_TITRE')}</h2>
+		<section class="section-default bg-secondary/20" id="cyberbase">
+			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
+				<div class="order-1 flex flex-col">
+					<h2 class="text-secondary pb-2 lg:pb-3">{t('CYBERBASE_TITRE')}</h2>
 					<p class="distinguished pb-8 lg:pb-16">{t('CYBERBASE_INTRO')}</p>
 					<p>{t('CYBERBASE_DESC')}</p>
 				</div>
-				<div class="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-5 order-2">
-					<MyImage alt="" src={FirstCyberbaseImg} width={200} height={400} layout="fullWidth" class="col-span-1 max-h-48 lg:max-h-none object-cover" />
-					<MyImage alt="" src={SecondCyberbaseImg} width={200} height={400} layout="fullWidth" class="col-span-1 max-h-48 lg:max-h-none object-cover" />
-					<MyImage alt="" src={ThirdCyberbaseImg} width={420} height={400} layout="fullWidth" class="col-span-2 lg:col-span-2 max-h-48 lg:max-h-none object-cover" />
+				<div class="order-2 grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-5">
+					<MyImage
+						alt=""
+						src={FirstCyberbaseImg}
+						width={200}
+						height={400}
+						layout="fullWidth"
+						class="col-span-1 max-h-48 object-cover lg:max-h-none"
+					/>
+					<MyImage
+						alt=""
+						src={SecondCyberbaseImg}
+						width={200}
+						height={400}
+						layout="fullWidth"
+						class="col-span-1 max-h-48 object-cover lg:max-h-none"
+					/>
+					<MyImage
+						alt=""
+						src={ThirdCyberbaseImg}
+						width={420}
+						height={400}
+						layout="fullWidth"
+						class="col-span-2 max-h-48 object-cover lg:col-span-2 lg:max-h-none"
+					/>
 				</div>
 			</article>
 		</section>
 
-		<section class="section-default bg-secondary/20" id="autres-medias">
-			<article class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
-				<div class="flex flex-col order-1 lg:order-2">
-					<h2 class="text-secondary pb-2 lg:pb-3">{t('AUTRES_MEDIAS_TITRE')}</h2>
+		<section class="section-default" id="autres-medias">
+			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
+				<div class="order-1 flex flex-col lg:order-2">
+					<h2 class="pb-2 lg:pb-3">{t('AUTRES_MEDIAS_TITRE')}</h2>
 					<p class="distinguished pb-8 lg:pb-16">{t('AUTRES_MEDIAS_INTRO')}</p>
 					<p>{t('AUTRES_MEDIAS_DESC')}</p>
 				</div>
-				<div class="grid grid-cols-2 gap-2 lg:gap-5 order-2 lg:order-1">
+				<div class="order-2 grid grid-cols-2 gap-2 lg:order-1 lg:gap-5">
 					<MyImage alt="" src={FirstMediaImg} width={420} height={260} layout="fullWidth" class="col-span-1" />
 					<MyImage alt="" src={SecondMediaImg} width={420} height={260} layout="fullWidth" class="col-span-1" />
 					<MyImage alt="" src={ThirdMediaImg} width={900} height={200} layout="fullWidth" class="col-span-2" />

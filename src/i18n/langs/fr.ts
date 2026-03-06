@@ -55,6 +55,7 @@ export default {
 	CINEMA_SCOLAIRE_TITRE: 'Scolaire',
 	CINEMA_SCOLAIRE_INTRO: 'Les évènements scolaires',
 	CINEMA_SCOLAIRE_DESC: 'Vous pouvez suivre les évènements scolaires autour du cinéma',
+	COMPAGNIE_ARTISTES: 'Compagnie / Artistes',
 	COMPTABLE: 'Comptable',
 	CREDITS_PHOTOS: 'Crédits photos',
 	CYBER_BASE: 'Cyberbase',
@@ -186,6 +187,9 @@ export default {
 	MEDIATHEQUE: 'Médiathèque',
 	MEDIATHEQUE_DESC:
 		"La médiathèque est un lieu ouvert à tous, dédié à la lecture, à la découverte et au partage. Romans, bandes dessinées, documentaires, magazines et romans vision : chacun peut y trouver de quoi s'informer, s'évader ou se divertir. Conviviale et accueillante, elle propose des espaces pour lire, feuilleter les ouvrages et profiter d'un moment calme, seul, en famille ou entre amis.",
+	MEDIATHEQUE_EVENEMENTS_TITRE: 'Les évènements de la médiathèque',
+	MEDIATHEQUE_EVENEMENTS_DESC:
+		"La médiathèque est un espace vivant qui s'anime régulièrement au fil des saisons. L'équipe de la Maison du Parc national et de la vallée vous propose des lectures à voix haute, des rencontres avec des auteurs locaux, ou plus encore. Ces rendez-vous, ouverts à tous, sont autant d'occasions de se retrouver, de partager et de laisser les mots prendre vie dans un cadre chaleureux et inspirant.",
 	MEDIATHEQUE_INTRO: 'Un espace de lecture et de découvertes pour tous',
 	MEDIATHEQUE_TITRE: 'La médiathèque',
 	MOINS_3ANS: '-3 ans',
