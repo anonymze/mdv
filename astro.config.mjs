@@ -34,7 +34,7 @@ export default defineConfig({
 		}
 	},
 	image: {
-		// remotePatterns: [{ protocol: 'https', hostname: 'mdv-admin.vercel.app' }]
+		remotePatterns: [{ protocol: 'https', hostname: 'mdv-admin.vercel.app' }]
 	},
 	experimental: {
 		fonts: [
