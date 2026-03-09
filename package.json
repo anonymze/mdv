@@ -23,7 +23,7 @@
 		"@types/react-dom": "^19.2.3",
 		"@unpic/astro": "^1.0.2",
 		"@unpic/react": "^1.0.2",
-		"astro": "^5.16.11",
+		"astro": "^5.18.0",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"lucide-react": "^0.562.0",

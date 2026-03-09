@@ -3,6 +3,7 @@ export const prerender = true
 
 import { find, findByID } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
+import { VideoPlayer } from '@/components/video-player'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import { cn } from '@/lib/utils'
@@ -202,5 +203,11 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 				</div>
 			</article>
 		</section>
+
+		{item.video && (
+			<section class="section-default bg-secondary/20">
+				<VideoPlayer client:load url={item.video} />
+			</section>
+		)}
 	</main>
 </Layout>

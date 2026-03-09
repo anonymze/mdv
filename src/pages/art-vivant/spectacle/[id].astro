@@ -7,6 +7,7 @@ import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import { cn } from '@/lib/utils'
 import type { ArtVivant } from '@/types/art-vivant'
+import { VideoPlayer } from '@/components/video-player'
 import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
 
 export async function getStaticPaths() {
@@ -29,6 +30,7 @@ const { id } = Astro.params
 
 // Fetch item for current locale
 const item = await findByID<ArtVivant>('art_vivant', id, { locale })
+console.log('video field:', item.video)
 const t = createTranslator(locale)
 
 const descText = item.description.root.children
@@ -214,5 +216,11 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 				</div>
 			</article>
 		</section>
+
+		{item.video && (
+			<section class="section-default bg-secondary/20">
+				<VideoPlayer client:load url={item.video} />
+			</section>
+		)}
 	</main>
 </Layout>
