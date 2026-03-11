@@ -283,7 +283,7 @@ export function SpectaclesGrid({
 				</div>
 			)}
 
-			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 min-h-104">
+			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-start gap-x-4 gap-y-8 *:max-w-80 min-h-104">
 				{loading ? (
 					<div className="col-span-full flex w-full items-center justify-center min-h-[300px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />

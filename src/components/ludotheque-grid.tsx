@@ -200,7 +200,7 @@ export function LudothequeGrid({
 
 			<div
 				ref={gridRef}
-				className="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:my-16 lg:grid-cols-3"
+				className="my-8 grid grid-cols-1 place-items-start gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:my-16 lg:grid-cols-3"
 			>
 				{loading ? (
 					<div className="col-span-full flex min-h-[270px] w-full items-center justify-center">

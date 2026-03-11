@@ -55,7 +55,7 @@ const cinema = await find<Cinema>('cinema', {
 			</p>
 
 			<div
-				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+				class="my-8 grid grid-cols-1 place-items-start gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
 			>
 				{
 					evenements.docs.map((item) => {
@@ -211,7 +211,7 @@ const cinema = await find<Cinema>('cinema', {
 			</article>
 
 			<div
-				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:my-16 lg:grid-cols-3"
+				class="my-8 grid grid-cols-1 place-items-start gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:my-16 lg:grid-cols-3"
 			>
 				{
 					ludotheque.docs.map((item) => {
