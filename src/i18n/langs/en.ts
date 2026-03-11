@@ -255,6 +255,7 @@ export default {
 	SPECTACLES_JEUNE_PUBLIC_INTRO: "Family programming for young and old",
 	SPECTACLES_JEUNE_PUBLIC_DESC: "Throughout the year, The House invites children and their families to discover shows designed for young audiences, to awaken curiosity and the taste for live arts from an early age.",
 	SPECTACLE_GENRE_CIRQUE: "Circus",
+	SPECTACLE_GENRE_CONCERT: "Concert",
 	SPECTACLE_GENRE_DANSE: "Dance",
 	SPECTACLE_GENRE_HUMOUR: "Comedy",
 	SPECTACLE_GENRE_MUSIQUE: "Music",

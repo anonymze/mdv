@@ -255,6 +255,7 @@ export default {
 	SPECTACLES_JEUNE_PUBLIC_INTRO: "Una programación familiar para pequeños y grandes",
 	SPECTACLES_JEUNE_PUBLIC_DESC: "A lo largo del año, La Casa invita a los niños y sus familias a descubrir espectáculos pensados para el público joven, para despertar la curiosidad y el gusto por el arte vivo desde muy temprana edad.",
 	SPECTACLE_GENRE_CIRQUE: "Circo",
+	SPECTACLE_GENRE_CONCERT: "Concierto",
 	SPECTACLE_GENRE_DANSE: "Danza",
 	SPECTACLE_GENRE_HUMOUR: "Humor",
 	SPECTACLE_GENRE_MUSIQUE: "Música",

@@ -298,6 +298,7 @@ export default {
 	SPECTACLE_GENRE_DANSE: 'Danse',
 	SPECTACLE_GENRE_MUSIQUE: 'Musique',
 	SPECTACLE_GENRE_CIRQUE: 'Cirque',
+	SPECTACLE_GENRE_CONCERT: 'Concert',
 	SUIVANT: 'Suivant',
 	SUR_HORAIRES_OUVERTURE: "Sur les horaires d'ouverture",
 	SYNOPSIS_DETAILS: 'Synopsis et détails',
