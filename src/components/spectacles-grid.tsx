@@ -25,14 +25,11 @@ interface SpectaclesGridProps {
 		EN_SAVOIR_PLUS: string
 		MOTS_CLES?: string
 		GENRE?: string
-		TAGS?: string
-		TAGS_FILTER?: string
 		DATE?: string
 		ANNEE?: string
 		AUCUN_CONTENU?: string
 		TOUS?: string
 		genreOptions?: { key: string; value: string }[]
-		tagsOptions?: { key: string; value: string }[]
 		dateOptions?: { key: string; value: string }[]
 	}
 }
@@ -59,7 +56,6 @@ export function SpectaclesGrid({
 	const [searchKeyword, setSearchKeyword] = useState('')
 	const [debouncedSearchKeyword, setDebouncedSearchKeyword] = useState('')
 	const [selectedGenre, setSelectedGenre] = useState('')
-	const [selectedTags, setSelectedTags] = useState('')
 	const [selectedDate, setSelectedDate] = useState('')
 	const [selectedYear, setSelectedYear] = useState('')
 
@@ -73,7 +69,7 @@ export function SpectaclesGrid({
 	}, [searchKeyword])
 
 	useEffect(() => {
-		const hasFilters = debouncedSearchKeyword || selectedGenre || selectedTags || selectedDate || selectedYear
+		const hasFilters = debouncedSearchKeyword || selectedGenre || selectedDate || selectedYear
 
 		// Use initial data only on page 1 with no filters
 		if (page === 1 && !hasFilters) {
@@ -99,10 +95,6 @@ export function SpectaclesGrid({
 				where.genre = { contains: selectedGenre }
 			}
 
-			// Tags filter (case-insensitive contains)
-			if (selectedTags && selectedTags !== 'all') {
-				where.tags = { contains: selectedTags }
-			}
 
 			// Date filter - all filters show events FROM date onwards (no end limit)
 			if (selectedDate && selectedDate !== 'all') {
@@ -176,12 +168,12 @@ export function SpectaclesGrid({
 		}
 
 		fetchData()
-	}, [page, locale, limit, initialData, debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
+	}, [page, locale, limit, initialData, debouncedSearchKeyword, selectedGenre, selectedDate, selectedYear])
 
 	// Reset to page 1 when filters change
 	useEffect(() => {
 		setPage(1)
-	}, [debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate, selectedYear])
+	}, [debouncedSearchKeyword, selectedGenre, selectedDate, selectedYear])
 
 
 	const getLink = (id: string) => {
@@ -237,7 +229,7 @@ export function SpectaclesGrid({
 					{/* Row 1: Keywords full width */}
 					<div className="relative w-full">
 						<Input
-							placeholder={translations.TAGS}
+							placeholder={translations.MOTS_CLES}
 							className="w-full bg-primary-foreground border-0 rounded-none min-h-12 pr-10"
 							value={searchKeyword}
 							onChange={(e) => setSearchKeyword(e.target.value)}
@@ -257,7 +249,7 @@ export function SpectaclesGrid({
 					</div>
 
 					{/* Row 2: 3 filters in same row on desktop, stacked on mobile */}
-					<div className={`grid grid-cols-1 ${filterType === 'archives' ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-4 lg:gap-6 *:min-h-12`}>
+					<div className={`grid grid-cols-1 ${filterType === 'archives' ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-4 lg:gap-6 *:min-h-12`}>
 						<SelectWrapper
 							placeholder={translations.GENRE || 'Genre'}
 							options={[
@@ -267,16 +259,6 @@ export function SpectaclesGrid({
 							className="w-full"
 							value={selectedGenre}
 							onValueChange={setSelectedGenre}
-						/>
-						<SelectWrapper
-							placeholder={translations.TAGS_FILTER || 'Tags'}
-							options={[
-								{ key: translations.TOUS || 'Tous', value: 'all' },
-								...(translations.tagsOptions || [])
-							]}
-							className="w-full"
-							value={selectedTags}
-							onValueChange={setSelectedTags}
 						/>
 						<SelectWrapper
 							placeholder={translations.DATE || 'Date'}
