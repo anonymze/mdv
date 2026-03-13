@@ -186,11 +186,12 @@ const seances = await find<Cinema>('cinema', {
 										</h3>
 										<p class="distinguished text-primary pb-1 text-xs">{item.genre}</p>
 										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
-											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
+											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })} -{' '}
 											{new Date(item.date_start).toLocaleTimeString(locale, {
 												hour: '2-digit',
 												minute: '2-digit',
-												hour12: false
+												hour12: false,
+												timeZone: 'Europe/Paris'
 											})}
 										</time>
 									</figcaption>
@@ -284,11 +285,12 @@ const seances = await find<Cinema>('cinema', {
 												{translatePublicField(item.public, t)} - {item.genre} - {item.languages}
 											</p>
 											<p class="font-serif text-sm capitalize">
-												{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full' })} -{' '}
+												{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })} -{' '}
 												{new Date(item.date_start).toLocaleTimeString(locale, {
 													hour: '2-digit',
 													minute: '2-digit',
-													hour12: false
+													hour12: false,
+													timeZone: 'Europe/Paris'
 												})}
 											</p>
 										</figcaption>

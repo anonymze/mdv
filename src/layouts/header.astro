@@ -41,11 +41,11 @@ const mobileLinks = [
 ]
 
 const formatTime = (iso: string) =>
-	new Date(iso).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
+	new Date(iso).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' })
 
 const hoursInfo = {
 	isClosed: hoursForToday.isClosed,
-	todayLabel: hoursForToday.today.toLocaleDateString(locale, { dateStyle: 'full' }),
+	todayLabel: hoursForToday.today.toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' }),
 	openLabel:
 		hoursForToday.openStart && hoursForToday.openEnd
 			? `${formatTime(hoursForToday.openStart)} - ${formatTime(hoursForToday.openEnd)}`
@@ -82,7 +82,7 @@ const mobileEvent = immanquableEvent
 			href: getEventHref(immanquableEvent),
 			imageUrl: getEventThumbnail(immanquableEvent)?.url,
 			imageAlt: getEventThumbnail(immanquableEvent)?.alt ?? t('IMAGE_PLACEHOLDER'),
-			date: new Date(immanquableEvent.date_start).toLocaleDateString(locale, { dateStyle: 'full' }),
+			date: new Date(immanquableEvent.date_start).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' }),
 			genre: immanquableEvent.genre,
 		}
 	: undefined
