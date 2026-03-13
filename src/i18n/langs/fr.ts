@@ -149,7 +149,7 @@ export default {
 	HORAIRES_PART2: "Vacances d'été et d'hiver, du lundi au dimanche de 14h à 19h",
 	HERO_LOCATION: 'LUZ-SAINT-SAUVEUR · PYRÉNÉES',
 	HERO_TITLE_LINE1: 'Maison du Parc',
-	HERO_TITLE_LINE2: 'National et de la Vallée',
+	HERO_TITLE_LINE2: 'national et de la vallée',
 	HERO_SUBTITLE: 'Un espace unique dédié à la culture et à la nature, au cœur des Pyrénées',
 	IMAGE_PLACEHOLDER: 'Image de remplacement',
 	IMMANQUABLE: 'immanquable',

@@ -11,7 +11,7 @@ import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import type { Hour } from '@/types/hours'
-import { MDV_DEFAULT_ADDRESS, PARKING_DEFAULT_ADDRESS, TELEPHONE_DEFAULT } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, TELEPHONE_DEFAULT } from '@/utils/helper'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
@@ -101,26 +101,29 @@ const formatTime = (dateStr: string) => {
 						<p class="distinguished mb-6 border-b border-white/20">{t('ANNEE')}</p>
 						<p><span class="text-primary-foreground font-bold">{t('FAMILLE')}</span> : 5€</p>
 						<p class="distinguished mb-6 border-b border-white/20">3 {t('SEMAINES')}</p>
+						<p class="mb-6 text-sm">Besoin d'une caution en espèce ou en chèque</p>
 					</div>
-					<MyImage src={null} alt="" width={200} height={380} class="hidden lg:block" />
+					<MyImage src={null} alt="" width={200} height={400} layout="fullWidth" class="hidden lg:block" />
 					<div class="bg-primary text-primary-foreground p-6 lg:col-span-2">
 						<h3 class="text-primary-foreground pb-10">{t('TARIFS_SPECTACLE')}</h3>
 						<p><span class="font-bold">{t('NORMAL')}</span> : 10€</p>
 						<p class="distinguished mb-6 border-b border-white/20">{t('DES_14ANS')}</p>
-						<p><span class="text-primary-foreground font-bold">{t('REDUIT')}</span> : 5€</p>
+						<p><span class="text-primary-foreground font-bold">{t('REDUIT')}</span> : 7€</p>
 						<p class="distinguished mb-6 border-b border-white/20">{t('REDUIT_DESC')}</p>
 						<p><span class="text-primary-foreground font-bold">{t('ENFANT')}</span> : {t('OFFERT')}</p>
 						<p class="distinguished mb-6 border-b border-white/20">{t('MOINS_3ANS')}</p>
 					</div>
-					<MyImage src={null} alt="" width={200} height={380} class="hidden lg:block" />
+					<MyImage src={null} alt="" width={200} height={400} layout="fullWidth" class="hidden lg:block" />
 					<div class="bg-primary text-primary-foreground p-6 lg:col-span-2">
 						<h3 class="text-primary-foreground pb-10">{t('TARIFS_CINEMA')}</h3>
 						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ADULTE')}</span> : 7€</p>
 						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ETUDIANT')}</span> : 6€</p>
 						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ENFANT_MOINS_13')}</span> : 5€</p>
-						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ABONNE')}</span> : 5,80€</p>
+						<p class="mb-6 border-b border-white/20">
+							<span class="font-bold">Cartes abonnement</span> : 58€ <span class="text-sm">(10 entrées, non nominatives, et sans durée de validité)</span>
+						</p>
 					</div>
-					<MyImage src={null} alt="" width={200} height={380} class="hidden lg:block" />
+					<MyImage src={null} alt="" width={200} height={400} layout="fullWidth" class="hidden lg:block" />
 				</div>
 			</article>
 		</section>
@@ -181,7 +184,7 @@ const formatTime = (dateStr: string) => {
 					<figure>
 						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
 						<figcaption class="pt-2">
-							<h3 class="text-secondary">Bouillon Mélinda</h3>
+							<h3 class="text-secondary">Ferrand-David Mélinda</h3>
 							<p>{t('AGENT_ENTRETIEN_ACCUEIL')}</p>
 						</figcaption>
 					</figure>
@@ -218,11 +221,23 @@ const formatTime = (dateStr: string) => {
 				</div>
 				<div class="order-2 grid grid-cols-3 grid-rows-3 place-items-start gap-3 lg:order-1 lg:col-span-1 lg:pt-48">
 					<MyImage src={BeHappyImg} alt="Be Happy" width={120} height={120} class="col-span-1" />
-					<MyImage src={HautesPyreneesImg} alt="Département des Hautes-Pyrénées" width={120} height={120} class="col-span-1" />
+					<MyImage
+						src={HautesPyreneesImg}
+						alt="Département des Hautes-Pyrénées"
+						width={120}
+						height={120}
+						class="col-span-1"
+					/>
 					<MyImage src={OccitanieImg} alt="Région Occitanie" width={120} height={120} class="col-span-1" />
 					<MyImage src={PrefetImg} alt="Préfet des Hautes-Pyrénées" width={120} height={120} class="col-span-1" />
 					<MyImage src={ParcNationalImg} alt="Parc National des Pyrénées" width={240} height={120} class="col-span-2" />
-					<MyImage src={EuropeImg} alt="Union Européenne – Fonds Européen de Développement Régional" width={700} height={120} class="col-span-3" />
+					<MyImage
+						src={EuropeImg}
+						alt="Union Européenne – Fonds Européen de Développement Régional"
+						width={700}
+						height={120}
+						class="col-span-3"
+					/>
 				</div>
 			</article>
 		</section>
