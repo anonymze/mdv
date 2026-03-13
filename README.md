@@ -7,4 +7,4 @@ Mets les affiches cinéma sur allocine
 mettre les contenus dans archies back office ?
 
 mauvais horaires dans où nous trouver
-mediathèque: ajouter une caution en espèce ou en chèque
+mediathèque: ajouter une caution en espèce ou en chèque (page médiathèque)
