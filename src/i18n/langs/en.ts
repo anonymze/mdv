@@ -244,6 +244,7 @@ export default {
 	SEANCES: "Screenings",
 	SEANCES_A_VENIR: "Upcoming screenings",
 	SEMAINES: "weeks",
+	SEMAINES_CAUTION: "* A cash or check deposit is required",
 	SITE_TITLE: "House of the National Park and Valley",
 	SKIP_TO_CONTENT: "Skip to main content",
 	SPECTACLES: "Shows",

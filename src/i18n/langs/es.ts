@@ -244,6 +244,7 @@ export default {
 	SEANCES: "Sesiones",
 	SEANCES_A_VENIR: "Sesiones próximas",
 	SEMAINES: "semanas",
+	SEMAINES_CAUTION: "* Se requiere un depósito en efectivo o cheque",
 	SITE_TITLE: "Casa del Parque Nacional y del Valle",
 	SKIP_TO_CONTENT: "Ir al contenido principal",
 	SPECTACLES: "Espectáculos",

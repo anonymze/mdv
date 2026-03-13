@@ -280,6 +280,7 @@ export default {
 	SEANCES: 'Séances',
 	SEANCES_A_VENIR: 'Séances à venir',
 	SEMAINES: 'semaines',
+	SEMAINES_CAUTION: '* Besoin d\'une caution en espèce ou en chèque',
 	SITE_TITLE: 'Maison du Parc national et de la vallée',
 	SKIP_TO_CONTENT: 'Aller au contenu principal',
 	SPECTACLES: 'Spectacles',
