@@ -155,14 +155,15 @@ export function CinemaGrid({
 	}
 
 	const formatDate = (dateStr: string) => {
-		return new Date(dateStr).toLocaleDateString(locale, { dateStyle: 'full' })
+		return new Date(dateStr).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })
 	}
 
 	const formatTime = (dateStr: string) => {
 		return new Date(dateStr).toLocaleTimeString(locale, {
 			hour: '2-digit',
 			minute: '2-digit',
-			hour12: false
+			hour12: false,
+			timeZone: 'Europe/Paris'
 		})
 	}
 

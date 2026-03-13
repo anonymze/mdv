@@ -123,7 +123,7 @@ const fetchData = async () => {
 	}
 
 	const formatDate = (dateStr: string) =>
-		new Date(dateStr).toLocaleDateString(locale, { dateStyle: 'full' })
+		new Date(dateStr).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })
 
 	const handlePageChange = (newPage: number) => {
 		if (newPage < 1 || newPage > data.totalPages) return
