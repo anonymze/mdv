@@ -200,7 +200,7 @@ export function LudothequeGrid({
 
 			<div
 				ref={gridRef}
-				className="my-8 grid grid-cols-1 place-items-start gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:my-16 lg:grid-cols-3"
+				className="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:my-16 lg:grid-cols-3"
 			>
 				{loading ? (
 					<div className="col-span-full flex min-h-[270px] w-full items-center justify-center">
@@ -228,7 +228,7 @@ export function LudothequeGrid({
 								</div>
 								<figure className="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
-										<h3 className="pb-3 text-black">
+										<h3 className="pb-3 text-black truncate">
 											<a
 												href={`${localePrefix}/mediatheque/ludotheque/${item.id}`}
 												className="after:absolute after:inset-0 after:z-10"
@@ -236,7 +236,7 @@ export function LudothequeGrid({
 												{item.title}
 											</a>
 										</h3>
-										<p className="text-secondary pb-2 font-serif text-xs">{item.genre}</p>
+										<p className="text-secondary pb-2 font-serif text-xs truncate">{item.genre}</p>
 										<div className="flex items-center justify-between text-xs">
 											<p>{translateDuration(item.duration)}</p>
 											<p>{item.players}</p>

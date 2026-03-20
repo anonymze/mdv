@@ -145,7 +145,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				localePrefix={localePrefix}
 				limit={SEANCES_LIMIT}
 				payloadUrl={PAYLOAD_URL}
-				showFilters={true}
+				showFilters={false}
 				translations={cinemaTranslations}
 			/>
 		</section>
@@ -174,7 +174,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
 										background={item.thumbnail?.blurhash}
 										width={275}
-										height={305}
+										height={220}
 										layout="fullWidth"
 									/>
 								</div>
@@ -254,7 +254,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
 										background={item.thumbnail?.blurhash}
 										width={275}
-										height={305}
+										height={220}
 										layout="fullWidth"
 									/>
 								</div>

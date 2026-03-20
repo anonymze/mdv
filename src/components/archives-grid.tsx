@@ -188,7 +188,7 @@ const fetchData = async () => {
 				</div>
 			</div>
 
-			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-start gap-x-4 gap-y-8 *:max-w-80 min-h-104">
+			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 min-h-104">
 				{loading ? (
 					<div className="col-span-full flex w-full items-center justify-center min-h-[300px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
@@ -220,12 +220,12 @@ const fetchData = async () => {
 								</div>
 								<figure className="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
-										<h3 className="pb-3 text-black">
+										<h3 className="pb-3 text-black truncate">
 											<a href={getLink(item)} className="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
-										<time className="distinguished text-sm capitalize" dateTime={item.date_start}>
+										<time className="distinguished text-sm capitalize truncate block" dateTime={item.date_start}>
 											{formatDate(item.date_start)}
 										</time>
 									</figcaption>

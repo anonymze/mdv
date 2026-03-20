@@ -94,14 +94,17 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 									return (
 										<div
 											key={subIndex}
-											className="flex flex-col animate-in fade-in slide-in-from-bottom-12 z-20"
+											className="flex flex-col h-90 pt-4 animate-in fade-in slide-in-from-bottom-12 z-20 bg-primary"
 											style={{
 												animationDelay: `${subIndex * 50}ms`,
 												animationDuration: '300ms',
 												animationFillMode: 'backwards'
 											}}
 										>
-											<ul className="flex-1 bg-primary p-4 pb-8">
+											<div className="bg-white w-fit py-2 px-3 ml-4">
+												<span className="text-primary text-sm font-medium uppercase">{subMenu.label}</span>
+											</div>
+											<ul className="flex-1 p-4 pb-8 overflow-y-auto">
 												{subMenu.subMenus?.map((item, itemIndex) => (
 													<ListItem
 														key={itemIndex}
@@ -111,19 +114,6 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 													/>
 												))}
 											</ul>
-											<div className="relative h-36">
-												<img
-													src={subMenu.image}
-													width="300"
-													height="150"
-													alt={`${subMenu.label} menu illustration`}
-													loading="lazy"
-													className="h-full w-full object-cover"
-												/>
-												<div className="absolute top-4 left-4 bg-white px-3 py-2">
-													<span className="text-primary text-sm font-medium uppercase">{subMenu.label}</span>
-												</div>
-											</div>
 										</div>
 									)
 								})}

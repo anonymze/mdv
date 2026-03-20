@@ -106,7 +106,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 						alt=""
 						src={FirstImg}
 						width={400}
-						height={370}
+						height={180}
 						layout="fullWidth"
 						class="col-span-2 max-h-48 w-full object-cover lg:max-h-none"
 					/>
@@ -114,18 +114,11 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 						alt=""
 						src={SecondImg}
 						width={400}
-						height={370}
+						height={180}
 						layout="fullWidth"
 						class="col-span-1 max-h-48 w-full object-cover lg:max-h-none"
 					/>
-					<MyImage
-						alt=""
-						src={FourthImg}
-						width={400}
-						height={370}
-						layout="fullWidth"
-						class="col-span-3 max-h-32 w-full object-cover lg:max-h-none"
-					/>
+
 					<MyImage
 						alt=""
 						src={FivethImg}
@@ -151,7 +144,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 			<p class="distinguished pb-3 lg:pb-6">{t('MEDIATHEQUE_EVENEMENTS_DESC')}</p>
 
 			<div
-				class="my-8 grid grid-cols-1 place-items-start gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
 			>
 				{
 					evenements.docs.map((item) => {
@@ -175,7 +168,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 								</div>
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
-										<h3 class="pb-1 text-black">
+										<h3 class="pb-1 text-black truncate">
 											<a
 												href={getRelativeLocaleUrl(locale, `mediatheque/evenement/${item.id}`)}
 												class="after:absolute after:inset-0 after:z-10"
@@ -194,7 +187,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 												})}
 											</time>
 										)}
-										<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
+										<p class="truncate pt-3 text-xs">{descText}</p>
 									</figcaption>
 								</figure>
 								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
@@ -243,7 +236,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				localePrefix={localePrefix}
 				limit={LUDO_LIMIT}
 				payloadUrl={PAYLOAD_URL}
-				showFilters={true}
+				showFilters={false}
 				translations={ludoTranslations}
 			/>
 		</section>
@@ -260,7 +253,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 						alt=""
 						src={FirstCyberbaseImg}
 						width={200}
-						height={400}
+						height={300}
 						layout="fullWidth"
 						class="col-span-1 max-h-48 object-cover lg:max-h-none"
 					/>
@@ -268,7 +261,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 						alt=""
 						src={SecondCyberbaseImg}
 						width={200}
-						height={400}
+						height={300}
 						layout="fullWidth"
 						class="col-span-1 max-h-48 object-cover lg:max-h-none"
 					/>
@@ -276,7 +269,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 						alt=""
 						src={ThirdCyberbaseImg}
 						width={420}
-						height={400}
+						height={300}
 						layout="fullWidth"
 						class="col-span-2 max-h-48 object-cover lg:col-span-2 lg:max-h-none"
 					/>
@@ -292,9 +285,9 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 					<p>{t('AUTRES_MEDIAS_DESC')}</p>
 				</div>
 				<div class="order-2 grid grid-cols-2 gap-2 lg:order-1 lg:gap-5">
-					<MyImage alt="" src={FirstMediaImg} width={420} height={260} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={SecondMediaImg} width={420} height={260} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={ThirdMediaImg} width={900} height={200} layout="fullWidth" class="col-span-2" />
+					<MyImage alt="" src={FirstMediaImg} width={420} height={180} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={SecondMediaImg} width={420} height={180} layout="fullWidth" class="col-span-1" />
+					<MyImage alt="" src={ThirdMediaImg} width={900} height={160} layout="fullWidth" class="col-span-2" />
 				</div>
 			</article>
 		</section>

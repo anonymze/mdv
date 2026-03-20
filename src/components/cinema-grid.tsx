@@ -284,8 +284,8 @@ export function CinemaGrid({
 										payloadUrl={payloadUrl}
 										alt={item.thumbnail?.alt ?? translations.IMAGE_PLACEHOLDER}
 										width={900}
-										height={145}
-										className="w-full h-[145px] object-cover"
+										height={220}
+										className="w-full h-55 object-cover"
 										background={item.thumbnail?.blurhash}
 									/>
 								</div>

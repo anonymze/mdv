@@ -27,6 +27,7 @@ export default {
 	ART_VIVANT_DESC_PART3:
 		"Une résidence artistique permet à un artiste-auteur de consacrer un temps de création dans un espace de travail mis à sa disposition, ainsi qu'un hébergement, un accompagnement et des moyens financiers. Elle contribue ainsi aux échanges avec l'équipe du lieu, mais également avec les publics au travers de rencontres et médiations, dans des formats variés qui favorisent une approche personnelle et sensible des œuvres et des démarches artistiques : sortie de résidence, bords de scènes avec les publics scolaires, ateliers…",
 	ARTISTE: 'Artiste',
+	INFORMATIONS_ARTISTE: 'Informations artiste',
 	AUTRES_ACTUALITES: 'Autres actualités',
 	AUCUN_CONTENU: 'Aucun contenu disponible',
 	AUTRES_MEDIAS: 'Autres médias',
@@ -158,6 +159,7 @@ export default {
 	INFORMATIONS_GENERALES: 'Informations générales',
 	INFORMATIONS_PRATIQUES: 'Informations pratiques',
 	INFORMATIONS_TECHNIQUES: 'Informations techniques',
+	SPECIFICATIONS_TECHNIQUES: 'Spécifications techniques',
 	INFORMATIONS_TECHNIQUES_DESC:
 		"Consultez et téléchargez tous les dossiers techniques relatifs à notre salle de spectacle et à notre salle d'exposition. Le dossier de candidature pour nos résidences artistiques est également disponible.",
 	INFORMATIONS_TECHNIQUES_INTRO: 'Dossiers technique et de candidature',
@@ -197,12 +199,12 @@ export default {
 	NAVIGATION_PRINCIPALE: 'Navigation principale',
 	NEWSLETTER_BOUTON: "S'abonner",
 	NEWSLETTER_DESC:
-		"Laissez-nous votre adresse e-mail pour ne rien manquer de nos actualités, offres exclusives et nouveautés. En vous abonnant à notre newsletter, vous recevrez régulièrement des contenus utiles et inspirants, directement dans votre boîte de réception. Promis, pas de spam — seulement l'essentiel, au bon moment.",
+		"En vous abonnant à notre newsletter, vous recevrez régulièrement des contenus utiles et inspirants, directement dans votre boîte de réception. Promis, pas de spam, seulement l'essentiel, au bon moment.",
 	NEWSLETTER_DEJA_INSCRIT: 'Vous êtes déjà inscrit à notre newsletter',
 	NEWSLETTER_EMAIL_REQUIS: "L'adresse email est requise",
 	NEWSLETTER_ERREUR: 'Une erreur est survenue. Veuillez réessayer.',
 	NEWSLETTER_INTRO:
-		"Partagez-nous votre adresse e-mail pour ne rien manquer de l'actualité de la Maison du Parc national et de la vallée",
+		"Partagez-nous votre adresse e-mail pour ne rien manquer de notre acutalité",
 	NEWSLETTER_SUCCES: 'Merci pour votre inscription !',
 	NEWSLETTER_TITRE: 'Inscrivez-vous à notre newsletter',
 	NOMBRE_DE_JOUEURS: 'Nombre de joueurs',

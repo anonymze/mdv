@@ -84,7 +84,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 						alt=""
 						src={ThirdMediaImg}
 						width={420}
-						height={310}
+						height={220}
 						layout="fullWidth"
 						class="col-start-1 row-start-1 h-40 w-full object-cover lg:h-full"
 					/>
@@ -92,7 +92,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 						alt=""
 						src={SecondMediaImg}
 						width={420}
-						height={310}
+						height={220}
 						layout="fullWidth"
 						class="col-start-1 row-start-2 h-40 w-full object-cover lg:h-full"
 					/>
@@ -100,7 +100,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 						alt=""
 						src={FirstMediaImg}
 						width={420}
-						height={640}
+						height={460}
 						layout="fullWidth"
 						class="col-start-2 row-span-2 h-80 w-full object-cover lg:h-full"
 					/>
@@ -126,7 +126,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				limit={SPECTACLES_LIMIT}
 				payloadUrl={PAYLOAD_URL}
 				collection="art_vivant"
-				showFilters={true}
+				showFilters={false}
 				translations={spectacleTranslations}
 			/>
 		</section>
@@ -142,7 +142,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 			</article>
 
 			<div
-				class="my-8 grid grid-cols-1 place-items-start gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
 			>
 				{
 					residences.docs.map((item) => {
@@ -166,7 +166,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 								</div>
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
-										<h3 class="pb-3 text-black">
+										<h3 class="pb-3 text-black truncate">
 											<a
 												href={`${localePrefix}/art-vivant/residence/${item.id}`}
 												class="after:absolute after:inset-0 after:z-10"
@@ -174,7 +174,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 												{item.title}
 											</a>
 										</h3>
-										<p class="distinguished text-primary pb-1 text-xs">{item.genre}</p>
+										<p class="distinguished text-primary pb-1 text-xs truncate">{item.genre}</p>
 										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
 											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })} -{' '}
 											{new Date(item.date_start).toLocaleTimeString(locale, {

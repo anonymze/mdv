@@ -59,28 +59,6 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 					},
 					{ label: t('EVENEMENTS'), link: '/exposition#evenements' }
 				]
-			},
-			{
-				label: t('JEUNESSE'),
-				link: '/jeune-public',
-				image: HeaderJeunePublic.src,
-				subMenus: [
-					{ label: t('SPECTACLES'), link: '/jeune-public#spectacles' },
-					{ label: t('SEANCES'), link: '/jeune-public#cinema' },
-					{ label: t('LUDOTHEQUE'), link: '/jeune-public#ludotheque' }
-				]
-			},
-			{
-				label: t('ARTISTE'),
-				link: '/artiste',
-				image: HeaderArtiste.src,
-				subMenus: [
-					{ label: t('RESIDENCE'), link: '/artiste#residence' },
-					{
-						label: t('INFORMATIONS_TECHNIQUES'),
-						link: '/artiste#informations'
-					}
-				]
 			}
 		]
 	},
@@ -96,54 +74,6 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 					{ label: t('EVENEMENTS'), link: '/parc-national#evenements' },
 					{ label: t('BOUTIQUE'), link: '/parc-national#articles' }
 				]
-			},
-			{
-				label: t('CINEMA'),
-				link: '/cinema',
-				image: HeaderCinema.src,
-				subMenus: [
-					{ label: t('SEANCES'), link: '/cinema#cinema' },
-					{ label: t('RDV_CINE'), link: '/cinema#rdv-cinema' },
-					{ label: t('CINEMA_SCOLAIRE_TITRE'), link: '/cinema#cinema-scolaire' }
-				]
-			},
-			{
-				label: t('INFORMATIONS_PRATIQUES'),
-				link: '/informations',
-				image: HeaderInformationsPratiques.src,
-				subMenus: [
-					{ label: t('HORAIRES'), link: '/informations#horaires' },
-					{ label: t('TARIFICATIONS'), link: '/informations#tarifs' },
-					{ label: t('OU_NOUS_TROUVER'), link: '/informations#horaires' }
-				]
-			},
-			{
-				label: t('INFORMATIONS_GENERALES'),
-				link: '/informations',
-				image: HeaderInformationsGenerales.src,
-				subMenus: [
-					{ label: t('L_EQUIPE'), link: '/informations#equipe' },
-					{ label: t('NOS_ENGAGEMENTS'), link: '/informations#engagements' },
-					{ label: t('NOS_PARTENAIRES'), link: '/informations#partenaires' }
-				]
-			},
-			{
-				label: t('ARCHIVES'),
-				link: '/archives',
-				image: HeaderArchives.src,
-				subMenus: [{ label: t('ARCHIVES'), link: '/archives' }]
-			},
-			{
-				label: t('ARTISTE'),
-				link: '/artiste',
-				image: HeaderArtiste.src,
-				subMenus: [
-					{ label: t('RESIDENCE'), link: '/artiste#residence' },
-					{
-						label: t('INFORMATIONS_TECHNIQUES'),
-						link: '/artiste#informations'
-					}
-				]
 			}
 		]
 	},
@@ -158,22 +88,6 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				subMenus: [{ label: t('MAISON_DU_PARC'), link: '/' }]
 			},
 			{
-				label: t('JEUNESSE'),
-				link: '/jeune-public',
-				image: HeaderJeunePublic.src,
-				subMenus: [
-					{ label: t('SPECTACLES'), link: '/jeune-public#spectacles' },
-					{ label: t('SEANCES'), link: '/jeune-public#cinema' },
-					{ label: t('LUDOTHEQUE'), link: '/jeune-public#ludotheque' }
-				]
-			},
-			{
-				label: t('PARC_NATIONAL'),
-				link: '/parc-national',
-				image: HeaderParcNational.src,
-				subMenus: [{ label: t('PRESENTATION'), link: '/parc-national#description' }]
-			},
-			{
 				label: t('INFORMATIONS_PRATIQUES'),
 				link: '/informations',
 				image: HeaderInformationsPratiques.src,
@@ -194,13 +108,13 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				]
 			},
 			{
-				label: t('ARTISTE'),
+				label: t('INFORMATIONS_ARTISTE'),
 				link: '/artiste',
 				image: HeaderArtiste.src,
 				subMenus: [
 					{ label: t('RESIDENCE'), link: '/artiste#residence' },
 					{
-						label: t('INFORMATIONS_TECHNIQUES'),
+						label: t('SPECIFICATIONS_TECHNIQUES'),
 						link: '/artiste#informations'
 					}
 				]

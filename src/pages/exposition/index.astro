@@ -162,7 +162,7 @@ const evenements = await find<EvenementType>('exposition', {
 			<p class="distinguished pb-3 lg:pb-6">{t('EVENEMENTS_EXPO_INTRO')}</p>
 
 			<div
-				class="my-8 grid grid-cols-1 place-items-start gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
 			>
 				{
 					evenements.docs.map((item) => {
@@ -186,7 +186,7 @@ const evenements = await find<EvenementType>('exposition', {
 								</div>
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
-										<h3 class="pb-1 text-black">
+										<h3 class="pb-1 text-black truncate">
 											<a
 												href={getRelativeLocaleUrl(locale, `exposition/evenement/${item.id}`)}
 												class="after:absolute after:inset-0 after:z-10"
@@ -203,7 +203,7 @@ const evenements = await find<EvenementType>('exposition', {
 												timeZone: 'Europe/Paris'
 											})}
 										</time>
-										<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
+										<p class="truncate pt-3 text-xs">{descText}</p>
 									</figcaption>
 								</figure>
 								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
