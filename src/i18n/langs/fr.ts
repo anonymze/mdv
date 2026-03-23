@@ -19,15 +19,16 @@ export default {
 	ANNEE_2025: '2025',
 	ARCHIVES: 'Archives',
 	ARCHIVES_DESC:
-		"Replongez dans l'histoire de la Maison du Parc national et de la Vallée à travers nos archives : spectacles passés, expositions marquantes, événements culturels qui ont façonné notre lieu depuis sa création en 1982.",
+		"Replongez dans l'histoire de la Maison du Parc national et de la vallée à travers nos archives : spectacles passés, expositions marquantes, événements culturels qui ont façonné notre lieu depuis sa création en 1982.",
 	ART_VIVANT: 'Art vivant',
 	ART_VIVANT_DESC_PART1:
 		"De septembre à juin, la Maison propose une programmation pluridisciplinaire, augmentée aux périodes d'affluence touristique. Une programmation à destination du jeune public est également proposée aux établissements scolaires tout au long de l'année. Chaque été la culture s'empare du village avec une proposition de spectacle de rue chaque mercredi !",
-	ART_VIVANT_DESC_PART2: "Tout au long de l'année des équipes artistiques sont accueillies en résidence dans les locaux. Une résidence d'artiste, c'est quoi ?",
+	ART_VIVANT_DESC_PART2:
+		"Tout au long de l'année des équipes artistiques sont accueillies en résidence dans les locaux. Une résidence d'artiste, c'est quoi ?",
 	ART_VIVANT_DESC_PART3:
 		"Une résidence artistique permet à un artiste-auteur de consacrer un temps de création dans un espace de travail mis à sa disposition, ainsi qu'un hébergement, un accompagnement et des moyens financiers. Elle contribue ainsi aux échanges avec l'équipe du lieu, mais également avec les publics au travers de rencontres et médiations, dans des formats variés qui favorisent une approche personnelle et sensible des œuvres et des démarches artistiques : sortie de résidence, bords de scènes avec les publics scolaires, ateliers…",
 	ARTISTE: 'Artiste',
-	INFORMATIONS_ARTISTE: 'Informations artiste',
+	INFORMATIONS_ARTISTE: 'Informations artistes',
 	AUTRES_ACTUALITES: 'Autres actualités',
 	AUCUN_CONTENU: 'Aucun contenu disponible',
 	AUTRES_MEDIAS: 'Autres médias',
@@ -111,7 +112,7 @@ export default {
 		"La Maison s'attache à offrir une programmation adaptée à tous les publics. Elle œuvre également à soutenir la démarche d'artistes du territoire ou d'ailleurs, en accueillant régulièrement des équipes en résidence. L'activité de la Maison se voit chaque année complétée par de nombreux spectacles et animations proposés par des associations et structures partenaires, que nous accueillons toujours avec joie, tant la Maison se veut un lieu de vie, de rencontres, d'échanges et de partage !",
 	ESPACE_CULTURE_DESC_PART5:
 		'Notre programmation artistique est soutenue par la Région Occitanie, le Département des Hautes-Pyrénées et la commune de Luz Saint Sauveur.',
-	ESPACE_CULTURE_INTRO: 'À "La Maison du Parc National et de la Vallée", on y fait quoi ?',
+	ESPACE_CULTURE_INTRO: 'À "La Maison du Parc national et de la vallée", on y fait quoi ?',
 	ESPACE_CULTURE_TITRE: 'Un espace culture et nature',
 	ESPACES_ARTISTIQUES: 'Espaces artistiques',
 	ETUDIANT: 'Étudiant',
@@ -184,7 +185,7 @@ export default {
 	LUDOTHEQUE_JEUNE_PUBLIC_DESC:
 		'Venez partager un moment convivial en famille autour des jeux de société ! Sur place, petits et grands peuvent jouer librement et découvrir de nouveaux jeux. Et pour prolonger le plaisir à la maison, inscrivez-vous à la médiathèque et empruntez vos jeux préférés.',
 	MAISON_DU_PARC: 'Maison du Parc',
-	MAISON_DU_PARC_COMPLET: 'Maison du Parc National et de la Vallée',
+	MAISON_DU_PARC_COMPLET: 'Maison du Parc national et de la vallée',
 	MATERIEL: 'Matériel',
 	MEDIATHEQUE: 'Médiathèque',
 	MEDIATHEQUE_DESC:
@@ -203,8 +204,7 @@ export default {
 	NEWSLETTER_DEJA_INSCRIT: 'Vous êtes déjà inscrit à notre newsletter',
 	NEWSLETTER_EMAIL_REQUIS: "L'adresse email est requise",
 	NEWSLETTER_ERREUR: 'Une erreur est survenue. Veuillez réessayer.',
-	NEWSLETTER_INTRO:
-		"Partagez-nous votre adresse e-mail pour ne rien manquer de notre acutalité",
+	NEWSLETTER_INTRO: 'Partagez-nous votre adresse e-mail pour ne rien manquer de notre acutalité',
 	NEWSLETTER_SUCCES: 'Merci pour votre inscription !',
 	NEWSLETTER_TITRE: 'Inscrivez-vous à notre newsletter',
 	NOMBRE_DE_JOUEURS: 'Nombre de joueurs',
@@ -220,7 +220,7 @@ export default {
 	OUVERT_HEURES_ARIA: 'Ouvert de 14 heures à 19 heures',
 	PANNEAU_EVENEMENT_IMMANQUABLE: "Panneau de l'évènement immanquable",
 	PANNEAU_HORAIRES_OUVERTURE: "Panneau des horaires d'ouverture",
-	PARC_NATIONAL: 'Parc National',
+	PARC_NATIONAL: 'Parc national',
 	PARKING: 'Parking',
 	PARKING_OUI: 'Parking : Oui',
 	PARC_ARTICLES_DESC:
@@ -282,7 +282,7 @@ export default {
 	SEANCES: 'Séances',
 	SEANCES_A_VENIR: 'Séances à venir',
 	SEMAINES: 'semaines',
-	SEMAINES_CAUTION: '* Besoin d\'une caution en espèce ou en chèque',
+	SEMAINES_CAUTION: "* Besoin d'une caution en espèce ou en chèque",
 	SITE_TITLE: 'Maison du Parc national et de la vallée',
 	SKIP_TO_CONTENT: 'Aller au contenu principal',
 	SPECTACLES: 'Spectacles',
