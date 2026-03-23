@@ -68,7 +68,7 @@ const seances = await find<Cinema>('cinema', {
 					{t('HERO_SUBTITLE')}
 				</p>
 
-				<nav class="flex w-full flex-wrap gap-5 pt-10 lg:gap-6 lg:pt-24">
+				<nav class="grid grid-cols-3 gap-5 pt-10 w-fit self-start lg:gap-6 lg:pt-24">
 					<Button link={getRelativeLocaleUrl(locale, 'art-vivant')} className="p-6">
 						{t('ART_VIVANT')}
 					</Button>

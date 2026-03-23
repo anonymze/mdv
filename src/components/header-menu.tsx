@@ -101,7 +101,7 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 												animationFillMode: 'backwards'
 											}}
 										>
-											<div className="bg-white w-fit py-2 px-3 ml-4">
+											<div className="bg-white py-2 px-3 ml-4">
 												<span className="text-primary text-sm font-medium uppercase">{subMenu.label}</span>
 											</div>
 											<ul className="flex-1 p-4 pb-8 overflow-y-auto">
@@ -134,10 +134,10 @@ function ListItem({
 }: React.ComponentPropsWithoutRef<'li'> & { href: string; title: string }) {
 	return (
 		<li {...props} className="group/link block py-4">
-			<a href={href} className="relative block pb-1.5 text-primary-foreground">
+			<a href={href} className="block pb-1.5 text-primary-foreground">
 				{title}
-				<span className="absolute bottom-0 left-0 h-px w-full bg-primary-foreground transition-[width] duration-0 group-hover/link:w-0" />
-				<span className="absolute bottom-0 left-0 h-px w-0 bg-primary-foreground transition-[width] duration-400 ease-in-out group-hover/link:w-full" />
+				<span className="block h-px w-full bg-primary-foreground transition-[width] duration-0 group-hover/link:w-0" />
+				<span className="block h-px w-0 -mt-px bg-primary-foreground transition-[width] duration-400 ease-in-out group-hover/link:w-full" />
 			</a>
 		</li>
 	)
