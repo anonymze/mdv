@@ -158,7 +158,7 @@ export default {
 	LUDOTHEQUE_JEUNE_PUBLIC_TITRE: "Los juegos de la ludoteca",
 	LUDOTHEQUE_JEUNE_PUBLIC_INTRO: "Juegos para compartir en familia, aquí y en casa",
 	LUDOTHEQUE_JEUNE_PUBLIC_DESC: "¡Venga a compartir un momento agradable en familia en torno a juegos de mesa! In situ, pequeños y grandes pueden jugar libremente y descubrir nuevos juegos. Y para prolongar el placer en casa, inscríbase en la mediateca y tome prestados sus juegos favoritos.",
-	MAISON_DU_PARC: "Casa del Parque",
+	MAISON_DU_PARC: "Maison du Parc",
 	MAISON_DU_PARC_COMPLET: "Maison du Parc national et de la vallée",
 	MATERIEL: "Material",
 	MEDIATHEQUE: 'Mediateca',
