@@ -54,7 +54,7 @@ const seances = await find<Cinema>('cinema', {
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main id="main-content">
 		<section
-			class="relative grid h-[calc(100dvh-var(--header-height))] grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 *:overflow-hidden *:rounded-lg"
+			class="relative grid h-[calc(100dvh-var(--header-height))] max-h-210 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 *:overflow-hidden *:rounded-lg"
 		>
 			<div class="notch-br col-span-10 col-start-1 row-span-18 row-start-1 bg-[#be7a5a]">
 				<img src={LayoutHome1.src} alt="" class="h-full w-full object-cover" />
