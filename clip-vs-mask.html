@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>clip-path vs mask</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    h2 { margin: 0 0 8px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #aaa; }
+    h3 { margin: 0 0 4px; color: #fff; }
+    p  { margin: 0 0 16px; color: #888; font-size: 13px; }
+
+    .row {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ─── CLIP-PATH EXAMPLES ─────────────────────────────────────── */
+
+    /*
+      clip-path = hard geometric cut.
+      Pixels OUTSIDE the shape: fully invisible (no anti-aliasing on old browsers).
+      Use when: sharp edges, polygons, angled corners, SVG path shapes.
+    */
+
+    .clip-circle {
+      clip-path: circle(50%);
+    }
+
+    .clip-polygon {
+      /* hexagon */
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    }
+
+    .clip-angled-corner {
+      /* rectangle with bottom-right corner cut — exactly like in your collage */
+      clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+    }
+
+    .clip-inset-rounded {
+      /* inset with rounded corners — closest to border-radius but via clip-path */
+      clip-path: inset(0 round 24px 24px 4px 24px);
+    }
+
+    /* ─── MASK EXAMPLES ─────────────────────────────────────────── */
+
+    /*
+      mask = uses luminance or alpha of another image/gradient to control opacity.
+      White in mask = fully visible. Black = fully invisible. Grey = semi-transparent.
+      Use when: soft edges, gradient fades, feathered borders, complex image masks.
+    */
+
+    .mask-gradient-fade {
+      /* fades image to transparent at the bottom */
+      -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    }
+
+    .mask-radial-vignette {
+      /* dark vignette: edges fade out */
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at center, black 40%, transparent 100%);
+      mask-image: radial-gradient(ellipse 80% 80% at center, black 40%, transparent 100%);
+    }
+
+    .mask-diagonal-wipe {
+      /* diagonal soft wipe — can't do this with clip-path without hard edge */
+      -webkit-mask-image: linear-gradient(135deg, black 30%, transparent 70%);
+      mask-image: linear-gradient(135deg, black 30%, transparent 70%);
+    }
+
+    .mask-svg {
+      /* arbitrary shape from SVG — soft or hard depending on SVG content */
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cellipse cx='100' cy='100' rx='100' ry='70' fill='white'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cellipse cx='100' cy='100' rx='100' ry='70' fill='white'/%3E%3C/svg%3E");
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+    }
+
+    /* ─── WHEN TO USE WHICH ──────────────────────────────────────── */
+    /*
+      clip-path  → sharp geometric shapes, performance-sensitive animations, angled cuts
+      mask       → anything needing soft/transparent edges, gradient fades, image-based shapes
+
+      Combining both: clip-path for outer shape, mask for inner fade effect.
+    */
+
+    .combined {
+      clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 100%);
+      mask-image: linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 100%);
+    }
+
+    /* ─── MASK ANIMATION ────────────────────────────────────────── */
+
+    .wipe-hard {
+      mask-image: linear-gradient(to bottom right, black 50%, transparent 50%);
+      -webkit-mask-image: linear-gradient(to bottom right, black 50%, transparent 50%);
+      mask-size: 300% 300%;
+      -webkit-mask-size: 300% 300%;
+      mask-position: 0% 0%;
+      -webkit-mask-position: 0% 0%;
+      transition: mask-position 0.7s ease, -webkit-mask-position 0.7s ease;
+    }
+
+    .wipe-soft {
+      mask-image: linear-gradient(to bottom right, black 35%, transparent 65%);
+      -webkit-mask-image: linear-gradient(to bottom right, black 35%, transparent 65%);
+      mask-size: 300% 300%;
+      -webkit-mask-size: 300% 300%;
+      mask-position: 0% 0%;
+      -webkit-mask-position: 0% 0%;
+      transition: mask-position 0.7s ease, -webkit-mask-position 0.7s ease;
+    }
+
+    .wipe-hard.eaten,
+    .wipe-soft.eaten {
+      mask-position: 100% 100%;
+      -webkit-mask-position: 100% 100%;
+    }
+
+    .wipe-hover {
+      mask-image: linear-gradient(to bottom right, black 40%, transparent 60%);
+      -webkit-mask-image: linear-gradient(to bottom right, black 40%, transparent 60%);
+      mask-size: 300% 300%;
+      -webkit-mask-size: 300% 300%;
+      mask-position: 100% 100%; /* starts hidden */
+      -webkit-mask-position: 100% 100%;
+      transition: mask-position 0.7s ease, -webkit-mask-position 0.7s ease;
+    }
+
+    .wipe-hover:hover {
+      mask-position: 0% 0%; /* reveals on hover */
+      -webkit-mask-position: 0% 0%;
+    }
+
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #e8c77d;
+    }
+
+    .label {
+      font-size: 12px;
+      color: #666;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CLIP-PATH -->
+  <section>
+    <h2>clip-path — hard geometric cut</h2>
+    <p>Pixels outside the shape are <strong>fully removed</strong>. No soft edges. Best for shapes and angled cuts.</p>
+    <div class="row">
+
+      <div class="card">
+        <h3>circle()</h3>
+        <img class="clip-circle" src="https://picsum.photos/seed/a/200/200" />
+        <span class="label">clip-path: circle(50%)</span>
+      </div>
+
+      <div class="card">
+        <h3>polygon() — hexagon</h3>
+        <img class="clip-polygon" src="https://picsum.photos/seed/b/200/200" />
+        <span class="label">clip-path: polygon(25% 0%, 75% 0%, …)</span>
+      </div>
+
+      <div class="card">
+        <h3>polygon() — angled corner</h3>
+        <p>← same as your collage photos</p>
+        <img class="clip-angled-corner" src="https://picsum.photos/seed/c/200/200" />
+        <span class="label">clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%)</span>
+      </div>
+
+      <div class="card">
+        <h3>inset() — rounded corners</h3>
+        <img class="clip-inset-rounded" src="https://picsum.photos/seed/d/200/200" />
+        <span class="label">clip-path: inset(0 round 24px 24px 4px 24px)</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MASK -->
+  <section>
+    <h2>mask — alpha/luminance based visibility</h2>
+    <p>White in mask = visible. Black = invisible. Grey = semi-transparent. Use for soft edges and fades.</p>
+    <div class="row">
+
+      <div class="card">
+        <h3>gradient fade bottom</h3>
+        <img class="mask-gradient-fade" src="https://picsum.photos/seed/e/200/200" />
+        <span class="label">mask: linear-gradient(to bottom, black 50%, transparent)</span>
+      </div>
+
+      <div class="card">
+        <h3>radial vignette</h3>
+        <img class="mask-radial-vignette" src="https://picsum.photos/seed/f/200/200" />
+        <span class="label">mask: radial-gradient(ellipse, black 40%, transparent)</span>
+      </div>
+
+      <div class="card">
+        <h3>diagonal soft wipe</h3>
+        <p>← impossible to soft-edge with clip-path</p>
+        <img class="mask-diagonal-wipe" src="https://picsum.photos/seed/g/200/200" />
+        <span class="label">mask: linear-gradient(135deg, black 30%, transparent 70%)</span>
+      </div>
+
+      <div class="card">
+        <h3>SVG shape mask</h3>
+        <img class="mask-svg" src="https://picsum.photos/seed/h/200/200" />
+        <span class="label">mask: url(data:image/svg+xml, …ellipse…)</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMBINED -->
+  <section>
+    <h2>combining both</h2>
+    <p>clip-path for the outer polygon shape + mask for a soft fade. Used in collages like yours.</p>
+    <div class="row">
+      <div class="card">
+        <h3>angled corner + bottom fade</h3>
+        <img class="combined" src="https://picsum.photos/seed/i/200/200" />
+        <span class="label">clip-path: polygon(…) + mask: linear-gradient(…)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MASK ANIMATION -->
+  <section>
+    <h2>mask-position animation — diagonal wipe</h2>
+    <p>Click a photo to trigger the wipe. The gradient doesn't change — only its position moves.</p>
+    <div class="row">
+
+      <div class="card">
+        <h3>hard edge wipe</h3>
+        <img class="wipe-hard" src="https://picsum.photos/seed/j/200/200" onclick="this.classList.toggle('eaten')" style="cursor:pointer" />
+        <span class="label">mask: linear-gradient(…black 50%, transparent 50%)</span>
+      </div>
+
+      <div class="card">
+        <h3>soft edge wipe</h3>
+        <img class="wipe-soft" src="https://picsum.photos/seed/k/200/200" onclick="this.classList.toggle('eaten')" style="cursor:pointer" />
+        <span class="label">soft feather: black 35%, transparent 65%</span>
+      </div>
+
+      <div class="card">
+        <h3>reveal on hover</h3>
+        <img class="wipe-hover" src="https://picsum.photos/seed/l/200/200" />
+        <span class="label">hover to reveal</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DECISION TABLE -->
+  <section>
+    <h2>when to use which</h2>
+    <table style="border-collapse:collapse; font-size:13px; color:#ccc;">
+      <thead>
+        <tr>
+          <th style="padding:8px 16px 8px 0; text-align:left; color:#fff;">Need</th>
+          <th style="padding:8px 16px; text-align:left; color:#4af">clip-path</th>
+          <th style="padding:8px 0; text-align:left; color:#fa4">mask</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:6px 16px 6px 0">Sharp geometric cut</td>        <td style="padding:6px 16px; color:#4af">✓ yes</td>  <td style="color:#666">possible but overkill</td></tr>
+        <tr><td style="padding:6px 16px 6px 0">Angled / folded corner</td>     <td style="padding:6px 16px; color:#4af">✓ yes</td>  <td style="color:#666">possible</td></tr>
+        <tr><td style="padding:6px 16px 6px 0">Soft/feathered edge</td>        <td style="padding:6px 16px; color:#666">✗ no</td>   <td style="color:#fa4">✓ yes</td></tr>
+        <tr><td style="padding:6px 16px 6px 0">Gradient fade</td>              <td style="padding:6px 16px; color:#666">✗ no</td>   <td style="color:#fa4">✓ yes</td></tr>
+        <tr><td style="padding:6px 16px 6px 0">Image used as mask</td>         <td style="padding:6px 16px; color:#666">✗ no</td>   <td style="color:#fa4">✓ yes</td></tr>
+        <tr><td style="padding:6px 16px 6px 0">Animation performance</td>      <td style="padding:6px 16px; color:#4af">✓ better</td><td style="color:#fa4">✓ ok</td></tr>
+        <tr><td style="padding:6px 16px 6px 0">Rounded corners + shape</td>    <td style="padding:6px 16px; color:#4af">inset(…round)</td><td style="color:#666">possible</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</body>
+</html>

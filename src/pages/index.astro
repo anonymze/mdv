@@ -1,25 +1,22 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import EspaceCultureImg from '@/assets/imgs/header/espace-culture-nature.webp'
 
+import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
+import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
+import LayoutHome3 from '@/assets/imgs/layout_home/3.png'
+import LayoutHome4 from '@/assets/imgs/layout_home/4.png'
+import LayoutHome5 from '@/assets/imgs/layout_home/5.png'
+import LayoutHome6 from '@/assets/imgs/layout_home/6.png'
 import FirstImg from '@/assets/imgs/home/1.webp'
 import TenthImg from '@/assets/imgs/home/10.webp'
 import EleventhImg from '@/assets/imgs/home/11.webp'
-import TwelfthImg from '@/assets/imgs/home/12.webp'
 import ThirteenthImg from '@/assets/imgs/home/13.webp'
 import FourteenthImg from '@/assets/imgs/home/14.webp'
 import FifteenthImg from '@/assets/imgs/home/15.webp'
 import SixteenthImg from '@/assets/imgs/home/16.webp'
-import SeventeenImg from '@/assets/imgs/home/17.webp'
-import EighteenImg from '@/assets/imgs/home/18.webp'
-import NineteenImg from '@/assets/imgs/home/19.webp'
 import SecondImg from '@/assets/imgs/home/2.webp'
-import TwentyImg from '@/assets/imgs/home/20.webp'
 import ThirdImg from '@/assets/imgs/home/3.webp'
-import Section1Img from '@/assets/imgs/home/31.webp'
-import Section2Img from '@/assets/imgs/home/32.webp'
-import Section3Img from '@/assets/imgs/home/33.webp'
 import FourthImg from '@/assets/imgs/home/4.webp'
 import FifthImg from '@/assets/imgs/home/5.webp'
 import SixthImg from '@/assets/imgs/home/6.webp'
@@ -56,44 +53,31 @@ const seances = await find<Cinema>('cinema', {
 
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main id="main-content">
-		<section class="text-primary grid grid-cols-1 gap-2 px-4 py-8 lg:grid-cols-3 lg:px-10 lg:py-16">
-			<header class="flex w-full flex-col self-stretch pb-8 lg:col-span-2 lg:pb-0">
-				<p class="text-md mb-8 tracking-widest uppercase lg:mb-20">{t('HERO_LOCATION')}</p>
-				<h1 class="mb-8 font-serif text-4xl normal-case lg:mb-14 lg:text-6xl">
-					{t('HERO_TITLE_LINE1')}
-					<span class="mt-5 block text-4xl font-light normal-case italic lg:text-6xl">{t('HERO_TITLE_LINE2')}</span>
-				</h1>
-
-				<p class="text-black">
-					{t('HERO_SUBTITLE')}
-				</p>
-
-				<nav class="grid grid-cols-3 gap-5 pt-10 w-fit self-start lg:gap-6 lg:pt-24">
-					<Button link={getRelativeLocaleUrl(locale, 'art-vivant')} className="p-6">
-						{t('ART_VIVANT')}
-					</Button>
-					<Button link={getRelativeLocaleUrl(locale, 'parc-national')} className="p-6">
-						{t('PARC_NATIONAL')}
-					</Button>
-					<Button link={getRelativeLocaleUrl(locale, 'cinema')} className="p-6">
-						{t('CINEMA')}
-					</Button>
-					<Button link={getRelativeLocaleUrl(locale, 'mediatheque')} className="p-6">
-						{t('MEDIATHEQUE')}
-					</Button>
-					<Button link={getRelativeLocaleUrl(locale, 'exposition')} className="p-6">
-						{t('EXPOSITION')}
-					</Button>
-					<Button link={getRelativeLocaleUrl(locale, 'jeune-public')} className="p-6">
-						{t('JEUNESSE')}
-					</Button>
-				</nav>
-			</header>
-
-			<div class="grid grid-cols-2 grid-rows-2 gap-5">
-				<MyImage alt="" src={Section1Img} width={300} height={280} layout="fullWidth" class="col-span-1 row-span-1" />
-				<MyImage alt="" src={Section2Img} width={300} height={580} layout="fullWidth" class="ol-span-1 row-span-2" />
-				<MyImage alt="" src={Section3Img} width={300} height={280} layout="fullWidth" class="col-span-1 row-span-1" />
+		<section
+			class="relative grid h-[calc(100dvh-var(--header-height))] grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 *:overflow-hidden *:rounded-lg"
+		>
+			<div class="notch-br col-span-10 col-start-1 row-span-18 row-start-1 bg-[#be7a5a]">
+				<img src={LayoutHome1.src} alt="" class="h-full w-full object-cover" />
+			</div>
+			<div class="col-span-11 col-start-11 row-span-16 row-start-1 bg-[#e5aa7f]">
+				<img src={LayoutHome2.src} alt="" class="h-full w-full object-cover" />
+			</div>
+			<div class="notch-bl col-span-19 col-start-22 row-span-20 row-start-1 bg-[#f4ede1]">
+				<img src={LayoutHome3.src} alt="" class="h-full w-full object-cover" />
+			</div>
+			<div class="notch-tr col-span-13 col-start-1 row-span-22 row-start-19 bg-[#f4ede1]">
+				<img src={LayoutHome4.src} alt="" class="h-full w-full object-cover" />
+			</div>
+			<div class="col-span-14 col-start-14 row-span-16 row-start-25 bg-[#be7a5a]">
+				<img src={LayoutHome5.src} alt="" class="h-full w-full object-cover" />
+			</div>
+			<div class="notch-tl col-span-13 col-start-28 row-span-20 row-start-21 bg-[#e5aa7f]">
+				<img src={LayoutHome6.src} alt="" class="h-full w-full object-cover" />
+			</div>
+			<div
+				class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center bg-white p-2"
+			>
+				<h1 class="text-center text-[#345f6e] ">Maison du Parc national et de<br />la vallée Luz-Saint-Sauveur</h1>
 			</div>
 		</section>
 
@@ -143,7 +127,7 @@ const seances = await find<Cinema>('cinema', {
 								</div>
 								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
-										<h3 class="pb-3 text-black truncate">
+										<h3 class="truncate pb-3 text-black">
 											<a
 												href={getRelativeLocaleUrl(locale, `art-vivant/spectacle/${item.id}`)}
 												class="after:absolute after:inset-0 after:z-10"
@@ -151,7 +135,7 @@ const seances = await find<Cinema>('cinema', {
 												{item.title}
 											</a>
 										</h3>
-										<p class="distinguished text-primary pb-1 text-xs truncate">{item.genre}</p>
+										<p class="distinguished text-primary truncate pb-1 text-xs">{item.genre}</p>
 										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
 											{new Date(item.date_start).toLocaleDateString(locale, {
 												dateStyle: 'full',
@@ -364,13 +348,12 @@ const seances = await find<Cinema>('cinema', {
 					<MyImage alt="" src={FifthImg} width={400} height={160} layout="fullWidth" class="col-span-2" />
 				</div>
 			</article>
-
 		</section>
 
 		<section class="section-default">
 			<article class="mx-auto max-w-200">
 				<h2 class="text-secondary pb-2 lg:pb-4">{t('NEWSLETTER_TITRE')}</h2>
-				<p class="pb-3 distinguished lg:pb-7">{t('NEWSLETTER_INTRO')}</p>
+				<p class="distinguished pb-3 lg:pb-7">{t('NEWSLETTER_INTRO')}</p>
 				<p class="pb-8">{t('NEWSLETTER_DESC')}</p>
 
 				<NewsletterForm client:load locale={locale} variant="default" apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL} />

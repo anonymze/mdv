@@ -17,6 +17,7 @@
 }
 
 :root {
+    --header-height: 4rem;
 	--background: oklch(0.9881 0 0);
 	--foreground: oklch(0 0 0);
 	--card: oklch(1 0 0);
@@ -157,13 +158,13 @@
 	h1,
 	h2,
 	h3 {
-		@apply text-primary font-serif;
+		@apply text-primary font-serif text-balance;
 		font-weight: bold;
 		text-transform: uppercase;
 	}
 
 	h1 {
-		font-size: 28px;
+		font-size: 24px;
 		@media (min-width: 1280px) {
 			font-size: 32px;
 		}
@@ -198,6 +199,30 @@
 	.distinguished {
 		@apply font-serif;
 		font-style: italic;
+	}
+
+	.notch-br {
+		mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0,0 L100,0 L100,84.5 Q100,88.5 96,88.5 L74,88.5 Q70,88.5 70,92.5 L70,95.5 Q70,100 66,100 L0,100 Z' fill='white'/></svg>");
+		mask-size: 100% 100%;
+		mask-repeat: no-repeat;
+	}
+
+	.notch-tr {
+		mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0,0 L48.8,0 Q52.8,0 52.8,4 L52.8,24 Q52.8,28 56.8,28 L96,28 Q100,28 100,32 L100,100 L0,100 Z' fill='white'/></svg>");
+		mask-size: 100% 100%;
+		mask-repeat: no-repeat;
+	}
+
+	.notch-tl {
+		mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0,24.7 L0,100 L100,100 L100,0 L44.5,0 Q40.5,0 40.5,4 L40.5,16.7 Q40.5,20.7 36.5,20.7 L4,20.7 Q0,20.7 0,24.7 Z' fill='white'/></svg>");
+		mask-size: 100% 100%;
+		mask-repeat: no-repeat;
+	}
+
+	.notch-bl {
+		mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0,0 L100,0 L100,100 L64,100 Q60,100 60,96 L60,83 Q60,79 56,79 L4,79 Q0,79 0,75 L0,0 Z' fill='white'/></svg>");
+		mask-size: 100% 100%;
+		mask-repeat: no-repeat;
 	}
 
 	.section-default {
