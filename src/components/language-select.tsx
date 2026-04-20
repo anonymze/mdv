@@ -29,7 +29,7 @@ export function LanguageSelect({ currentLocale, currentPath, className }: Props)
 	return (
 		<div className={cn("w-28", className)}>
 			<Select value={selectedLocale} onValueChange={handleChange}>
-				<SelectTrigger className="h-11 w-full border-0 bg-primary-foreground text-white rounded-md hover:bg-white/10">
+				<SelectTrigger className="w-full border-0 bg-primary-foreground text-white rounded-md hover:bg-white/10 focus-visible:ring-0 focus-visible:border-0">
 					<SelectValue />
 				</SelectTrigger>
 				<SelectContent>
