@@ -56,7 +56,7 @@ export function SideCard({
 				className={`hidden lg:block fixed ${position} right-0 z-50 transition-transform duration-300 ${
 					isOpen
 						? 'translate-x-0'
-						: `translate-x-[calc(100%-56px)] ${!justClosed ? 'hover:translate-x-[calc(100%-70px)]' : ''} cursor-pointer`
+						: `translate-x-[calc(100%-40px)] ${!justClosed ? 'hover:translate-x-[calc(100%-54px)]' : ''} cursor-pointer`
 				}`}
 				onMouseLeave={() => setJustClosed(false)}
 				onClick={handleOpen}
@@ -64,13 +64,17 @@ export function SideCard({
 				role="complementary"
 			>
 				{/* Content panel */}
-				<div className={`relative ${height} ${width} bg-primary flex flex-col overflow-y-auto`}>
-					{/* Vertical text tab - visible when closed */}
+				<div className={`relative ${height} ${width} bg-secondary flex flex-col overflow-y-auto rounded-l-3xl`}>
+					{/* Vertical text tab - always visible */}
 					<div
-						className={`bg-primary absolute top-0 left-0 flex ${height} w-14 items-center justify-center gap-2 transition-opacity duration-300 ${
-							isOpen ? 'pointer-events-none opacity-0' : 'opacity-100'
-						}`}
+						className={`bg-secondary-muted absolute top-0 left-0 flex ${height} w-10 items-center justify-center gap-2 rounded-l-3xl cursor-pointer`}
 						aria-hidden={isOpen}
+						onClick={(e) => {
+							if (isOpen) {
+								e.stopPropagation()
+								handleClose()
+							}
+						}}
 					>
 						{tabText.map((text, idx) => {
 							// Keep apostrophes with preceding letter
@@ -86,7 +90,7 @@ export function SideCard({
 								<span
 									key={idx}
 									className={cn(
-										'text-primary-foreground flex flex-col gap-px text-center text-xs font-medium uppercase',
+										'text-white flex flex-col gap-px text-center text-xs font-medium uppercase',
 										idx === 1 && 'text-start'
 									)}
 									aria-hidden="true"
@@ -100,7 +104,7 @@ export function SideCard({
 					</div>
 					{/* Content visible when open */}
 					<article
-						className={`flex-1 ${isOpen ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+						className={`flex-1 pl-10 ${isOpen ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
 						onClick={(e) => {
 							if (isOpen) {
 								e.stopPropagation()

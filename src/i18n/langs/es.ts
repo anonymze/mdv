@@ -56,6 +56,7 @@ export default {
 	CYBERBASE_INTRO: "Su espacio de trabajo diferente",
 	CYBERBASE_TITRE: "La cyberbase",
 	D_OUVERTURE: "de apertura",
+	DE_LA_SAISON: "Horarios de temporada",
 	DATE: "Fecha",
 	DATE_DISPONIBILITE: "Fecha de disponibilidad",
 	DATE_FROM: "Desde",

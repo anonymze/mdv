@@ -40,8 +40,8 @@ export default defineConfig({
 		fonts: [
 			{
 				provider: fontProviders.google(),
-				name: 'Libre Baskerville',
-				cssVariable: '--font-libre-baskerville'
+				name: 'DM Serif Text',
+				cssVariable: '--font-dm-serif-text'
 			},
 			{
 				provider: fontProviders.google(),

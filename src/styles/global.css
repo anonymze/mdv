@@ -17,19 +17,19 @@
 }
 
 :root {
-    --header-height: 4rem;
-	--background: oklch(0.9881 0 0);
-	--foreground: oklch(0 0 0);
+	--header-height: 4rem;
+	--background: #f5ede3;
+	--foreground: #1e3d47;
 	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.141 0.005 285.823);
-	--popover: oklch(0.95 0.06 220);
-	--popover-foreground: oklch(0.141 0.005 285.823);
-	--primary: oklch(0.6475 0.1187 235.02);
-	--primary-foreground: oklch(0.9881 0 0);
-	--primary-muted: oklch(0.787 0.0622 247.14);
-	--secondary: oklch(0.7664 0.1679 59.61);
-	--secondary-foreground: oklch(0.9881 0 0);
-	--secondary-muted: oklch(0.8435 0.1094 65.42);
+	--card-foreground: #1e3d47;
+	--popover: #f5ede3;
+	--popover-foreground: #1e3d47;
+	--primary: #345f6e;
+	--primary-foreground: #1e3d47;
+	--primary-muted: #1a3d47;
+	--secondary: #e5ab7f;
+	--secondary-foreground: #1e3d47;
+	--secondary-muted: #bd7a5a;
 	--radius: 0.625rem;
 	/*--muted: oklch(0.967 0.001 286.375);
 	--muted-foreground: oklch(0.552 0.016 285.938);
@@ -94,7 +94,7 @@
 
 @theme inline {
 	--font-sans: var(--font-noto-sans);
-	--font-serif: var(--font-libre-baskerville);
+	--font-serif: var(--font-dm-serif-text);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -151,43 +151,38 @@
 	}
 	body {
 		@apply bg-background text-foreground font-sans;
+		font-size: 16px;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
 
+	small {
+		font-size: 14px;
+	}
+
 	h1,
 	h2,
-	h3 {
+	h3,
+	h4 {
 		@apply text-primary font-serif text-balance;
 		font-weight: bold;
-		text-transform: uppercase;
 	}
 
 	h1 {
-		font-size: 24px;
-		@media (min-width: 1280px) {
-			font-size: 32px;
-		}
+		font-size: 42px;
+		text-transform: uppercase;
 	}
 
 	h2 {
-		font-size: 16px;
-		@media (min-width: 1280px) {
-			font-size: 20px;
-		}
+		font-size: 26px;
 	}
 
 	h3 {
-		font-size: 14px;
-		@media (min-width: 1280px) {
-			font-size: 16px;
-		}
+		font-size: 20px;
 	}
+
 	h4 {
-		font-size: 12px;
-		@media (min-width: 1280px) {
-			font-size: 14px;
-		}
+		font-size: 16px;
 	}
 
 	code {
@@ -198,7 +193,7 @@
 @layer components {
 	.distinguished {
 		@apply font-serif;
-		font-style: italic;
+		/*font-style: italic;*/
 	}
 
 	.notch-br {
@@ -226,14 +221,6 @@
 	}
 
 	.section-default {
-		margin-block: 0.75rem;
-		padding-block: 6rem;
-		padding-inline: 2rem;
-
-		@media (max-width: 1279px) {
-			margin-block: 0.5rem;
-			padding-block: 3rem;
-			padding-inline: 1rem;
-		}
+		@apply p-8 md:p-14 lg:p-20;
 	}
 }
