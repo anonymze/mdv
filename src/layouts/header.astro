@@ -132,13 +132,13 @@ const mobileEvent = immanquableEvent
 		client:media="(min-width: 1280px)"
 		currentLocale={locale}
 		currentPath={currentPath}
-		className="hidden lg:block"
+		className="hidden lg:flex self-center"
 	/>
 	<Button
 		link={getRelativeLocaleUrl(locale, 'informations')}
-		variant={'secondary'}
+		variant={'default'}
 		client:media="(min-width: 1280px)"
-		className="group hidden h-full w-40 lg:flex"
-		>{t('NOUS_CONTACTER')} <ArrowRightIcon className="transition-transform group-hover:translate-x-1" /></Button
+		className="group hidden w-40 uppercase lg:flex self-center mr-6"
+		>{t('NOUS_CONTACTER')}</Button
 	>
 </header>
