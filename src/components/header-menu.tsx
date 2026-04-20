@@ -94,15 +94,15 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 									return (
 										<div
 											key={subIndex}
-											className="flex flex-col h-90 pt-4 animate-in fade-in slide-in-from-bottom-12 z-20 bg-primary"
+											className="flex flex-col h-90 animate-in fade-in slide-in-from-bottom-12 z-20 bg-primary-foreground rounded-xl"
 											style={{
 												animationDelay: `${subIndex * 50}ms`,
 												animationDuration: '300ms',
 												animationFillMode: 'backwards'
 											}}
 										>
-											<div className="bg-white py-2 px-3 ml-4">
-												<span className="text-primary text-sm font-medium uppercase">{subMenu.label}</span>
+											<div className="px-4 pt-4">
+												<span className="text-white text-sm font-bold uppercase">{subMenu.label}</span>
 											</div>
 											<ul className="flex-1 p-4 pb-8 overflow-y-auto">
 												{subMenu.subMenus?.map((item, itemIndex) => (
@@ -133,11 +133,9 @@ function ListItem({
 	...props
 }: React.ComponentPropsWithoutRef<'li'> & { href: string; title: string }) {
 	return (
-		<li {...props} className="group/link block py-4">
-			<a href={href} className="block pb-1.5 text-primary-foreground">
+		<li {...props} className="group/link block py-1.5 pl-4">
+			<a href={href} className="block pb-1.5 text-white">
 				{title}
-				<span className="block h-px w-full bg-primary-foreground transition-[width] duration-0 group-hover/link:w-0" />
-				<span className="block h-px w-0 -mt-px bg-primary-foreground transition-[width] duration-400 ease-in-out group-hover/link:w-full" />
 			</a>
 		</li>
 	)
