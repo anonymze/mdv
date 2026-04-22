@@ -82,12 +82,6 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 		link: '/informations',
 		subMenus: [
 			{
-				label: t('ACCUEIL'),
-				link: '/',
-				image: HeaderAccueil.src,
-				subMenus: [{ label: t('MAISON_DU_PARC'), link: '/' }]
-			},
-			{
 				label: t('INFORMATIONS_PRATIQUES'),
 				link: '/informations',
 				image: HeaderInformationsPratiques.src,
