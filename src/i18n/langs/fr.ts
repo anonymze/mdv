@@ -205,7 +205,7 @@ export default {
 	NEWSLETTER_DEJA_INSCRIT: 'Vous êtes déjà inscrit à notre newsletter',
 	NEWSLETTER_EMAIL_REQUIS: "L'adresse email est requise",
 	NEWSLETTER_ERREUR: 'Une erreur est survenue. Veuillez réessayer.',
-	NEWSLETTER_INTRO: 'Partagez-nous votre adresse e-mail pour ne rien manquer de notre acutalité',
+	NEWSLETTER_INTRO: 'Partagez-nous votre adresse e-mail pour ne rien manquer de notre actualité',
 	NEWSLETTER_SUCCES: 'Merci pour votre inscription !',
 	NEWSLETTER_TITRE: 'Inscrivez-vous à notre newsletter',
 	NOMBRE_DE_JOUEURS: 'Nombre de joueurs',

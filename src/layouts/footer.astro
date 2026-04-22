@@ -37,20 +37,20 @@ const parcNational = menuNavs[1]?.subMenus || []
 
 			<div class="grid grid-cols-1 lg:grid-cols-2 space-y-4 gap-x-20 gap-y-3">
 				<div>
-					<h4 class="text-white! font-normal uppercase font-serif">{t('ADRESSE_DU_LIEU')}</h4>
+					<h4 class="text-white! font-normal font-serif">{t('ADRESSE_DU_LIEU')}</h4>
 					<hr class="mb-4 border-white/40" />
 					<p class="pl-4 text-sm">24, Place Saint Clément <br />65120, Luz-Saint-Sauveur</p>
 				</div>
 
 				<div>
-					<h4 class="text-white! font-normal uppercase font-serif">{t('ACCES')}</h4>
+					<h4 class="text-white! font-normal font-serif">{t('ACCES')}</h4>
 					<hr class="mb-4 border-white/40" />
 					<p class="pl-4 text-sm">{t('PARKING_OUI')}</p>
 					<p class="pl-4 text-sm">{t('TRANSPORT_PUBLIC')}</p>
 				</div>
 
 				<div>
-					<h4 class="text-white! font-normal uppercase font-serif">{t('HORAIRES')}</h4>
+					<h4 class="text-white! font-normal font-serif">{t('HORAIRES')}</h4>
 					<hr class="mb-4 border-white/40" />
 					<p class="pl-4 text-sm">
 						{t('HORAIRES_PART1')}
@@ -101,7 +101,7 @@ const parcNational = menuNavs[1]?.subMenus || []
 		</div>
 		<div>
 			<h3 class="text-white! pb-4 lg:pb-8 font-normal!">{t('NEWSLETTER_TITRE')}</h3>
-			<p class="pb-8">{t('NEWSLETTER_INTRO')}</p>
+			<p class="pb-8 text-sm">{t('NEWSLETTER_INTRO')}</p>
 			<NewsletterForm client:load locale={locale} variant="footer" apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL} />
 		</div>
 	</div>
