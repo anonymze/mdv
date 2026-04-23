@@ -58,24 +58,28 @@ const seances = await find<Cinema>('cinema', {
 			class="relative grid h-[calc(100dvh-var(--header-height))] max-h-225 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 pt-11.5 *:rounded-lg"
 		>
 			<div class="notch-br col-span-10 col-start-1 row-span-18 row-start-1 overflow-hidden bg-[#be7a5a]">
-				<img src={LayoutHome1.src} alt="" class="h-full w-full object-cover" />
+				<img src={LayoutHome1.src} alt="" class="h-full w-full rounded-lg object-cover" />
 			</div>
-			<div class="col-span-11 col-start-11 row-span-16 row-start-1 relative">
-				<div class="absolute inset-0 overflow-hidden rounded-lg bg-[#e5aa7f]"></div>
-				<img src={LayoutHome2.src} alt="" class="absolute inset-x-0 top-0 z-20 h-[calc(100%+1.5rem)] w-full rounded-lg object-cover object-bottom" />
+			<div class="col-span-11 col-start-11 row-span-16 row-start-1 relative z-20 [clip-path:inset(0_0_-0.75rem_0_round_0.5rem)] lg:[clip-path:inset(0_0_-1.5rem_0_round_0.5rem)]">
+				<div class="absolute inset-0 rounded-lg bg-[#e5aa7f]"></div>
+				<div class="absolute inset-x-0 top-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
+					<img src={LayoutHome2.src} alt="" class="h-full w-full object-cover object-bottom" />
+				</div>
 			</div>
 			<div class="notch-bl col-span-19 col-start-22 row-span-20 row-start-1 overflow-hidden bg-[#f4ede1]">
-				<img src={LayoutHome3.src} alt="" class="h-full w-full object-cover" />
+				<img src={LayoutHome3.src} alt="" class="h-full w-full rounded-lg object-cover" />
 			</div>
 			<div class="notch-tr col-span-13 col-start-1 row-span-22 row-start-19 overflow-hidden bg-[#f4ede1]">
-				<img src={LayoutHome4.src} alt="" class="h-full w-full object-cover" />
+				<img src={LayoutHome4.src} alt="" class="h-full w-full rounded-lg object-cover" />
 			</div>
-			<div class="col-span-14 col-start-14 row-span-16 row-start-25 relative">
-				<div class="absolute inset-0 overflow-hidden rounded-lg bg-[#be7a5a]"></div>
-				<img src={LayoutHome5.src} alt="" class="absolute inset-x-0 bottom-0 z-20 h-[calc(100%+1.5rem)] w-full rounded-lg object-cover object-top" />
+			<div class="col-span-14 col-start-14 row-span-16 row-start-25 relative z-20 [clip-path:inset(-0.75rem_0_0_0_round_0.5rem)] lg:[clip-path:inset(-1.5rem_0_0_0_round_0.5rem)]">
+				<div class="absolute inset-0 rounded-lg bg-[#be7a5a]"></div>
+				<div class="absolute inset-x-0 bottom-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
+					<img src={LayoutHome5.src} alt="" class="h-full w-full object-cover object-top" />
+				</div>
 			</div>
 			<div class="notch-tl col-span-13 col-start-28 row-span-20 row-start-21 overflow-hidden bg-[#e5aa7f]">
-				<img src={LayoutHome6.src} alt="" class="h-full w-full object-cover" />
+				<img src={LayoutHome6.src} alt="" class="h-full w-full rounded-lg object-cover" />
 			</div>
 			<div
 				class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center overflow-hidden bg-[#f4ede1] p-2"
