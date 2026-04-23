@@ -55,28 +55,30 @@ const seances = await find<Cinema>('cinema', {
 <Layout title={t('ACCUEIL_TITLE')}>
 	<main id="main-content">
 		<section
-			class="relative grid h-[calc(100dvh-var(--header-height))] max-h-225 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 pt-11.5 *:overflow-hidden *:rounded-lg"
+			class="relative grid h-[calc(100dvh-var(--header-height))] max-h-225 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 pt-11.5 *:rounded-lg"
 		>
-			<div class="notch-br col-span-10 col-start-1 row-span-18 row-start-1 bg-[#be7a5a]">
+			<div class="notch-br col-span-10 col-start-1 row-span-18 row-start-1 overflow-hidden bg-[#be7a5a]">
 				<img src={LayoutHome1.src} alt="" class="h-full w-full object-cover" />
 			</div>
-			<div class="col-span-11 col-start-11 row-span-16 row-start-1 bg-[#e5aa7f]">
-				<img src={LayoutHome2.src} alt="" class="h-full w-full object-cover" />
+			<div class="col-span-11 col-start-11 row-span-16 row-start-1 relative">
+				<div class="absolute inset-0 overflow-hidden rounded-lg bg-[#e5aa7f]"></div>
+				<img src={LayoutHome2.src} alt="" class="absolute inset-x-0 top-0 z-20 h-[calc(100%+1.5rem)] w-full rounded-lg object-cover object-bottom" />
 			</div>
-			<div class="notch-bl col-span-19 col-start-22 row-span-20 row-start-1 bg-[#f4ede1]">
+			<div class="notch-bl col-span-19 col-start-22 row-span-20 row-start-1 overflow-hidden bg-[#f4ede1]">
 				<img src={LayoutHome3.src} alt="" class="h-full w-full object-cover" />
 			</div>
-			<div class="notch-tr col-span-13 col-start-1 row-span-22 row-start-19 bg-[#f4ede1]">
+			<div class="notch-tr col-span-13 col-start-1 row-span-22 row-start-19 overflow-hidden bg-[#f4ede1]">
 				<img src={LayoutHome4.src} alt="" class="h-full w-full object-cover" />
 			</div>
-			<div class="col-span-14 col-start-14 row-span-16 row-start-25 bg-[#be7a5a]">
-				<img src={LayoutHome5.src} alt="" class="h-full w-full object-cover" />
+			<div class="col-span-14 col-start-14 row-span-16 row-start-25 relative">
+				<div class="absolute inset-0 overflow-hidden rounded-lg bg-[#be7a5a]"></div>
+				<img src={LayoutHome5.src} alt="" class="absolute inset-x-0 bottom-0 z-20 h-[calc(100%+1.5rem)] w-full rounded-lg object-cover object-top" />
 			</div>
-			<div class="notch-tl col-span-13 col-start-28 row-span-20 row-start-21 bg-[#e5aa7f]">
+			<div class="notch-tl col-span-13 col-start-28 row-span-20 row-start-21 overflow-hidden bg-[#e5aa7f]">
 				<img src={LayoutHome6.src} alt="" class="h-full w-full object-cover" />
 			</div>
 			<div
-				class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center bg-[#f4ede1] p-2"
+				class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center overflow-hidden bg-[#f4ede1] p-2"
 			>
 				<h1 class="text-primary text-center text-3xl! leading-8 font-medium! lg:text-[42px]! lg:leading-14">
 					Maison du Parc national et<br />de la vallée Luz-Saint-Sauveur
@@ -364,8 +366,8 @@ const seances = await find<Cinema>('cinema', {
 		<section class="section-default">
 			<article class="flex bg-foreground rounded-4xl" >
 				<div class="relative h-[349.5px] w-[378px] shrink-0 ">
-					<div class="absolute right-0 bottom-0 z-1 h-94.25 w-101.5 ">
-						<MyImage alt="" src={NewsletterImg} width={406} height={377} layout="fullWidth" class='rounded-none' />
+					<div class="absolute right-0 bottom-0 z-1 h-[calc(100%+28px)] w-[calc(100%+28px)]">
+						<MyImage alt="" src={NewsletterImg} width={420} height={400} layout="fullWidth" class='rounded-none h-full!' />
 					</div>
 				</div>
 				<div class="flex flex-col justify-center p-8">
