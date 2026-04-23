@@ -7,6 +7,7 @@ import TenthImg from '@/assets/imgs/home/10.webp'
 import EleventhImg from '@/assets/imgs/home/11.webp'
 import ThirteenthImg from '@/assets/imgs/home/13.webp'
 import FourteenthImg from '@/assets/imgs/home/14.webp'
+import NewsletterImg from '@/assets/imgs/newsletter.png'
 import FifteenthImg from '@/assets/imgs/home/15.webp'
 import SixteenthImg from '@/assets/imgs/home/16.webp'
 import SecondImg from '@/assets/imgs/home/2.webp'
@@ -136,7 +137,7 @@ const seances = await find<Cinema>('cinema', {
 						width={300}
 						height={500}
 						layout="fullWidth"
-						class="col-span-1 h-full! lg:col-span-2 lg:max-h-none lg:row-span-2"
+						class="col-span-1 h-full! lg:col-span-2 lg:row-span-2 lg:max-h-none"
 					/>
 					<MyImage
 						alt=""
@@ -158,7 +159,7 @@ const seances = await find<Cinema>('cinema', {
 							.join(' ')
 
 						return (
-							<article class="group relative col-span-1 w-full overflow-hidden rounded-2xl border border-black bg-white shadow-card">
+							<article class="group shadow-card relative col-span-1 w-full overflow-hidden rounded-2xl border border-black bg-white">
 								<MyImage
 									src={item.thumbnail?.url}
 									alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
@@ -168,7 +169,7 @@ const seances = await find<Cinema>('cinema', {
 									layout="fullWidth"
 									class="rounded-2xl"
 								/>
-								<figure class="absolute bottom-0 inset-x-0 bg-background/90 rounded-t-2xl p-4 transition-opacity duration-250 group-hover:opacity-0">
+								<figure class="bg-background/90 absolute inset-x-0 bottom-0 rounded-t-2xl p-4 transition-opacity duration-250 group-hover:opacity-0">
 									<figcaption>
 										<h3 class="truncate pb-3">
 											<a
@@ -178,7 +179,7 @@ const seances = await find<Cinema>('cinema', {
 												{item.title}
 											</a>
 										</h3>
-										<p class="distinguished text-secondary-muted truncate uppercase text-xs">{item.genre}</p>
+										<p class="distinguished text-secondary-muted truncate text-xs uppercase">{item.genre}</p>
 										<time class="distinguished text-primary text-sm capitalize" datetime={item.date_start}>
 											{new Date(item.date_start).toLocaleDateString(locale, {
 												dateStyle: 'full',
@@ -361,14 +362,23 @@ const seances = await find<Cinema>('cinema', {
 		</section>
 
 		<section class="section-default">
-			<article class="grid grid-cols-1 overflow-hidden rounded-4xl bg-foreground lg:grid-cols-3">
-				<MyImage src={FifteenthImg} alt="" width={800} height={360} layout="fullWidth" class="h-full object-cover rounded-none col-span-1" />
-				<div class="flex flex-col justify-center p-8 col-span-2">
-					<h2 class="text-white! pb-3">{t('NEWSLETTER_TITRE')}</h2>
-					<p class="text-white font-medium pb-8 text-sm">{t('NEWSLETTER_INTRO')}</p>
-					<p class="text-white pb-8 text-sm">{t('NEWSLETTER_DESC')}</p>
+			<article class="flex bg-foreground rounded-4xl" >
+				<div class="relative h-[349.5px] w-[378px] shrink-0 ">
+					<div class="absolute right-0 bottom-0 z-1 h-94.25 w-101.5 ">
+						<MyImage alt="" src={NewsletterImg} width={406} height={377} layout="fullWidth" class='rounded-none' />
+					</div>
+				</div>
+				<div class="flex flex-col justify-center p-8">
+					<h2 class="pb-3 text-white!">{t('NEWSLETTER_TITRE')}</h2>
+					<p class="pb-8 text-sm font-medium text-white">{t('NEWSLETTER_INTRO')}</p>
+					<p class="pb-8 text-sm text-white">{t('NEWSLETTER_DESC')}</p>
 
-					<NewsletterForm client:load locale={locale} variant="default" apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL} />
+					<NewsletterForm
+						client:load
+						locale={locale}
+						variant="default"
+						apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL}
+					/>
 				</div>
 			</article>
 		</section>
