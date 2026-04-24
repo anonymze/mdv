@@ -49,7 +49,7 @@ export function NewsletterForm({ locale, variant = 'default', apiBaseUrl }: Prop
 					required
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
-					className={'h-14 w-full rounded-l-xl bg-white text-black'}
+					className={'h-14 w-full rounded-xl bg-white text-black lg:rounded-r-none'}
 					placeholder={t.EMAIL_PLACEHOLDER}
 				/>
 				<Button
@@ -57,7 +57,7 @@ export function NewsletterForm({ locale, variant = 'default', apiBaseUrl }: Prop
 					variant={'secondary'}
 					size={isFooter ? 'xl' : 'xl'}
 					disabled={status === 'loading'}
-					className="h-14 rounded-r-xl lg:w-auto"
+					className="h-14 rounded-xl lg:w-auto lg:rounded-l-none"
 				>
 					{t.NEWSLETTER_BOUTON}
 				</Button>

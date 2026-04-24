@@ -95,6 +95,7 @@
 @theme inline {
 	--font-sans: var(--font-noto-sans);
 	--font-serif: var(--font-dm-serif-text);
+	--font-title: var(--font-libre-baskerville);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -165,13 +166,25 @@
 	h2,
 	h3,
 	h4 {
-		@apply text-primary font-serif text-balance;
-		font-weight: bold;
+		@apply text-balance;
 	}
 
 	h1 {
 		font-size: 42px;
+		@apply font-serif;
 		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	h2,
+	h3,
+	h4 {
+		@apply font-title text-foreground;
+		font-weight: 500;
+	}
+
+	p {
+		@apply text-foreground;
 	}
 
 	h2 {
@@ -189,19 +202,21 @@
 	code {
 		font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 	}
+}
 
-	.bg-primary {
+.bg-primary {
+	color: white;
+	p {
 		color: white;
-		h2 {
-			color: white;
-		}
+	}
+	h2 {
+		color: white;
 	}
 }
 
 @layer components {
 	.distinguished {
-		@apply font-serif;
-		/*font-style: italic;*/
+		@apply text-primary font-sans font-semibold;
 	}
 
 	.notch-br {

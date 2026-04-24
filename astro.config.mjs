@@ -47,6 +47,11 @@ export default defineConfig({
 				provider: fontProviders.google(),
 				name: 'Noto Sans',
 				cssVariable: '--font-noto-sans'
+			},
+			{
+				provider: fontProviders.google(),
+				name: 'Libre Baskerville',
+				cssVariable: '--font-libre-baskerville'
 			}
 		]
 	},
