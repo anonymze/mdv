@@ -177,15 +177,15 @@ const seances = await find<Cinema>('cinema', {
 								/>
 								<figure class="bg-background/90 absolute inset-x-0 bottom-0 h-auto max-h-full overflow-hidden rounded-t-2xl p-4 transition-[height] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:h-full">
 									<figcaption>
-										<h3 class="truncate pb-3 group-hover:line-clamp-2 group-hover:whitespace-normal">
+										<h3 class="line-clamp-1 mb-3 group-hover:line-clamp-2">
 											<a
 												href={getRelativeLocaleUrl(locale, `art-vivant/spectacle/${item.id}`)}
 												class="after:absolute after:inset-0 after:z-10"
 											>
-												{item.title} fzefefe
+												{item.title}
 											</a>
 										</h3>
-										<p class="distinguished text-secondary-muted! truncate text-xs uppercase group-hover:line-clamp-2 group-hover:whitespace-normal">{item.genre}</p>
+										<p class="distinguished text-secondary-muted! line-clamp-1 text-xs uppercase group-hover:line-clamp-2">{item.genre}</p>
 										<time class="distinguished text-primary text-sm capitalize tabular-nums" datetime={item.date_start}>
 											{new Date(item.date_start).toLocaleDateString(locale, {
 												dateStyle: 'full',
@@ -201,8 +201,8 @@ const seances = await find<Cinema>('cinema', {
 										</time>
 										<div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:grid-rows-[1fr]">
 											<div class="overflow-hidden">
-												<p class="text-foreground! line-clamp-8 pt-4 text-sm">{descText}</p>
-												<p class="text-secondary-muted! inline-flex items-center gap-2 pt-4 text-medium font-semibold opacity-0 transition-opacity duration-250 group-hover:opacity-100 group-hover:delay-200 pl-0.5">
+												<p class="text-foreground! line-clamp-8 pt-4 text-sm">{descText} </p>
+												<p class="text-secondary-muted! inline-flex items-center gap-2 pt-4 text-medium font-semibold transition-opacity opacity-0 duration-400 group-hover:opacity-100 group-hover:delay-150 pl-0.5">
 													{t('VOIR_LA_REPRESENTATION')}
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
