@@ -33,26 +33,26 @@ const parcNational = menuNavs[1]?.subMenus || []
 
 		<!-- Informations pratiques -->
 		<div class="w-full">
-			<h3 class="text-white! pb-4 lg:pb-8 font-normal!">{t('INFORMATIONS_PRATIQUES')}</h3>
+			<h3 class="text-white pb-4 lg:pb-8 font-normal!">{t('INFORMATIONS_PRATIQUES')}</h3>
 
 			<div class="grid grid-cols-1 lg:grid-cols-2 space-y-4 gap-x-20 gap-y-3">
 				<div>
-					<h4 class="text-white! font-normal font-serif">{t('ADRESSE_DU_LIEU')}</h4>
+					<h4 class="text-white font-normal font-serif">{t('ADRESSE_DU_LIEU')}</h4>
 					<hr class="mb-4 border-white/40" />
-					<p class="pl-4 text-sm">24, Place Saint Clément <br />65120, Luz-Saint-Sauveur</p>
+					<p class="pl-4 text-sm text-white">24, Place Saint Clément <br />65120, Luz-Saint-Sauveur</p>
 				</div>
 
 				<div>
-					<h4 class="text-white! font-normal font-serif">{t('ACCES')}</h4>
-					<hr class="mb-4 border-white/40" />
-					<p class="pl-4 text-sm">{t('PARKING_OUI')}</p>
-					<p class="pl-4 text-sm">{t('TRANSPORT_PUBLIC')}</p>
+					<h4 class="text-white font-normal font-serif">{t('ACCES')}</h4>
+					<hr class="mb-4 border-white/40 text-white" />
+					<p class="pl-4 text-sm text-white">{t('PARKING_OUI')}</p>
+					<p class="pl-4 text-sm text-white">{t('TRANSPORT_PUBLIC')}</p>
 				</div>
 
 				<div>
-					<h4 class="text-white! font-normal font-serif">{t('HORAIRES')}</h4>
+					<h4 class="text-white font-normal font-serif">{t('HORAIRES')}</h4>
 					<hr class="mb-4 border-white/40" />
-					<p class="pl-4 text-sm">
+					<p class="pl-4 text-sm text-white">
 						{t('HORAIRES_PART1')}
 						<br />
 						{t('HORAIRES_PART2')}
@@ -64,11 +64,11 @@ const parcNational = menuNavs[1]?.subMenus || []
 
 	<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
 		<div>
-			<h3 class="text-white! pb-4 lg:pb-8 font-normal!">{t('PLAN_DU_SITE')}</h3>
+			<h3 class="text-white pb-4 lg:pb-8 font-normal!">{t('PLAN_DU_SITE')}</h3>
 
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
 				<div>
-					<h4 class="text-white! tracking-wider">{t('ESPACES_ARTISTIQUES')}</h4>
+					<h4 class="text-white tracking-wider">{t('ESPACES_ARTISTIQUES')}</h4>
 					<hr class="mb-4 border-white/40" />
 					<ul class="space-y-2 pl-4">
 						{
@@ -83,7 +83,7 @@ const parcNational = menuNavs[1]?.subMenus || []
 					</ul>
 				</div>
 				<div>
-					<h4 class="text-white! tracking-wider">Maison de la vallée</h4>
+					<h4 class="text-white tracking-wider">Maison de la vallée</h4>
 					<hr class="mb-4 border-white/40" />
 					<ul class="space-y-2 pl-4">
 						{
@@ -100,8 +100,8 @@ const parcNational = menuNavs[1]?.subMenus || []
 			</div>
 		</div>
 		<div>
-			<h3 class="text-white! pb-4 lg:pb-8 font-normal!">{t('NEWSLETTER_TITRE')}</h3>
-			<p class="pb-8 text-sm">{t('NEWSLETTER_INTRO')}</p>
+			<h3 class="text-white pb-4 lg:pb-8 font-normal!">{t('NEWSLETTER_TITRE')}</h3>
+			<p class="pb-8 text-sm text-white">{t('NEWSLETTER_INTRO')}</p>
 			<NewsletterForm client:load locale={locale} variant="footer" apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL} />
 		</div>
 	</div>
