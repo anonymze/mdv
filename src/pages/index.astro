@@ -175,18 +175,18 @@ const seances = await find<Cinema>('cinema', {
 									layout="fullWidth"
 									class="rounded-2xl"
 								/>
-								<figure class="bg-background/90 absolute inset-x-0 bottom-0 rounded-t-2xl p-4 transition-opacity duration-250 group-hover:opacity-0">
+								<figure class="bg-background/90 absolute inset-x-0 bottom-0 h-auto max-h-full overflow-hidden rounded-t-2xl p-4 transition-[height] duration-300 group-hover:h-full">
 									<figcaption>
-										<h3 class="truncate pb-3">
+										<h3 class="truncate pb-3 group-hover:line-clamp-2 group-hover:whitespace-normal">
 											<a
 												href={getRelativeLocaleUrl(locale, `art-vivant/spectacle/${item.id}`)}
 												class="after:absolute after:inset-0 after:z-10"
 											>
-												{item.title}
+												{item.title} fzefefe
 											</a>
 										</h3>
-										<p class="distinguished text-secondary-muted! truncate text-xs uppercase">{item.genre}</p>
-										<time class="distinguished text-primary text-sm capitalize" datetime={item.date_start}>
+										<p class="distinguished text-secondary-muted! truncate text-xs uppercase group-hover:line-clamp-2 group-hover:whitespace-normal">{item.genre}</p>
+										<time class="distinguished text-primary text-sm capitalize tabular-nums" datetime={item.date_start}>
 											{new Date(item.date_start).toLocaleDateString(locale, {
 												dateStyle: 'full',
 												timeZone: 'Europe/Paris'
@@ -199,29 +199,28 @@ const seances = await find<Cinema>('cinema', {
 												timeZone: 'Europe/Paris'
 											})}
 										</time>
-									</figcaption>
-								</figure>
-								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption class="text-white">
-										<p class="line-clamp-8 text-sm">{descText}</p>
-										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{t('EN_SAVOIR_PLUS')}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
+										<div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 group-hover:grid-rows-[1fr]">
+											<div class="overflow-hidden">
+												<p class="text-foreground! line-clamp-8 pt-4 text-sm">{descText}</p>
+												<p class="text-secondary-muted! inline-flex items-center gap-2 pt-4 text-sm font-semibold opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-hover:delay-150">
+													{t('VOIR_LA_REPRESENTATION')}
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														width="16"
+														height="16"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="currentColor"
+														stroke-width="2"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													>
+														<path d="M5 12h14" />
+														<path d="m12 5 7 7-7 7" />
+													</svg>
+												</p>
+											</div>
+										</div>
 									</figcaption>
 								</figure>
 							</article>

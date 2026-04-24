@@ -77,6 +77,7 @@ export default {
 	DIRECTRICE_ARTISTIQUE: "Directora artística",
 	EMAIL_PLACEHOLDER: "Su dirección de correo electrónico",
 	EN_SAVOIR_PLUS: "Más información",
+	VOIR_LA_REPRESENTATION: "Ver la representación",
 	ENFANT: "Niño",
 	ENFANT_MOINS_13: "Niño -13 años",
 	ENGAGEMENTS_VALEURS_DESC: "En el marco de sus acciones y su programación, la Maison du Parc national et de la vallée afirma compromisos fuertes, guiados por valores humanos y responsables. Apoyamos y difundimos la creación local acompañando prioritariamente a las compañías y artistas de Occitania y coproduciendo cada año 1 a 2 espectáculos.\n\nNos comprometemos también a promover la igualdad entre mujeres y hombres, un principio esencial que guía nuestras elecciones y prácticas. Comprometida con la tolerancia y la diversidad social, nuestra estructura lucha activamente contra todas las formas de acoso y violencias sexistas o sexuales y trabaja para favorecer la inclusión.\n\nPreocupada por el medio ambiente, la Maison du Parc national et de la vallée fomenta un enfoque eco responsable en todas sus acciones. También valora las movilidades suaves e invita a cada visitante a privilegiar la marcha, la bicicleta o el coche compartido para asistir a sus eventos.\n\nEstos compromisos dibujan un lugar cultural abierto, solidario y orientado hacia el futuro.",

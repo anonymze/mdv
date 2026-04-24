@@ -93,6 +93,7 @@ export default {
 	DIRECTRICE_ARTISTIQUE: 'Directrice artistique',
 	EMAIL_PLACEHOLDER: 'Votre adresse email',
 	EN_SAVOIR_PLUS: 'En savoir plus',
+	VOIR_LA_REPRESENTATION: 'Voir la représentation',
 	ENFANT: 'Enfant',
 	ENFANT_MOINS_13: 'Enfant -13 ans',
 	ENGAGEMENTS_VALEURS_DESC:
