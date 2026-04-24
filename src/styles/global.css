@@ -247,6 +247,6 @@
 	}
 
 	.section-default {
-		@apply p-8 md:p-14 lg:p-20;
+		@apply p-8 md:p-14 lg:p-20 lg:rounded-3xl;
 	}
 }
