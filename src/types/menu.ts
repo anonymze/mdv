@@ -7,6 +7,7 @@ export type SubMenu = {
 	label: string
 	link: string
 	image: string
+	imageBg?: string
 	subMenus?: SubMenuItem[]
 }
 

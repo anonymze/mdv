@@ -84,7 +84,7 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 								{menu.label}
 							</NavigationMenuTrigger>
 							<NavigationMenuContent
-								className="grid grid-cols-6 gap-x-4"
+								className="flex gap-x-4"
 								style={{
 									width: headerWidth || 'auto',
 									left: getLeftOffset(index)
@@ -94,7 +94,7 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 									return (
 										<div
 											key={subIndex}
-											className="flex flex-col h-90 animate-in fade-in slide-in-from-bottom-12 z-20 bg-primary-foreground rounded-xl"
+											className="flex flex-col h-104 w-[200px] shrink-0 animate-in fade-in slide-in-from-bottom-12 z-20 bg-primary rounded-xl overflow-hidden shadow-card border border-foreground"
 											style={{
 												animationDelay: `${subIndex * 50}ms`,
 												animationDuration: '300ms',
@@ -104,7 +104,7 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 											<div className="px-4 pt-4">
 												<span className="text-white text-sm font-bold uppercase">{subMenu.label}</span>
 											</div>
-											<ul className="flex-1 p-4 pb-8 overflow-y-auto">
+											<ul className="flex-1 p-4 overflow-y-auto">
 												{subMenu.subMenus?.map((item, itemIndex) => (
 													<ListItem
 														key={itemIndex}
@@ -114,6 +114,15 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 													/>
 												))}
 											</ul>
+											{subMenu.image && (
+												<div className={cn('relative mx-auto mb-4 h-[135px] w-[160px]', subMenu.imageBg)}>
+													<img
+														src={subMenu.image}
+														alt=""
+														className="absolute inset-x-0 bottom-0 h-[159px] w-full object-contain object-bottom"
+													/>
+												</div>
+											)}
 										</div>
 									)
 								})}
@@ -133,8 +142,8 @@ function ListItem({
 	...props
 }: React.ComponentPropsWithoutRef<'li'> & { href: string; title: string }) {
 	return (
-		<li {...props} className="group/link block py-1.5 pl-4">
-			<a href={href} className="block pb-1.5 text-white">
+		<li {...props} className="group/link block py-1 pl-4">
+			<a href={href} className="block pb-1 text-white transition-colors duration-200 hover:text-secondary">
 				{title}
 			</a>
 		</li>
