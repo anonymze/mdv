@@ -185,7 +185,7 @@ const seances = await find<Cinema>('cinema', {
 												{item.title}
 											</a>
 										</h3>
-										<p class="distinguished text-secondary-muted truncate text-xs uppercase">{item.genre}</p>
+										<p class="distinguished text-secondary-muted! truncate text-xs uppercase">{item.genre}</p>
 										<time class="distinguished text-primary text-sm capitalize" datetime={item.date_start}>
 											{new Date(item.date_start).toLocaleDateString(locale, {
 												dateStyle: 'full',
