@@ -105,22 +105,22 @@ const seances = await find<Cinema>('cinema', {
 
 					<Button
 						link={`${getRelativeLocaleUrl(locale, 'parc-national')}#evenements`}
-						className="mt-10 h-10 px-6 lg:h-12 lg:px-8">{t('DECOUVREZ_PROCHAINS_EVENEMENTS')}</Button
+						className="mt-10 h-10 px-6 mb-4 lg:mb-0 lg:h-12 lg:px-8">{t('DECOUVREZ_PROCHAINS_EVENEMENTS')}</Button
 					>
 				</div>
 				<div class="grid grid-cols-3 gap-3 lg:w-1/3 lg:gap-4">
-					<MyImage alt="" src={FirstImg} width={400} height={160} layout="fullWidth" class="col-span-2 h-full!" />
-					<MyImage alt="" src={SecondImg} width={200} height={160} layout="fullWidth" class="col-span-1 h-full!" />
-					<MyImage alt="" src={ThirdImg} width={600} height={250} layout="fullWidth" class="col-span-3 h-full!" />
-					<MyImage alt="" src={FourthImg} width={200} height={160} layout="fullWidth" class="col-span-1 h-full!" />
-					<MyImage alt="" src={FifthImg} width={400} height={160} layout="fullWidth" class="col-span-2 h-full!" />
+					<MyImage alt="" src={FirstImg} width={400} height={160} layout="fullWidth" class="col-span-2 lg:h-full!" />
+					<MyImage alt="" src={SecondImg} width={200} height={160} layout="fullWidth" class="col-span-1 lg:h-full!" />
+					<MyImage alt="" src={ThirdImg} width={600} height={250} layout="fullWidth" class="col-span-3 lg:h-full!" />
+					<MyImage alt="" src={FourthImg} width={200} height={160} layout="fullWidth" class="col-span-1 lg:h-full!" />
+					<MyImage alt="" src={FifthImg} width={400} height={160} layout="fullWidth" class="col-span-2 lg:h-full!" />
 				</div>
 			</article>
 		</section>
 
 		<section class="section-default bg-primary">
-			<article class="grid grid-cols-1 gap-5 lg:flex">
-				<div class="lg:w-7/12">
+			<article class="grid grid-cols-5 gap-5">
+				<div class="lg:col-span-3 col-span-5 mb-5 lg:mb-0">
 					<h2 class="pb-2 lg:pb-3">{t('SPECTACLES_A_VENIR')}</h2>
 					<p class="distinguished pb-3 lg:pb-12">{t('SPECTACLES_INTRO')}</p>
 					<p>
@@ -128,36 +128,36 @@ const seances = await find<Cinema>('cinema', {
 						{t('SPECTACLES_DESC_PART2')}
 					</p>
 				</div>
-				<div class="grid grid-cols-2 gap-3 lg:w-5/12 lg:grid-cols-5 lg:grid-rows-3 lg:gap-4">
+				<div class="col-span-5 grid-cols-2 lg:col-span-2 grid lg:grid-cols-5 grid-rows-3 gap-4">
 					<MyImage
 						alt=""
 						src={EighthImg}
 						width={550}
-						height={600}
+						height={400}
 						layout="fullWidth"
-						class="col-span-2 h-full! lg:col-span-3 lg:row-span-3 lg:max-h-none"
+						class="col-span-1  lg:col-span-3 row-span-3"
 					/>
 					<MyImage
 						alt=""
 						src={SeventhImg}
 						width={300}
-						height={500}
+						height={270}
 						layout="fullWidth"
-						class="col-span-1 h-full! lg:col-span-2 lg:row-span-2 lg:max-h-none"
+						class="col-span-1  lg:col-span-2 row-span-2"
 					/>
 					<MyImage
 						alt=""
 						src={SixthImg}
 						width={300}
-						height={250}
+						height={115}
 						layout="fullWidth"
-						class="col-span-1 h-full! lg:col-span-2 lg:row-span-1 lg:max-h-none"
+						class="col-span-1  lg:col-span-2 row-span-1"
 					/>
 				</div>
 			</article>
 			<div class="my-16 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:grid-cols-4">
 				{
-					spectacles.docs.map((item) => {
+					spectacles.docs.map((item, index) => {
 						const descText = item.description.root.children
 							.flatMap((para) => para.children)
 							.filter((child) => child.type === 'text')
@@ -165,7 +165,7 @@ const seances = await find<Cinema>('cinema', {
 							.join(' ')
 
 						return (
-							<article class="group shadow-card relative col-span-1 w-full overflow-hidden rounded-2xl border border-black bg-white">
+							<article class:list={['group shadow-card relative col-span-1 w-full overflow-hidden rounded-2xl border border-black bg-white', index === 3 && 'max-md:hidden']}>
 								<MyImage
 									src={item.thumbnail?.url}
 									alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
@@ -235,20 +235,19 @@ const seances = await find<Cinema>('cinema', {
 		</section>
 
 		<section>
-			<div class="section-default pt-6 lg:pt-12">
-				<div class="flex flex-col gap-5 lg:flex-row lg:gap-10">
+			<div class="section-default">
+				<div class="flex flex-col gap-5 lg:flex-row lg:gap-5">
 					<div class="flex flex-col gap-8 lg:w-2/3">
-						<div class="mb-10">
+						<div class="mb-8 pr-4">
 							<h2 class="pb-2 lg:pb-3">{t('SEANCES_A_VENIR')}</h2>
 							<p class="distinguished pb-3 lg:pb-12">{t('CINEMA_INTRO')}</p>
 							<p>{t('CINEMA_DESC_PART1')}</p>
 						</div>
-						<MyImage src={TenthImg} alt="" width={1200} height={200} layout="fullWidth" />
+						<MyImage src={TenthImg} alt="" width={1200} height={205} layout="fullWidth" />
 					</div>
 					<div class="flex flex-col gap-5 lg:w-1/3">
-						<MyImage src={NinthImg} alt="" width={600} height={150} layout="fullWidth" class="rounded-2xl" />
-						<MyImage src={EleventhImg} alt="" width={600} height={150} layout="fullWidth" class="rounded-2xl" />
-						<MyImage src={ThirteenthImg} alt="" width={600} height={150} layout="fullWidth" class="rounded-2xl" />
+						<MyImage src={NinthImg} alt="" width={600} height={240} layout="fullWidth" class="rounded-2xl" />
+						<MyImage src={EleventhImg} alt="" width={600} height={200} layout="fullWidth" class="rounded-2xl" />
 					</div>
 				</div>
 
@@ -338,7 +337,7 @@ const seances = await find<Cinema>('cinema', {
 		<section class="section-default">
 			<article class="grid grid-cols-1 gap-5 lg:grid-cols-2">
 				<div class="flex flex-col">
-					<h2 class="text-secondary pb-2 lg:pb-3">{t('EXPOSITIONS_TITRE')}</h2>
+					<h2 class="pb-2 lg:pb-3">{t('EXPOSITIONS_TITRE')}</h2>
 					<p class="distinguished pb-3 lg:pb-12">
 						{t('EXPOSITIONS_INTRO')}
 					</p>
@@ -346,7 +345,7 @@ const seances = await find<Cinema>('cinema', {
 						{t('EXPOSITIONS_DESC')}
 					</p>
 
-					<Button link={`${getRelativeLocaleUrl(locale, 'cinema')}#cinema`} size={'xl'} className="mt-auto w-fit"
+					<Button link={`${getRelativeLocaleUrl(locale, 'cinema')}#cinema`} size={'xl'} className="lg:mt-auto w-fit mt-12 mb-5"
 						>{t('VOIR_EXPOSITION_MOMENT')}</Button
 					>
 				</div>
@@ -368,9 +367,9 @@ const seances = await find<Cinema>('cinema', {
 
 		<section class="section-default w-[358px] px-0 lg:w-auto mx-auto">
 			<article class="flex bg-foreground rounded-4xl flex-col-reverse lg:flex-row w-full" >
-				<div class="relative w-[358px] h-[301px] lg:h-[349.5px] lg:w-[378px] shrink-0 ">
-					<div class="absolute right-0 bottom-0 z-1 lg:h-[calc(100%+28px)] lg:w-[calc(100%+28px)]">
-						<MyImage alt="" src={NewsletterImg} width={420} height={400} layout="constrained" class='rounded-none h-full!' />
+				<div class="relative w-[358px] h-[301px] lg:h-[349.5px] lg:w-[378px] shrink-0 overflow-hidden rounded-b-4xl lg:rounded-none lg:overflow-visible">
+					<div class="absolute -inset-[29px] z-1 lg:inset-auto lg:right-0 lg:bottom-0 lg:h-[calc(100%+28px)] lg:w-[calc(100%+28px)]">
+						<MyImage alt="" src={NewsletterImg} width={420} height={400} layout="constrained" class='rounded-none h-full! w-full! object-cover object-left-top lg:object-center' />
 					</div>
 				</div>
 				<div class="flex flex-col justify-center p-4 lg:p-8 mb-8 lg:mb-0">
