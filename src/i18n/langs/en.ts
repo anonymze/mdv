@@ -26,6 +26,7 @@ export default {
 	ARTISTE: "Artist",
 	INFORMATIONS_ARTISTE: "Artist information",
 	AUTRES_ACTUALITES: "Other news",
+	AUTRES_INFORMATIONS: "Other information",
 	AUCUN_CONTENU: "No content available",
 	AUTRES_MEDIAS: "Other media",
 	AUTRES_MEDIAS_DESC: "The media library also offers a wide selection of multimedia formats: CDs, DVDs and vinyl for all tastes. Your subscription also gives you access to a multitude of online resources, to listen, watch or discover content from home or on site. Music, films, online press, tutorials, documentaries and more: everything is at your fingertips to enrich your leisure time and discoveries.",

@@ -9,6 +9,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 
 import BurgerIcon from '@/assets/icons/burger.svg'
 import LogoImg from '@/assets/icons/logo-icon-only.svg'
+import type { Hour } from '@/types/hours'
 import type { ImmanquableDoc } from '@/types/immanquable'
 import { ArrowRightIcon } from 'lucide-react'
 
@@ -21,10 +22,11 @@ interface HoursForToday {
 
 interface Props {
 	hoursForToday: HoursForToday
+	hoursData: Hour
 	immanquableEvent?: ImmanquableDoc | null
 }
 
-const { hoursForToday, immanquableEvent } = Astro.props
+const { hoursForToday, hoursData, immanquableEvent } = Astro.props
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 const menuNavs = getMenuNavs(t)
@@ -33,11 +35,13 @@ const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
 const mobileLinks = [
 	{ label: t('ART_VIVANT'), href: getRelativeLocaleUrl(locale, 'art-vivant') },
-	{ label: t('PARC_NATIONAL'), href: getRelativeLocaleUrl(locale, 'parc-national') },
 	{ label: t('CINEMA'), href: getRelativeLocaleUrl(locale, 'cinema') },
 	{ label: t('MEDIATHEQUE'), href: getRelativeLocaleUrl(locale, 'mediatheque') },
 	{ label: t('EXPOSITION'), href: getRelativeLocaleUrl(locale, 'exposition') },
-	{ label: t('JEUNESSE'), href: getRelativeLocaleUrl(locale, 'jeune-public') }
+	{ label: t('JEUNESSE'), href: getRelativeLocaleUrl(locale, 'jeune-public') },
+	{ label: t('PARC_NATIONAL'), href: getRelativeLocaleUrl(locale, 'parc-national') },
+	{ label: t('AUTRES_INFORMATIONS'), href: getRelativeLocaleUrl(locale, 'informations') },
+	{ label: t('ARCHIVES'), href: getRelativeLocaleUrl(locale, 'archives') }
 ]
 
 const formatTime = (iso: string) =>
@@ -46,10 +50,18 @@ const formatTime = (iso: string) =>
 const hoursInfo = {
 	isClosed: hoursForToday.isClosed,
 	todayLabel: hoursForToday.today.toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' }),
+	todayShortLabel: hoursForToday.today.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' }),
+	todayIso: hoursForToday.today.toISOString().split('T')[0],
 	openLabel:
 		hoursForToday.openStart && hoursForToday.openEnd
 			? `${formatTime(hoursForToday.openStart)} - ${formatTime(hoursForToday.openEnd)}`
-			: undefined
+			: undefined,
+	openStart: hoursForToday.openStart,
+	openEnd: hoursForToday.openEnd,
+	baseStart: hoursData.horaires_base.base_start,
+	baseEnd: hoursData.horaires_base.base_end,
+	dimancheStart: hoursData.horaires_base.dimanche_start,
+	dimancheEnd: hoursData.horaires_base.dimanche_end
 }
 
 const getEventHref = (event: ImmanquableDoc) => {
@@ -122,6 +134,14 @@ const mobileEvent = immanquableEvent
 			closedLabel={t('FERME')}
 			eventLabel={t('EVENEMENT_IMMANQUABLE')}
 			learnMoreLabel={t('EN_SAVOIR_PLUS')}
+			hoursCardLabels={{
+				tabLabel: t('HORAIRES'),
+				dateFromLabel: t('DATE_FROM'),
+				seasonLabel: t('DE_LA_SAISON'),
+				mondaySaturdayLabel: t('LUNDI_SAMEDI'),
+				sundayLabel: t('DIMANCHE')
+			}}
+			hoursLearnMoreHref={`${getRelativeLocaleUrl(locale, 'informations')}#horaires`}
 			hours={hoursInfo}
 			event={mobileEvent}
 			payloadUrl={import.meta.env.PUBLIC_PAYLOAD_URL}

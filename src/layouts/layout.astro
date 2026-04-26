@@ -119,7 +119,7 @@ const cleanPath = Astro.url.pathname.replace(/^\/(en|es)\//, '/')
 	</head>
 	<body>
 		<div class="container">
-			<Header hoursForToday={hoursForToday} immanquableEvent={null} />
+			<Header hoursForToday={hoursForToday} hoursData={hoursData} immanquableEvent={null} />
 			<slot />
 			<Footer locale={locale} />
 		</div>

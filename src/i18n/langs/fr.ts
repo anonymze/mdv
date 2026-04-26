@@ -30,6 +30,7 @@ export default {
 	ARTISTE: 'Artiste',
 	INFORMATIONS_ARTISTE: 'Informations artistes',
 	AUTRES_ACTUALITES: 'Autres actualités',
+	AUTRES_INFORMATIONS: 'Autres informations',
 	AUCUN_CONTENU: 'Aucun contenu disponible',
 	AUTRES_MEDIAS: 'Autres médias',
 	AUTRES_MEDIAS_DESC:

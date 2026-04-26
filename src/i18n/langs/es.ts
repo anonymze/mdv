@@ -26,6 +26,7 @@ export default {
 	ARTISTE: "Artista",
 	INFORMATIONS_ARTISTE: "Información del artista",
 	AUTRES_ACTUALITES: "Otras noticias",
+	AUTRES_INFORMATIONS: "Otra información",
 	AUCUN_CONTENU: "Ningún contenido disponible",
 	AUTRES_MEDIAS: "Otros medios",
 	AUTRES_MEDIAS_DESC: "La mediateca también ofrece una amplia selección de soportes multimedia: CD, DVD y vinilos para todos los gustos. Su suscripción también le permite acceder a una multitud de recursos en línea, para escuchar, ver o descubrir contenidos desde su casa o in situ. Música, películas, prensa en línea, tutoriales, documentales y más: todo está al alcance de la mano para enriquecer sus momentos de ocio y descubrimientos.",

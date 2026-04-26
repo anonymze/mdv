@@ -1,8 +1,10 @@
 import { cn } from '@/lib/utils'
-import { ArrowRight, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import * as React from 'react'
+import { HoursCard } from './hours-card'
 import { LanguageSelect } from './language-select'
 import { MyImage } from './my-image'
+import { Button } from './ui/button'
 
 interface Link {
 	label: string
@@ -12,7 +14,23 @@ interface Link {
 interface HoursInfo {
 	isClosed: boolean
 	todayLabel: string
+	todayShortLabel: string
+	todayIso: string
 	openLabel?: string
+	openStart: string | null
+	openEnd: string | null
+	baseStart: string
+	baseEnd: string
+	dimancheStart: string
+	dimancheEnd: string
+}
+
+interface HoursCardLabels {
+	tabLabel: string
+	dateFromLabel: string
+	seasonLabel: string
+	mondaySaturdayLabel: string
+	sundayLabel: string
 }
 
 interface EventInfo {
@@ -41,6 +59,8 @@ interface Props {
 	learnMoreLabel: string
 	// data
 	hours: HoursInfo
+	hoursCardLabels: HoursCardLabels
+	hoursLearnMoreHref: string
 	payloadUrl: string
 	event?: EventInfo
 	className?: string
@@ -61,6 +81,8 @@ export function MobileMenu({
 	eventLabel,
 	learnMoreLabel,
 	hours,
+	hoursCardLabels,
+	hoursLearnMoreHref,
 	payloadUrl,
 	event,
 	className
@@ -86,7 +108,7 @@ export function MobileMenu({
 
 			<div
 				className={cn(
-					'bg-primary text-primary-foreground fixed inset-y-0 right-0 z-50 flex w-full flex-col overflow-y-auto transition-all duration-300 min-[410px]:w-[95%]',
+					'bg-foreground text-white fixed inset-y-0 right-0 z-50 flex w-full flex-col overflow-y-auto transition-all duration-300 min-[410px]:w-[95%]',
 					open ? 'pointer-events-auto translate-x-0 opacity-100' : 'pointer-events-none translate-x-full opacity-0'
 				)}
 				aria-hidden={!open}
@@ -107,60 +129,47 @@ export function MobileMenu({
 				</div>
 
 				{/* Nav links */}
-				<nav className="flex flex-col items-end gap-1.5 px-8">
+				<nav className="grid grid-cols-2 gap-x-4 gap-y-3 px-8 justify-items-end mt-2">
 					{links.map((link) => (
 						<a
 							key={link.href}
 							href={link.href}
 							onClick={() => setOpen(false)}
-							className="px-2 py-3 text-xl font-light transition-opacity hover:opacity-60"
+							className="px-2 py-2.5 text-base font-light transition-opacity hover:opacity-60"
 						>
 							{link.label}
 						</a>
 					))}
 				</nav>
-
-				{/* Hours + Contact */}
-				<div className="mt-auto mb-auto flex items-end justify-between gap-1  px-5 py-2">
-					<div>
-						<p className="whitespace-nowrap pb-2 text-xs font-serif uppercase">{hoursLabel}</p>
-						<hr className="mb-3 border-white/40" />
-						<p className="pb-1 text-sm capitalize">{hours.todayLabel}</p>
-						<p className="text-xl font-bold">{hours.isClosed ? closedLabel : hours.openLabel}</p>
-					</div>
-					<a
-						href={contactHref}
-						onClick={() => setOpen(false)}
-						className="bg-secondary text-secondary-foreground flex shrink-0 items-center gap-2 px-2 py-3 text-xs font-medium mb-1.5"
-					>
+				<div className="flex w-full items-center justify-end px-8 pt-3 mb-2">
+					<Button link={contactHref} variant="default" className="uppercase">
 						{contactLabel}
-						<ArrowRight className="h-4 w-4" />
-					</a>
+					</Button>
 				</div>
 
-				{/* Immanquable event */}
-				{event && (
-					<div className="mt-auto px-5 pb-2">
-						<p className="pb-2 text-xs font-serif uppercase">{eventLabel}</p>
-						<hr className="mb-3 border-white/40" />
-						<MyImage
-							payloadUrl={payloadUrl}
-							src={event.imageUrl}
-							alt={event.imageAlt}
-							layout="constrained"
-							className="mb-3 h-28 w-full object-cover"
-						/>
-						<div className="flex w-full items-center gap-3">
-							<div className="min-w-0 shrink truncate text-xs text-gray-200 capitalize">{event.date}</div>
-							{event.genre && (
-								<div className="mr-auto min-w-0 shrink truncate text-xs text-gray-200">{event.genre}</div>
-							)}
-							<a href={event.href} className="ml-auto shrink-0 py-2 pl-2 text-xs underline underline-offset-3">
-								{learnMoreLabel}
-							</a>
-						</div>
-					</div>
-				)}
+				{/* Hours card */}
+				<div className="px-5 pt-6 pb-2">
+					<HoursCard
+						className="ml-auto max-w-72"
+						tabLabel={hoursCardLabels.tabLabel}
+						dateFromLabel={hoursCardLabels.dateFromLabel}
+						todayLabel={hours.todayShortLabel}
+						todayIso={hours.todayIso}
+						isClosed={hours.isClosed}
+						closedLabel={closedLabel}
+						openStart={hours.openStart}
+						openEnd={hours.openEnd}
+						seasonLabel={hoursCardLabels.seasonLabel}
+						mondaySaturdayLabel={hoursCardLabels.mondaySaturdayLabel}
+						sundayLabel={hoursCardLabels.sundayLabel}
+						baseStart={hours.baseStart}
+						baseEnd={hours.baseEnd}
+						dimancheStart={hours.dimancheStart}
+						dimancheEnd={hours.dimancheEnd}
+						learnMoreLabel={learnMoreLabel}
+						learnMoreHref={hoursLearnMoreHref}
+					/>
+				</div>
 			</div>
 		</>
 	)
