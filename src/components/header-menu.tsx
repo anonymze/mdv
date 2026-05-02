@@ -94,7 +94,7 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 									return (
 										<div
 											key={subIndex}
-											className="flex flex-col h-104 w-[200px] shrink-0 animate-in fade-in slide-in-from-bottom-12 z-20 bg-primary rounded-xl overflow-hidden shadow-card border border-foreground"
+											className="flex flex-col h-[406px] flex-1 min-w-0 max-w-[210px] animate-in fade-in slide-in-from-bottom-12 z-20 bg-primary rounded-xl overflow-hidden shadow-card border border-foreground"
 											style={{
 												animationDelay: `${subIndex * 50}ms`,
 												animationDuration: '300ms',
@@ -102,7 +102,7 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 											}}
 										>
 											<div className="px-4 pt-4">
-												<span className="text-white text-sm font-bold uppercase">{subMenu.label}</span>
+												<span className="text-white text-sm font-medium uppercase">{subMenu.label}</span>
 											</div>
 											<ul className="flex-1 p-4 overflow-y-auto">
 												{subMenu.subMenus?.map((item, itemIndex) => (
@@ -115,11 +115,11 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 												))}
 											</ul>
 											{subMenu.image && (
-												<div className={cn('relative mx-auto mb-4 h-[135px] w-[160px]', subMenu.imageBg)}>
+												<div className="relative mx-auto mb-4 h-[135px] w-[160px]"><div className={cn('absolute inset-0 rounded-xl', subMenu.imageBg)} />
 													<img
 														src={subMenu.image}
 														alt=""
-														className="absolute inset-x-0 bottom-0 h-[159px] w-full object-contain object-bottom"
+														className="absolute inset-x-0 -bottom-px h-[160px] w-full object-cover object-top rounded-xl"
 													/>
 												</div>
 											)}

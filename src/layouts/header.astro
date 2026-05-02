@@ -128,7 +128,7 @@ const mobileEvent = immanquableEvent
 			currentPath={currentPath}
 			links={mobileLinks}
 			homeHref={getRelativeLocaleUrl(locale, '')}
-			contactHref={getRelativeLocaleUrl(locale, 'informations')}
+			contactHref={getRelativeLocaleUrl(locale, 'contact')}
 			contactLabel={t('NOUS_CONTACTER')}
 			hoursLabel={t('HORAIRES_OUVERTURE')}
 			closedLabel={t('FERME')}
@@ -155,10 +155,10 @@ const mobileEvent = immanquableEvent
 		className="hidden lg:flex self-center"
 	/>
 	<Button
-		link={getRelativeLocaleUrl(locale, 'informations')}
+		link={getRelativeLocaleUrl(locale, 'contact')}
 		variant={'default'}
 		client:media="(min-width: 1280px)"
-		className="group hidden w-40 uppercase lg:flex self-center mr-6"
+		className="group hidden w-40 lg:flex self-center mr-6"
 		>{t('NOUS_CONTACTER')}</Button
 	>
 </header>

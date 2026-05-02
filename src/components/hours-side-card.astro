@@ -25,9 +25,9 @@ const formatHourFr = (iso: string) => {
 }
 ---
 
-<SideCard client:media="(min-width: 1280px)" height="h-60" tabText={[t('HORAIRES')]} ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}>
+<SideCard client:media="(min-width: 1280px)" height="h-60" tabText={[t('HORAIRES')]} tabClassName="text-sm font-title font-normal" ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}>
 	<div class="flex h-full flex-col items-start px-4 py-5 text-left">
-		<p class="text-sm capitalize text-white">
+		<p class="text-base font-medium text-white">
 			{t('DATE_FROM')}{' '}
 			<time datetime={today.toISOString().split('T')[0]}>
 				{today.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' })}
@@ -45,7 +45,7 @@ const formatHourFr = (iso: string) => {
 			</p>
 		) : null}
 
-		<p class="pt-6 pb-2 text-sm font-semibold text-white">{t('DE_LA_SAISON')}&nbsp;:</p>
+		<p class="pt-6 pb-2 text-base font-medium text-white">{t('DE_LA_SAISON')}&nbsp;:</p>
 
 		<div class="text-sm space-y-0.5">
 			<p class="text-white">{t('LUNDI_SAMEDI')} : {formatHourFr(hours.horaires_base.base_start)} - {formatHourFr(hours.horaires_base.base_end)}</p>

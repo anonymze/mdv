@@ -142,7 +142,7 @@ export function MobileMenu({
 					))}
 				</nav>
 				<div className="flex w-full items-center justify-end px-8 pt-3 mb-2">
-					<Button link={contactHref} variant="default" className="uppercase">
+					<Button link={contactHref} variant="default">
 						{contactLabel}
 					</Button>
 				</div>

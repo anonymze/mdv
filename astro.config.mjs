@@ -36,25 +36,24 @@ export default defineConfig({
 	image: {
 		remotePatterns: [{ protocol: 'https', hostname: 'mdv-admin.vercel.app' }]
 	},
-	experimental: {
-		fonts: [
-			{
-				provider: fontProviders.google(),
-				name: 'DM Serif Text',
-				cssVariable: '--font-dm-serif-text'
-			},
-			{
-				provider: fontProviders.google(),
-				name: 'Noto Sans',
-				cssVariable: '--font-noto-sans'
-			},
-			{
-				provider: fontProviders.google(),
-				name: 'Libre Baskerville',
-				cssVariable: '--font-libre-baskerville'
-			}
-		]
-	},
+	fonts: [
+		{
+			provider: fontProviders.google(),
+			name: 'DM Serif Text',
+			cssVariable: '--font-dm-serif-text'
+		},
+		{
+			provider: fontProviders.google(),
+			name: 'Noto Sans',
+			cssVariable: '--font-noto-sans',
+			weights: ['400', '500', '600', '700']
+		},
+		{
+			provider: fontProviders.google(),
+			name: 'Libre Baskerville',
+			cssVariable: '--font-libre-baskerville'
+		}
+	],
 	vite: {
 		plugins: [tailwindcss()]
 	}

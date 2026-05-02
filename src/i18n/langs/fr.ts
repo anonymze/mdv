@@ -9,6 +9,7 @@ export default {
 	ACTUALITES: 'Actualités',
 	ADRESSE: 'Adresse',
 	ADRESSE_DU_LIEU: 'Adresse du lieu',
+	ADRESSE_EMAIL: 'Adresse e-mail',
 	ADULTE: 'Adulte',
 	AGE: 'Âge',
 	AGENDA: 'Agenda',
@@ -60,6 +61,11 @@ export default {
 	CINEMA_SCOLAIRE_DESC: 'Vous pouvez suivre les évènements scolaires autour du cinéma',
 	COMPAGNIE_ARTISTES: 'Compagnie / Artiste(s)',
 	COMPTABLE: 'Comptable',
+	CONTACT_DESC:
+		'Vous avez une question, un besoin spécifique ou souhaitez simplement entrer en contact avec nous ? Nous sommes à votre écoute.\nMerci de remplir le formulaire ci-dessous en précisant votre demande. Plus votre message sera détaillé, plus nous pourrons vous répondre efficacement. Nous nous engageons à traiter votre demande dans les meilleurs délais.',
+	CONTACT_ERREUR: 'Une erreur est survenue. Veuillez réessayer.',
+	CONTACT_INTRO: 'Merci de remplir les informations nécessaires pour vous répondre',
+	CONTACT_SUCCES: 'Votre message a bien été envoyé.',
 	CREDITS_PHOTOS: 'Crédits photos',
 	CYBER_BASE: 'Cyberbase',
 	CYBERBASE_DESC:
@@ -101,6 +107,7 @@ export default {
 		"Dans le cadre de ses actions et de sa programmation, la Maison du Parc national et de la vallée affirme des engagements forts, guidés par des valeurs humaines et responsables. Nous soutenons et diffusons la création locale en accompagnant en priorité les compagnies et artistes d'Occitanie et en co-produisant chaque année 1 à 2 spectacles.\n\nNous nous engageons également à promouvoir l'égalité entre les femmes et les hommes, un principe essentiel qui guide nos choix et nos pratiques. Attachée à la tolérance et à la mixité sociale, notre structure lutte activement contre toutes les formes de harcèlement et de violences sexistes ou sexuelles et s'attache à favoriser l'inclusion.\n\nSoucieuse de l'environnement, la Maison du Parc national et de la vallée encourage une démarche éco responsable dans l'ensemble de ses actions. Elle valorise également les mobilités douces et invite chaque visiteur à privilégier la marche, le vélo ou le covoiturage pour rejoindre ses événements.\n\nCes engagements dessinent un lieu culturel ouvert, solidaire et tourné vers l'avenir.",
 	ENGAGEMENTS_VALEURS_INTRO: 'Un engagement humain au cœur de nos actions',
 	ENGAGEMENTS_VALEURS_TITRE: 'Nos engagements et valeurs',
+	ENVOYER: 'Envoyer',
 	EQUIPE_DESC:
 		"Notre équipe a le plaisir d'accompagner visiteurs, habitants et professionnels lors de leur passage dans notre structure. Notre accueil se veut chaleureux et bienveillant, afin que votre visite soit une expérience agréable.",
 	EQUIPE_INTRO: 'Les membres du personnel',
@@ -210,6 +217,7 @@ export default {
 	NEWSLETTER_INTRO: 'Partagez-nous votre adresse e-mail pour ne rien manquer de notre actualité',
 	NEWSLETTER_SUCCES: 'Merci pour votre inscription !',
 	NEWSLETTER_TITRE: 'Inscrivez-vous à notre newsletter',
+	NOM: 'Nom',
 	NOMBRE_DE_JOUEURS: 'Nombre de joueurs',
 	NORMAL: 'Normal',
 	NOS_ENGAGEMENTS: 'Nos engagements',
@@ -217,6 +225,7 @@ export default {
 	NOS_TARIFS: 'Nos tarifs',
 	NOS_TARIFS_INTRO: 'Des prix adaptés à tous pour que la culture reste accessible',
 	NOUS_CONTACTER: 'Nous contacter',
+	NUMERO_TELEPHONE: 'N° Téléphone',
 	OFFERT: 'Offert',
 	OU_NOUS_TROUVER: 'Où nous trouver',
 	OU_NOUS_TROUVER_TITRE: 'Où nous trouver',
@@ -248,6 +257,7 @@ export default {
 	PLAN_DU_SITE: 'Plan du site',
 	PORTFOLIO: 'Portfolio',
 	PRECEDENT: 'Précédent',
+	PRENOM: 'Prénom',
 	PRESENTATION: 'Présentation',
 	PRIX: 'Prix',
 	PUBLIC_TOUT_PUBLIC: 'Tout public',
@@ -280,6 +290,7 @@ export default {
 	RESIDENCE_DESC_PART2:
 		"En accueillant des artistes en résidence, nous affirmons notre engagement en faveur de la création et du soutien aux compagnies locales. Ces temps de travail sont l'occasion d'accompagner les artistes dans leur parcours tout en offrant au public un regard privilégié sur la naissance d'une œuvre lors des sorties de résidences.",
 	RESIDENCE_INTRO: 'Accompagner les artistes, au plus près de la création',
+	SORTIES_DE_RESIDENCE: 'Sorties de résidence',
 	RESPONSABLE_CINEMA_EXPO: 'Responsable cinéma et exposition',
 	RESPONSABLE_MEDIATHEQUE: 'Responsable médiathèque',
 	SEANCES: 'Séances',
@@ -328,5 +339,6 @@ export default {
 	VALEURS_TITRE: 'NOS VALEURS ET ENGAGEMENTS',
 	VOIR_EXPOSITION_MOMENT: "Voir l'exposition du moment",
 	VOIR_TOUS_SPECTACLES: 'Voir tous les spectacles',
-	VOIR_TOUTES_SEANCES: 'Voir toutes les séances'
+	VOIR_TOUTES_SEANCES: 'Voir toutes les séances',
+	VOTRE_MESSAGE: 'Votre message'
 }

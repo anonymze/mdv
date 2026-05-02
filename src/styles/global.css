@@ -219,7 +219,7 @@
 
 @layer components {
 	.distinguished {
-		@apply text-primary font-sans font-semibold;
+		@apply text-primary font-sans font-medium;
 	}
 
 	.notch-br {

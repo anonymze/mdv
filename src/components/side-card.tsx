@@ -6,6 +6,7 @@ interface SideCardProps {
 	height?: string
 	position?: string
 	tabText: string[]
+	tabClassName?: string
 	children: React.ReactNode
 	ariaLabel: string
 }
@@ -15,6 +16,7 @@ export function SideCard({
 	height = 'h-50',
 	position = 'top-1/4',
 	tabText,
+	tabClassName,
 	children,
 	ariaLabel
 }: SideCardProps) {
@@ -91,7 +93,8 @@ export function SideCard({
 									key={idx}
 									className={cn(
 										'text-white flex flex-col gap-px text-center text-xs font-medium uppercase',
-										idx === 1 && 'text-start'
+										idx === 1 && 'text-start',
+										tabClassName
 									)}
 									aria-hidden="true"
 								>

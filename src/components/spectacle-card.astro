@@ -1,0 +1,112 @@
+---
+import MyImage from '@/components/my-image.astro'
+import { createTranslator, type I18n } from '@/i18n/translations'
+
+interface Props {
+	title: string
+	href: string
+	locale: I18n
+	description?: string
+	dateStart?: string
+	genre?: string
+	ctaLabel?: string
+	imageSrc?: string | null
+	imageAlt?: string | null
+	imageBlurhash?: string | null
+	width?: string
+	height?: string
+	class?: string
+}
+
+const {
+	title,
+	href,
+	locale,
+	description,
+	dateStart,
+	genre,
+	ctaLabel,
+	imageSrc,
+	imageAlt,
+	imageBlurhash,
+	width = 'w-full',
+	height,
+	class: className
+} = Astro.props
+
+const t = createTranslator(locale)
+---
+
+<article
+	class:list={[
+		'group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-black bg-white',
+		width,
+		height,
+		className
+	]}
+>
+	<MyImage
+		src={imageSrc ?? undefined}
+		alt={imageAlt ?? t('IMAGE_PLACEHOLDER')}
+		background={imageBlurhash}
+		width={275}
+		height={400}
+		layout="fullWidth"
+		class="h-full w-full rounded-2xl object-cover"
+	/>
+	<figure
+		class="bg-background/90 absolute inset-x-0 bottom-0 h-[116px] overflow-hidden rounded-t-2xl p-4 transition-[height] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:h-full"
+	>
+		<figcaption>
+			<h3 class="line-clamp-1 mb-3 group-hover:line-clamp-2">
+				<a href={href} class="after:absolute after:inset-0 after:z-10">
+					{title}
+				</a>
+			</h3>
+			{genre && (
+				<p class="distinguished text-secondary-muted! line-clamp-1 text-xs uppercase group-hover:line-clamp-2">{genre}</p>
+			)}
+			{dateStart && (
+				<time class="distinguished text-primary text-sm capitalize tabular-nums" datetime={dateStart}>
+					{new Date(dateStart).toLocaleDateString(locale, {
+						dateStyle: 'full',
+						timeZone: 'Europe/Paris'
+					})}{' '}
+					-{' '}
+					{new Date(dateStart).toLocaleTimeString(locale, {
+						hour: '2-digit',
+						minute: '2-digit',
+						hour12: false,
+						timeZone: 'Europe/Paris'
+					})}
+				</time>
+			)}
+			{(description || ctaLabel) && (
+				<div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:grid-rows-[1fr]">
+					<div class="overflow-hidden">
+						{description && <p class="text-foreground! line-clamp-8 pt-4 text-sm">{description}</p>}
+						{ctaLabel && (
+							<p class="text-secondary-muted! inline-flex items-center gap-2 pt-4 text-medium font-semibold transition-opacity opacity-0 duration-200 group-hover:opacity-100 group-hover:delay-200 pl-0.5">
+								{ctaLabel}
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path d="M5 12h14" />
+									<path d="m12 5 7 7-7 7" />
+								</svg>
+							</p>
+						)}
+					</div>
+				</div>
+			)}
+		</figcaption>
+	</figure>
+</article>

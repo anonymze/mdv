@@ -6,7 +6,6 @@ import HeaderInformationsGenerales from '@/assets/imgs/header/info2.png'
 import HeaderInformationsPratiques from '@/assets/imgs/header/info1.png'
 import HeaderJeunePublic from '@/assets/imgs/header/jeunesse.png'
 import HeaderMediatheque from '@/assets/imgs/header/books.png'
-import HeaderParcNational from '@/assets/imgs/header/parc.png'
 import type { createTranslator } from '@/i18n/translations'
 import type { MenuNav } from '@/types/menu'
 
@@ -23,7 +22,7 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 				imageBg: 'bg-secondary-muted',
 				subMenus: [
 					{ label: t('SPECTACLES'), link: '/art-vivant#spectacles' },
-					{ label: t('RESIDENCE'), link: '/art-vivant#residence' }
+					{ label: t('SORTIES_DE_RESIDENCE'), link: '/art-vivant#residence' }
 				]
 			},
 			{
@@ -72,24 +71,25 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 					{ label: t('SEANCES'), link: '/jeune-public#cinema' },
 					{ label: t('LUDOTHEQUE'), link: '/jeune-public#ludotheque' }
 				]
+			},
+			{
+				label: t('ARTISTE'),
+				link: '/artiste',
+				image: HeaderArtiste.src,
+				imageBg: 'bg-white',
+				subMenus: [
+					{ label: t('RESIDENCE'), link: '/artiste#residence' },
+					{
+						label: t('SPECIFICATIONS_TECHNIQUES'),
+						link: '/artiste#informations'
+					}
+				]
 			}
 		]
 	},
 	{
-		label: t('PARC_NATIONAL'),
-		subMenus: [
-			{
-				label: t('PARC_NATIONAL'),
-				link: '/parc-national',
-				image: HeaderParcNational.src,
-				imageBg: 'bg-secondary',
-				subMenus: [
-					{ label: t('PRESENTATION'), link: '/parc-national#description' },
-					{ label: t('EVENEMENTS'), link: '/parc-national#evenements' },
-					{ label: t('BOUTIQUE'), link: '/parc-national#articles' }
-				]
-			}
-		]
+		label: t('AUTRES_ACTUALITES'),
+		link: '/autres-actualites'
 	},
 	{
 		label: t('INFORMATIONS'),
@@ -116,25 +116,12 @@ export const getMenuNavs = (t: Translator): MenuNav[] => [
 					{ label: t('NOS_ENGAGEMENTS'), link: '/informations#engagements' },
 					{ label: t('NOS_PARTENAIRES'), link: '/informations#partenaires' }
 				]
-			},
-			{
-				label: t('INFORMATIONS_ARTISTE'),
-				link: '/artiste',
-				image: HeaderArtiste.src,
-				imageBg: 'bg-white',
-				subMenus: [
-					{ label: t('RESIDENCE'), link: '/artiste#residence' },
-					{
-						label: t('SPECIFICATIONS_TECHNIQUES'),
-						link: '/artiste#informations'
-					}
-				]
 			}
 		]
 	},
 	{
-		label: t('AUTRES_ACTUALITES'),
-		link: '/autres-actualites'
+		label: t('PARC_NATIONAL'),
+		link: '/parc-national'
 	},
 	{
 		label: t('ARCHIVES'),
