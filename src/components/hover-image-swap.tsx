@@ -11,17 +11,21 @@ export interface Row {
 	slots: Slot[]
 	defaultIndex?: number
 	height?: string
+	width?: string
 }
 
 interface Props {
 	rows: Row[]
+	direction?: 'horizontal' | 'vertical'
 	className?: string
 	gap?: string
 }
 
 const DEFAULT_BAR_CLASS = 'bg-secondary'
 
-export function HoverImageSwap({ rows, className, gap = 'gap-3 lg:gap-4' }: Props) {
+export function HoverImageSwap({ rows, direction = 'horizontal', className, gap = 'gap-3 lg:gap-4' }: Props) {
+	const isVertical = direction === 'vertical'
+
 	const [hovered, setHovered] = useState<(number | null)[]>(rows.map(() => null))
 	const [selected, setSelected] = useState<number[]>(rows.map((r) => r.defaultIndex ?? 0))
 	const leaveTimers = useRef<Array<ReturnType<typeof setTimeout> | null>>(rows.map(() => null))
@@ -53,15 +57,16 @@ export function HoverImageSwap({ rows, className, gap = 'gap-3 lg:gap-4' }: Prop
 	}
 
 	return (
-		<div className={cn('flex flex-col gap-3 lg:gap-4', className)}>
+		<div className={cn('flex gap-3 lg:gap-4', isVertical ? 'flex-row' : 'flex-col', className)}>
 			{rows.map((row, rowIdx) => {
 				const activeIdx = hovered[rowIdx] ?? selected[rowIdx]
-				const height = row.height ?? 'h-48'
+				const height = row.height ?? (isVertical ? 'h-96' : 'h-48')
+				const width = row.width ?? 'w-full'
 
 				if (row.slots.length === 1) {
 					const slot = row.slots[0]
 					return (
-						<div key={rowIdx} className={cn('w-full overflow-hidden rounded-2xl', height)}>
+						<div key={rowIdx} className={cn('overflow-hidden rounded-2xl', height, width)}>
 							<img
 								src={slot.src}
 								alt={slot.alt ?? ''}
@@ -74,7 +79,7 @@ export function HoverImageSwap({ rows, className, gap = 'gap-3 lg:gap-4' }: Prop
 				return (
 					<div
 						key={rowIdx}
-						className={cn('flex w-full', height, gap)}
+						className={cn('flex', isVertical ? 'flex-col' : 'flex-row', height, width, gap)}
 						onMouseLeave={() => handleLeave(rowIdx)}
 					>
 						{row.slots.map((slot, slotIdx) => {
@@ -89,7 +94,8 @@ export function HoverImageSwap({ rows, className, gap = 'gap-3 lg:gap-4' }: Prop
 									aria-pressed={isActive}
 									tabIndex={isActive ? -1 : 0}
 									className={cn(
-										'relative h-full p-0 border-0',
+										'relative p-0 border-0',
+										isVertical ? 'w-full' : 'h-full',
 										'transition-[flex-grow,flex-basis,border-radius] duration-300 ease-out',
 										'before:content-[""] before:absolute before:-inset-[5px]',
 										slot.barClassName ?? DEFAULT_BAR_CLASS,
