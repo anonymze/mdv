@@ -135,7 +135,7 @@ const expoRows = buildExpoRows()
 				class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center overflow-hidden bg-[#f4ede1] p-2"
 			>
 				<h1 class="text-primary text-center text-3xl! leading-8 font-medium! lg:text-[42px]! lg:leading-14">
-					Maison du Parc national et<br />de la vallée Luz-Saint-Sauveur
+					Maison du Parc national et<br />de la vallée &middot; Luz-Saint-Sauveur
 				</h1>
 			</div>
 		</section>
@@ -164,8 +164,8 @@ const expoRows = buildExpoRows()
 					rows={[
 						{
 							slots: [
-								{ src: FirstImg.src, alt: '' },
-								{ src: SecondImg.src, alt: '', barClassName: 'bg-secondary-muted' }
+								{ src: FirstImg.src, alt: '', barClassName: 'bg-foreground' },
+								{ src: SecondImg.src, alt: '', barClassName: 'bg-foreground' }
 							],
 							defaultIndex: 0,
 							height: 'h-48'
@@ -176,9 +176,9 @@ const expoRows = buildExpoRows()
 						},
 						{
 							slots: [
-								{ src: FourthImg.src, alt: '', barClassName: 'bg-secondary-muted' },
-								{ src: FifthImg.src, alt: '', barClassName: 'bg-secondary' },
-								{ src: FirstImg.src, alt: '' }
+								{ src: FourthImg.src, alt: '', barClassName: 'bg-secondary' },
+								{ src: FifthImg.src, alt: '', barClassName: 'bg-secondary-muted' },
+								{ src: FirstImg.src, alt: '', barClassName: 'bg-secondary' }
 							],
 							defaultIndex: 2,
 							height: 'h-48'
@@ -198,34 +198,30 @@ const expoRows = buildExpoRows()
 						{t('SPECTACLES_DESC_PART2')}
 					</p>
 				</div>
-				<div class="col-span-5 grid-cols-2 lg:col-span-2 grid lg:grid-cols-5 grid-rows-3 gap-4">
-					<MyImage
-						alt=""
-						src={EighthImg}
-						width={550}
-						height={400}
-						layout="fullWidth"
-						class="col-span-1  lg:col-span-3 row-span-3"
-					/>
-					<MyImage
-						alt=""
-						src={SeventhImg}
-						width={300}
-						height={270}
-						layout="fullWidth"
-						class="col-span-1  lg:col-span-2 row-span-2"
-					/>
-					<MyImage
-						alt=""
-						src={SixthImg}
-						width={300}
-						height={115}
-						layout="fullWidth"
-						class="col-span-1  lg:col-span-2 row-span-1"
-					/>
-				</div>
+				<HoverImageSwap
+					client:visible
+					direction="vertical"
+					className="col-span-5 lg:col-span-2 h-100"
+					rows={[
+						{
+							slots: [{ src: EighthImg.src, alt: '' }],
+							width: 'w-3/5',
+							height: 'h-full'
+						},
+						{
+							slots: [
+								{ src: SeventhImg.src, alt: '' },
+								{ src: SixthImg.src, alt: '', barClassName: 'bg-white' },
+								{ src: SecondImg.src, alt: '', barClassName: 'bg-secondary' }
+							],
+							defaultIndex: 0,
+							width: 'w-2/5',
+							height: 'h-full'
+						}
+					]}
+				/>
 			</article>
-			<div class="my-16 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 *:min-w-[300px] md:grid-cols-2 lg:grid-cols-4">
+			<div class="my-16 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 *:min-w-75 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
 				{
 					spectacles.docs.map((item, index) => {
 						const descText = item.description.root.children
@@ -241,7 +237,7 @@ const expoRows = buildExpoRows()
 								locale={locale}
 								description={descText}
 								dateStart={item.date_start}
-								genre={item.genre}
+								genre={item.genre ?? ''}
 								ctaLabel={t('VOIR_LA_REPRESENTATION')}
 								imageSrc={item.thumbnail?.url}
 								imageAlt={item.thumbnail?.alt}
@@ -276,8 +272,8 @@ const expoRows = buildExpoRows()
 						rows={[
 							{
 								slots: [
-									{ src: FifthImg.src, alt: '', barClassName: 'bg-primary' },
-									{ src: NinthImg.src, alt: '' },
+									{ src: FifthImg.src, alt: '', barClassName: 'bg-foreground' },
+									{ src: NinthImg.src, alt: '',  barClassName: 'bg-primary' },
 									{ src: EleventhImg.src, alt: '', barClassName: 'bg-secondary-muted' },
 									{ src: SixthImg.src, alt: '', barClassName: 'bg-secondary' }
 								],
