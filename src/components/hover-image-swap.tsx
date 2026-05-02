@@ -101,7 +101,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 										slot.barClassName ?? DEFAULT_BAR_CLASS,
 										isActive
 											? 'grow shrink basis-0 cursor-default rounded-2xl'
-											: 'grow-0 shrink-0 basis-10 cursor-pointer rounded-[20px]'
+											: 'grow-0 shrink-0 basis-[50px] cursor-pointer rounded-[25px]'
 									)}
 								>
 									<img
@@ -112,7 +112,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 											'absolute inset-0 h-full w-full object-cover',
 											'transition-[opacity,border-radius] duration-300 ease-out',
 											'outline outline-1 -outline-offset-1 outline-black/10',
-											isActive ? 'opacity-100 rounded-2xl' : 'opacity-0 rounded-[20px] pointer-events-none'
+											isActive ? 'opacity-100 rounded-2xl' : 'opacity-0 rounded-[25px] pointer-events-none'
 										)}
 									/>
 								</button>
