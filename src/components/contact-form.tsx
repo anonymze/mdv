@@ -43,68 +43,73 @@ export function ContactForm({ locale, apiBaseUrl }: Props) {
 	}
 
 	return (
-		<form onSubmit={handleSubmit} className="flex flex-col gap-4">
-			<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-				<input
-					type="text"
-					name="nom"
+		<div className="relative">
+			<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+				<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+					<input
+						type="text"
+						name="nom"
+						required
+						value={form.nom}
+						onChange={handleChange}
+						placeholder={t.NOM}
+						className={fieldClasses}
+					/>
+					<input
+						type="text"
+						name="prenom"
+						required
+						value={form.prenom}
+						onChange={handleChange}
+						placeholder={t.PRENOM}
+						className={fieldClasses}
+					/>
+					<input
+						type="email"
+						name="email"
+						required
+						value={form.email}
+						onChange={handleChange}
+						placeholder={t.ADRESSE_EMAIL}
+						className={fieldClasses}
+					/>
+					<input
+						type="tel"
+						name="telephone"
+						value={form.telephone}
+						onChange={handleChange}
+						placeholder={t.NUMERO_TELEPHONE}
+						className={fieldClasses}
+					/>
+				</div>
+				<textarea
+					name="message"
 					required
-					value={form.nom}
+					rows={6}
+					value={form.message}
 					onChange={handleChange}
-					placeholder={t.NOM}
-					className={fieldClasses}
+					placeholder={t.VOTRE_MESSAGE}
+					className={`${fieldClasses} h-auto resize-none py-4`}
 				/>
-				<input
-					type="text"
-					name="prenom"
-					required
-					value={form.prenom}
-					onChange={handleChange}
-					placeholder={t.PRENOM}
-					className={fieldClasses}
-				/>
-				<input
-					type="email"
-					name="email"
-					required
-					value={form.email}
-					onChange={handleChange}
-					placeholder={t.ADRESSE_EMAIL}
-					className={fieldClasses}
-				/>
-				<input
-					type="tel"
-					name="telephone"
-					value={form.telephone}
-					onChange={handleChange}
-					placeholder={t.NUMERO_TELEPHONE}
-					className={fieldClasses}
-				/>
-			</div>
-			<textarea
-				name="message"
-				required
-				rows={6}
-				value={form.message}
-				onChange={handleChange}
-				placeholder={t.VOTRE_MESSAGE}
-				className={`${fieldClasses} h-auto resize-none py-4`}
-			/>
-			<Button
-				type="submit"
-				variant="secondary"
-				size="xl"
-				disabled={status === 'loading'}
-				className="mt-2 w-fit rounded-xl"
-			>
-				{t.ENVOYER}
-			</Button>
-			{status === 'success' && (
-				<p className="text-sm font-medium text-secondary">{t.CONTACT_SUCCES}</p>
+				<Button
+					type="submit"
+					variant="secondary"
+					size="xl"
+					disabled={status === 'loading'}
+					className="mt-2 w-fit rounded-xl"
+				>
+					{t.ENVOYER}
+				</Button>
+			</form>
+			{(status === 'success' || status === 'error') && (
+				<p
+					className={`absolute -bottom-7 left-0 text-sm font-medium ${
+						status === 'error' ? 'text-destructive' : 'text-secondary'
+					}`}
+				>
+					{status === 'error' ? t.CONTACT_ERREUR : t.CONTACT_SUCCES}
+				</p>
 			)}
-			{status === 'error' && (
-				<p className="text-sm font-medium text-destructive">{t.CONTACT_ERREUR}</p>
-			)}
-		</form>
+		</div>
 	)
 }
