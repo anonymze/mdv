@@ -31,7 +31,7 @@ import { translatePublicField } from '@/lib/translate-fields'
 import type { ArtVivant } from '@/types/art-vivant'
 import type { Cinema } from '@/types/cinema'
 import type { ExpositionType } from '@/types/exposition'
-import { renderRichText } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, renderRichText, TELEPHONE_DEFAULT } from '@/utils/helper'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
@@ -100,76 +100,158 @@ const buildExpoRows = () => {
 }
 
 const expoRows = buildExpoRows()
+
+// JSON-LD structured data
+const SITE_URL = Astro.site?.href.replace(/\/$/, '') ?? 'https://www.maisondelavallee.org'
+
+const venueAddress = {
+	'@type': 'PostalAddress',
+	streetAddress: '24 Place Saint-Clément',
+	postalCode: '65120',
+	addressLocality: 'Luz-Saint-Sauveur',
+	addressRegion: 'Hautes-Pyrénées',
+	addressCountry: 'FR'
+}
+
+const venueLocation = {
+	'@type': 'Place',
+	name: 'Maison du Parc national et de la vallée',
+	address: venueAddress
+}
+
+const venueSchema = {
+	'@type': 'PerformingArtsTheater',
+	'@id': `${SITE_URL}/#venue`,
+	name: 'Maison du Parc national et de la vallée',
+	url: SITE_URL,
+	telephone: TELEPHONE_DEFAULT,
+	address: venueAddress,
+	geo: {
+		'@type': 'GeoCoordinates',
+		latitude: 42.8722,
+		longitude: -0.0033
+	}
+}
+
+const eventSchemas = [
+	...spectacles.docs.map((item) => ({
+		'@type': 'TheaterEvent',
+		name: item.title,
+		startDate: item.date_start,
+		eventStatus: 'https://schema.org/EventScheduled',
+		eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+		location: venueLocation,
+		url: `${SITE_URL}${getRelativeLocaleUrl(locale, `art-vivant/spectacle/${item.id}`)}`,
+		organizer: { '@id': `${SITE_URL}/#venue` }
+	})),
+	...seances.docs.map((item) => ({
+		'@type': 'ScreeningEvent',
+		name: item.title,
+		startDate: item.date_start,
+		eventStatus: 'https://schema.org/EventScheduled',
+		eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+		location: venueLocation,
+		url: `${SITE_URL}${getRelativeLocaleUrl(locale, `cinema/seance/${item.id}`)}`,
+		organizer: { '@id': `${SITE_URL}/#venue` }
+	})),
+	...(exposition
+		? [
+				{
+					'@type': 'ExhibitionEvent',
+					name: exposition.title,
+					startDate: exposition.date_start,
+					endDate: exposition.date_end,
+					eventStatus: 'https://schema.org/EventScheduled',
+					eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+					location: venueLocation,
+					url: `${SITE_URL}${getRelativeLocaleUrl(locale, 'exposition')}`,
+					organizer: { '@id': `${SITE_URL}/#venue` }
+				}
+			]
+		: [])
+]
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [venueSchema, ...eventSchemas]
+}
 ---
 
 <Layout title={t('ACCUEIL_TITLE')}>
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	<main id="main-content">
 		<section
 			class="relative grid h-[calc(100dvh-var(--header-height))] max-h-225 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 pt-11.5 *:rounded-lg lg:rounded-b-3xl"
 		>
 			<a
 				href={getRelativeLocaleUrl(locale, 'art-vivant')}
+				aria-label={t('ART_VIVANT')}
 				class="notch-br col-span-10 col-start-1 row-span-18 row-start-1 overflow-hidden bg-[#be7a5a] group block relative"
 			>
-				<img src={LayoutHome1.src} alt="" class="h-full w-full rounded-lg object-cover" />
+				<img src={LayoutHome1.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 				<div class="absolute inset-0 z-30 flex flex-col items-center justify-center text-center p-3 lg:p-6 bg-[#be7a5a]/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-					<span class="font-serif text-white text-3xl lg:text-5xl">{t('ART_VIVANT')}</span>
+					<h2 class="font-serif text-white text-3xl lg:text-5xl">{t('ART_VIVANT')}</h2>
 					<span class="font-sans font-medium text-white text-sm lg:text-lg pt-1 lg:pt-2 max-w-40">{t('HERO_TILE_ART_VIVANT_SUB')}</span>
 				</div>
 			</a>
 			<a
 				href={getRelativeLocaleUrl(locale, 'cinema')}
+				aria-label={t('CINEMA')}
 				class="col-span-11 col-start-11 row-span-16 row-start-1 relative z-20 [clip-path:inset(0_0_-0.75rem_0_round_0.5rem)] lg:[clip-path:inset(0_0_-1.5rem_0_round_0.5rem)] group block"
 			>
 				<div class="absolute inset-0 rounded-lg bg-[#e5aa7f]"></div>
 				<div class="absolute inset-x-0 top-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
-					<img src={LayoutHome2.src} alt="" class="h-full w-full object-cover object-bottom" />
+					<img src={LayoutHome2.src} alt="" loading="eager" class="h-full w-full object-cover object-bottom" />
 				</div>
 				<div class="absolute inset-0 z-30 flex flex-col items-center justify-center text-center p-3 lg:p-6 bg-[#e5aa7f]/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-					<span class="font-serif text-white text-3xl lg:text-5xl">{t('CINEMA')}</span>
+					<h2 class="font-serif text-white text-3xl lg:text-5xl">{t('CINEMA')}</h2>
 					<span class="font-sans font-medium text-white text-sm lg:text-lg pt-1 lg:pt-2 max-w-40">{t('HERO_TILE_CINEMA_SUB')}</span>
 				</div>
 			</a>
 			<a
 				href={getRelativeLocaleUrl(locale, 'exposition')}
+				aria-label={t('EXPOSITION')}
 				class="notch-bl col-span-19 col-start-22 row-span-20 row-start-1 overflow-hidden bg-[#f4ede1] group block relative"
 			>
-				<img src={LayoutHome3.src} alt="" class="h-full w-full rounded-lg object-cover" />
+				<img src={LayoutHome3.src} alt="" loading="eager" fetchpriority="high" class="h-full w-full rounded-lg object-cover" />
 				<div class="absolute inset-0 z-30 flex flex-col items-center justify-center text-center p-3 lg:p-6 bg-[#f4ede1]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-					<span class="font-serif text-foreground text-3xl lg:text-5xl">{t('EXPOSITION')}</span>
+					<h2 class="font-serif text-foreground text-3xl lg:text-5xl">{t('EXPOSITION')}</h2>
 					<span class="font-sans font-medium text-foreground text-sm lg:text-lg pt-1 lg:pt-2 max-w-40">{t('HERO_TILE_EXPOSITION_SUB')}</span>
 				</div>
 			</a>
 			<a
 				href={getRelativeLocaleUrl(locale, 'artiste')}
+				aria-label={t('ARTISTE')}
 				class="notch-tr col-span-13 col-start-1 row-span-22 row-start-19 overflow-hidden bg-[#f4ede1] group block relative"
 			>
-				<img src={LayoutHome4.src} alt="" class="h-full w-full rounded-lg object-cover" />
+				<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 				<div class="absolute inset-0 z-30 flex flex-col items-center justify-center text-center p-3 lg:p-6 bg-[#f4ede1]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-					<span class="font-serif text-foreground text-3xl lg:text-5xl">{t('ARTISTE')}</span>
+					<h2 class="font-serif text-foreground text-3xl lg:text-5xl">{t('ARTISTE')}</h2>
 					<span class="font-sans font-medium text-foreground text-sm lg:text-lg pt-1 lg:pt-2 max-w-40">{t('HERO_TILE_ARTISTE_SUB')}</span>
 				</div>
 			</a>
 			<a
 				href={getRelativeLocaleUrl(locale, 'jeune-public')}
+				aria-label={t('JEUNESSE')}
 				class="col-span-14 col-start-14 row-span-16 row-start-25 relative z-20 [clip-path:inset(-0.75rem_0_0_0_round_0.5rem)] lg:[clip-path:inset(-1.5rem_0_0_0_round_0.5rem)] group block"
 			>
 				<div class="absolute inset-0 rounded-lg bg-[#be7a5a]"></div>
 				<div class="absolute inset-x-0 bottom-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
-					<img src={LayoutHome5.src} alt="" class="h-full w-full object-cover object-top" />
+					<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full object-cover object-top" />
 				</div>
 				<div class="absolute inset-0 z-30 flex flex-col items-center justify-center text-center p-3 lg:p-6 bg-[#be7a5a]/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-					<span class="font-serif text-white text-3xl lg:text-5xl">{t('JEUNESSE')}</span>
+					<h2 class="font-serif text-white text-3xl lg:text-5xl">{t('JEUNESSE')}</h2>
 					<span class="font-sans font-medium text-white text-sm lg:text-lg pt-1 lg:pt-2 max-w-40">{t('HERO_TILE_JEUNESSE_SUB')}</span>
 				</div>
 			</a>
 			<a
 				href={getRelativeLocaleUrl(locale, 'mediatheque')}
+				aria-label={t('MEDIATHEQUE')}
 				class="notch-tl col-span-13 col-start-28 row-span-20 row-start-21 overflow-hidden bg-[#e5aa7f] group block relative"
 			>
-				<img src={LayoutHome6.src} alt="" class="h-full w-full rounded-lg object-cover" />
+				<img src={LayoutHome6.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 				<div class="absolute inset-0 z-30 flex flex-col items-center justify-center text-center p-3 lg:p-6 bg-[#e5aa7f]/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-					<span class="font-serif text-white text-3xl lg:text-5xl">{t('MEDIATHEQUE')}</span>
+					<h2 class="font-serif text-white text-3xl lg:text-5xl">{t('MEDIATHEQUE')}</h2>
 					<span class="font-sans font-medium text-white text-sm lg:text-lg pt-1 lg:pt-2 max-w-40">{t('HERO_TILE_MEDIATHEQUE_SUB')}</span>
 				</div>
 			</a>
