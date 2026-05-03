@@ -102,7 +102,16 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 											}}
 										>
 											<div className="px-4 pt-4">
-												<span className="text-white text-sm font-medium uppercase">{subMenu.label}</span>
+												{subMenu.link ? (
+													<a
+														href={`${localePrefix}${subMenu.link}`}
+														className="text-white text-sm font-medium uppercase transition-colors duration-200 hover:text-secondary"
+													>
+														{subMenu.label}
+													</a>
+												) : (
+													<span className="text-white text-sm font-medium uppercase">{subMenu.label}</span>
+												)}
 											</div>
 											<ul className="flex-1 p-4 overflow-y-auto">
 												{subMenu.subMenus?.map((item, itemIndex) => (

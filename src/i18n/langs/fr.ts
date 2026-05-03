@@ -23,11 +23,14 @@ export default {
 		"Replongez dans l'histoire de la Maison du Parc national et de la vallée à travers nos archives : spectacles passés, expositions marquantes, événements culturels qui ont façonné notre lieu depuis sa création en 1982.",
 	ART_VIVANT: 'Art vivant',
 	ART_VIVANT_DESC_PART1:
-		"De septembre à juin, la Maison propose une programmation pluridisciplinaire, augmentée aux périodes d'affluence touristique. Une programmation à destination du jeune public est également proposée aux établissements scolaires tout au long de l'année. Chaque été la culture s'empare du village avec une proposition de spectacle de rue chaque mercredi !",
+		"De septembre à juin, la Maison propose une programmation culturelle pluridisciplinaire, enrichie lors des périodes de forte affluence touristique. Des actions spécifiques pour le jeune public et les établissements scolaires sont également organisées tout au long de l'année. Chaque été, le village s'anime avec un spectacle de rue proposé tous les mercredis.",
 	ART_VIVANT_DESC_PART2:
-		"Tout au long de l'année des équipes artistiques sont accueillies en résidence dans les locaux. Une résidence d'artiste, c'est quoi ?",
-	ART_VIVANT_DESC_PART3:
-		"Une résidence artistique permet à un artiste-auteur de consacrer un temps de création dans un espace de travail mis à sa disposition, ainsi qu'un hébergement, un accompagnement et des moyens financiers. Elle contribue ainsi aux échanges avec l'équipe du lieu, mais également avec les publics au travers de rencontres et médiations, dans des formats variés qui favorisent une approche personnelle et sensible des œuvres et des démarches artistiques : sortie de résidence, bords de scènes avec les publics scolaires, ateliers…",
+		"Au long de l'année, des équipes artistiques sont accueillies en résidence. Une résidence artistique permet à un artiste-auteur de bénéficier d'un temps de création dans un espace dédié, avec hébergement, accompagnement et soutien financier. Ces résidences encouragent les échanges avec les publics à travers des rencontres, ateliers, sorties de résidence ou actions de médiation, pour une approche sensible et accessible des œuvres.",
+	ART_VIVANT_HERO_TITRE: "Des temps forts culturels tout au long de l'année",
+	COUP_DE_COEUR: 'Coup de cœur',
+	CARTES_ABONNEMENT: 'Cartes abonnement',
+	CARTE_ABONNEMENT_DESC: '10 entrées, non nominatives',
+	LES_IMMANQUABLES: 'Les immanquables',
 	ARTISTE: 'Artiste',
 	INFORMATIONS_ARTISTE: 'Informations artistes',
 	AUTRES_ACTUALITES: 'Autres actualités',
@@ -230,11 +233,14 @@ export default {
 	NOS_PARTENAIRES: 'Nos partenaires',
 	NOS_TARIFS: 'Nos tarifs',
 	NOS_TARIFS_INTRO: 'Des prix adaptés à tous pour que la culture reste accessible',
+	NOS_TARIFS_DESC:
+		"Une grille tarifaire pensée pour rendre la culture accessible au plus grand nombre. Adhésions à la médiathèque, places de spectacle et entrées au cinéma : nos tarifs s'adaptent à chaque public, des plus jeunes aux familles. Des cartes d'abonnement permettent également de profiter pleinement de la programmation tout au long de l'année.",
 	NOUS_CONTACTER: 'Nous contacter',
 	NUMERO_TELEPHONE: 'N° Téléphone',
 	OFFERT: 'Offert',
 	OU_NOUS_TROUVER: 'Où nous trouver',
 	OU_NOUS_TROUVER_TITRE: 'Où nous trouver',
+	OU_NOUS_TROUVER_INTRO: 'Des initiatives qui font vivre le territoire, en partenariat avec La Maison de la Vallée',
 	OUVERT_HEURES_ARIA: 'Ouvert de 14 heures à 19 heures',
 	PANNEAU_EVENEMENT_IMMANQUABLE: "Panneau de l'évènement immanquable",
 	PANNEAU_HORAIRES_OUVERTURE: "Panneau des horaires d'ouverture",

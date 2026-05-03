@@ -4,7 +4,13 @@ import { find } from '@/api/payload'
 import FirstMediaImg from '@/assets/imgs/art_vivant/1.webp'
 import SecondMediaImg from '@/assets/imgs/art_vivant/2.webp'
 import ThirdMediaImg from '@/assets/imgs/art_vivant/3.webp'
+import ParcImg1 from '@/assets/imgs/parc/1.webp'
+import ParcImg2 from '@/assets/imgs/parc/2.webp'
+import ParcImg3 from '@/assets/imgs/parc/3.webp'
+import ParcImg4 from '@/assets/imgs/parc/4.webp'
+import { HoverImageSwap } from '@/components/hover-image-swap'
 import MyImage from '@/components/my-image.astro'
+import SpectacleCard from '@/components/spectacle-card.astro'
 import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
@@ -18,22 +24,27 @@ const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 const SPECTACLES_LIMIT = 8
 const RESIDENCE_LIMIT = 4
 
-// Build time: fetch only first page
 const spectacles = await find<ArtVivant>('art_vivant', {
 	limit: SPECTACLES_LIMIT,
 	page: 1,
 	locale,
-	where: {
-		type: { equals: 'evenement' }
-	}
+	where: { type: { equals: 'evenement' } }
 })
 const residences = await find<ArtVivant>('art_vivant', {
 	limit: RESIDENCE_LIMIT,
 	locale,
-	where: {
-		type: { equals: 'residence' }
-	}
+	where: { type: { equals: 'residence' } }
 })
+
+const immanquableResp = await find<ArtVivant>('art_vivant', {
+	limit: 1,
+	locale,
+	where: { immanquable: { equals: true }, type: { equals: 'evenement' } }
+})
+const immanquable = immanquableResp.docs[0]
+
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
+const immanquableImg = immanquable?.thumbnail?.url ? `${PAYLOAD_URL}${immanquable.thumbnail.url}` : ParcImg1.src
 
 const spectacleTranslations = {
 	PRECEDENT: t('PRECEDENT'),
@@ -62,60 +73,90 @@ const spectacleTranslations = {
 		{ key: t('DATE_1_AN'), value: '1_an' }
 	]
 }
-
-const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
 <Layout title={t('ART_VIVANT')}>
 	<main id="main-content">
-		<section class="section-default" id="description">
-			<h1 class="text-primary pb-8 lg:pb-20">{t('ART_VIVANT')}</h1>
-			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
-				<div class="order-1 flex flex-col">
-					<p class="distinguished pb-8 lg:pb-16">{t('SPECTACLES_INTRO')}</p>
-					<p>
-						{t('ART_VIVANT_DESC_PART1')}<br /><br />
-						{t('ART_VIVANT_DESC_PART2')}<br /><br />
-						{t('ART_VIVANT_DESC_PART3')}
-					</p>
+		{/* HERO */}
+		<section class="bg-primary relative overflow-hidden text-white" id="description">
+			<div class="px-4 py-10 lg:px-16 lg:py-16">
+				<article class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
+					<div class="lg:col-span-7 flex flex-col">
+						<h2 class="font-title text-2xl lg:text-[26px] text-white pb-3 lg:pb-4">{t('ART_VIVANT_HERO_TITRE')}</h2>
+						<p class="distinguished text-white/90 pb-6 lg:pb-8">{t('SPECTACLES_INTRO')}</p>
+						<p class="text-white/90 text-sm lg:text-base leading-relaxed pb-4">{t('ART_VIVANT_DESC_PART1')}</p>
+						<p class="text-white/90 text-sm lg:text-base leading-relaxed">{t('ART_VIVANT_DESC_PART2')}</p>
+					</div>
+					<div class="lg:col-span-5">
+						<MyImage
+							src={ParcImg1}
+							alt=""
+							width={520}
+							height={425}
+							layout="fullWidth"
+							class="rounded-2xl h-full w-full object-cover"
+						/>
+					</div>
+				</article>
+
+				<div class="relative my-10 lg:my-14 flex items-center">
+					<div class="absolute inset-x-0 top-1/2 h-[1px] bg-white/30"></div>
+					<h1 class="font-serif text-white text-4xl lg:text-[42px] uppercase mx-auto px-6 bg-primary relative z-10">
+						{t('ART_VIVANT')}
+					</h1>
 				</div>
-				<div class="order-2 grid grid-cols-2 grid-rows-2 gap-2 lg:gap-5">
-					<MyImage
-						alt=""
-						src={ThirdMediaImg}
-						width={420}
-						height={220}
-						layout="fullWidth"
-						class="col-start-1 row-start-1 h-40 w-full object-cover lg:h-full"
-					/>
-					<MyImage
-						alt=""
-						src={SecondMediaImg}
-						width={420}
-						height={220}
-						layout="fullWidth"
-						class="col-start-1 row-start-2 h-40 w-full object-cover lg:h-full"
-					/>
-					<MyImage
-						alt=""
-						src={FirstMediaImg}
-						width={420}
-						height={460}
-						layout="fullWidth"
-						class="col-start-2 row-span-2 h-80 w-full object-cover lg:h-full"
-					/>
+
+				<div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6 items-stretch">
+					<div class="rounded-2xl overflow-hidden h-64 lg:h-[430px]">
+						<MyImage
+							src={SecondMediaImg}
+							alt=""
+							width={475}
+							height={485}
+							layout="fullWidth"
+							class="h-full w-full object-cover"
+						/>
+					</div>
+					<div class="rounded-2xl overflow-hidden h-64 lg:h-[430px]">
+						<MyImage
+							src={ThirdMediaImg}
+							alt=""
+							width={365}
+							height={372}
+							layout="fullWidth"
+							class="h-full w-full object-cover"
+						/>
+					</div>
+					<div class="bg-white/5 rounded-2xl p-6 flex flex-col h-64 lg:h-[430px]">
+						<p class="font-title text-white text-xl text-center pb-4">{t('LES_IMMANQUABLES')}</p>
+						<div class="flex-1 min-h-0">
+							<HoverImageSwap
+								client:visible
+								direction="vertical"
+								rows={[{
+									slots: [
+										{ src: immanquableImg, alt: immanquable?.thumbnail?.alt ?? '', barClassName: 'bg-secondary' },
+										{ src: ParcImg2.src, alt: '', barClassName: 'bg-secondary-muted' },
+										{ src: ParcImg3.src, alt: '', barClassName: 'bg-secondary' }
+									],
+									defaultIndex: 0,
+									height: 'h-full',
+									width: 'w-full'
+								}]}
+							/>
+						</div>
+					</div>
 				</div>
-			</article>
+			</div>
 		</section>
 
-		<section class="section-default bg-primary/20" id="spectacles">
+		{/* SPECTACLES À VENIR */}
+		<section class="section-default" id="spectacles">
 			<article>
 				<h2 class="pb-2 lg:pb-3">{t('SPECTACLES_A_VENIR')}</h2>
 				<p class="distinguished pb-3 lg:pb-6">{t('SPECTACLES_INTRO')}</p>
-				<p class="lg:w-2/3">
-					{t('SPECTACLES_DESC_PART1')}<br />
-					{t('SPECTACLES_DESC_PART2')}
-				</p>
+				<p class="lg:w-2/3 pb-2">{t('SPECTACLES_DESC_PART1')}</p>
+				<p class="lg:w-2/3">{t('SPECTACLES_DESC_PART2')}</p>
 			</article>
 
 			<SpectaclesGrid
@@ -131,18 +172,45 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 			/>
 		</section>
 
-		<section class="section-default" id="residence">
-			<article>
-				<h2 class="text-secondary pb-2 lg:pb-3">{t('SORTIES_DE_RESIDENCE')}</h2>
-				<p class="distinguished pb-3 lg:pb-6">{t('RESIDENCE_INTRO')}</p>
-				<p class="lg:w-2/3">
-					{t('RESIDENCE_DESC_PART1')}<br /><br />
-					{t('RESIDENCE_DESC_PART2')}
-				</p>
+		{/* RÉSIDENCE ARTISTIQUE */}
+		<section class="section-default bg-primary/10" id="residence">
+			<article class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8 pb-12">
+				<div class="lg:col-span-7 flex flex-col">
+					<h2 class="text-foreground pb-2 lg:pb-3">{t('RESIDENCE_ARTISTIQUE')}</h2>
+					<p class="distinguished pb-3 lg:pb-6">{t('RESIDENCE_INTRO')}</p>
+					<p class="pb-4">{t('RESIDENCE_DESC_PART1')}</p>
+					<p>{t('RESIDENCE_DESC_PART2')}</p>
+				</div>
+				<div class="lg:col-span-5 flex flex-col gap-4 lg:gap-5">
+					<HoverImageSwap
+						client:visible
+						direction="vertical"
+						rows={[{
+							slots: [
+								{ src: FirstMediaImg.src, alt: '' },
+								{ src: ParcImg4.src, alt: '', barClassName: 'bg-secondary-muted' },
+								{ src: ParcImg2.src, alt: '', barClassName: 'bg-foreground' }
+							],
+							defaultIndex: 0,
+							height: 'h-[222px]',
+							width: 'w-full'
+						}]}
+					/>
+					<div class="rounded-2xl overflow-hidden h-[160px]">
+						<MyImage
+							src={SecondMediaImg}
+							alt=""
+							width={420}
+							height={160}
+							layout="fullWidth"
+							class="h-full w-full object-cover"
+						/>
+					</div>
+				</div>
 			</article>
 
 			<div
-				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+				class="grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 *:min-w-[300px] md:grid-cols-2 lg:grid-cols-4"
 			>
 				{
 					residences.docs.map((item) => {
@@ -153,63 +221,18 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 							.join(' ')
 
 						return (
-							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
-								<div class="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-										background={item.thumbnail?.blurhash}
-										width={275}
-										height={305}
-										layout="fullWidth"
-									/>
-								</div>
-								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
-									<figcaption>
-										<h3 class="pb-3 text-black truncate">
-											<a
-												href={`${localePrefix}/art-vivant/residence/${item.id}`}
-												class="after:absolute after:inset-0 after:z-10"
-											>
-												{item.title}
-											</a>
-										</h3>
-										<p class="distinguished text-primary pb-1 text-xs truncate">{item.genre}</p>
-										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
-											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })} -{' '}
-											{new Date(item.date_start).toLocaleTimeString(locale, {
-												hour: '2-digit',
-												minute: '2-digit',
-												hour12: false,
-												timeZone: 'Europe/Paris'
-											})}
-										</time>
-									</figcaption>
-								</figure>
-								<div class="bg-secondary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption class="text-white">
-										<p class="line-clamp-8 text-sm">{descText}</p>
-										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{t('EN_SAVOIR_PLUS')}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
-									</figcaption>
-								</figure>
-							</article>
+							<SpectacleCard
+								title={item.title}
+								href={`${localePrefix}/art-vivant/residence/${item.id}`}
+								locale={locale}
+								description={descText}
+								dateStart={item.date_start}
+								genre={item.genre ?? ''}
+								ctaLabel={t('EN_SAVOIR_PLUS')}
+								imageSrc={item.thumbnail?.url}
+								imageAlt={item.thumbnail?.alt}
+								imageBlurhash={item.thumbnail?.blurhash}
+							/>
 						)
 					})
 				}

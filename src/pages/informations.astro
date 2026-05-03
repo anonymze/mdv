@@ -1,6 +1,8 @@
 ---
 export const prerender = true
 import { findGlobal } from '@/api/payload'
+import EquipeImg from '@/assets/imgs/parc/1.webp'
+import NewsletterImg from '@/assets/imgs/newsletter.png'
 import BeHappyImg from '@/assets/imgs/sponsos/be-happy.webp'
 import EuropeImg from '@/assets/imgs/sponsos/europe.webp'
 import HautesPyreneesImg from '@/assets/imgs/sponsos/hautes-pyrenees.webp'
@@ -11,7 +13,7 @@ import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import type { Hour } from '@/types/hours'
-import { MDV_DEFAULT_ADDRESS, TELEPHONE_DEFAULT } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, MDV_PARKING_DEFAULT_ADDRESS, TELEPHONE_DEFAULT } from '@/utils/helper'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
@@ -24,203 +26,242 @@ const formatTime = (dateStr: string) => {
 		timeZone: 'Europe/Paris'
 	})
 }
+
+const teamMembers = [
+	{ name: 'Cathy Marque', role: t('DIRECTRICE_ADMINISTRATIVE'), tone: 'from-[#d6d6dc] to-[#efefef]' },
+	{ name: 'Marie Lay', role: t('DIRECTRICE_ARTISTIQUE'), tone: 'from-[#d7d5df] to-[#f2f1f5]' },
+	{ name: 'Chantal Boussac', role: t('COMPTABLE'), tone: 'from-[#d8d8de] to-[#f1f1f4]' },
+	{ name: 'Andréa Loo Santos', role: t('RESPONSABLE_MEDIATHEQUE'), tone: 'from-[#d9d9df] to-[#f4f4f7]' }
+]
 ---
 
 <Layout title={t('INFORMATIONS')}>
 	<main id="main-content">
 		<h1 class="sr-only">{t('INFORMATIONS')}</h1>
 		<section class="section-default" id="horaires">
-			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
+			<article class="grid grid-cols-1 gap-5 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
 				<div class="flex flex-col">
-					<h2 class="text-primary pb-2 lg:pb-3">{t('OU_NOUS_TROUVER_TITRE')}</h2>
-					<p class="distinguished pb-8 lg:pb-16">{t('MAISON_DU_PARC_COMPLET')}</p>
-					<div class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
-						<div class="bg-primary/20 px-5 py-8">
-							<ul class="space-y-5">
-								<li class="border-b border-black/20 px-5 pb-4">
-									<span class="font-bold">{t('HORAIRES')}</span> :
-									<div class="mt-2 space-y-1">
-										<p>
-											{t('LUNDI_SAMEDI')} : {formatTime(hours.horaires_base.base_start)} - {
-												formatTime(hours.horaires_base.base_end)
-											}
-										</p>
-										<p>
-											{t('DIMANCHE')} : {formatTime(hours.horaires_base.dimanche_start)} - {
-												formatTime(hours.horaires_base.dimanche_end)
-											}
-										</p>
-									</div>
-								</li>
+					<div class="max-w-2xl">
+						<h2 class="text-primary pb-2 lg:pb-3">{t('OU_NOUS_TROUVER_TITRE')}</h2>
+						<p class="pb-8 lg:pb-16">{t('OU_NOUS_TROUVER_INTRO')}</p>
+					</div>
 
-								<li class="px-5">
-									<span class="font-bold">{t('ADRESSE')}</span> :
-									<p>{MDV_DEFAULT_ADDRESS}</p>
-								</li>
-							</ul>
+					<div class="bg-secondary grid grid-cols-1 gap-3 rounded-4xl p-6 md:grid-cols-2 lg:gap-5">
+						<div class="rounded-3xl bg-[#F5EDE2] p-4">
+							<p class="font-title text-foreground border-foreground mb-4 border-b text-lg">{t('ADRESSE_DU_LIEU')}</p>
+							<p class="pl-3">{MDV_DEFAULT_ADDRESS}</p>
 						</div>
-						<div class="bg-primary/20 px-5 py-8">
-							<ul class="space-y-5">
-								<li class="border-b border-black/20 px-5 pb-4 lg:pb-13">
-									<span class="font-bold">{t('TELEPHONE')}</span> :
-									<a class="block" href={`tel:${TELEPHONE_DEFAULT}`}>{TELEPHONE_DEFAULT}</a>
-								</li>
 
-								<li class="px-5">
-									<span class="font-bold">{t('ACCES_TRANSPORT_PUBLIC')}</span> :
-									<p>{t('PARKING')}</p>
-									<p>{t('ACCES_TRANSPORT_PUBLIC_DESC')}</p>
-								</li>
-							</ul>
+						<div class="rounded-3xl bg-[#F5EDE2] p-4">
+							<p class="font-title text-foreground border-foreground mb-4 border-b text-lg">{t('ACCES')}</p>
+							<p class="pl-3">{t('TRANSPORT_PUBLIC')}</p>
+						</div>
+
+						<div class="rounded-3xl bg-[#F5EDE2] p-4">
+							<p class="font-title text-foreground border-foreground mb-4 border-b text-lg">{t('HORAIRES')}</p>
+							<div class="space-y-2 pl-3">
+								<div>
+									<p class="font-medium">{t('LUNDI_SAMEDI')}</p>
+									<p>{formatTime(hours.horaires_base.base_start)} - {formatTime(hours.horaires_base.base_end)}</p>
+								</div>
+								<div>
+									<p class="font-medium">{t('DIMANCHE')}</p>
+									<p>
+										{formatTime(hours.horaires_base.dimanche_start)} - {formatTime(hours.horaires_base.dimanche_end)}
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="rounded-3xl bg-[#F5EDE2] p-4">
+							<p class="font-title text-foreground border-foreground mb-4 border-b text-lg">{t('PARKING')}</p>
+							<p class="pl-3">{MDV_PARKING_DEFAULT_ADDRESS}</p>
 						</div>
 					</div>
 				</div>
 
-				<iframe
-					class="h-full w-full"
-					style="border:0"
-					referrerpolicy="no-referrer-when-downgrade"
-					src="https://www.google.com/maps?q=24+Place+Saint+Clément,+65120+Luz-Saint-Sauveur&output=embed"
-					allowfullscreen
-					title="Maison du Parc National et de la Vallée — Luz-Saint-Sauveur"
+				<div
+					class="bg-primary/5 overflow-hidden rounded-[2rem] border border-black/5 shadow-[0_22px_60px_rgba(27,66,79,0.12)]"
 				>
-				</iframe>
+					<iframe
+						class="h-[22rem] min-h-[22rem] w-full lg:h-full"
+						style="border:0"
+						referrerpolicy="no-referrer-when-downgrade"
+						src="https://www.google.com/maps?q=24+Place+Saint+Clément,+65120+Luz-Saint-Sauveur&output=embed"
+						allowfullscreen
+						title="Maison du Parc National et de la Vallée — Luz-Saint-Sauveur"
+					>
+					</iframe>
+				</div>
 			</article>
 		</section>
 
-		<section class="section-default bg-primary/20" id="tarifs">
+		<section class="section-default bg-primary" id="tarifs">
 			<article>
 				<h2 class="text-primary pb-2 lg:pb-3">{t('NOS_TARIFS')}</h2>
-				<p class="distinguished pb-8 lg:pb-16">{t('NOS_TARIFS_INTRO')}</p>
+				<p class="distinguished pb-8 lg:pb-12">{t('NOS_TARIFS_INTRO')}</p>
+				<p class="pb-12">{t('NOS_TARIFS_DESC')}</p>
 
-				<div class="grid grid-cols-1 gap-3 lg:grid-cols-9 lg:gap-5">
-					<div class="bg-primary text-primary-foreground p-6 lg:col-span-2">
-						<h3 class="text-primary-foreground pb-10">{t('TARIFS_MEDIATHEQUE')}</h3>
-						<p><span class="font-bold">{t('ADULTE')}</span> : 10€</p>
-						<p class="distinguished mb-6 border-b border-white/20">{t('ANNEE')}</p>
-						<p><span class="text-primary-foreground font-bold">{t('ENFANT')}</span> : 5€</p>
-						<p class="distinguished mb-6 border-b border-white/20">{t('ANNEE')}</p>
-						<p><span class="text-primary-foreground font-bold">{t('FAMILLE')}</span> : 5€</p>
-						<p class="distinguished mb-6 border-b border-white/20">3 {t('SEMAINES')}</p>
-						<p class="text-xs font-bold">{t('SEMAINES_CAUTION')}</p>
+				<div class="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-6">
+					<div
+						class="border-primary grid grid-cols-[1fr_auto] gap-3 overflow-hidden rounded-[2rem] border-2 bg-[#F5EDE2] p-5"
+					>
+						<div class="flex flex-col p-3 lg:p-4">
+							<h3 class="text-foreground pb-8">{t('TARIFS_MEDIATHEQUE')}</h3>
+							<div class="mt-auto flex flex-col items-start gap-3">
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ADULTE')}</span> : 10€</p>
+									<p class="text-primary! font-sans text-[11px] font-medium tracking-wider uppercase">{t('ANNEE')}</p>
+								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ENFANT')}</span> : 5€</p>
+									<p class="text-primary! font-sans text-[11px] font-medium tracking-wider uppercase">{t('ANNEE')}</p>
+								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('FAMILLE')}</span> : 5€</p>
+									<p class="text-primary! font-sans text-[11px] font-medium tracking-wider uppercase">
+										3 {t('SEMAINES')}
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="w-[110px] overflow-hidden rounded-[1.5rem] lg:w-[130px]">
+							<MyImage
+								src={null}
+								alt=""
+								width={130}
+								height={400}
+								layout="fullWidth"
+								class="h-full w-full object-cover"
+							/>
+						</div>
 					</div>
-					<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" class="hidden lg:block" />
-					<div class="bg-primary text-primary-foreground p-6 lg:col-span-2">
-						<h3 class="text-primary-foreground pb-10">{t('TARIFS_SPECTACLE')}</h3>
-						<p><span class="font-bold">{t('NORMAL')}</span> : 10€</p>
-						<p class="distinguished mb-6 border-b border-white/20">{t('DES_14ANS')}</p>
-						<p><span class="text-primary-foreground font-bold">{t('REDUIT')}</span> : 7€</p>
-						<p class="distinguished mb-6 border-b border-white/20">{t('REDUIT_DESC')}</p>
-						<p><span class="text-primary-foreground font-bold">{t('ENFANT')}</span> : {t('OFFERT')}</p>
-						<p class="distinguished border-b border-white/20">{t('MOINS_3ANS')}</p>
+
+					<div
+						class="border-primary grid grid-cols-[1fr_auto] gap-3 overflow-hidden rounded-[2rem] border-2 bg-[#F5EDE2] p-5"
+					>
+						<div class="flex flex-col p-3 lg:p-4">
+							<h3 class="text-foreground pb-8">{t('TARIFS_SPECTACLE')}</h3>
+							<div class="mt-auto flex flex-col items-start gap-3">
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('NORMAL')}</span> : 10€</p>
+									<p class="text-primary! font-sans text-[11px] font-medium tracking-wider uppercase">
+										{t('DES_14ANS')}
+									</p>
+								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('REDUIT')}</span> : 7€</p>
+									<p class="text-primary! font-sans text-[11px] font-medium tracking-wider uppercase">
+										{t('REDUIT_DESC')}
+									</p>
+								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ENFANT')}</span> : {t('OFFERT')}</p>
+									<p class="text-primary! font-sans text-[11px] font-medium tracking-wider uppercase">
+										{t('MOINS_3ANS')}
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="w-[110px] overflow-hidden rounded-[1.5rem] lg:w-[130px]">
+							<MyImage
+								src={null}
+								alt=""
+								width={130}
+								height={400}
+								layout="fullWidth"
+								class="h-full w-full object-cover"
+							/>
+						</div>
 					</div>
-					<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" class="hidden lg:block" />
-					<div class="bg-primary text-primary-foreground p-6 lg:col-span-2">
-						<h3 class="text-primary-foreground pb-10">{t('TARIFS_CINEMA')}</h3>
-						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ADULTE')}</span> : 7€</p>
-						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ETUDIANT')}</span> : 6€</p>
-						<p class="mb-6 border-b border-white/20"><span class="font-bold">{t('ENFANT_MOINS_13')}</span> : 5€</p>
-						<p class="border-b border-white/20">
-							<span class="font-bold">Cartes abonnement</span> : 58€ <span class="text-sm">(10 entrées, non nominatives, et sans durée de validité)</span>
-						</p>
+
+					<div
+						class="border-primary grid grid-cols-[1fr_auto] gap-3 overflow-hidden rounded-[2rem] border-2 bg-[#F5EDE2] p-5"
+					>
+						<div class="flex flex-col p-3 lg:p-4">
+							<h3 class="text-foreground pb-8">{t('TARIFS_CINEMA')}</h3>
+							<div class="mt-auto flex flex-col items-start gap-3">
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ADULTE')}</span> : 7€</p>
+								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ETUDIANT')}</span> : 6€</p>
+								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ENFANT_MOINS_13')}</span> : 5€</p>
+								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('CARTES_ABONNEMENT')}</span> : 58€</p>
+									<p class="text-primary! font-sans text-[11px] font-medium tracking-wider uppercase">
+										{t('CARTE_ABONNEMENT_DESC')}
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="w-[110px] overflow-hidden rounded-[1.5rem] lg:w-[130px]">
+							<MyImage
+								src={null}
+								alt=""
+								width={130}
+								height={400}
+								layout="fullWidth"
+								class="h-full w-full object-cover"
+							/>
+						</div>
 					</div>
-					<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" class="hidden lg:block" />
 				</div>
 			</article>
 		</section>
 
 		<section class="section-default" id="equipe">
 			<article>
-				<h2 class="text-secondary pb-2 lg:pb-3">{t('EQUIPE_TITRE')}</h2>
-				<p class="distinguished pb-8 lg:pb-16">{t('EQUIPE_INTRO')}</p>
-				<p class="pb-8 lg:w-2/3 lg:pb-16">
-					{t('EQUIPE_DESC')}
-				</p>
+				<div class="grid grid-cols-1 gap-6 pb-8 lg:grid-cols-2 lg:gap-10 lg:pb-16">
+					<div class="flex flex-col">
+						<h2 class="text-primary pb-2 lg:pb-3">{t('L_EQUIPE')}</h2>
+						<p class="distinguished pb-8 lg:pb-12">{t('EQUIPE_INTRO')}</p>
+						<p>{t('EQUIPE_DESC')}</p>
+					</div>
 
-				<div
-					class="grid grid-cols-1 items-center justify-center gap-x-5 gap-y-12 md:grid-cols-2 lg:flex lg:flex-wrap lg:gap-y-20 lg:*:w-[20%]"
-				>
-					<figure>
-						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
-						<figcaption class="pt-2">
-							<h3 class="text-secondary">Cathy Marque</h3>
-							<p>{t('DIRECTRICE_ADMINISTRATIVE')}</p>
-						</figcaption>
-					</figure>
-					<figure>
-						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
-						<figcaption class="pt-2">
-							<h3 class="text-secondary">Marie Lay</h3>
-							<p>{t('DIRECTRICE_ARTISTIQUE')}</p>
-						</figcaption>
-					</figure>
-					<figure>
-						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
-						<figcaption class="pt-2">
-							<h3 class="text-secondary">Chantal Boussac</h3>
-							<p>{t('COMPTABLE')}</p>
-						</figcaption>
-					</figure>
-					<figure>
-						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
-						<figcaption class="pt-2">
-							<h3 class="text-secondary">Andréa Loo Santos</h3>
-							<p>{t('RESPONSABLE_MEDIATHEQUE')}</p>
-						</figcaption>
-					</figure>
-					<figure>
-						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
-						<figcaption class="pt-2">
-							<h3 class="text-secondary">Marie-Jade Bouillon</h3>
-							<p>{t('RESPONSABLE_CINEMA_EXPO')}</p>
-						</figcaption>
-					</figure>
-					<figure>
-						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
-						<figcaption class="pt-2">
-							<h3 class="text-secondary">Léo-Polde Poulalion</h3>
-							<p>{t('TECHNICIEN_REGISSEUR')}</p>
-						</figcaption>
-					</figure>
-					<figure>
-						<MyImage src={null} alt="" width={200} height={380} layout="fullWidth" />
-						<figcaption class="pt-2">
-							<h3 class="text-secondary">Mélinda Ferrand-David</h3>
-							<p>{t('AGENT_ENTRETIEN_ACCUEIL')}</p>
-						</figcaption>
-					</figure>
+					<MyImage
+						src={EquipeImg}
+						alt=""
+						width={700}
+						height={400}
+						layout="fullWidth"
+						class="h-full w-full object-cover"
+					/>
 				</div>
 			</article>
 		</section>
 
-		<section class="section-default bg-secondary/20" id="engagements">
-			<article class="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-0">
-				<div class="order-1 lg:col-span-2">
-					<h2 class="text-secondary pb-2 lg:pb-3">{t('ENGAGEMENTS_VALEURS_TITRE')}</h2>
-					<p class="distinguished pb-8 lg:pb-16">{t('ENGAGEMENTS_VALEURS_INTRO')}</p>
-					<p class="whitespace-pre-line">
-						{t('ENGAGEMENTS_VALEURS_DESC')}
-					</p>
+		<section class="section-default mx-auto lg:w-auto">
+			<article class="grid w-full grid-cols-1 rounded-4xl lg:grid-cols-[1fr_2fr]">
+				<div class="bg-secondary-muted overflow-hidden rounded-b-4xl order-2 lg:order-1 lg:rounded-l-4xl lg:rounded-br-none">
+					<MyImage
+						alt=""
+						src={NewsletterImg}
+						width={500}
+						height={400}
+						layout="fullWidth"
+						class="h-full! w-full! rounded-none object-cover"
+					/>
 				</div>
-
-				<div class="order-2 flex items-center justify-center gap-3 lg:col-span-1">
-					<MyImage src={null} alt="" width={150} height={150} />
-					<MyImage src={null} alt="" width={150} height={150} />
-					<MyImage src={null} alt="" width={150} height={150} />
+				<div class="p-6 bg-secondary rounded-t-4xl order-1 lg:order-2 lg:rounded-tl-none lg:rounded-r-4xl">
+					<h2 class="text-foreground pb-2 lg:pb-3">{t('ENGAGEMENTS_VALEURS_TITRE')}</h2>
+					<p class="distinguished pb-8 lg:pb-12 ">{t('ENGAGEMENTS_VALEURS_INTRO')}</p>
+					<p class="text-foreground whitespace-pre-line">{t('ENGAGEMENTS_VALEURS_DESC')}</p>
 				</div>
 			</article>
 		</section>
 
 		<section class="section-default" id="partenaires">
-			<article class="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-5">
-				<div class="order-1 lg:order-2 lg:col-span-2">
+			<article class="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-16">
+				<div class="lg:col-span-2 mb-6 lg:mb-0">
 					<h2 class="text-primary pb-2 lg:pb-3">{t('PARTENAIRES_TITRE')}</h2>
 					<p class="distinguished pb-8 lg:pb-16">{t('PARTENAIRES_INTRO')}</p>
-					<p>
-						{t('PARTENAIRES_DESC')}
-					</p>
+					<p>{t('PARTENAIRES_DESC')}</p>
 				</div>
-				<div class="order-2 grid grid-cols-3 grid-rows-3 place-items-start gap-3 lg:order-1 lg:col-span-1 lg:pt-48">
+				<div class="grid grid-cols-3 grid-rows-3 place-items-start gap-3 lg:order-1 lg:col-span-1 lg:pt-48">
 					<MyImage src={BeHappyImg} alt="Be Happy" width={120} height={120} class="col-span-1" />
 					<MyImage
 						src={HautesPyreneesImg}
