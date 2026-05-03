@@ -214,7 +214,7 @@ export default {
 		"La médiathèque est un espace vivant qui s'anime régulièrement au fil des saisons. L'équipe de la Maison du Parc national et de la vallée vous propose des lectures à voix haute, des rencontres avec des auteurs locaux, ou plus encore. Ces rendez-vous, ouverts à tous, sont autant d'occasions de se retrouver, de partager et de laisser les mots prendre vie dans un cadre chaleureux et inspirant.",
 	MEDIATHEQUE_INTRO: 'Un espace de lecture et de découvertes pour tous',
 	MEDIATHEQUE_TITRE: 'La médiathèque',
-	MOINS_3ANS: '-3 ans',
+	MOINS_3ANS: 'Moins de 3 ans',
 	MOTS_CLES: 'Mots clés',
 	NAVIGATION_PRINCIPALE: 'Navigation principale',
 	NEWSLETTER_BOUTON: "S'abonner",

@@ -186,7 +186,7 @@ export default {
 	MEDIATHEQUE_EVENEMENTS_TITRE: "Media library events",
 	MEDIATHEQUE_INTRO: "A reading and discovery space for everyone",
 	MEDIATHEQUE_TITRE: "The media library",
-	MOINS_3ANS: "-3 years",
+	MOINS_3ANS: "Under 3 years old",
 	MORE_INFORMATION: "More information",
 	MOTS_CLES: "Keywords",
 	NAVIGATION_PRINCIPALE: "Main navigation",

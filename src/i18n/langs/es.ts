@@ -186,7 +186,7 @@ export default {
 	MEDIATHEQUE_EVENEMENTS_TITRE: "Los eventos de la mediateca",
 	MEDIATHEQUE_INTRO: "Un espacio de lectura y descubrimientos para todos",
 	MEDIATHEQUE_TITRE: "La mediateca",
-	MOINS_3ANS: "-3 años",
+	MOINS_3ANS: "Menores de 3 años",
 	MORE_INFORMATION: "Más información",
 	MOTS_CLES: "Palabras clave",
 	NAVIGATION_PRINCIPALE: "Navegación principal",
