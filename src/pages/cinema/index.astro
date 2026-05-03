@@ -127,6 +127,7 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				</div>
 			</article>
 		</section>
+		{seances.docs.length > 0 && (
 		<section class="section-default bg-primary/20" id="cinema">
 			<article>
 				<h2 class="pb-2 lg:pb-3">{t('CINEMA')}</h2>
@@ -149,7 +150,9 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				translations={cinemaTranslations}
 			/>
 		</section>
+		)}
 
+		{rdv.docs.length > 0 && (
 		<section class="section-default" id="rdv-cinema">
 			<h2 class="text-secondary pb-2 lg:pb-3">{t('RDV_CINEMA')}</h2>
 			<p class="distinguished pb-3 lg:pb-6">{t('RDV_CINEMA_INTRO')}</p>
@@ -229,7 +232,9 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				}
 			</div>
 		</section>
+		)}
 
+		{scolaire.docs.length > 0 && (
 		<section class="section-default bg-secondary/20" id="cinema-scolaire">
 			<h2 class="text-secondary pb-2 lg:pb-3">{t('CINEMA_SCOLAIRE_TITRE')}</h2>
 			<p class="distinguished pb-3 lg:pb-6">{t('CINEMA_SCOLAIRE_INTRO')}</p>
@@ -309,5 +314,6 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 				}
 			</div>
 		</section>
+		)}
 	</main>
 </Layout>

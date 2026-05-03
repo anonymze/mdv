@@ -157,6 +157,7 @@ const evenements = await find<EvenementType>('exposition', {
 			)
 		}
 
+		{evenements.docs.length > 0 && (
 		<section class="section-default bg-primary/20" id="evenements">
 			<h2 class="text-primary pb-2 lg:pb-3">{t('EVENEMENTS_EXPO')}</h2>
 			<p class="distinguished pb-3 lg:pb-6">{t('EVENEMENTS_EXPO_INTRO')}</p>
@@ -235,5 +236,6 @@ const evenements = await find<EvenementType>('exposition', {
 				}
 			</div>
 		</section>
+		)}
 	</main>
 </Layout>

@@ -378,6 +378,7 @@ const jsonLd = {
 			>
 		</section>
 
+		{seances.docs.length > 0 && (
 		<section>
 			<div class="section-default">
 				<div class="flex flex-col gap-5 lg:flex-row lg:gap-5">
@@ -446,6 +447,7 @@ const jsonLd = {
 				>
 			</div>
 		</section>
+		)}
 
 		{exposition && (
 			<section class="section-default">
@@ -466,7 +468,7 @@ const jsonLd = {
 			</section>
 		)}
 
-		<section class="section-default w-[358px] px-0 lg:w-auto mx-auto">
+		<section class="section-default w-[358px] px-0 lg:px-8 lg:w-auto mx-auto">
 			<article class="flex bg-foreground rounded-4xl flex-col-reverse lg:flex-row w-full" >
 				<div class="relative w-[358px] h-[301px] lg:h-[349.5px] lg:w-[378px] shrink-0 overflow-hidden rounded-b-4xl lg:rounded-none lg:overflow-visible">
 					<div class="absolute -inset-[29px] z-1 lg:inset-auto lg:right-0 lg:bottom-0 lg:h-[calc(100%+28px)] lg:w-[calc(100%+28px)]">
