@@ -26,20 +26,13 @@ const formatTime = (dateStr: string) => {
 		timeZone: 'Europe/Paris'
 	})
 }
-
-const teamMembers = [
-	{ name: 'Cathy Marque', role: t('DIRECTRICE_ADMINISTRATIVE'), tone: 'from-[#d6d6dc] to-[#efefef]' },
-	{ name: 'Marie Lay', role: t('DIRECTRICE_ARTISTIQUE'), tone: 'from-[#d7d5df] to-[#f2f1f5]' },
-	{ name: 'Chantal Boussac', role: t('COMPTABLE'), tone: 'from-[#d8d8de] to-[#f1f1f4]' },
-	{ name: 'Andréa Loo Santos', role: t('RESPONSABLE_MEDIATHEQUE'), tone: 'from-[#d9d9df] to-[#f4f4f7]' }
-]
 ---
 
 <Layout title={t('INFORMATIONS')}>
 	<main id="main-content">
 		<h1 class="sr-only">{t('INFORMATIONS')}</h1>
 		<section class="section-default" id="horaires">
-			<article class="grid grid-cols-1 gap-5 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+			<article class="grid grid-cols-1 gap-8 lg:grid-cols-[1.15fr_0.85fr]">
 				<div class="flex flex-col">
 					<div class="max-w-2xl">
 						<h2 class="text-primary pb-2 lg:pb-3">{t('OU_NOUS_TROUVER_TITRE')}</h2>
