@@ -5,7 +5,7 @@ export interface ArtVivant {
 	id: string
 	type: 'evenement' | 'residence'
 	archive?: boolean | null
-	immanquable?: boolean | null
+	immanquable?: 'immanquable' | 'coup_de_coeur' | null
 	jeunePublic?: boolean | null
 	thumbnail?: Media | null
 	title: string

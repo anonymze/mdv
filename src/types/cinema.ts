@@ -5,7 +5,7 @@ export interface Cinema {
 	id: string
 	type: 'seance' | 'scolaire' | 'rdv_cinema'
 	archive?: boolean | null
-	immanquable?: boolean | null
+	immanquable?: 'immanquable' | 'coup_de_coeur' | 'cine_passion' | null
 	jeunePublic?: boolean | null
 	thumbnail?: Media | null
 	title: string

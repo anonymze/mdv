@@ -6,9 +6,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import '../styles/global.css'
 import Header from './header.astro'
 import Footer from './footer.astro'
-// import EventsSideCard from '@/components/events-side-card.astro'
 import { findGlobal } from '@/api/payload'
-// import type { ImmanquableResponse } from '@/types/immanquable'
 import { getHoursForToday } from '@/lib/hours'
 import type { Hour } from '@/types/hours'
 
@@ -21,10 +19,6 @@ export interface Props {
 const { title, description = '', image } = Astro.props
 const locale = (Astro.currentLocale || 'fr') as I18n
 
-// const [immanquable, hoursData] = await Promise.all([
-// 	find('immanquable', { locale }) as unknown as Promise<ImmanquableResponse>,
-// 	findGlobal<Hour>('hours', { locale })
-// ])
 const hoursData = await findGlobal<Hour>('hours', { locale })
 
 const hoursForToday = getHoursForToday(hoursData)
@@ -119,11 +113,10 @@ const cleanPath = Astro.url.pathname.replace(/^\/(en|es)\//, '/')
 	</head>
 	<body>
 		<div class="container">
-			<Header hoursForToday={hoursForToday} hoursData={hoursData} immanquableEvent={null} />
+			<Header hoursForToday={hoursForToday} hoursData={hoursData} />
 			<slot />
 			<Footer locale={locale} />
 		</div>
 		<HoursSideCard locale={locale} />
-		{/* {immanquable.doc && <EventsSideCard locale={locale} event={immanquable.doc} />} */}
 	</body>
 </html>

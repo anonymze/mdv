@@ -3,7 +3,6 @@ import { X } from 'lucide-react'
 import * as React from 'react'
 import { HoursCard } from './hours-card'
 import { LanguageSelect } from './language-select'
-import { MyImage } from './my-image'
 import { Button } from './ui/button'
 
 interface Link {
@@ -33,15 +32,6 @@ interface HoursCardLabels {
 	sundayLabel: string
 }
 
-interface EventInfo {
-	title: string
-	href: string
-	imageUrl?: string | null
-	imageAlt: string
-	date: string
-	genre?: string | null
-}
-
 interface Props {
 	logoSrc: string
 	logoAlt: string
@@ -55,14 +45,12 @@ interface Props {
 	contactLabel: string
 	hoursLabel: string
 	closedLabel: string
-	eventLabel: string
 	learnMoreLabel: string
 	// data
 	hours: HoursInfo
 	hoursCardLabels: HoursCardLabels
 	hoursLearnMoreHref: string
 	payloadUrl: string
-	event?: EventInfo
 	className?: string
 }
 
@@ -78,13 +66,11 @@ export function MobileMenu({
 	contactLabel,
 	hoursLabel,
 	closedLabel,
-	eventLabel,
 	learnMoreLabel,
 	hours,
 	hoursCardLabels,
 	hoursLearnMoreHref,
 	payloadUrl,
-	event,
 	className
 }: Props) {
 	const [open, setOpen] = React.useState(false)

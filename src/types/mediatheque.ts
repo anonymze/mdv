@@ -34,7 +34,6 @@ export interface Ludotheque extends BaseMediatheque {
 export interface MediathequeSpectacle extends BaseMediatheque {
 	type: 'mediatheque'
 	archive?: boolean | null
-	immanquable?: boolean | null
 	jeunePublic?: boolean | null
 	date_start?: string | null
 	duration?: string | null

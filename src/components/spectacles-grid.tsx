@@ -284,7 +284,7 @@ export function SpectaclesGrid({
 				</div>
 			)}
 
-			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 min-h-104">
+			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 *:w-full min-h-104">
 				{loading ? (
 					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[300px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
@@ -299,55 +299,54 @@ export function SpectaclesGrid({
 						return (
 							<article
 								key={item.id}
-								className="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm"
+								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-black bg-white h-[400px]"
 							>
-								<div className="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
+								<MyImage
+									src={item.thumbnail?.url}
 									payloadUrl={payloadUrl}
-										alt={item.thumbnail?.alt ?? translations.IMAGE_PLACEHOLDER}
-										width={275}
-										height={305}
-										className="h-[305px] w-full object-cover"
-										loading="lazy"
+									alt={item.thumbnail?.alt ?? translations.IMAGE_PLACEHOLDER}
+									className="h-full w-full rounded-2xl object-cover"
+									loading="lazy"
 									layout="fullWidth"
 									background={item.thumbnail?.blurhash}
-									/>
-								</div>
-								<figure className="p-4 transition-opacity duration-250 group-hover:opacity-0">
+								/>
+								<figure className="bg-background/90 absolute inset-x-0 bottom-0 h-[116px] overflow-hidden rounded-t-2xl p-4 transition-[height] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:h-full">
 									<figcaption>
-										<h3 className="pb-3 text-black truncate">
+										<h3 className="line-clamp-1 mb-3 group-hover:line-clamp-2">
 											<a href={getLink(item.id)} className="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
-										<p className="distinguished text-primary pb-1 text-xs truncate">{item.genre}</p>
-										<time className="distinguished text-sm capitalize" dateTime={item.date_start}>
-											{formatDate(item.date_start)} - {formatTime(item.date_start)}
-										</time>
-									</figcaption>
-								</figure>
-								<div className="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure className="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption className="text-white">
-										<p className="line-clamp-8 text-sm">{descText}</p>
-										<p className="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{translations.EN_SAVOIR_PLUS}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												strokeWidth="2"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
+										{item.genre && (
+											<p className="distinguished !text-secondary-muted line-clamp-1 text-xs uppercase group-hover:line-clamp-2">{item.genre}</p>
+										)}
+										{item.date_start && (
+											<time className="distinguished text-primary text-sm capitalize tabular-nums" dateTime={item.date_start}>
+												{formatDate(item.date_start)} - {formatTime(item.date_start)}
+											</time>
+										)}
+										<div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:grid-rows-[1fr]">
+											<div className="overflow-hidden">
+												{descText && <p className="!text-foreground line-clamp-8 pt-4 text-sm">{descText}</p>}
+												<p className="!text-secondary-muted inline-flex items-center gap-2 pt-4 text-medium font-semibold transition-opacity opacity-0 duration-200 group-hover:opacity-100 group-hover:delay-200 pl-0.5">
+													{translations.EN_SAVOIR_PLUS}
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														width="16"
+														height="16"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="currentColor"
+														strokeWidth="2"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													>
+														<path d="M5 12h14" />
+														<path d="m12 5 7 7-7 7" />
+													</svg>
+												</p>
+											</div>
+										</div>
 									</figcaption>
 								</figure>
 							</article>

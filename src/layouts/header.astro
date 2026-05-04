@@ -10,7 +10,6 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import BurgerIcon from '@/assets/icons/burger.svg'
 import LogoImg from '@/assets/icons/logo-icon-only.svg'
 import type { Hour } from '@/types/hours'
-import type { ImmanquableDoc } from '@/types/immanquable'
 import { ArrowRightIcon } from 'lucide-react'
 
 interface HoursForToday {
@@ -23,10 +22,9 @@ interface HoursForToday {
 interface Props {
 	hoursForToday: HoursForToday
 	hoursData: Hour
-	immanquableEvent?: ImmanquableDoc | null
 }
 
-const { hoursForToday, hoursData, immanquableEvent } = Astro.props
+const { hoursForToday, hoursData } = Astro.props
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 const menuNavs = getMenuNavs(t)
@@ -64,43 +62,6 @@ const hoursInfo = {
 	dimancheEnd: hoursData.horaires_base.dimanche_end
 }
 
-const getEventHref = (event: ImmanquableDoc) => {
-	switch (event._collection) {
-		case 'art_vivant':
-			return getRelativeLocaleUrl(locale, `art-vivant/spectacle/${event.id}`)
-		case 'cinema':
-			if (event.type === 'scolaire') return getRelativeLocaleUrl(locale, `cinema/scolaire/${event.id}`)
-			if (event.type === 'rdv_cinema') return getRelativeLocaleUrl(locale, `cinema/rdv-cinema/${event.id}`)
-			return getRelativeLocaleUrl(locale, `cinema/seance/${event.id}`)
-		case 'exposition':
-			return event.type === 'evenement'
-				? getRelativeLocaleUrl(locale, `exposition/evenement/${event.id}`)
-				: getRelativeLocaleUrl(locale, 'exposition')
-		case 'parc_national':
-			return getRelativeLocaleUrl(locale, `parc-national/evenement/${event.id}`)
-	}
-}
-
-const getEventThumbnail = (event: ImmanquableDoc) => {
-	if (event._collection === 'exposition' && 'images' in event) {
-		return event.images?.[0]?.image
-	}
-	return 'thumbnail' in event ? event.thumbnail : undefined
-}
-
-const mobileEvent = immanquableEvent
-	? {
-			title: immanquableEvent.title,
-			href: getEventHref(immanquableEvent),
-			imageUrl: getEventThumbnail(immanquableEvent)?.url,
-			imageAlt: getEventThumbnail(immanquableEvent)?.alt ?? t('IMAGE_PLACEHOLDER'),
-			date: new Date(immanquableEvent.date_start).toLocaleDateString(locale, {
-				dateStyle: 'full',
-				timeZone: 'Europe/Paris'
-			}),
-			genre: immanquableEvent.genre
-		}
-	: undefined
 ---
 
 <a
@@ -132,7 +93,6 @@ const mobileEvent = immanquableEvent
 			contactLabel={t('NOUS_CONTACTER')}
 			hoursLabel={t('HORAIRES_OUVERTURE')}
 			closedLabel={t('FERME')}
-			eventLabel={t('EVENEMENT_IMMANQUABLE')}
 			learnMoreLabel={t('EN_SAVOIR_PLUS')}
 			hoursCardLabels={{
 				tabLabel: t('HORAIRES_TAB'),
@@ -143,7 +103,6 @@ const mobileEvent = immanquableEvent
 			}}
 			hoursLearnMoreHref={`${getRelativeLocaleUrl(locale, 'informations')}#horaires`}
 			hours={hoursInfo}
-			event={mobileEvent}
 			payloadUrl={import.meta.env.PUBLIC_PAYLOAD_URL}
 			className="lg:hidden"
 		/>

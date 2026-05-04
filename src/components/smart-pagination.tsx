@@ -1,11 +1,3 @@
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-import {
-	Pagination,
-	PaginationContent,
-	PaginationItem,
-	PaginationLink,
-} from '@/components/ui/pagination'
-
 interface SmartPaginationProps {
 	page: number
 	totalPages: number
@@ -15,54 +7,34 @@ interface SmartPaginationProps {
 	labelNext: string
 }
 
-function getPageItems(page: number, totalPages: number): number[] {
-	return [...new Set([1, page, totalPages])].sort((a, b) => a - b)
-}
+const MAX_DOTS = 6
 
-export function SmartPagination({ page, totalPages, anchor, onPageChange, labelPrev, labelNext }: SmartPaginationProps) {
-	const items = totalPages > 1 ? getPageItems(page, totalPages) : []
-	const disablePrev = page <= 1 || totalPages <= 1
-	const disableNext = page >= totalPages || totalPages <= 1
+export function SmartPagination({ page, totalPages, anchor, onPageChange }: SmartPaginationProps) {
+	if (totalPages < 2) return null
+
+	const dotsCount = Math.min(totalPages, MAX_DOTS)
 
 	return (
-		<Pagination>
-			<PaginationContent>
-				<PaginationItem>
-					<PaginationLink
+		<nav className="flex items-center justify-center gap-3" aria-label="Pagination">
+			{Array.from({ length: dotsCount }, (_, i) => {
+				const targetPage = i + 1
+				const isActive = targetPage === page
+				return (
+					<a
+						key={targetPage}
 						href={`#${anchor}`}
-						size="default"
-						onClick={(e) => { e.preventDefault(); if (!disablePrev) onPageChange(page - 1) }}
-						className={`gap-1 px-2.5 sm:pl-2.5 hover:bg-primary/20 ${disablePrev ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
-					>
-						<ChevronLeftIcon className="size-4" />
-						<span className="hidden sm:block">{labelPrev}</span>
-					</PaginationLink>
-				</PaginationItem>
-
-				{items.map((item) => (
-					<PaginationItem key={item}>
-						<PaginationLink
-							href={`#${anchor}`}
-							isActive={item === page}
-							onClick={(e) => { e.preventDefault(); onPageChange(item) }}
-						>
-							{item}
-						</PaginationLink>
-					</PaginationItem>
-				))}
-
-				<PaginationItem>
-					<PaginationLink
-						href={`#${anchor}`}
-						size="default"
-						onClick={(e) => { e.preventDefault(); if (!disableNext) onPageChange(page + 1) }}
-						className={`gap-1 px-2.5 sm:pr-2.5 hover:bg-primary/20 ${disableNext ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
-					>
-						<span className="hidden sm:block">{labelNext}</span>
-						<ChevronRightIcon className="size-4" />
-					</PaginationLink>
-				</PaginationItem>
-			</PaginationContent>
-		</Pagination>
+						onClick={(e) => {
+							e.preventDefault()
+							onPageChange(targetPage)
+						}}
+						aria-label={`Page ${targetPage}`}
+						aria-current={isActive ? 'page' : undefined}
+						className={`size-2.5 rounded-full transition-colors ${
+							isActive ? 'bg-foreground' : 'bg-primary/40 hover:bg-primary/70'
+						}`}
+					/>
+				)
+			})}
+		</nav>
 	)
 }
