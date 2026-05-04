@@ -44,6 +44,8 @@ export default {
 	CINEMA_DESC_PART3: "Our greatest strength? Listening to you. Your wishes and recommendations inspire us so that the program reflects and moves you.",
 	CINEMA_DECOUVREZ_PROGRAMME: "Discover the program",
 	CINEMA_INTRO: "The cinema program to discover",
+	CINEMA_PROGRAMME_TITRE: "The cinema program",
+	CINEMA_PROGRAMME_INTRO: "Discover below the schedule planned for the coming days.",
 	CINEMA_JEUNE_PUBLIC_TITRE: "Cinema screenings",
 	CINEMA_JEUNE_PUBLIC_INTRO: "Want to share a family movie screening?",
 	CINEMA_JEUNE_PUBLIC_DESC: "More than just a screen, the cinema is above all a place to discover the seventh art from an early age. Thanks to a varied program throughout the year, youth cinema invites children to explore the richness of the cinematic universe. School screenings as well as open-to-all events are offered to extend and enrich the experience!",

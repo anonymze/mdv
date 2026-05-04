@@ -44,6 +44,8 @@ export default {
 	CINEMA_DESC_PART3: "¿Nuestra mayor fortaleza? Escucharle. Sus deseos y recomendaciones nos inspiran para que la programación se le parezca y le haga vibrar.",
 	CINEMA_DECOUVREZ_PROGRAMME: "Descubra el programa",
 	CINEMA_INTRO: "El programa de cine por descubrir",
+	CINEMA_PROGRAMME_TITRE: "El programa de cine",
+	CINEMA_PROGRAMME_INTRO: "Descubra a continuación la programación prevista para los próximos días.",
 	CINEMA_JEUNE_PUBLIC_TITRE: "Las sesiones de cine",
 	CINEMA_JEUNE_PUBLIC_INTRO: "¿Quiere compartir una sesión de cine en familia?",
 	CINEMA_JEUNE_PUBLIC_DESC: "Más que una simple pantalla, la sala de cine es ante todo un lugar de descubrimiento del séptimo arte desde muy temprana edad. Gracias a una programación variada durante todo el año, el cine juvenil invita a los niños a explorar la riqueza del universo cinematográfico. Se ofrecen sesiones escolares así como animaciones abiertas a todos para prolongar y enriquecer la experiencia!",

@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { SelectWrapper } from '@/components/select-wrapper'
 import { SmartPagination } from '@/components/smart-pagination'
 import type { ArtVivant } from '@/types/art-vivant'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import type { ParcNational } from '@/types/parc-national'
 
 type CollectionType = ArtVivant | ParcNational;
@@ -50,7 +50,6 @@ export function SpectaclesGrid({
 	const [data, setData] = useState<PayloadResponse<CollectionType>>(initialData)
 	const [page, setPage] = useState(1)
 	const [loading, setLoading] = useState(false)
-	const gridRef = useRef<HTMLDivElement>(null)
 
 	// Filter states
 	const [searchKeyword, setSearchKeyword] = useState('')
@@ -206,11 +205,9 @@ export function SpectaclesGrid({
 		if (newPage < 1 || newPage > data.totalPages) return
 		setPage(newPage)
 		if (!mobileScrollOnly || window.innerWidth < 1024) {
-			const el = gridRef.current
-			if (el) {
-				const y = el.getBoundingClientRect().top + window.scrollY - 32
-				window.scrollTo({ top: y, behavior: 'auto' })
-			}
+			const target = document.getElementById('spectacles-grid')
+		target?.scrollIntoView({ behavior: 'smooth' })
+		setTimeout(() => target?.scrollIntoView({ behavior: 'smooth' }), 600)
 		}
 	}
 
@@ -284,7 +281,7 @@ export function SpectaclesGrid({
 				</div>
 			)}
 
-			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 *:w-full min-h-104">
+			<div id="spectacles-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 *:w-full min-h-104">
 				{loading ? (
 					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[300px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />

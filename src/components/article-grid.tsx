@@ -2,7 +2,7 @@ import { find, type PayloadResponse } from '@/api/payload'
 import { MyImage } from '@/components/my-image'
 import { SmartPagination } from '@/components/smart-pagination'
 import type { ParcNational } from '@/types/parc-national'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 interface ArticleGridProps {
 	initialData: PayloadResponse<ParcNational>
@@ -29,7 +29,6 @@ export function ArticleGrid({
 	const [data, setData] = useState<PayloadResponse<ParcNational>>(initialData)
 	const [page, setPage] = useState(1)
 	const [loading, setLoading] = useState(false)
-	const gridRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		if (page === 1) {
@@ -73,17 +72,15 @@ export function ArticleGrid({
 		if (newPage < 1 || newPage > data.totalPages) return
 		setPage(newPage)
 		if (!mobileScrollOnly || window.innerWidth < 1024) {
-			const el = gridRef.current
-			if (el) {
-				const y = el.getBoundingClientRect().top + window.scrollY - 32
-				window.scrollTo({ top: y, behavior: 'auto' })
-			}
+			const target = document.getElementById('articles-grid')
+			target?.scrollIntoView({ behavior: 'smooth' })
+			setTimeout(() => target?.scrollIntoView({ behavior: 'smooth' }), 600)
 		}
 	}
 
 	return (
 		<>
-			<div ref={gridRef} className="my-8 lg:my-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92 min-h-92">
+			<div id="articles-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-x-4 gap-y-8 *:max-w-92 min-h-92">
 				{loading ? (
 					<div className="col-span-full flex w-full items-center justify-center">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />

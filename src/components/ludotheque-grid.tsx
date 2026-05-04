@@ -4,7 +4,7 @@ import { SelectWrapper } from '@/components/select-wrapper'
 import { SmartPagination } from '@/components/smart-pagination'
 import { Input } from '@/components/ui/input'
 import type { Ludotheque, Mediatheque } from '@/types/mediatheque'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface LudothequeGridProps {
 	initialData: PayloadResponse<Ludotheque>
@@ -43,7 +43,6 @@ export function LudothequeGrid({
 	const [data, setData] = useState<PayloadResponse<Ludotheque>>(initialData)
 	const [page, setPage] = useState(1)
 	const [loading, setLoading] = useState(false)
-	const gridRef = useRef<HTMLDivElement>(null)
 
 	// Filter states
 	const [searchKeyword, setSearchKeyword] = useState('')
@@ -130,11 +129,9 @@ export function LudothequeGrid({
 	const handlePageChange = (newPage: number) => {
 		if (newPage < 1 || newPage > data.totalPages) return
 		setPage(newPage)
-		const el = gridRef.current
-		if (el) {
-			const y = el.getBoundingClientRect().top + window.scrollY - 32
-			window.scrollTo({ top: y, behavior: 'auto' })
-		}
+		const target = document.getElementById('ludotheque-grid')
+		target?.scrollIntoView({ behavior: 'smooth' })
+		setTimeout(() => target?.scrollIntoView({ behavior: 'smooth' }), 600)
 	}
 
 	return (
@@ -199,8 +196,8 @@ export function LudothequeGrid({
 			)}
 
 			<div
-				ref={gridRef}
-				className="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:my-16 lg:grid-cols-3"
+				id="ludotheque-grid"
+				className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:grid-cols-3"
 			>
 				{loading ? (
 					<div className="col-span-full flex min-h-[270px] w-full items-center justify-center">

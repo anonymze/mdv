@@ -55,6 +55,8 @@ export default {
 		'Notre plus belle force ? Être à votre écoute. Vos envies et vos recommandations nous inspirent afin que la programmation vous ressemble et vous fasse vibrer.',
 	CINEMA_DECOUVREZ_PROGRAMME: 'Découvrez le programme',
 	CINEMA_INTRO: 'Le programme cinéma à découvrir',
+	CINEMA_PROGRAMME_TITRE: 'Le programme cinéma',
+	CINEMA_PROGRAMME_INTRO: 'Découvrez ci-dessous la programmation prévue pour les prochains jours.',
 	CINEMA_JEUNE_PUBLIC_TITRE: 'Les séances de cinéma',
 	CINEMA_JEUNE_PUBLIC_INTRO: 'Envie de partager une séance cinéma en famille ?',
 	CINEMA_JEUNE_PUBLIC_DESC:
