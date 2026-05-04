@@ -253,8 +253,8 @@ export default {
 	PARKING: 'Parking',
 	PARKING_OUI: 'Parking : Oui',
 	PARC_ARTICLES_DESC:
-		'Cette rubrique rassemble les articles et actualités du Parc national des Pyrénées que nous relayons. Vous y découvrirez des informations et des contenus pour mieux connaître, comprendre et apprécier ce territoire naturel exceptionnel.',
-	PARC_ARTICLES_INTRO: "Toute l'actualité à portée de main",
+		"La boutique du Parc national des Pyrénées vous propose une sélection de souvenirs et de goodies : produits textiles, ouvrages photographiques, livres de terrain, histoires pour les enfants, ainsi que des jeux de société autour de la nature, pour petits et grands. Une belle façon de prolonger votre visite tout en soutenant la valorisation et la préservation de ce territoire d'exception.",
+	PARC_ARTICLES_INTRO: 'Découvrez les produits de notre boutique',
 	PARC_ARTICLES_TITRE: 'Les articles du Parc national des Pyrénées',
 	PARC_NATIONAL_TITRE: 'Parc national des Pyrénées',
 	PARC_NATIONAL_INTRO: "Découvrir, s'émerveiller et partager la nature des Hautes-Pyrénées",
