@@ -6,8 +6,9 @@ import { SmartPagination } from '@/components/smart-pagination'
 import type { ArtVivant } from '@/types/art-vivant'
 import { useEffect, useState } from 'react'
 import type { ParcNational } from '@/types/parc-national'
+import type { MediathequeSpectacle } from '@/types/mediatheque'
 
-type CollectionType = ArtVivant | ParcNational;
+type CollectionType = ArtVivant | ParcNational | MediathequeSpectacle;
 interface SpectaclesGridProps {
 	initialData: PayloadResponse<CollectionType>
 	locale: string
@@ -81,7 +82,7 @@ export function SpectaclesGrid({
 
 			// Build where clause
 			const where: any = {
-				type: { equals: 'evenement' }
+				type: { equals: collection === 'mediatheque' ? 'mediatheque' : 'evenement' }
 			}
 
 			// Keyword search (title only, case-insensitive contains)
@@ -176,7 +177,10 @@ export function SpectaclesGrid({
 
 
 	const getLink = (id: string) => {
-		const base = collection === 'parc_national' ? '/parc-national/evenement' : '/art-vivant/spectacle'
+		const base =
+			collection === 'parc_national' ? '/parc-national/evenement'
+			: collection === 'mediatheque' ? '/mediatheque/evenement'
+			: '/art-vivant/spectacle'
 		return `${localePrefix}${base}/${id}`
 	}
 
@@ -281,7 +285,7 @@ export function SpectaclesGrid({
 				</div>
 			)}
 
-			<div id="spectacles-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 *:w-full min-h-104">
+			<div id="spectacles-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] place-items-center lg:place-items-start gap-x-4 gap-y-8 *:max-w-80 *:min-w-75 *:only:col-span-full min-h-104">
 				{loading ? (
 					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[300px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
@@ -302,6 +306,8 @@ export function SpectaclesGrid({
 									src={item.thumbnail?.url}
 									payloadUrl={payloadUrl}
 									alt={item.thumbnail?.alt ?? translations.IMAGE_PLACEHOLDER}
+									width={275}
+									height={400}
 									className="h-full w-full rounded-2xl object-cover"
 									loading="lazy"
 									layout="fullWidth"

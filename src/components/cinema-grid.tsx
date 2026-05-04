@@ -260,11 +260,11 @@ export function CinemaGrid({
 
 			<div id="cinema-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-5">
 				{loading ? (
-					<div className="col-span-full flex w-full items-center justify-center min-h-[257px]">
+					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[257px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
 					</div>
 				) : data.docs.length === 0 ? (
-					<div className="col-span-full flex w-full items-center justify-center min-h-[257px]">
+					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[257px]">
 						<p className="text-lg text-gray-400">{translations.AUCUN_CONTENU}</p>
 					</div>
 				) : (

@@ -5,6 +5,12 @@ import FirstCyberbaseImg from '@/assets/imgs/cyberbase/1.webp'
 import SecondCyberbaseImg from '@/assets/imgs/cyberbase/2.webp'
 import ThirdCyberbaseImg from '@/assets/imgs/cyberbase/3.webp'
 import FirstMediaImg from '@/assets/imgs/media/1.webp'
+import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
+import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
+import LayoutHome3 from '@/assets/imgs/layout_home/3.png'
+import LayoutHome4 from '@/assets/imgs/layout_home/4.png'
+import LayoutHome5 from '@/assets/imgs/layout_home/5.png'
+import LayoutHome6 from '@/assets/imgs/layout_home/6.png'
 import SecondMediaImg from '@/assets/imgs/media/2.webp'
 import ThirdMediaImg from '@/assets/imgs/media/3.webp'
 import FirstImg from '@/assets/imgs/mediatheque/1.webp'
@@ -12,8 +18,10 @@ import SecondImg from '@/assets/imgs/mediatheque/2.webp'
 import FourthImg from '@/assets/imgs/mediatheque/4.webp'
 import FivethImg from '@/assets/imgs/mediatheque/5.webp'
 import SixthImg from '@/assets/imgs/mediatheque/6.webp'
+import { HoverImageSwap } from '@/components/hover-image-swap'
 import { LudothequeGrid } from '@/components/ludotheque-grid'
 import MyImage from '@/components/my-image.astro'
+import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import type { Ludotheque, MediathequeSpectacle } from '@/types/mediatheque'
@@ -23,13 +31,25 @@ const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
+const EVENEMENTS_LIMIT = 4
+
 const evenements = await find<MediathequeSpectacle>('mediatheque', {
-	limit: 4,
+	limit: EVENEMENTS_LIMIT,
+	page: 1,
 	locale,
 	where: {
 		type: { equals: 'mediatheque' }
 	}
 })
+
+const evenementsTranslations = {
+	PRECEDENT: t('PRECEDENT'),
+	SUIVANT: t('SUIVANT'),
+	IMAGE_PLACEHOLDER: t('IMAGE_PLACEHOLDER'),
+	EN_SAVOIR_PLUS: t('EN_SAVOIR_PLUS'),
+	AUCUN_CONTENU: t('AUCUN_CONTENU'),
+	TOUS: t('TOUS')
+}
 
 const LUDO_LIMIT = 6
 
@@ -52,6 +72,8 @@ const ludoTranslations = {
 	TEMPS_DE_JEU: t('TEMPS_DE_JEU'),
 	NOMBRE_DE_JOUEURS: t('NOMBRE_DE_JOUEURS'),
 	AGE: t('AGE'),
+	JOUEURS: t('JOUEURS'),
+	ANS_ET_PLUS: t('ANS_ET_PLUS'),
 	AUCUN_CONTENU: t('AUCUN_CONTENU'),
 	TOUS: t('TOUS'),
 	durationOptions: [
@@ -94,136 +116,178 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 
 <Layout title={t('MEDIATHEQUE')}>
 	<main id="main-content">
+
+	<section
+		class="relative grid h-[calc(100dvh-var(--header-height))] max-h-225 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 pt-11.5 *:rounded-lg lg:rounded-b-3xl"
+	>
+		<a
+			href={getRelativeLocaleUrl(locale, 'art-vivant')}
+			aria-label={t('ART_VIVANT')}
+			class="notch-br group relative col-span-10 col-start-1 row-span-18 row-start-1 block overflow-hidden bg-[#be7a5a]"
+		>
+			<img src={LayoutHome1.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+			<div
+				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#be7a5a]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+			>
+				<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('ART_VIVANT')}</h2>
+				<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
+					>{t('HERO_TILE_ART_VIVANT_SUB')}</span
+				>
+			</div>
+		</a>
+		<a
+			href={getRelativeLocaleUrl(locale, 'cinema')}
+			aria-label={t('CINEMA')}
+			class="group relative z-20 col-span-11 col-start-11 row-span-16 row-start-1 block [clip-path:inset(0_0_-0.75rem_0_round_0.5rem)] lg:[clip-path:inset(0_0_-1.5rem_0_round_0.5rem)]"
+		>
+			<div class="absolute inset-0 rounded-lg bg-[#e5aa7f]"></div>
+			<div class="absolute inset-x-0 top-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
+				<img src={LayoutHome2.src} alt="" loading="eager" class="h-full w-full object-cover object-bottom" />
+			</div>
+			<div
+				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#e5aa7f]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+			>
+				<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('CINEMA')}</h2>
+				<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
+					>{t('HERO_TILE_CINEMA_SUB')}</span
+				>
+			</div>
+		</a>
+		<a
+			href={getRelativeLocaleUrl(locale, 'exposition')}
+			aria-label={t('EXPOSITION')}
+			class="notch-bl group relative col-span-19 col-start-22 row-span-20 row-start-1 block overflow-hidden bg-[#f4ede1]"
+		>
+			<img
+				src={LayoutHome3.src}
+				alt=""
+				loading="eager"
+				fetchpriority="high"
+				class="h-full w-full rounded-lg object-cover"
+			/>
+			<div
+				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#f4ede1]/90 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+			>
+				<h2 class="text-foreground font-serif text-3xl lg:text-5xl">{t('EXPOSITION')}</h2>
+				<span class="text-foreground max-w-40 pt-1 font-sans text-sm font-medium lg:pt-2 lg:text-lg"
+					>{t('HERO_TILE_EXPOSITION_SUB')}</span
+				>
+			</div>
+		</a>
+		<a
+			href={getRelativeLocaleUrl(locale, 'artiste')}
+			aria-label={t('ARTISTE')}
+			class="notch-tr group relative col-span-13 col-start-1 row-span-22 row-start-19 block overflow-hidden bg-[#f4ede1]"
+		>
+			<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+			<div
+				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#f4ede1]/90 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+			>
+				<h2 class="text-foreground font-serif text-3xl lg:text-5xl">{t('ARTISTE')}</h2>
+				<span class="text-foreground max-w-40 pt-1 font-sans text-sm font-medium lg:pt-2 lg:text-lg"
+					>{t('HERO_TILE_ARTISTE_SUB')}</span
+				>
+			</div>
+		</a>
+		<a
+			href={getRelativeLocaleUrl(locale, 'jeune-public')}
+			aria-label={t('JEUNESSE')}
+			class="group relative z-20 col-span-14 col-start-14 row-span-16 row-start-25 block [clip-path:inset(-0.75rem_0_0_0_round_0.5rem)] lg:[clip-path:inset(-1.5rem_0_0_0_round_0.5rem)]"
+		>
+			<div class="absolute inset-0 rounded-lg bg-[#be7a5a]"></div>
+			<div class="absolute inset-x-0 bottom-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
+				<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full object-cover object-top" />
+			</div>
+			<div
+				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#be7a5a]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+			>
+				<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('JEUNESSE')}</h2>
+				<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
+					>{t('HERO_TILE_JEUNESSE_SUB')}</span
+				>
+			</div>
+		</a>
+		<a
+			href={getRelativeLocaleUrl(locale, 'mediatheque')}
+			aria-label={t('MEDIATHEQUE')}
+			class="notch-tl group relative col-span-13 col-start-28 row-span-20 row-start-21 block overflow-hidden bg-[#e5aa7f]"
+		>
+			<img src={LayoutHome6.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+			<div
+				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#e5aa7f]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+			>
+				<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('MEDIATHEQUE')}</h2>
+				<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
+					>{t('HERO_TILE_MEDIATHEQUE_SUB')}</span
+				>
+			</div>
+		</a>
+		<div
+			class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center overflow-hidden bg-[#f4ede1] p-2"
+		>
+			<h1 class="text-primary text-center text-3xl! leading-8 font-medium! lg:text-[42px]! lg:leading-14">
+				Maison du Parc national et<br />de la vallée &middot; Luz-Saint-Sauveur
+			</h1>
+		</div>
+	</section>
+
 		<section class="section-default" id="mediatheque">
 			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
-				<div class="order-1 flex flex-col lg:order-2">
-					<h1 class="text-primary pb-2 lg:pb-3">{t('MEDIATHEQUE_TITRE')}</h1>
+				<div class="flex flex-col">
+					<h2 class="text-primary pb-2 lg:pb-3">{t('MEDIATHEQUE_TITRE')}</h2>
 					<p class="distinguished pb-8 lg:pb-16">{t('MEDIATHEQUE_INTRO')}</p>
 					<p>{t('MEDIATHEQUE_DESC')}</p>
 				</div>
-				<div class="order-2 grid grid-cols-3 gap-2 overflow-hidden lg:order-1 lg:gap-5">
-					<MyImage
-						alt=""
-						src={FirstImg}
-						width={400}
-						height={180}
-						layout="fullWidth"
-						class="col-span-2 max-h-48 w-full object-cover lg:max-h-none"
-					/>
-					<MyImage
-						alt=""
-						src={SecondImg}
-						width={400}
-						height={180}
-						layout="fullWidth"
-						class="col-span-1 max-h-48 w-full object-cover lg:max-h-none"
-					/>
-
-					<MyImage
-						alt=""
-						src={FivethImg}
-						width={400}
-						height={150}
-						layout="fullWidth"
-						class="col-span-1 max-h-24 w-full object-cover lg:max-h-none"
-					/>
-					<MyImage
-						alt=""
-						src={SixthImg}
-						width={400}
-						height={150}
-						layout="fullWidth"
-						class="col-span-2 max-h-24 w-full object-cover lg:max-h-none"
+				<div class="flex flex-col gap-4 lg:gap-5">
+					<HoverImageSwap
+						client:visible
+						direction="horizontal"
+						rows={[
+							{
+								slots: [{ src: FirstImg.src, alt: '' }],
+								defaultIndex: 0,
+								height: 'h-[300px]',
+								width: 'w-full'
+							},
+							{
+								slots: [
+									{ src: SecondImg.src, alt: '', barClassName: 'bg-secondary' },
+									{ src: FivethImg.src, alt: '', barClassName: 'bg-secondary-muted' },
+									{ src: SixthImg.src, alt: '' }
+								],
+								defaultIndex: 2,
+								height: 'h-[180px]',
+								width: 'w-full'
+							}
+						]}
 					/>
 				</div>
 			</article>
 		</section>
 
 		{evenements.docs.length > 0 && (
-		<section class="section-default bg-primary/20" id="evenements">
-			<h2 class="pb-2 lg:pb-3">{t('MEDIATHEQUE_EVENEMENTS_TITRE')}</h2>
-			<p class="distinguished pb-3 lg:pb-16">{t('MEDIATHEQUE_EVENEMENTS_DESC')}</p>
+		<section class="section-default" id="evenements">
+			<article>
+				<h2 class="pb-2 lg:pb-3">{t('MEDIATHEQUE_EVENEMENTS_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-16">{t('MEDIATHEQUE_EVENEMENTS_INTRO')}</p>
+			</article>
 
-			<div
-				class="my-8 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-80 md:grid-cols-2 lg:my-16 lg:grid-cols-4"
-			>
-				{
-					evenements.docs.map((item) => {
-						const descText = item.description.root.children
-							.flatMap((para) => para.children)
-							.filter((child) => child.type === 'text')
-							.map((child) => child.text)
-							.join(' ')
-
-						return (
-							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
-								<div class="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-										background={item.thumbnail?.blurhash}
-										width={275}
-										height={305}
-										layout="fullWidth"
-									/>
-								</div>
-								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
-									<figcaption>
-										<h3 class="pb-1 text-black truncate">
-											<a
-												href={getRelativeLocaleUrl(locale, `mediatheque/evenement/${item.id}`)}
-												class="after:absolute after:inset-0 after:z-10"
-											>
-												{item.title}
-											</a>
-										</h3>
-										{item.date_start && (
-											<time class="distinguished text-sm capitalize" datetime={item.date_start}>
-												{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })} -{' '}
-												{new Date(item.date_start).toLocaleTimeString(locale, {
-													hour: '2-digit',
-													minute: '2-digit',
-													hour12: false,
-													timeZone: 'Europe/Paris'
-												})}
-											</time>
-										)}
-										<p class="truncate pt-3 text-xs">{descText}</p>
-									</figcaption>
-								</figure>
-								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption class="text-white">
-										<p class="line-clamp-8 text-sm">{descText}</p>
-										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{t('EN_SAVOIR_PLUS')}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
-									</figcaption>
-								</figure>
-							</article>
-						)
-					})
-				}
-			</div>
+			<SpectaclesGrid
+				client:load
+				initialData={evenements}
+				locale={locale}
+				localePrefix={localePrefix}
+				limit={EVENEMENTS_LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				collection="mediatheque"
+				showFilters={false}
+				translations={evenementsTranslations}
+			/>
 		</section>
 		)}
 
 		{ludotheque.docs.length > 0 && (
-		<section class="section-default" id="ludotheque">
+		<section class="section-default bg-primary" id="ludotheque">
 			<article>
 				<h2 class="text-secondary pb-2 lg:pb-3">{t('LUDOTHEQUE_TITRE')}</h2>
 				<p class="distinguished pb-3 lg:pb-16">{t('LUDOTHEQUE_INTRO')}</p>
@@ -245,54 +309,69 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 		</section>
 		)}
 
-		<section class="section-default bg-secondary/20" id="cyberbase">
-			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
-				<div class="order-1 flex flex-col">
-					<h2 class="text-secondary pb-2 lg:pb-3">{t('CYBERBASE_TITRE')}</h2>
-					<p class="distinguished pb-8 lg:pb-16">{t('CYBERBASE_INTRO')}</p>
-					<p>{t('CYBERBASE_DESC')}</p>
-				</div>
-				<div class="order-2 grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-5">
-					<MyImage
-						alt=""
-						src={FirstCyberbaseImg}
-						width={200}
-						height={300}
-						layout="fullWidth"
-						class="col-span-1 max-h-48 object-cover lg:max-h-none"
-					/>
-					<MyImage
-						alt=""
-						src={SecondCyberbaseImg}
-						width={200}
-						height={300}
-						layout="fullWidth"
-						class="col-span-1 max-h-48 object-cover lg:max-h-none"
-					/>
-					<MyImage
-						alt=""
-						src={ThirdCyberbaseImg}
-						width={420}
-						height={300}
-						layout="fullWidth"
-						class="col-span-2 max-h-48 object-cover lg:col-span-2 lg:max-h-none"
-					/>
-				</div>
+		<section class="section-default" id="cyberbase">
+			<article class="pb-8 lg:pb-16">
+				<h2 class="pb-2 lg:pb-3">{t('CYBERBASE_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-16">{t('CYBERBASE_INTRO')}</p>
+				<p class="lg:w-2/3">{t('CYBERBASE_DESC')}</p>
 			</article>
+
+			<div class="hidden lg:block">
+				<HoverImageSwap
+					client:visible
+					direction="horizontal"
+					rows={[{
+						slots: [
+							{ src: FirstCyberbaseImg.src, alt: '', barClassName: 'bg-secondary' },
+							{ src: SecondCyberbaseImg.src, alt: '', barClassName: 'bg-secondary-muted' },
+							{ src: ThirdCyberbaseImg.src, alt: '', barClassName: 'bg-primary' },
+							{ src: FirstCyberbaseImg.src, alt: '', barClassName: 'bg-secondary' },
+							{ src: SecondCyberbaseImg.src, alt: '', barClassName: 'bg-secondary-muted' },
+							{ src: ThirdCyberbaseImg.src, alt: '' }
+						],
+						defaultIndex: 5,
+						height: 'h-[200px]',
+						width: 'w-full'
+					}]}
+				/>
+			</div>
+			<div class="lg:hidden flex flex-col gap-4">
+				<HoverImageSwap
+					client:visible
+					direction="horizontal"
+					rows={[{
+						slots: [
+							{ src: ThirdCyberbaseImg.src, alt: '' },
+							{ src: FirstCyberbaseImg.src, alt: '', barClassName: 'bg-primary' },
+							{ src: SecondCyberbaseImg.src, alt: '', barClassName: 'bg-secondary' }
+						],
+						defaultIndex: 0,
+						height: 'h-[180px]',
+						width: 'w-full'
+					}]}
+				/>
+				<HoverImageSwap
+					client:visible
+					direction="horizontal"
+					rows={[{
+						slots: [
+							{ src: SecondCyberbaseImg.src, alt: '', barClassName: 'bg-secondary' },
+							{ src: ThirdCyberbaseImg.src, alt: '', barClassName: 'bg-secondary-muted' },
+							{ src: FirstCyberbaseImg.src, alt: '' }
+						],
+						defaultIndex: 2,
+						height: 'h-[180px]',
+						width: 'w-full'
+					}]}
+				/>
+			</div>
 		</section>
 
 		<section class="section-default" id="autres-medias">
-			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-5">
-				<div class="order-1 flex flex-col lg:order-2">
-					<h2 class="pb-2 lg:pb-3">{t('AUTRES_MEDIAS_TITRE')}</h2>
-					<p class="distinguished pb-8 lg:pb-16">{t('AUTRES_MEDIAS_INTRO')}</p>
-					<p>{t('AUTRES_MEDIAS_DESC')}</p>
-				</div>
-				<div class="order-2 grid grid-cols-2 gap-2 lg:order-1 lg:gap-5">
-					<MyImage alt="" src={FirstMediaImg} width={420} height={180} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={SecondMediaImg} width={420} height={180} layout="fullWidth" class="col-span-1" />
-					<MyImage alt="" src={ThirdMediaImg} width={900} height={160} layout="fullWidth" class="col-span-2" />
-				</div>
+			<article>
+				<h2 class="pb-2 lg:pb-3">{t('AUTRES_MEDIAS_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-16">{t('AUTRES_MEDIAS_INTRO')}</p>
+				<p class="lg:w-2/3">{t('AUTRES_MEDIAS_DESC')}</p>
 			</article>
 		</section>
 	</main>

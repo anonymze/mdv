@@ -185,13 +185,13 @@ const fetchData = async () => {
 				</div>
 			</div>
 
-			<div id="archives-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-x-4 gap-y-8 *:max-w-80 min-h-104">
+			<div id="archives-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center lg:place-items-start gap-x-4 gap-y-8 *:max-w-80 *:only:col-span-full min-h-104">
 				{loading ? (
-					<div className="col-span-full flex w-full items-center justify-center min-h-[300px]">
+					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[300px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
 					</div>
 				) : data.docs.length === 0 ? (
-					<div className="col-span-full flex w-full items-center justify-center min-h-[300px]">
+					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[300px]">
 						<p className="text-lg text-gray-400">{translations.AUCUN_CONTENU}</p>
 					</div>
 				) : (

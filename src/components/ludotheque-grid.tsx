@@ -22,6 +22,8 @@ interface LudothequeGridProps {
 		TEMPS_DE_JEU?: string
 		NOMBRE_DE_JOUEURS?: string
 		AGE?: string
+		JOUEURS?: string
+		ANS_ET_PLUS?: string
 		AUCUN_CONTENU?: string
 		TOUS?: string
 		durationOptions?: { key: string; value: string }[]
@@ -197,35 +199,38 @@ export function LudothequeGrid({
 
 			<div
 				id="ludotheque-grid"
-				className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 place-items-center gap-x-4 gap-y-8 *:max-w-92 md:grid-cols-2 lg:grid-cols-3"
+				className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 place-items-center lg:place-items-start gap-x-4 gap-y-8 *:max-w-90 *:min-w-75 *:only:col-span-full md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(360px,1fr))]"
 			>
 				{loading ? (
-					<div className="col-span-full flex min-h-[270px] w-full items-center justify-center">
+					<div className="col-span-full flex min-h-[270px] w-full !max-w-none items-center justify-center">
 						<div className="border-secondary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
 					</div>
 				) : data.docs.length === 0 ? (
-					<div className="col-span-full flex min-h-[270px] w-full items-center justify-center">
+					<div className="col-span-full flex min-h-[270px] w-full !max-w-none items-center justify-center">
 						<p className="text-lg text-gray-400">{translations.AUCUN_CONTENU}</p>
 					</div>
 				) : (
 					data.docs.map((item) => {
 						const descText = getDescriptionText(item)
 						return (
-							<article key={item.id} className="group relative col-span-1 w-full overflow-hidden bg-white shadow-xs">
-								<div className="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										payloadUrl={payloadUrl}
-										alt={item.thumbnail?.alt ?? translations.IMAGE_PLACEHOLDER}
-										width={365}
-										height={270}
-										className="h-[270px] w-full object-cover"
-										background={item.thumbnail?.blurhash}
-									/>
-								</div>
-								<figure className="p-4 transition-opacity duration-250 group-hover:opacity-0">
+							<article
+								key={item.id}
+								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-black bg-white w-[360px] h-[360px]"
+							>
+								<MyImage
+									src={item.thumbnail?.url}
+									payloadUrl={payloadUrl}
+									alt={item.thumbnail?.alt ?? translations.IMAGE_PLACEHOLDER}
+									width={275}
+									height={400}
+									className="h-full w-full rounded-2xl object-cover"
+									loading="lazy"
+									layout="fullWidth"
+									background={item.thumbnail?.blurhash}
+								/>
+								<figure className="bg-background/90 absolute inset-x-0 bottom-0 h-[116px] overflow-hidden rounded-t-2xl p-4 transition-[height] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:h-full">
 									<figcaption>
-										<h3 className="pb-3 text-black truncate">
+										<h3 className="line-clamp-1 mb-0.5 group-hover:line-clamp-2">
 											<a
 												href={`${localePrefix}/mediatheque/ludotheque/${item.id}`}
 												className="after:absolute after:inset-0 after:z-10"
@@ -233,35 +238,36 @@ export function LudothequeGrid({
 												{item.title}
 											</a>
 										</h3>
-										<p className="text-secondary pb-2 font-serif text-xs truncate">{item.genre}</p>
-										<div className="flex items-center justify-between text-xs">
-											<p>{translateDuration(item.duration)}</p>
-											<p>{item.players}</p>
-											<p>{item.public}</p>
+										{item.genre && (
+											<p className="distinguished !text-primary line-clamp-1 text-sm group-hover:line-clamp-2">{item.genre}</p>
+										)}
+										<div className="bg-secondary text-secondary-foreground rounded-xl mt-1.5 flex items-center">
+											<div className="flex-1 distinguished text-center text-xs py-2">{item.public}</div>
+											<div className="bg-background distinguished flex-1 text-center text-xs py-1 mx-1 rounded-xl">{item.players}</div>
+											<div className="flex-1 distinguished text-center text-xs py-2">{translateDuration(item.duration)}</div>
 										</div>
-									</figcaption>
-								</figure>
-								<div className="bg-secondary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure className="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption className="text-white">
-										<p className="line-clamp-8 text-sm">{descText}</p>
-										<p className="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{translations.EN_SAVOIR_PLUS}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												strokeWidth="2"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
+										<div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:grid-rows-[1fr]">
+											<div className="overflow-hidden">
+												{descText && <p className="!text-foreground line-clamp-8 pt-4 text-sm">{descText}</p>}
+												<p className="!text-secondary-muted inline-flex items-center gap-2 pt-4 text-medium font-semibold transition-opacity opacity-0 duration-200 group-hover:opacity-100 group-hover:delay-200 pl-0.5">
+													{translations.EN_SAVOIR_PLUS}
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														width="16"
+														height="16"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="currentColor"
+														strokeWidth="2"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													>
+														<path d="M5 12h14" />
+														<path d="m12 5 7 7-7 7" />
+													</svg>
+												</p>
+											</div>
+										</div>
 									</figcaption>
 								</figure>
 							</article>
@@ -277,6 +283,7 @@ export function LudothequeGrid({
 				onPageChange={handlePageChange}
 				labelPrev={translations.PRECEDENT}
 				labelNext={translations.SUIVANT}
+				variant="light"
 			/>
 		</>
 	)

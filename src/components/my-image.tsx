@@ -33,12 +33,14 @@ export function MyImage({
 
 	// For fullWidth layout, don't pass width/height to avoid type conflicts
 	if (layout === 'fullWidth') {
+		const aspectRatio = width && height ? width / height : undefined
 		return (
 			<Image
 				src={imageSrc}
 				alt={alt}
 				layout="fullWidth"
 				loading={loading}
+				aspectRatio={aspectRatio}
 				background={background ?? undefined}
 				className={className}
 				priority={priority}

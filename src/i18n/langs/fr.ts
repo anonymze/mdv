@@ -211,7 +211,8 @@ export default {
 	MEDIATHEQUE: 'Médiathèque',
 	MEDIATHEQUE_DESC:
 		"La médiathèque est un lieu ouvert à tous, dédié à la lecture, à la découverte et au partage. Romans, bandes dessinées, documentaires, magazines et romans vision : chacun peut y trouver de quoi s'informer, s'évader ou se divertir. Conviviale et accueillante, elle propose des espaces pour lire, feuilleter les ouvrages et profiter d'un moment calme, seul, en famille ou entre amis.",
-	MEDIATHEQUE_EVENEMENTS_TITRE: 'Les évènements de la médiathèque',
+	MEDIATHEQUE_EVENEMENTS_TITRE: 'Évènements liés à la médiathèque',
+	MEDIATHEQUE_EVENEMENTS_INTRO: "Laissons l'art s'exprimer.",
 	MEDIATHEQUE_EVENEMENTS_DESC:
 		"La médiathèque est un espace vivant qui s'anime régulièrement au fil des saisons. L'équipe de la Maison du Parc national et de la vallée vous propose des lectures à voix haute, des rencontres avec des auteurs locaux, ou plus encore. Ces rendez-vous, ouverts à tous, sont autant d'occasions de se retrouver, de partager et de laisser les mots prendre vie dans un cadre chaleureux et inspirant.",
 	MEDIATHEQUE_INTRO: 'Un espace de lecture et de découvertes pour tous',
@@ -230,6 +231,8 @@ export default {
 	NEWSLETTER_TITRE: 'Inscrivez-vous à notre newsletter',
 	NOM: 'Nom',
 	NOMBRE_DE_JOUEURS: 'Nombre de joueurs',
+	JOUEURS: 'joueurs',
+	ANS_ET_PLUS: 'ans et +',
 	NORMAL: 'Normal',
 	NOS_ENGAGEMENTS: 'Nos engagements',
 	NOS_PARTENAIRES: 'Nos partenaires',

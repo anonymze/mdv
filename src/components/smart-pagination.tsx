@@ -1,3 +1,5 @@
+type Variant = 'default' | 'light'
+
 interface SmartPaginationProps {
 	page: number
 	totalPages: number
@@ -5,14 +7,21 @@ interface SmartPaginationProps {
 	onPageChange: (page: number) => void
 	labelPrev: string
 	labelNext: string
+	variant?: Variant
 }
 
 const MAX_DOTS = 6
 
-export function SmartPagination({ page, totalPages, anchor, onPageChange }: SmartPaginationProps) {
+const VARIANTS: Record<Variant, { active: string; inactive: string }> = {
+	default: { active: 'bg-foreground', inactive: 'bg-primary/40 hover:bg-primary/70' },
+	light: { active: 'bg-background', inactive: 'bg-background/40 hover:bg-background/70' }
+}
+
+export function SmartPagination({ page, totalPages, anchor, onPageChange, variant = 'default' }: SmartPaginationProps) {
 	if (totalPages < 2) return null
 
 	const dotsCount = Math.min(totalPages, MAX_DOTS)
+	const { active, inactive } = VARIANTS[variant]
 
 	return (
 		<nav className="flex items-center justify-center gap-3" aria-label="Pagination">
@@ -29,9 +38,7 @@ export function SmartPagination({ page, totalPages, anchor, onPageChange }: Smar
 						}}
 						aria-label={`Page ${targetPage}`}
 						aria-current={isActive ? 'page' : undefined}
-						className={`size-2.5 rounded-full transition-colors ${
-							isActive ? 'bg-foreground' : 'bg-primary/40 hover:bg-primary/70'
-						}`}
+						className={`size-2.5 rounded-full transition-colors ${isActive ? active : inactive}`}
 					/>
 				)
 			})}
