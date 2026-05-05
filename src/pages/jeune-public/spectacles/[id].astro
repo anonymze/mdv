@@ -11,7 +11,7 @@ import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
 
 export async function getStaticPaths() {
 	const locale = 'fr'
-	const data = await find<ArtVivant>('parc_national', {
+	const data = await find<ArtVivant>('art_vivant', {
 		limit: 50,
 		locale,
 		where: {
@@ -29,7 +29,7 @@ const locale = (Astro.currentLocale || 'fr') as I18n
 const { id } = Astro.params
 
 // Fetch item for current locale
-const item = await findByID<ArtVivant>('parc_national', id, { locale })
+const item = await findByID<ArtVivant>('art_vivant', id, { locale })
 const t = createTranslator(locale)
 
 const descText = item.description.root.children

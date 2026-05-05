@@ -28,6 +28,7 @@ export interface Ludotheque extends BaseMediatheque {
 	players: string
 	public: string
 	duration: '5' | '10' | '15' | '30' | '1h' | '1h+'
+	video?: string | null
 	materiel?: string | null
 }
 
@@ -38,7 +39,6 @@ export interface MediathequeSpectacle extends BaseMediatheque {
 	date_start?: string | null
 	duration?: string | null
 	public?: string | null
-	video?: string | null
 	distribution?: string | null
 	portfolio_authors?: string | null
 	credits_photos?: string | null
