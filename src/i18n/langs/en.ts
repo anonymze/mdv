@@ -82,6 +82,8 @@ export default {
 	DURATION: "Duration",
 	REALISATION: "Directed by",
 	AVEC: "With",
+	TEASER: "Teaser",
+	LANGUES: "Languages",
 	DECOUVREZ_PROCHAINS_EVENEMENTS: "Discover our upcoming events",
 	DES_14ANS: "From 14 years",
 	DIRECTRICE_ADMINISTRATIVE: "Administrative director",

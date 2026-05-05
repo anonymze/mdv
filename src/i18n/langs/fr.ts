@@ -85,6 +85,8 @@ export default {
 	DUREE: 'Durée',
 	REALISATION: 'Réalisation',
 	AVEC: 'Avec',
+	TEASER: 'Teaser',
+	LANGUES: 'Langues',
 	DATE_FROM: 'Du',
 	DATE_TO: 'au',
 	DATE_SEMAINE_PROCHAINE: 'Semaine prochaine',

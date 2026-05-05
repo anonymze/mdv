@@ -2,7 +2,7 @@ import ReactPlayer from 'react-player'
 
 export function VideoPlayer({ url }: { url: string }) {
 	return (
-		<div className="relative aspect-video">
+		<div className="relative aspect-video overflow-hidden rounded-3xl">
 			<ReactPlayer
 				src={url}
 				width={'100%'}

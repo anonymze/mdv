@@ -207,7 +207,7 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 		</section>
 
 		{item.video && (
-			<section class="section-default bg-secondary/20">
+			<section class="section-default bg-secondary">
 				<VideoPlayer client:load url={item.video} />
 			</section>
 		)}
