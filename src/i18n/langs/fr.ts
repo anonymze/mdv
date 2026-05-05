@@ -63,7 +63,7 @@ export default {
 		"Plus qu'un simple écran, la salle de cinéma est avant tout un lieu de découverte du septième art dès le plus jeune âge. Grâce à une programmation variée tout au long de l'année, le cinéma jeune public invite les enfants à explorer la richesse de l'univers cinématographique. Des séances scolaires ainsi que des animations ouvertes à tous sont proposées pour prolonger et enrichir l'expérience !",
 	CINEMA_SCOLAIRE_TITRE: 'Scolaire',
 	CINEMA_SCOLAIRE_INTRO: 'Les évènements scolaires',
-	CINEMA_SCOLAIRE_DESC: 'Vous pouvez suivre les évènements scolaires autour du cinéma',
+	CINEMA_SCOLAIRE_DESC: 'Vous pouvez suivre les évènements scolaires autour du cinéma.',
 	COMPAGNIE_ARTISTES: 'Compagnie / Artiste(s)',
 	COMPTABLE: 'Comptable',
 	CONTACT_DESC:
@@ -87,6 +87,9 @@ export default {
 	AVEC: 'Avec',
 	TEASER: 'Teaser',
 	LANGUES: 'Langues',
+	DATE_DEBUT: 'Date de début',
+	DATE_FIN: 'Date de fin',
+	DISTRIBUTION: 'Distribution',
 	DATE_FROM: 'Du',
 	DATE_TO: 'au',
 	DATE_SEMAINE_PROCHAINE: 'Semaine prochaine',

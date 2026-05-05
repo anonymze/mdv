@@ -40,6 +40,15 @@ const rdv = await find<Cinema>('cinema', {
 		type: { equals: 'rdv_cinema' }
 	}
 })
+
+const SCOLAIRE_LIMIT = 6
+const scolaire = await find<Cinema>('cinema', {
+	limit: SCOLAIRE_LIMIT,
+	locale,
+	where: {
+		type: { equals: 'scolaire' }
+	}
+})
 const cinemaTranslations = {
 	PRECEDENT: t('PRECEDENT'),
 	SUIVANT: t('SUIVANT'),
@@ -283,6 +292,28 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 					})
 				}
 			</div>
+		</section>
+		)}
+
+		{scolaire.docs.length > 0 && (
+		<section class="section-default" id="scolaire">
+			<article>
+				<h2 class="pb-2 lg:pb-3">{t('CINEMA_SCOLAIRE_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-16">{t('CINEMA_SCOLAIRE_INTRO')}</p>
+				<p class="lg:w-2/3">{t('CINEMA_SCOLAIRE_DESC')}</p>
+			</article>
+
+			<CinemaGrid
+				client:load
+				initialData={scolaire}
+				locale={locale}
+				localePrefix={localePrefix}
+				limit={SCOLAIRE_LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				showFilters={false}
+				linkPath="scolaire"
+				translations={cinemaTranslations}
+			/>
 		</section>
 		)}
 	</main>

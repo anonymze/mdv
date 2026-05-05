@@ -14,6 +14,7 @@ interface CinemaGridProps {
 	payloadUrl: string
 	showFilters?: boolean
 	mobileScrollOnly?: boolean
+	linkPath?: string
 	translations: {
 		PRECEDENT: string
 		SUIVANT: string
@@ -42,6 +43,7 @@ export function CinemaGrid({
 	payloadUrl,
 	showFilters = false,
 	mobileScrollOnly = false,
+	linkPath = 'seance',
 	translations
 }: CinemaGridProps) {
 	const [data, setData] = useState<PayloadResponse<Cinema>>(initialData)
@@ -288,7 +290,7 @@ export function CinemaGrid({
 								<figure className="bg-background/90 absolute inset-x-0 bottom-0 h-[116px] overflow-hidden rounded-t-2xl p-4 transition-[height] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:h-full">
 									<figcaption>
 										<h3 className="line-clamp-1 mb-3 group-hover:line-clamp-2">
-											<a href={`${localePrefix}/cinema/seance/${item.id}`} className="after:absolute after:inset-0 after:z-10">
+											<a href={`${localePrefix}/cinema/${linkPath}/${item.id}`} className="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>

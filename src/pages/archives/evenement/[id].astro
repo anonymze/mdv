@@ -64,7 +64,7 @@ const formatDate = (dateStr: string) =>
 		<section class="section-default">
 			<article>
 				<h1 class="text-primary pb-2">{item.title}</h1>
-				{item.genre && <p class="text-xs font-serif text-primary pb-2">{item.genre}</p>}
+				{item.genre && <p class="text-sm text-primary pb-2">{item.genre}</p>}
 				{item.date_start && <p class="distinguished capitalize">{formatDate(item.date_start)}</p>}
 				{item.location && <p class="distinguished">{item.location}</p>}
 				{descText && <div class="pt-8" set:html={stripTextAlign(descText)} />}
