@@ -241,11 +241,13 @@ export function LudothequeGrid({
 										{item.genre && (
 											<p className="distinguished !text-primary line-clamp-1 text-sm group-hover:line-clamp-2">{item.genre}</p>
 										)}
-										<div className="bg-secondary text-secondary-foreground rounded-xl mt-1.5 flex items-center">
-											<div className="flex-1 distinguished text-center text-xs py-2">{item.public}</div>
-											<div className="bg-background distinguished flex-1 text-center text-xs py-1 mx-1 rounded-xl">{item.players}</div>
-											<div className="flex-1 distinguished text-center text-xs py-2">{translateDuration(item.duration)}</div>
-										</div>
+										{(item.public || item.players || item.duration) && (
+											<div className="bg-secondary text-secondary-foreground rounded-xl mt-1.5 flex items-center">
+												<div className="flex-1 distinguished text-center text-xs py-2">{item.public}</div>
+												<div className="bg-background distinguished flex-1 text-center text-xs py-1 mx-1 rounded-xl">{item.players}</div>
+												<div className="flex-1 distinguished text-center text-xs py-2">{translateDuration(item.duration)}</div>
+											</div>
+										)}
 										<div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:grid-rows-[1fr]">
 											<div className="overflow-hidden">
 												{descText && <p className="!text-foreground line-clamp-8 pt-4 text-sm">{descText}</p>}

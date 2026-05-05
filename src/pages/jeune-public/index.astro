@@ -2,6 +2,7 @@
 export const prerender = true
 import { find } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
+import SpectacleCard from '@/components/spectacle-card.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
@@ -9,9 +10,9 @@ import {
 	translateLudoDuration,
 	translatePublicField
 } from '@/lib/translate-fields'
+import type { ArtVivant } from '@/types/art-vivant'
 import type { Cinema } from '@/types/cinema'
 import type { Ludotheque, Mediatheque } from '@/types/mediatheque'
-import type { ParcNational } from '@/types/parc-national'
 import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
 import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
 import LayoutHome3 from '@/assets/imgs/layout_home/3.png'
@@ -22,7 +23,7 @@ import LayoutHome6 from '@/assets/imgs/layout_home/6.png'
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
-const evenements = await find<ParcNational>('parc_national', {
+const evenements = await find<ArtVivant>('art_vivant', {
 	limit: 4,
 	locale,
 	where: {
@@ -186,60 +187,19 @@ const cinema = await find<Cinema>('cinema', {
 							.join(' ')
 
 						return (
-							<article class="group relative col-span-1 w-[320px] overflow-hidden bg-white shadow-sm">
-								<div class="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-										background={item.thumbnail?.blurhash}
-										width={275}
-										height={305}
-										layout="fullWidth"
-									/>
-								</div>
-								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
-									<figcaption>
-										<h3 class="pb-1 text-black">
-											<a href={getRelativeLocaleUrl(locale, `jeune-public/spectacles/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
-												{item.title}
-											</a>
-										</h3>
-										<time class="distinguished text-sm capitalize" datetime={item.date_start}>
-											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })} -{' '}
-											{new Date(item.date_start).toLocaleTimeString(locale, {
-												hour: '2-digit',
-												minute: '2-digit',
-												hour12: false,
-												timeZone: 'Europe/Paris'
-											})}
-										</time>
-										<p class="line-clamp-2 pt-3 text-xs">{descText}</p>
-									</figcaption>
-								</figure>
-								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption class="text-white">
-										<p class="line-clamp-8 text-sm">{descText}</p>
-										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{t('EN_SAVOIR_PLUS')}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
-									</figcaption>
-								</figure>
-							</article>
+							<SpectacleCard
+								title={item.title}
+								href={getRelativeLocaleUrl(locale, `jeune-public/spectacles/${item.id}`)}
+								locale={locale}
+								description={descText}
+								dateStart={item.date_start}
+								genre={item.genre ?? ''}
+								ctaLabel={t('EN_SAVOIR_PLUS')}
+								imageSrc={item.thumbnail?.url}
+								imageAlt={item.thumbnail?.alt}
+								imageBlurhash={item.thumbnail?.blurhash}
+								width="w-[320px]"
+							/>
 						)
 					})
 				}
@@ -248,7 +208,7 @@ const cinema = await find<Cinema>('cinema', {
 		)}
 
 		{cinema.docs.length > 0 && (
-		<section class="section-default bg-primary/20 pb-4" id="cinema">
+		<section class="section-default bg-primary pb-4" id="cinema">
 			<article>
 				<h2 class="pb-2 lg:pb-3">{t('CINEMA_JEUNE_PUBLIC_TITRE')}</h2>
 				<p class="distinguished pb-3 lg:pb-16">{t('CINEMA_JEUNE_PUBLIC_INTRO')}</p>
@@ -265,62 +225,19 @@ const cinema = await find<Cinema>('cinema', {
 							.join(' ')
 
 						return (
-							<article class="group relative col-span-1 w-[320px] overflow-hidden bg-white shadow-sm">
-								<div class="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-										background={item.thumbnail?.blurhash}
-										width={900}
-										height={145}
-										layout="fullWidth"
-									/>
-								</div>
-								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
-									<figcaption>
-										<h3 class="pb-3 text-black">
-											<a href={getRelativeLocaleUrl(locale, `jeune-public/seance/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
-												{item.title}
-											</a>
-										</h3>
-										<p class="distinguished text-primary pb-1 text-xs">
-											{translatePublicField(item.public, t)} - {item.genre} - {item.languages}
-										</p>
-										<p class="font-serif text-sm capitalize">
-											{new Date(item.date_start).toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' })} -{' '}
-											{new Date(item.date_start).toLocaleTimeString(locale, {
-												hour: '2-digit',
-												minute: '2-digit',
-												hour12: false,
-												timeZone: 'Europe/Paris'
-											})}
-										</p>
-									</figcaption>
-								</figure>
-								<div class="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption class="text-white">
-										<p class="line-clamp-6 text-sm">{synopsisText}</p>
-										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{t('EN_SAVOIR_PLUS')}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
-									</figcaption>
-								</figure>
-							</article>
+							<SpectacleCard
+								title={item.title}
+								href={getRelativeLocaleUrl(locale, `jeune-public/seance/${item.id}`)}
+								locale={locale}
+								description={synopsisText}
+								dateStart={item.date_start}
+								genre={`${translatePublicField(item.public, t)} - ${item.genre} - ${item.languages}`}
+								ctaLabel={t('EN_SAVOIR_PLUS')}
+								imageSrc={item.thumbnail?.url}
+								imageAlt={item.thumbnail?.alt}
+								imageBlurhash={item.thumbnail?.blurhash}
+								height="h-[300px]"
+							/>
 						)
 					})
 				}
@@ -331,7 +248,7 @@ const cinema = await find<Cinema>('cinema', {
 		{ludotheque.docs.length > 0 && (
 		<section class="section-default" id="ludotheque">
 			<article>
-				<h2 class="text-secondary pb-2 lg:pb-3">{t('LUDOTHEQUE_JEUNE_PUBLIC_TITRE')}</h2>
+				<h2 class="pb-2 lg:pb-3">{t('LUDOTHEQUE_JEUNE_PUBLIC_TITRE')}</h2>
 				<p class="distinguished pb-3 lg:pb-16">{t('LUDOTHEQUE_JEUNE_PUBLIC_INTRO')}</p>
 				<p class="lg:w-2/3">{t('LUDOTHEQUE_JEUNE_PUBLIC_DESC')}</p>
 			</article>
@@ -348,53 +265,61 @@ const cinema = await find<Cinema>('cinema', {
 							.join(' ')
 
 						return (
-							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-xs">
-								<div class="overflow-hidden">
-									<MyImage
-										src={item.thumbnail?.url}
-										alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
-										background={item.thumbnail?.blurhash}
-										width={365}
-										height={270}
-										layout="fullWidth"
-									/>
-								</div>
-								<figure class="p-4 transition-opacity duration-250 group-hover:opacity-0">
+							<article
+								class="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-black bg-white w-[360px] h-[360px]"
+							>
+								<MyImage
+									src={item.thumbnail?.url}
+									alt={item.thumbnail?.alt ?? t('IMAGE_PLACEHOLDER')}
+									background={item.thumbnail?.blurhash}
+									width={275}
+									height={400}
+									class="h-full w-full rounded-2xl object-cover"
+									loading="lazy"
+									layout="fullWidth"
+								/>
+								<figure class="bg-background/90 absolute inset-x-0 bottom-0 h-[116px] overflow-hidden rounded-t-2xl p-4 transition-[height] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:h-full">
 									<figcaption>
-										<h3 class="pb-3 text-black">
-											<a href={getRelativeLocaleUrl(locale, `jeune-public/ludotheque/${item.id}`)} class="after:absolute after:inset-0 after:z-10">
+										<h3 class="line-clamp-1 mb-0.5 group-hover:line-clamp-2">
+											<a
+												href={getRelativeLocaleUrl(locale, `jeune-public/ludotheque/${item.id}`)}
+												class="after:absolute after:inset-0 after:z-10"
+											>
 												{item.title}
 											</a>
 										</h3>
-										<p class="text-secondary pb-2 font-serif text-xs">{item.genre}</p>
-										<div class="flex items-center justify-between text-xs">
-											<p>{item.public}</p>
-											<p>{item.players}</p>
-											<p>{translateLudoDuration(item.duration, t)}</p>
+										{item.genre && (
+											<p class="distinguished text-primary! line-clamp-1 text-sm group-hover:line-clamp-2">{item.genre}</p>
+										)}
+										{(item.public || item.players || item.duration) && (
+											<div class="bg-secondary text-secondary-foreground rounded-xl mt-1.5 flex items-center">
+												<div class="flex-1 distinguished text-center text-xs py-2">{item.public}</div>
+												<div class="bg-background distinguished flex-1 text-center text-xs py-1 mx-1 rounded-xl">{item.players}</div>
+												<div class="flex-1 distinguished text-center text-xs py-2">{translateLudoDuration(item.duration, t)}</div>
+											</div>
+										)}
+										<div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:grid-rows-[1fr]">
+											<div class="overflow-hidden">
+												{descText && <p class="text-foreground! line-clamp-8 pt-4 text-sm">{descText}</p>}
+												<p class="text-secondary-muted! inline-flex items-center gap-2 pt-4 text-medium font-semibold transition-opacity opacity-0 duration-200 group-hover:opacity-100 group-hover:delay-200 pl-0.5">
+													{t('EN_SAVOIR_PLUS')}
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														width="16"
+														height="16"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="currentColor"
+														stroke-width="2"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													>
+														<path d="M5 12h14" />
+														<path d="m12 5 7 7-7 7" />
+													</svg>
+												</p>
+											</div>
 										</div>
-									</figcaption>
-								</figure>
-								<div class="bg-secondary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure class="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption class="text-white">
-										<p class="line-clamp-8 text-sm">{descText}</p>
-										<p class="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{t('EN_SAVOIR_PLUS')}
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="16"
-												height="16"
-												viewBox="0 0 24 24"
-												fill="none"
-												stroke="currentColor"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-											>
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
 									</figcaption>
 								</figure>
 							</article>
