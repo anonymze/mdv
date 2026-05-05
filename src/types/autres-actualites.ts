@@ -6,7 +6,6 @@ export interface AutresActualites {
 	type: 'evenement'
 	archive?: boolean | null
 	immanquable?: 'immanquable' | 'coup_de_coeur' | null
-	jeunePublic?: boolean | null
 	thumbnail?: Media | null
 	title: string
 	description: RichTextField

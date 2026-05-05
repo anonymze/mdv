@@ -8,8 +8,9 @@ import { useEffect, useState } from 'react'
 import type { ParcNational } from '@/types/parc-national'
 import type { MediathequeSpectacle } from '@/types/mediatheque'
 import type { EvenementType } from '@/types/exposition'
+import type { AutresActualites } from '@/types/autres-actualites'
 
-type CollectionType = ArtVivant | ParcNational | MediathequeSpectacle | EvenementType;
+type CollectionType = ArtVivant | ParcNational | MediathequeSpectacle | EvenementType | AutresActualites;
 interface SpectaclesGridProps {
 	initialData: PayloadResponse<CollectionType>
 	locale: string
@@ -182,6 +183,7 @@ export function SpectaclesGrid({
 			collection === 'parc_national' ? '/parc-national/evenement'
 			: collection === 'mediatheque' ? '/mediatheque/evenement'
 			: collection === 'exposition' ? '/exposition/evenement'
+			: collection === 'autres_actualites' ? '/autres-actualites/evenement'
 			: '/art-vivant/spectacle'
 		return `${localePrefix}${base}/${id}`
 	}
