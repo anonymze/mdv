@@ -10,7 +10,7 @@ interface SmartPaginationProps {
 	variant?: Variant
 }
 
-const MAX_DOTS = 6
+const MAX_DOTS = 7
 
 const VARIANTS: Record<Variant, { active: string; inactive: string }> = {
 	default: { active: 'bg-foreground', inactive: 'bg-primary/40 hover:bg-primary/70' },
@@ -24,7 +24,7 @@ export function SmartPagination({ page, totalPages, anchor, onPageChange, varian
 	const { active, inactive } = VARIANTS[variant]
 
 	return (
-		<nav className="flex items-center justify-center gap-3" aria-label="Pagination">
+		<nav className="flex items-center justify-center gap-4" aria-label="Pagination">
 			{Array.from({ length: dotsCount }, (_, i) => {
 				const targetPage = i + 1
 				const isActive = targetPage === page
