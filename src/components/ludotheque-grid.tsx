@@ -199,7 +199,7 @@ export function LudothequeGrid({
 
 			<div
 				id="ludotheque-grid"
-				className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 place-items-center lg:place-items-start gap-x-4 gap-y-8 *:max-w-90 *:min-w-75 *:only:col-span-full md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(360px,1fr))]"
+				className="scroll-m-20 py-8 lg:py-16 grid grid-cols-[repeat(auto-fit,360px)] justify-center lg:justify-between content-start gap-x-4 gap-y-8 *:only:col-span-full"
 			>
 				{loading ? (
 					<div className="col-span-full flex min-h-[270px] w-full !max-w-none items-center justify-center">

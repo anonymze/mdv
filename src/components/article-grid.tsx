@@ -80,7 +80,7 @@ export function ArticleGrid({
 
 	return (
 		<>
-			<div id="articles-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(360px,1fr))] place-items-center lg:place-items-start gap-x-4 gap-y-8 *:max-w-90 *:min-w-75 *:only:col-span-full min-h-104">
+			<div id="articles-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-[repeat(auto-fit,360px)] justify-center lg:justify-between content-start gap-x-4 gap-y-8 *:only:col-span-full min-h-104">
 				{loading ? (
 					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[300px]">
 						<div className="border-secondary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
@@ -114,7 +114,7 @@ export function ArticleGrid({
 										<div className="row-span-2 bg-secondary flex shrink-0 items-center justify-center rounded-2xl px-7 py-5 text-3xl font-serif text-white">
 											9 €
 										</div>
-										{descText && <p className="!text-foreground line-clamp-2 group-hover:line-clamp-10 group-hover:pt-2 text-sm">{descText}</p>}
+										{descText && <p className="!text-foreground line-clamp-2 group-hover:line-clamp-9 group-hover:pt-2 text-sm">{descText}</p>}
 									</figcaption>
 								</figure>
 							</article>

@@ -261,8 +261,8 @@ export default {
 	PARC_NATIONAL_DESC:
 		"La Maison du Parc national et de la vallée est une véritable vitrine pour toutes celles et ceux qui souhaitent mieux connaître le Parc national des Pyrénées. Sur place, vous trouverez une documentation riche à consulter librement ainsi que des films à visionner pour découvrir le territoire sous un autre angle. Tout au long de l'année, les gardes-moniteurs animent les lieux de leur présence et de leur passion. Ils partagent leurs connaissances, leurs expériences et leur amour du patrimoine naturel, offrant ainsi des rencontres privilégiées et authentiques. La Maison est également un espace dédié à la mise en valeur des produits labellisés Esprit Parc, ainsi qu'une boutique où vous pourrez retrouver divers souvenirs et goodies inspirés du Parc national.",
 	PARC_NATIONAL_SITE_OFFICIEL: 'Site officiel du Parc national des Pyrénées',
-	AUTRES_EVENEMENTS_TITRE: 'Les autres évènements',
-	AUTRES_EVENEMENTS_INTRO: 'Des initiatives qui font vivre le territoire',
+	AUTRES_EVENEMENTS_TITRE: "L'agenda des actions locales",
+	AUTRES_EVENEMENTS_INTRO: 'Des initiatives qui font vivre le territoire, en partenariat avec la maison du Parc National et de la vallée',
 	PARC_EVENEMENTS_DESC:
 		"Tout au long de l'année, le Parc national des Pyrénées propose des activités variées pour sensibiliser et faire découvrir son territoire. Découvrez des projections sous le ciel étoilé, assistez à des conférences passionnantes ou rencontrez et échangez avec les gardes-moniteurs.",
 	PARC_EVENEMENTS_INTRO: "Des rencontres et des découvertes tout au long de l'année",

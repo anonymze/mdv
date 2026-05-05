@@ -29,7 +29,8 @@ export function MyImage({
 	priority
 }: MyImageProps) {
 	// Handle src: prepend PAYLOAD_URL if string, fallback to placeholder if null
-	const imageSrc = src ? `${payloadUrl}${src}` : PlaceholderImg.src
+	const placeholderSrc = typeof PlaceholderImg === 'string' ? PlaceholderImg : PlaceholderImg.src
+	const imageSrc = src ? `${payloadUrl}${src}` : placeholderSrc
 
 	// For fullWidth layout, don't pass width/height to avoid type conflicts
 	if (layout === 'fullWidth') {

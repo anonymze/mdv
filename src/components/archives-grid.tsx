@@ -185,7 +185,7 @@ const fetchData = async () => {
 				</div>
 			</div>
 
-			<div id="archives-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center lg:place-items-start gap-x-4 gap-y-8 *:max-w-80 *:only:col-span-full min-h-104">
+			<div id="archives-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-[repeat(auto-fit,320px)] justify-center lg:justify-between content-start gap-x-4 gap-y-8 *:only:col-span-full min-h-104">
 				{loading ? (
 					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[300px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
@@ -200,44 +200,41 @@ const fetchData = async () => {
 						return (
 							<article
 								key={item.id}
-								className="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm"
+								className="group shadow-card relative col-span-1 w-[320px] overflow-hidden rounded-2xl border border-black bg-white h-[400px]"
 							>
-								<div className="overflow-hidden">
-									<MyImage
-										src={getImage(item)?.url}
-										payloadUrl={payloadUrl}
-										alt={getImage(item)?.alt ?? translations.IMAGE_PLACEHOLDER}
-										width={275}
-										height={305}
-										className="h-[305px] w-full object-cover"
-										loading="lazy"
-										layout="fullWidth"
-										background={getImage(item)?.blurhash}
-									/>
-								</div>
-								<figure className="p-4 transition-opacity duration-250 group-hover:opacity-0">
+								<MyImage
+									src={getImage(item)?.url}
+									payloadUrl={payloadUrl}
+									alt={getImage(item)?.alt ?? translations.IMAGE_PLACEHOLDER}
+									width={275}
+									height={400}
+									className="h-full w-full rounded-2xl object-cover"
+									loading="lazy"
+									layout="fullWidth"
+									background={getImage(item)?.blurhash}
+								/>
+								<figure className="bg-background/90 absolute inset-x-0 bottom-0 h-[116px] overflow-hidden rounded-t-2xl p-4 transition-[height] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:h-full">
 									<figcaption>
-										<h3 className="pb-3 text-black truncate">
+										<h3 className="line-clamp-1 mb-3 group-hover:line-clamp-2">
 											<a href={getLink(item)} className="after:absolute after:inset-0 after:z-10">
 												{item.title}
 											</a>
 										</h3>
-										<time className="distinguished text-sm capitalize truncate block" dateTime={item.date_start}>
+										<time className="distinguished text-primary text-sm capitalize tabular-nums" dateTime={item.date_start}>
 											{formatDate(item.date_start)}
 										</time>
-									</figcaption>
-								</figure>
-								<div className="bg-primary/80 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover:opacity-100" />
-								<figure className="pointer-events-none absolute inset-0 p-5 opacity-0 transition-opacity duration-250 group-hover:opacity-100">
-									<figcaption className="text-white">
-										<div className="line-clamp-8 text-sm" dangerouslySetInnerHTML={{ __html: stripTextAlign(descText) }} />
-										<p className="inline-flex items-center gap-2 pt-10 text-sm font-semibold underline underline-offset-2">
-											{translations.EN_SAVOIR_PLUS}
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-												<path d="M5 12h14" />
-												<path d="m12 5 7 7-7 7" />
-											</svg>
-										</p>
+										<div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:grid-rows-[1fr]">
+											<div className="overflow-hidden">
+												{descText && <div className="!text-foreground line-clamp-8 pt-4 text-sm" dangerouslySetInnerHTML={{ __html: stripTextAlign(descText) }} />}
+												<p className="!text-secondary-muted inline-flex items-center gap-2 pt-4 text-medium font-semibold transition-opacity opacity-0 duration-200 group-hover:opacity-100 group-hover:delay-200 pl-0.5">
+													{translations.EN_SAVOIR_PLUS}
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+														<path d="M5 12h14" />
+														<path d="m12 5 7 7-7 7" />
+													</svg>
+												</p>
+											</div>
+										</div>
 									</figcaption>
 								</figure>
 							</article>

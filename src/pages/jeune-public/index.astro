@@ -10,7 +10,7 @@ import {
 	translatePublicField
 } from '@/lib/translate-fields'
 import type { Cinema } from '@/types/cinema'
-import type { Mediatheque } from '@/types/mediatheque'
+import type { Ludotheque, Mediatheque } from '@/types/mediatheque'
 import type { ParcNational } from '@/types/parc-national'
 import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
 import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
@@ -31,7 +31,7 @@ const evenements = await find<ParcNational>('parc_national', {
 	}
 })
 
-const ludotheque = await find<Mediatheque>('mediatheque', {
+const ludotheque = await find<Ludotheque>('mediatheque', {
 	limit: 3,
 	locale,
 	upcomingOnly: false,
@@ -175,7 +175,7 @@ const cinema = await find<Cinema>('cinema', {
 			</p>
 
 			<div
-				class="my-8 grid grid-cols-1 place-items-center lg:place-items-start gap-x-4 gap-y-8 *:max-w-80 *:only:col-span-full md:grid-cols-2 lg:my-16 lg:grid-cols-4"
+				class="my-8 grid grid-cols-[repeat(auto-fit,320px)] justify-center lg:justify-between content-start gap-x-4 gap-y-8 *:only:col-span-full lg:my-16"
 			>
 				{
 					evenements.docs.map((item) => {
@@ -186,7 +186,7 @@ const cinema = await find<Cinema>('cinema', {
 							.join(' ')
 
 						return (
-							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
+							<article class="group relative col-span-1 w-[320px] overflow-hidden bg-white shadow-sm">
 								<div class="overflow-hidden">
 									<MyImage
 										src={item.thumbnail?.url}
@@ -265,7 +265,7 @@ const cinema = await find<Cinema>('cinema', {
 							.join(' ')
 
 						return (
-							<article class="group relative col-span-1 w-full overflow-hidden bg-white shadow-sm">
+							<article class="group relative col-span-1 w-[320px] overflow-hidden bg-white shadow-sm">
 								<div class="overflow-hidden">
 									<MyImage
 										src={item.thumbnail?.url}
@@ -337,7 +337,7 @@ const cinema = await find<Cinema>('cinema', {
 			</article>
 
 			<div
-				class="my-8 grid grid-cols-1 place-items-center lg:place-items-start gap-x-4 gap-y-8 *:max-w-92 *:only:col-span-full md:grid-cols-2 lg:my-16 lg:grid-cols-3"
+				class="my-8 grid grid-cols-[repeat(auto-fit,360px)] justify-center lg:justify-between content-start gap-x-4 gap-y-8 *:only:col-span-full lg:my-16"
 			>
 				{
 					ludotheque.docs.map((item) => {
