@@ -65,34 +65,34 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 <Layout title={item.title} image={item.thumbnail?.url}>
 	<main id="main-content">
 		<section class="section-default rounded-t-none bg-primary">
-			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">
-				<div class="flex items-center justify-center mt-8 md:mt-6 lg:mt-0">
-					<MyImage
-						src={item.thumbnail?.url}
-						alt={item.thumbnail?.alt ?? item.title}
-						background={item.thumbnail?.blurhash}
-						width={1100}
-						height={800}
-						layout="constrained"
-					/>
-				</div>
+			<article class="relative overflow-hidden rounded-2xl mt-8 lg:mt-0">
+				<MyImage
+					src={item.thumbnail?.url}
+					alt={item.thumbnail?.alt ?? item.title}
+					background={item.thumbnail?.blurhash}
+					width={1400}
+					height={450}
+					layout="fullWidth"
+					class="aspect-video object-cover"
+				/>
 
-				<div class="bg-background flex flex-col rounded-2xl p-6 lg:p-8">
-					<p class="distinguished !text-primary text-sm capitalize">{formatDate(item.date_start)} - {formatTime(item.date_start)}</p>
-					<p class="distinguished !text-primary mb-4 lg:mb-8 text-sm">{item.location || MDV_DEFAULT_ADDRESS}</p>
+				<div class="bg-background/90 absolute inset-x-0 bottom-0 p-4 lg:p-6 flex flex-col lg:flex-row lg:items-end justify-between gap-4 lg:gap-6 rounded-t-3xl">
+					<div>
+						<h1 class="!text-foreground pb-3 lg:pb-4 text-2xl lg:text-3xl font-normal">{item.title}</h1>
+						<p class="!text-foreground font-medium text-sm capitalize">
+							{formatDate(item.date_start)} - {formatTime(item.date_start)}
+						</p>
+						<p class="distinguished !text-secondary-muted text-sm uppercase">
+							{translatePublicField(item.public, t)} - {item.genre} - {item.languages}
+						</p>
+					</div>
 
-					<h1 class="pb-4 !text-foreground text-3xl font-normal">{item.title}</h1>
-
-					<p class="pb-4 text-secondary! font-medium">
-						{translatePublicField(item.public, t)} - {item.genre} - {item.languages}
-					</p>
-
-					<div class="flex flex-wrap gap-3 mt-auto">
+					<div class="flex flex-wrap gap-2 shrink-0">
 						{
 							item.price
 								.split(';')
 								.map((price: string) => (
-									<span class="bg-secondary text-primary distinguished rounded-2xl px-3 py-3 text-sm">{price.trim()}</span>
+									<span class="bg-secondary text-primary distinguished rounded-2xl px-3 py-2 text-sm">{price.trim()}</span>
 								))
 						}
 					</div>
