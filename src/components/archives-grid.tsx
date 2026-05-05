@@ -1,7 +1,7 @@
 import { find, type PayloadResponse } from '@/api/payload'
 import { MyImage } from '@/components/my-image'
 import { Input } from '@/components/ui/input'
-import { SelectWrapper } from '@/components/select-wrapper'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { SmartPagination } from '@/components/smart-pagination'
 import { stripTextAlign } from '@/utils/helper'
 import { useEffect, useState } from 'react'
@@ -142,18 +142,18 @@ const fetchData = async () => {
 
 	return (
 		<>
-			<div className="bg-primary mt-6 lg:mt-12 px-5 lg:px-10 py-6 lg:py-8 space-y-4 lg:space-y-6">
+			<div className="bg-primary rounded-3xl mt-6 lg:mt-12 px-5 lg:px-8 py-5 lg:py-6 space-y-3 lg:space-y-4">
 				<div className="relative w-full">
 					<Input
 						placeholder={translations.MOTS_CLES}
-						className="w-full bg-primary-foreground border-0 rounded-none min-h-12 pr-10"
+						className="w-full bg-foreground text-white border-0 rounded-md min-h-12 px-4 pr-10 placeholder:text-white/60"
 						value={keyword}
 						onChange={(e) => setKeyword(e.target.value)}
 					/>
 					{keyword && (
 						<button
 							onClick={() => setKeyword('')}
-							className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+							className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
 							type="button"
 						>
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -164,24 +164,32 @@ const fetchData = async () => {
 					)}
 				</div>
 
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 *:min-h-12">
-					<SelectWrapper
-						placeholder={translations.TOUS}
-						options={translations.collectionOptions}
-						className="w-full"
-						value={collection}
-						onValueChange={setCollection}
-					/>
-					<SelectWrapper
-						placeholder={translations.ANNEE}
-						options={[
-							{ key: translations.TOUS, value: 'all' },
-							...generateYearOptions()
-						]}
-						className="w-full"
-						value={year}
-						onValueChange={(v) => setYear(v === 'all' ? '' : v)}
-					/>
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 *:min-h-12">
+					<Select value={collection} onValueChange={setCollection}>
+						<SelectTrigger className="w-full border-0 bg-foreground text-white rounded-md hover:text-secondary focus-visible:ring-0 focus-visible:border-0 min-h-12">
+							<SelectValue placeholder={translations.TOUS} />
+						</SelectTrigger>
+						<SelectContent>
+							{translations.collectionOptions.map((option) => (
+								<SelectItem key={option.value} value={option.value} className="py-3">
+									{option.key}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+					<Select value={year} onValueChange={(v: string) => setYear(v === 'all' ? '' : v)}>
+						<SelectTrigger className="w-full border-0 bg-foreground text-white rounded-md hover:text-secondary focus-visible:ring-0 focus-visible:border-0 min-h-12">
+							<SelectValue placeholder={translations.ANNEE} />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="all" className="py-3">{translations.TOUS}</SelectItem>
+							{generateYearOptions().map((option) => (
+								<SelectItem key={option.value} value={option.value} className="py-3">
+									{option.key}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
 				</div>
 			</div>
 

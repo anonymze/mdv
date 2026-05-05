@@ -41,8 +41,10 @@ interface Props {
 	links: Link[]
 	homeHref: string
 	contactHref: string
+	artisteHref: string
 	// labels
 	contactLabel: string
+	artisteLabel: string
 	hoursLabel: string
 	closedLabel: string
 	learnMoreLabel: string
@@ -63,7 +65,9 @@ export function MobileMenu({
 	links,
 	homeHref,
 	contactHref,
+	artisteHref,
 	contactLabel,
+	artisteLabel,
 	hoursLabel,
 	closedLabel,
 	learnMoreLabel,
@@ -127,7 +131,10 @@ export function MobileMenu({
 						</a>
 					))}
 				</nav>
-				<div className="flex w-full items-center justify-end px-8 pt-3 mb-2">
+				<div className="flex w-full items-center justify-end gap-4 px-8 pt-3 mb-2">
+					<Button link={artisteHref} variant="default" className="!bg-primary hover:!bg-primary/90">
+						{artisteLabel}
+					</Button>
 					<Button link={contactHref} variant="default">
 						{contactLabel}
 					</Button>

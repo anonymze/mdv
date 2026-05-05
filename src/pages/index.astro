@@ -38,13 +38,13 @@ const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
 const spectacles = await find<ArtVivant>('art_vivant', {
-	limit: 4,
+	limit: 1,
 	locale,
 	where: { type: { equals: 'evenement' } }
 })
 
 const seances = await find<Cinema>('cinema', {
-	limit: 4,
+	limit: 1,
 	locale,
 	where: {
 		type: { equals: 'seance' }
@@ -180,119 +180,7 @@ const jsonLd = {
 <Layout title={t('ACCUEIL_TITLE')}>
 	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	<main id="main-content">
-		<section
-			class="relative grid h-[calc(100dvh-var(--header-height))] max-h-225 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 pt-11.5 *:rounded-lg lg:rounded-b-3xl"
-		>
-			<a
-				href={getRelativeLocaleUrl(locale, 'art-vivant')}
-				aria-label={t('ART_VIVANT')}
-				class="notch-br group relative col-span-10 col-start-1 row-span-18 row-start-1 block overflow-hidden bg-[#be7a5a]"
-			>
-				<img src={LayoutHome1.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
-				<div
-					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#be7a5a]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-				>
-					<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('ART_VIVANT')}</h2>
-					<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
-						>{t('HERO_TILE_ART_VIVANT_SUB')}</span
-					>
-				</div>
-			</a>
-			<a
-				href={getRelativeLocaleUrl(locale, 'cinema')}
-				aria-label={t('CINEMA')}
-				class="group relative z-20 col-span-11 col-start-11 row-span-16 row-start-1 block [clip-path:inset(0_0_-0.75rem_0_round_0.5rem)] lg:[clip-path:inset(0_0_-1.5rem_0_round_0.5rem)]"
-			>
-				<div class="absolute inset-0 rounded-lg bg-[#e5aa7f]"></div>
-				<div class="absolute inset-x-0 top-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
-					<img src={LayoutHome2.src} alt="" loading="eager" class="h-full w-full object-cover object-bottom" />
-				</div>
-				<div
-					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#e5aa7f]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-				>
-					<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('CINEMA')}</h2>
-					<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
-						>{t('HERO_TILE_CINEMA_SUB')}</span
-					>
-				</div>
-			</a>
-			<a
-				href={getRelativeLocaleUrl(locale, 'exposition')}
-				aria-label={t('EXPOSITION')}
-				class="notch-bl group relative col-span-19 col-start-22 row-span-20 row-start-1 block overflow-hidden bg-[#f4ede1]"
-			>
-				<img
-					src={LayoutHome3.src}
-					alt=""
-					loading="eager"
-					fetchpriority="high"
-					class="h-full w-full rounded-lg object-cover"
-				/>
-				<div
-					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#f4ede1]/90 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-				>
-					<h2 class="text-foreground font-serif text-3xl lg:text-5xl">{t('EXPOSITION')}</h2>
-					<span class="text-foreground max-w-40 pt-1 font-sans text-sm font-medium lg:pt-2 lg:text-lg"
-						>{t('HERO_TILE_EXPOSITION_SUB')}</span
-					>
-				</div>
-			</a>
-			<a
-				href={getRelativeLocaleUrl(locale, 'artiste')}
-				aria-label={t('ARTISTE')}
-				class="notch-tr group relative col-span-13 col-start-1 row-span-22 row-start-19 block overflow-hidden bg-[#f4ede1]"
-			>
-				<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
-				<div
-					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#f4ede1]/90 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-				>
-					<h2 class="text-foreground font-serif text-3xl lg:text-5xl">{t('ARTISTE')}</h2>
-					<span class="text-foreground max-w-40 pt-1 font-sans text-sm font-medium lg:pt-2 lg:text-lg"
-						>{t('HERO_TILE_ARTISTE_SUB')}</span
-					>
-				</div>
-			</a>
-			<a
-				href={getRelativeLocaleUrl(locale, 'jeune-public')}
-				aria-label={t('JEUNESSE')}
-				class="group relative z-20 col-span-14 col-start-14 row-span-16 row-start-25 block [clip-path:inset(-0.75rem_0_0_0_round_0.5rem)] lg:[clip-path:inset(-1.5rem_0_0_0_round_0.5rem)]"
-			>
-				<div class="absolute inset-0 rounded-lg bg-[#be7a5a]"></div>
-				<div class="absolute inset-x-0 bottom-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
-					<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full object-cover object-top" />
-				</div>
-				<div
-					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#be7a5a]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-				>
-					<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('JEUNESSE')}</h2>
-					<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
-						>{t('HERO_TILE_JEUNESSE_SUB')}</span
-					>
-				</div>
-			</a>
-			<a
-				href={getRelativeLocaleUrl(locale, 'mediatheque')}
-				aria-label={t('MEDIATHEQUE')}
-				class="notch-tl group relative col-span-13 col-start-28 row-span-20 row-start-21 block overflow-hidden bg-[#e5aa7f]"
-			>
-				<img src={LayoutHome6.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
-				<div
-					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#e5aa7f]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-				>
-					<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('MEDIATHEQUE')}</h2>
-					<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
-						>{t('HERO_TILE_MEDIATHEQUE_SUB')}</span
-					>
-				</div>
-			</a>
-			<div
-				class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center overflow-hidden bg-[#f4ede1] p-2"
-			>
-				<h1 class="text-primary text-center text-3xl! leading-8 font-medium! lg:text-[42px]! lg:leading-14">
-					Maison du Parc national et<br />de la vallée &middot; Luz-Saint-Sauveur
-				</h1>
-			</div>
-		</section>
+
 
 		<section class="section-default">
 			<article class="grid grid-cols-1 gap-4 lg:flex">
@@ -376,7 +264,7 @@ const jsonLd = {
 				/>
 			</article>
 			<div
-				class="my-16 grid grid-cols-[repeat(auto-fit,320px)] justify-center lg:justify-between content-start gap-x-4 gap-y-8 *:only:col-span-full"
+				class="my-16 grid grid-cols-1 place-items-center lg:place-items-start gap-x-4 gap-y-8 *:max-w-80 *:min-w-75 *:only:col-span-full md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]"
 			>
 				{
 					spectacles.docs.map((item, index) => {
@@ -398,7 +286,6 @@ const jsonLd = {
 								imageSrc={item.thumbnail?.url}
 								imageAlt={item.thumbnail?.alt}
 								imageBlurhash={item.thumbnail?.blurhash}
-								width="w-[320px]"
 								class={index >= 2 ? 'max-md:hidden' : undefined}
 							/>
 						)
@@ -503,10 +390,10 @@ const jsonLd = {
 			)
 		}
 
-		<section class="section-default mx-auto w-[358px] px-0 lg:w-auto lg:px-8">
+		<section class="section-default mx-auto w-[335px] px-0 sm:w-[358px] lg:w-auto lg:px-8">
 			<article class="bg-foreground flex w-full flex-col-reverse rounded-4xl lg:flex-row">
 				<div
-					class="relative h-[301px] w-[358px] shrink-0 overflow-hidden rounded-b-4xl lg:h-[349.5px] lg:w-[378px] lg:overflow-visible lg:rounded-none"
+					class="relative h-[301px] w-[335px] shrink-0 overflow-hidden rounded-b-4xl sm:w-[358px] lg:h-[349.5px] lg:w-[378px] lg:overflow-visible lg:rounded-none"
 				>
 					<div
 						class="absolute -inset-[29px] z-1 lg:inset-auto lg:right-0 lg:bottom-0 lg:h-[calc(100%+28px)] lg:w-[calc(100%+28px)]"
