@@ -3,7 +3,7 @@ import type { RichTextField } from './rich-text'
 
 export interface ArtVivant {
 	id: string
-	type: 'evenement' | 'residence'
+	type: 'evenement' | 'residence' | 'scolaire'
 	archive?: boolean | null
 	immanquable?: 'immanquable' | 'coup_de_coeur' | null
 	jeunePublic?: boolean | null

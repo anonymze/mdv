@@ -13,10 +13,10 @@ import type { MenuNav } from '@/types/menu'
 import { cn } from '@/lib/utils'
 
 export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menuNavs: MenuNav[]; localePrefix: string; className?: string }) {
-	const [headerWidth, setHeaderWidth] = React.useState(0)
 	const [value, setValue] = React.useState('')
-	const itemRefs = React.useRef<(HTMLLIElement | null)[]>([])
 	const isClickingRef = React.useRef(false)
+	const itemRefs = React.useRef<(HTMLLIElement | null)[]>([])
+	const [layout, setLayout] = React.useState<{ width: number; offsets: number[] }>({ width: 0, offsets: [] })
 
 	const handleValueChange = (newValue: string) => {
 		if (isClickingRef.current || newValue === '') {
@@ -25,31 +25,20 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 		}
 	}
 
-	React.useEffect(() => {
-		const updateWidth = () => {
+	React.useLayoutEffect(() => {
+		const compute = () => {
 			const header = document.querySelector('header')
-			if (header) {
-				setHeaderWidth(header.getBoundingClientRect().width)
-			}
-		}
-
-		updateWidth()
-		window.addEventListener('resize', updateWidth)
-		return () => window.removeEventListener('resize', updateWidth)
-	}, [])
-
-	const getLeftOffset = (index: number) => {
-		if (typeof window === 'undefined') return 0
-
-		const header = document.querySelector('header')
-		const item = itemRefs.current[index]
-		if (header && item) {
+			if (!header) return
 			const headerRect = header.getBoundingClientRect()
-			const itemRect = item.getBoundingClientRect()
-			return -(itemRect.left - headerRect.left)
+			const offsets = itemRefs.current.map((item) =>
+				item ? -(item.getBoundingClientRect().left - headerRect.left) : 0
+			)
+			setLayout({ width: headerRect.width, offsets })
 		}
-		return 0
-	}
+		compute()
+		window.addEventListener('resize', compute)
+		return () => window.removeEventListener('resize', compute)
+	}, [menuNavs.length])
 
 	return (
 		<NavigationMenu viewport={false} value={value} onValueChange={handleValueChange} className={cn('z-20', className)}>
@@ -74,7 +63,7 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 							value={`menu-${index}`}
 							ref={(el) => {
 								itemRefs.current[index] = el
-              }}
+							}}
 						>
 							<NavigationMenuTrigger
 								onPointerDown={() => {
@@ -86,8 +75,8 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 							<NavigationMenuContent
 								className="flex gap-x-4"
 								style={{
-									width: headerWidth || 'auto',
-									left: getLeftOffset(index)
+									width: layout.width || 'auto',
+									left: layout.offsets[index] || 0
 								}}
 							>
 								{menu.subMenus.map((subMenu, subIndex) => {
@@ -98,7 +87,8 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 											style={{
 												animationDelay: `${subIndex * 50}ms`,
 												animationDuration: '300ms',
-												animationFillMode: 'backwards'
+												animationFillMode: 'backwards',
+												willChange: 'transform'
 											}}
 										>
 											<div className="px-4 pt-4">
