@@ -180,7 +180,7 @@ const photoCredits = (Object.keys(PAGE_LABELS) as CreditsPage[])
 
 				<section>
 					<h2 class="text-primary pb-2 lg:pb-3">11. Crédits photos</h2>
-					<div class="flex flex-col gap-4">
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						{photoCredits.map((credit) => (
 							<div>
 								<h3 class="font-title pb-1">{credit.page}</h3>
