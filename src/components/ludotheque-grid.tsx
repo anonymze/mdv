@@ -243,9 +243,9 @@ export function LudothequeGrid({
 										)}
 										{(item.public || item.players || item.duration) && (
 											<div className="bg-secondary text-secondary-foreground rounded-xl mt-1.5 flex items-center">
-												<div className="flex-1 distinguished text-center text-xs py-2">{item.public}</div>
-												<div className="bg-background distinguished flex-1 text-center text-xs py-1 mx-1 rounded-xl">{item.players}</div>
-												<div className="flex-1 distinguished text-center text-xs py-2">{translateDuration(item.duration)}</div>
+												<div className="flex-1 min-w-0 distinguished text-center text-xs py-2 px-2 truncate">{item.public}</div>
+												<div className="bg-background distinguished flex-1 min-w-0 text-center text-xs py-1 px-2 mx-1 rounded-xl truncate">{item.players}</div>
+												<div className="flex-1 min-w-0 distinguished text-center text-xs py-2 px-2 truncate">{translateDuration(item.duration)}</div>
 											</div>
 										)}
 										<div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:grid-rows-[1fr]">

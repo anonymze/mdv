@@ -42,45 +42,6 @@ const rdv = await find<Cinema>('cinema', {
 	}
 })
 
-// FAKE DATA — remove when API has rdv_cinema entries
-const fakeSynopsis = (text: string) => ({
-	root: { children: [{ children: [{ type: 'text', text }] }] }
-}) as unknown as Cinema['synopsis']
-rdv.docs = [
-	{
-		id: 'fake-1',
-		title: 'Ciné-Débat : Le Cinéma de Demain',
-		synopsis: fakeSynopsis('Une rencontre exclusive avec un réalisateur passionné qui partage sa vision du septième art contemporain. Échanges, projections et anecdotes inédites au programme.'),
-		date_start: '2026-06-15T19:30:00.000Z',
-		genre: 'Débat',
-		thumbnail: null
-	},
-	{
-		id: 'fake-2',
-		title: 'Nuit du Court Métrage',
-		synopsis: fakeSynopsis('Une sélection des meilleurs courts métrages français et internationaux de l\'année. Une nuit entière dédiée à la créativité et à l\'audace cinématographique.'),
-		date_start: '2026-07-02T20:00:00.000Z',
-		genre: 'Festival',
-		thumbnail: null
-	},
-	{
-		id: 'fake-3',
-		title: 'Hommage à Agnès Varda',
-		synopsis: fakeSynopsis('Projection d\'une œuvre majeure suivie d\'un échange avec des spécialistes du cinéma de la Nouvelle Vague et de ses héritières.'),
-		date_start: '2026-07-18T18:00:00.000Z',
-		genre: 'Rétrospective',
-		thumbnail: null
-	},
-	{
-		id: 'fake-4',
-		title: 'Cinéma en Plein Air',
-		synopsis: fakeSynopsis('Sous les étoiles de la vallée, redécouvrez un classique du cinéma sur grand écran. Soirée conviviale ouverte à toutes et tous.'),
-		date_start: '2026-08-05T21:30:00.000Z',
-		genre: 'Plein air',
-		thumbnail: null
-	}
-] as unknown as typeof rdv.docs
-
 const SCOLAIRE_LIMIT = 6
 const scolaire = await find<Cinema>('cinema', {
 	limit: SCOLAIRE_LIMIT,

@@ -1,26 +1,24 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
-import FirstCyberbaseImg from '@/assets/imgs/cyberbase/1.webp'
-import SecondCyberbaseImg from '@/assets/imgs/cyberbase/2.webp'
-import ThirdCyberbaseImg from '@/assets/imgs/cyberbase/3.webp'
-import FirstMediaImg from '@/assets/imgs/media/1.webp'
 import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
 import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
 import LayoutHome3 from '@/assets/imgs/layout_home/3.png'
 import LayoutHome4 from '@/assets/imgs/layout_home/4.png'
 import LayoutHome5 from '@/assets/imgs/layout_home/5.png'
 import LayoutHome6 from '@/assets/imgs/layout_home/6.png'
-import SecondMediaImg from '@/assets/imgs/media/2.webp'
-import ThirdMediaImg from '@/assets/imgs/media/3.webp'
 import FirstImg from '@/assets/imgs/mediatheque/1.webp'
 import SecondImg from '@/assets/imgs/mediatheque/2.webp'
+import ThirdImg from '@/assets/imgs/mediatheque/3.webp'
 import FourthImg from '@/assets/imgs/mediatheque/4.webp'
-import FivethImg from '@/assets/imgs/mediatheque/5.webp'
+import FifthImg from '@/assets/imgs/mediatheque/5.webp'
 import SixthImg from '@/assets/imgs/mediatheque/6.webp'
+import SeventhImg from '@/assets/imgs/mediatheque/7.webp'
+import EighthImg from '@/assets/imgs/mediatheque/8.webp'
+import NinthImg from '@/assets/imgs/mediatheque/9.webp'
+import TenthImg from '@/assets/imgs/mediatheque/10.webp'
 import { HoverImageSwap } from '@/components/hover-image-swap'
 import { LudothequeGrid } from '@/components/ludotheque-grid'
-import MyImage from '@/components/my-image.astro'
 import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
@@ -252,8 +250,8 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 							{
 								slots: [
 									{ src: SecondImg.src, alt: '', barClassName: 'bg-secondary' },
-									{ src: FivethImg.src, alt: '', barClassName: 'bg-secondary-muted' },
-									{ src: SixthImg.src, alt: '' }
+									{ src: ThirdImg.src, alt: '', barClassName: 'bg-secondary-muted' },
+									{ src: FourthImg.src, alt: '' }
 								],
 								defaultIndex: 2,
 								height: 'h-[180px]',
@@ -322,15 +320,15 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 					direction="horizontal"
 					rows={[{
 						slots: [
-							{ src: FirstCyberbaseImg.src, alt: '', barClassName: 'bg-secondary' },
-							{ src: SecondCyberbaseImg.src, alt: '', barClassName: 'bg-secondary-muted' },
-							{ src: ThirdCyberbaseImg.src, alt: '', barClassName: 'bg-primary' },
-							{ src: FirstCyberbaseImg.src, alt: '', barClassName: 'bg-secondary' },
-							{ src: SecondCyberbaseImg.src, alt: '', barClassName: 'bg-secondary-muted' },
-							{ src: ThirdCyberbaseImg.src, alt: '' }
+							{ src: FifthImg.src, alt: '', barClassName: 'bg-secondary' },
+							{ src: SixthImg.src, alt: '', barClassName: 'bg-secondary-muted' },
+							{ src: SeventhImg.src, alt: '', barClassName: 'bg-primary' },
+							{ src: EighthImg.src, alt: '', barClassName: 'bg-secondary' },
+							{ src: NinthImg.src, alt: '', barClassName: 'bg-secondary-muted' },
+							{ src: TenthImg.src, alt: '' }
 						],
 						defaultIndex: 5,
-						height: 'h-[200px]',
+						height: 'h-[250px]',
 						width: 'w-full'
 					}]}
 				/>
@@ -341,9 +339,9 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 					direction="horizontal"
 					rows={[{
 						slots: [
-							{ src: ThirdCyberbaseImg.src, alt: '' },
-							{ src: FirstCyberbaseImg.src, alt: '', barClassName: 'bg-primary' },
-							{ src: SecondCyberbaseImg.src, alt: '', barClassName: 'bg-secondary' }
+							{ src: FifthImg.src, alt: '' },
+							{ src: SixthImg.src, alt: '', barClassName: 'bg-primary' },
+							{ src: SeventhImg.src, alt: '', barClassName: 'bg-secondary' }
 						],
 						defaultIndex: 0,
 						height: 'h-[180px]',
@@ -355,9 +353,9 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 					direction="horizontal"
 					rows={[{
 						slots: [
-							{ src: SecondCyberbaseImg.src, alt: '', barClassName: 'bg-secondary' },
-							{ src: ThirdCyberbaseImg.src, alt: '', barClassName: 'bg-secondary-muted' },
-							{ src: FirstCyberbaseImg.src, alt: '' }
+							{ src: EighthImg.src, alt: '', barClassName: 'bg-secondary' },
+							{ src: NinthImg.src, alt: '', barClassName: 'bg-secondary-muted' },
+							{ src: TenthImg.src, alt: '' }
 						],
 						defaultIndex: 2,
 						height: 'h-[180px]',
