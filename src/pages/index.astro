@@ -42,13 +42,13 @@ const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
 const spectacles = await find<ArtVivant>('art_vivant', {
-	limit: 1,
+	limit: 4,
 	locale,
 	where: { type: { equals: 'evenement' } }
 })
 
 const seances = await find<Cinema>('cinema', {
-	limit: 1,
+	limit: 4,
 	locale,
 	where: {
 		type: { equals: 'seance' }
