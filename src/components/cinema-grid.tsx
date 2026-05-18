@@ -304,7 +304,7 @@ export function CinemaGrid({
 										)}
 										<div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:grid-rows-[1fr]">
 											<div className="overflow-hidden">
-												{synopsisText && <p className="!text-foreground line-clamp-8 pt-4 text-sm">{synopsisText}</p>}
+												{synopsisText && <p className="!text-foreground line-clamp-5 md:line-clamp-5 lg:line-clamp-6 pt-4 text-sm">{synopsisText}</p>}
 												<p className="!text-secondary-muted inline-flex items-center gap-2 pt-4 text-medium font-semibold transition-opacity opacity-0 duration-200 group-hover:opacity-100 group-hover:delay-200 pl-0.5">
 													{translations.EN_SAVOIR_PLUS}
 													<svg

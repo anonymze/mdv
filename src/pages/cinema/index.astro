@@ -4,6 +4,7 @@ import { find } from '@/api/payload'
 import FirstMediaImg from '@/assets/imgs/cinema/1.webp'
 import SecondMediaImg from '@/assets/imgs/cinema/2.webp'
 import ThirdMediaImg from '@/assets/imgs/cinema/3.webp'
+import FourthMediaImg from '@/assets/imgs/cinema/4.webp'
 import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
 import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
 import LayoutHome3 from '@/assets/imgs/layout_home/3.png'
@@ -40,6 +41,45 @@ const rdv = await find<Cinema>('cinema', {
 		type: { equals: 'rdv_cinema' }
 	}
 })
+
+// FAKE DATA — remove when API has rdv_cinema entries
+const fakeSynopsis = (text: string) => ({
+	root: { children: [{ children: [{ type: 'text', text }] }] }
+}) as unknown as Cinema['synopsis']
+rdv.docs = [
+	{
+		id: 'fake-1',
+		title: 'Ciné-Débat : Le Cinéma de Demain',
+		synopsis: fakeSynopsis('Une rencontre exclusive avec un réalisateur passionné qui partage sa vision du septième art contemporain. Échanges, projections et anecdotes inédites au programme.'),
+		date_start: '2026-06-15T19:30:00.000Z',
+		genre: 'Débat',
+		thumbnail: null
+	},
+	{
+		id: 'fake-2',
+		title: 'Nuit du Court Métrage',
+		synopsis: fakeSynopsis('Une sélection des meilleurs courts métrages français et internationaux de l\'année. Une nuit entière dédiée à la créativité et à l\'audace cinématographique.'),
+		date_start: '2026-07-02T20:00:00.000Z',
+		genre: 'Festival',
+		thumbnail: null
+	},
+	{
+		id: 'fake-3',
+		title: 'Hommage à Agnès Varda',
+		synopsis: fakeSynopsis('Projection d\'une œuvre majeure suivie d\'un échange avec des spécialistes du cinéma de la Nouvelle Vague et de ses héritières.'),
+		date_start: '2026-07-18T18:00:00.000Z',
+		genre: 'Rétrospective',
+		thumbnail: null
+	},
+	{
+		id: 'fake-4',
+		title: 'Cinéma en Plein Air',
+		synopsis: fakeSynopsis('Sous les étoiles de la vallée, redécouvrez un classique du cinéma sur grand écran. Soirée conviviale ouverte à toutes et tous.'),
+		date_start: '2026-08-05T21:30:00.000Z',
+		genre: 'Plein air',
+		thumbnail: null
+	}
+] as unknown as typeof rdv.docs
 
 const SCOLAIRE_LIMIT = 6
 const scolaire = await find<Cinema>('cinema', {
@@ -231,32 +271,32 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 		{rdv.docs.length > 0 && (
 		<section class="section-default bg-primary" id="rdv-cinema">
 			<article class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8 pb-12">
-				<div class="lg:col-span-7 flex flex-col">
+				<div class="lg:col-span-8 flex flex-col">
 					<h2 class="text-foreground pb-2 lg:pb-3">{t('RDV_CINEMA')}</h2>
 					<p class="distinguished pb-3 lg:pb-16">{t('RDV_CINEMA_INTRO')}</p>
 					<p>{t('RDV_CINEMA_DESC')}</p>
 				</div>
-				<div class="lg:col-span-5 flex flex-col gap-4 lg:gap-5">
+				<div class="lg:col-span-4 grid grid-cols-[2fr_3fr] gap-4 lg:gap-5 h-[420px]">
 					<HoverImageSwap
 						client:visible
-						direction="horizontal"
+						direction="vertical"
 						rows={[{
 							slots: [
-								{ src: FirstMediaImg.src, alt: '' },
-								{ src: SecondMediaImg.src, alt: '', barClassName: 'bg-secondary-muted' },
-								{ src: ThirdMediaImg.src, alt: '', barClassName: 'bg-foreground' }
+								{ src: ThirdMediaImg.src, alt: '' },
+								{ src: FirstMediaImg.src, alt: '', barClassName: 'bg-background' },
+								{ src: SecondMediaImg.src, alt: '', barClassName: 'bg-secondary' }
 							],
 							defaultIndex: 0,
-							height: 'h-[222px]',
+							height: 'h-full',
 							width: 'w-full'
 						}]}
 					/>
-					<div class="rounded-2xl overflow-hidden h-[160px]">
+					<div class="rounded-2xl overflow-hidden">
 						<MyImage
-							src={SecondMediaImg}
+							src={FourthMediaImg}
 							alt=""
 							width={420}
-							height={160}
+							height={450}
 							layout="fullWidth"
 							class="h-full w-full object-cover"
 						/>
