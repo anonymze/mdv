@@ -1,6 +1,12 @@
 ---
 export const prerender = true
 import { find } from '@/api/payload'
+import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
+import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
+import LayoutHome3 from '@/assets/imgs/layout_home/3.png'
+import LayoutHome4 from '@/assets/imgs/layout_home/4.png'
+import LayoutHome5 from '@/assets/imgs/layout_home/5.png'
+import LayoutHome6 from '@/assets/imgs/layout_home/6.png'
 import { ArchivesGrid, type ArchiveDoc } from '@/components/archives-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
@@ -48,6 +54,114 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 
 <Layout title={t('ARCHIVES')}>
 	<main id="main-content">
+		<section
+			class="relative grid h-[calc(100dvh-var(--header-height))] max-h-225 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 pt-11.5 *:rounded-lg lg:rounded-b-3xl"
+		>
+			<a
+				href={getRelativeLocaleUrl(locale, 'art-vivant')}
+				aria-label={t('ART_VIVANT')}
+				class="notch-br group relative col-span-10 col-start-1 row-span-18 row-start-1 block overflow-hidden bg-[#be7a5a]"
+			>
+				<img src={LayoutHome1.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+				<div
+					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#be7a5a]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+				>
+					<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('ART_VIVANT')}</h2>
+					<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
+						>{t('HERO_TILE_ART_VIVANT_SUB')}</span
+					>
+				</div>
+			</a>
+			<a
+				href={getRelativeLocaleUrl(locale, 'cinema')}
+				aria-label={t('CINEMA')}
+				class="group relative col-span-11 col-start-11 row-span-16 row-start-1 block overflow-hidden bg-[#e5aa7f]"
+			>
+				<img src={LayoutHome2.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+				<div
+					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#e5aa7f]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+				>
+					<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('CINEMA')}</h2>
+					<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
+						>{t('HERO_TILE_CINEMA_SUB')}</span
+					>
+				</div>
+			</a>
+			<a
+				href={getRelativeLocaleUrl(locale, 'exposition')}
+				aria-label={t('EXPOSITION')}
+				class="notch-bl group relative col-span-19 col-start-22 row-span-20 row-start-1 block overflow-hidden bg-[#f4ede1]"
+			>
+				<img
+					src={LayoutHome3.src}
+					alt=""
+					loading="eager"
+					fetchpriority="high"
+					class="h-full w-full rounded-lg object-cover"
+				/>
+				<div
+					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#f4ede1]/90 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+				>
+					<h2 class="text-foreground font-serif text-3xl lg:text-5xl">{t('EXPOSITION')}</h2>
+					<span class="text-foreground max-w-40 pt-1 font-sans text-sm font-medium lg:pt-2 lg:text-lg"
+						>{t('HERO_TILE_EXPOSITION_SUB')}</span
+					>
+				</div>
+			</a>
+			<a
+				href={getRelativeLocaleUrl(locale, 'artiste')}
+				aria-label={t('ARTISTE')}
+				class="notch-tr group relative col-span-13 col-start-1 row-span-22 row-start-19 block overflow-hidden bg-[#f4ede1]"
+			>
+				<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+				<div
+					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#f4ede1]/90 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+				>
+					<h2 class="text-foreground font-serif text-3xl lg:text-5xl">{t('ARTISTE')}</h2>
+					<span class="text-foreground max-w-40 pt-1 font-sans text-sm font-medium lg:pt-2 lg:text-lg"
+						>{t('HERO_TILE_ARTISTE_SUB')}</span
+					>
+				</div>
+			</a>
+			<a
+				href={getRelativeLocaleUrl(locale, 'jeune-public')}
+				aria-label={t('JEUNESSE')}
+				class="group relative col-span-14 col-start-14 row-span-16 row-start-25 block overflow-hidden bg-[#be7a5a]"
+			>
+				<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+				<div
+					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#be7a5a]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+				>
+					<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('JEUNESSE')}</h2>
+					<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
+						>{t('HERO_TILE_JEUNESSE_SUB')}</span
+					>
+				</div>
+			</a>
+			<a
+				href={getRelativeLocaleUrl(locale, 'mediatheque')}
+				aria-label={t('MEDIATHEQUE')}
+				class="notch-tl group relative col-span-13 col-start-28 row-span-20 row-start-21 block overflow-hidden bg-[#e5aa7f]"
+			>
+				<img src={LayoutHome6.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+				<div
+					class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#e5aa7f]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
+				>
+					<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('MEDIATHEQUE')}</h2>
+					<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
+						>{t('HERO_TILE_MEDIATHEQUE_SUB')}</span
+					>
+				</div>
+			</a>
+			<div
+				class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center overflow-hidden bg-[#f4ede1] p-2"
+			>
+				<h1 class="text-primary text-center text-3xl! leading-8 font-medium! lg:text-[42px]! lg:leading-14">
+					Maison du Parc national et<br />de la vallée &middot; Luz-Saint-Sauveur
+				</h1>
+			</div>
+		</section>
+
 		<section class="section-default" id="archives">
 			<article>
 				<h2 class="pb-2 lg:pb-3">{t('ARCHIVES')}</h2>
