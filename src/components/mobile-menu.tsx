@@ -119,7 +119,7 @@ export function MobileMenu({
 				</div>
 
 				{/* Nav links */}
-				<nav className="grid grid-cols-2 gap-x-4 gap-y-3 px-8 justify-items-end mt-2">
+				<nav className="grid grid-cols-2 gap-x-4 gap-y-2.5 px-8 justify-items-end mt-2">
 					{links.map((link) => (
 						<a
 							key={link.href}

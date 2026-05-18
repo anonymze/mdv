@@ -21,7 +21,13 @@ const t = createTranslator(locale)
 const menuNavs = getMenuNavs(t)
 
 const espacesArtistiques = menuNavs[0]?.subMenus || []
-const parcNational = menuNavs[1]?.subMenus || []
+const maisonDuParc = [
+	menuNavs[3],
+	menuNavs[1],
+	menuNavs[2],
+	menuNavs[4],
+	{ label: t('MENTIONS_LEGALES'), link: '/mentions-legales' }
+].filter(Boolean)
 ---
 
 <footer class="bg-foreground text-white space-y-8 lg:space-y-14 px-5 lg:px-10 py-10 lg:py-20 mt-8 lg:mt-16 rounded-t-3xl">
@@ -83,13 +89,13 @@ const parcNational = menuNavs[1]?.subMenus || []
 					</ul>
 				</div>
 				<div>
-					<h4 class="text-white tracking-wider">Maison de la vallée</h4>
+					<h4 class="text-white tracking-wider">Maison du Parc</h4>
 					<hr class="mb-4 border-white/40" />
 					<ul class="space-y-2 pl-4">
 						{
-							parcNational.map((item) => (
+							maisonDuParc.map((item) => (
 								<li>
-									<a href={getRelativeLocaleUrl(locale, item.link.replace(/^\//, ''))} class="text-sm hover:underline">
+									<a href={getRelativeLocaleUrl(locale, (item.link ?? '').replace(/^\//, ''))} class="text-sm hover:underline">
 										{item.label}
 									</a>
 								</li>

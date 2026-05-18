@@ -19,6 +19,7 @@ export default {
 	ANNEE_2024: "2024",
 	ANNEE_2025: "2025",
 	ARCHIVES: "Archives",
+	MENTIONS_LEGALES: "Legal notice",
 	ARCHIVES_DESC: "Dive back into the history of the Maison du Parc national et de la vallée through our archives: past shows, notable exhibitions, cultural events that have shaped our venue since its creation in 1982.",
 	ART_VIVANT: 'Living Art',
 	ART_VIVANT_DESC_PART1: "From September to June, the House offers a multidisciplinary cultural program, expanded during peak tourist periods. Specific activities for young audiences and schools are also organized throughout the year. Every summer, the village comes alive with a street performance every Wednesday.",
