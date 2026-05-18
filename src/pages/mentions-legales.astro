@@ -1,14 +1,33 @@
 ---
 export const prerender = true
+import { getCredits } from '@/api/credits'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
+import type { CreditsPage } from '@/types/credits'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 
-const photoCredits: { page: string; authors: string[] }[] = [
-	// { page: 'Accueil', authors: ['Auteur 1', 'Auteur 2'] },
-]
+const PAGE_LABELS: Record<CreditsPage, string> = {
+	home: 'Accueil',
+	archives: 'Archives',
+	art_vivant: 'Art vivant',
+	autres_actualites: 'Autres actualités',
+	cinema: 'Cinéma',
+	exposition: 'Exposition',
+	jeune_public: 'Jeune public',
+	mediatheque: 'Médiathèque',
+	parc_national: 'Parc national',
+	artiste: 'Artiste',
+	contact: 'Contact',
+	informations: 'Informations'
+}
+
+const credits = await getCredits()
+
+const photoCredits = (Object.keys(PAGE_LABELS) as CreditsPage[])
+	.map((key) => ({ page: PAGE_LABELS[key], text: credits[key]?.trim() ?? '' }))
+	.filter((c) => c.text.length > 0)
 ---
 
 <Layout title="Mentions Légales">
@@ -165,7 +184,7 @@ const photoCredits: { page: string; authors: string[] }[] = [
 						{photoCredits.map((credit) => (
 							<div>
 								<h3 class="font-title pb-1">{credit.page}</h3>
-								<p>{credit.authors.join(', ')}</p>
+								<p class="whitespace-pre-line">{credit.text}</p>
 							</div>
 						))}
 					</div>
