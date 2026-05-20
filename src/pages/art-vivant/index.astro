@@ -18,6 +18,7 @@ import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import type { ArtVivant } from '@/types/art-vivant'
+import type { ImmanquableDoc } from '@/types/immanquable'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.currentLocale || 'fr') as I18n
@@ -39,21 +40,9 @@ const residences = await find<ArtVivant>('art_vivant', {
 	where: { type: { equals: 'residence' } }
 })
 
-let immanquables: (ArtVivant & { _collection: string })[] = []
-try {
-	const immanquableRes = await fetch(`${import.meta.env.PUBLIC_PAYLOAD_URL}/api/immanquable?collection=art_vivant&locale=${locale}`)
-	const text = await immanquableRes.text()
-	if (text) {
-		const parsed = JSON.parse(text)
-		if (Array.isArray(parsed?.docs)) {
-			immanquables = parsed.docs
-		} else {
-			immanquables = [parsed?.immanquable, parsed?.coup_de_coeur, parsed?.cine_passion].filter(Boolean)
-		}
-	}
-} catch (e) {
-	console.error('[immanquable]', e)
-}
+const immanquableRes = await fetch(`${import.meta.env.PUBLIC_PAYLOAD_URL}/api/immanquable?collection=art_vivant&locale=${locale}`)
+const immanquableData = (await immanquableRes.json()) as { docs: ImmanquableDoc[] }
+const immanquables = immanquableData.docs ?? []
 
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 // const immanquableImg = immanquable?.thumbnail?.url ? `${PAYLOAD_URL}${immanquable.thumbnail.url}` : ParcImg1.src
