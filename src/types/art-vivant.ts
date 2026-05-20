@@ -5,7 +5,7 @@ export interface ArtVivant {
 	id: string
 	type: 'evenement' | 'residence' | 'scolaire'
 	archive?: boolean | null
-	immanquable?: 'immanquable' | 'coup_de_coeur' | null
+	immanquable?: 'immanquable' | 'coup_de_coeur' | 'cine_passion' | null
 	jeunePublic?: boolean | null
 	thumbnail?: Media | null
 	title: string

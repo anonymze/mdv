@@ -5,7 +5,7 @@ export interface AutresActualites {
 	id: string
 	type: 'evenement'
 	archive?: boolean | null
-	immanquable?: 'immanquable' | 'coup_de_coeur' | null
+	immanquable?: 'immanquable' | 'coup_de_coeur' | 'cine_passion' | null
 	thumbnail?: Media | null
 	title: string
 	description: RichTextField

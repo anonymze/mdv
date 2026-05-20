@@ -1,10 +1,12 @@
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 export interface Slot {
 	src: string
 	alt?: string
 	barClassName?: string
+	href?: string
+	badge?: string
 }
 
 export interface Row {
@@ -27,6 +29,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 	const isVertical = direction === 'vertical'
 
 	const [selected, setSelected] = useState<number[]>(rows.map((r) => r.defaultIndex ?? 0))
+	const justSelectedRef = useRef(false)
 
 	const setRowSelected = (rowIdx: number, value: number) => {
 		setSelected((prev) => (prev[rowIdx] === value ? prev : prev.map((v, i) => (i === rowIdx ? value : v))))
@@ -42,7 +45,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 				if (row.slots.length === 1) {
 					const slot = row.slots[0]
 					return (
-						<div key={rowIdx} className={cn('overflow-hidden rounded-2xl', height, width)}>
+						<div key={rowIdx} className={cn('overflow-hidden rounded-3xl', height, width)}>
 							<img
 								src={slot.src}
 								alt={slot.alt ?? ''}
@@ -61,7 +64,20 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 									type="button"
 									key={slotIdx}
 									onMouseEnter={isActive ? undefined : () => setRowSelected(rowIdx, slotIdx)}
-									onPointerDown={isActive ? undefined : () => setRowSelected(rowIdx, slotIdx)}
+									onPointerDown={isActive ? undefined : () => {
+										setRowSelected(rowIdx, slotIdx)
+										justSelectedRef.current = true
+									}}
+									onClick={() => {
+										if (justSelectedRef.current) {
+											justSelectedRef.current = false
+											return
+										}
+										if (isActive && slot.href) {
+											window.location.href = slot.href
+										}
+									}}
+									style={{ touchAction: 'manipulation' }}
 									aria-label={slot.alt || `Image ${slotIdx + 1}`}
 									aria-pressed={isActive}
 									tabIndex={isActive ? -1 : 0}
@@ -71,8 +87,8 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 										'transition-[flex-grow,flex-basis,border-radius,background-color] [transition-duration:300ms,300ms,300ms,400ms] ease-out',
 										'before:content-[""] before:absolute before:-inset-[5px]',
 										isActive
-											? 'bg-transparent grow shrink basis-0 cursor-default rounded-2xl'
-											: cn(slot.barClassName ?? DEFAULT_BAR_CLASS, 'grow-0 shrink-0 basis-10 lg:basis-[50px] cursor-pointer rounded-[20px] lg:rounded-[25px]')
+											? cn('bg-transparent grow shrink basis-0 rounded-3xl', slot.href ? 'cursor-pointer' : 'cursor-default')
+											: cn(slot.barClassName ?? DEFAULT_BAR_CLASS, 'grow-0 shrink-0 basis-10 lg:basis-[50px] cursor-pointer rounded-[24px] lg:rounded-[30px]')
 									)}
 								>
 									<img
@@ -83,9 +99,14 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 											'absolute inset-0 h-full w-full object-cover',
 											'transition-[opacity,border-radius] duration-300 ease-in',
 											'outline outline-1 -outline-offset-1 outline-black/10',
-											isActive ? 'opacity-100 rounded-2xl delay-200' : 'opacity-0 rounded-[20px] lg:rounded-[25px] pointer-events-none'
+											isActive ? 'opacity-100 rounded-3xl delay-200' : 'opacity-0 rounded-[24px] lg:rounded-[30px] pointer-events-none'
 										)}
 									/>
+									{isActive && slot.badge && (
+										<span className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-cream text-foreground text-xs font-medium px-3 py-1.5 rounded-full shadow whitespace-nowrap">
+											{slot.badge}
+										</span>
+									)}
 								</button>
 							)
 						})}
