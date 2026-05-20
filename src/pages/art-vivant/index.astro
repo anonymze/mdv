@@ -109,10 +109,10 @@ const spectacleTranslations = {
 			<div class="relative col-span-13 col-start-1 row-span-23 row-start-18 overflow-hidden bg-cream">
 				<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 			</div>
-			<div class="relative col-span-14 col-start-14 row-span-17 row-start-24 overflow-hidden bg-[#be7a5a]">
+			<div class="relative hidden md:block md:col-span-14 md:col-start-14 md:row-span-17 md:row-start-24 overflow-hidden bg-[#be7a5a]">
 				<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 			</div>
-			<div class="relative col-span-13 col-start-28 row-span-20 row-start-21 overflow-hidden bg-[#e5aa7f]">
+			<div class="relative col-span-27 col-start-14 row-span-20 row-start-21 md:col-span-13 md:col-start-28 md:row-span-20 md:row-start-21 overflow-hidden bg-[#e5aa7f]">
 				<img src={LayoutHome6.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 			</div>
 			<div
@@ -122,6 +122,15 @@ const spectacleTranslations = {
 					{t('ART_VIVANT')}
 				</h1>
 			</div>
+		</section>
+
+		<section class="section-default lg:hidden">
+			<article>
+				<h2 class="pb-2 lg:pb-3">{t('ART_VIVANT_HERO_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-16">{t('SPECTACLES_INTRO')}</p>
+				<p class="pb-2 lg:w-2/3">{t('ART_VIVANT_DESC_PART1')}</p>
+				<p class="lg:w-2/3">{t('ART_VIVANT_DESC_PART2')}</p>
+			</article>
 		</section>
 
 		{/* SPECTACLES À VENIR */}
