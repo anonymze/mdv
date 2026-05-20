@@ -193,7 +193,7 @@ const fetchData = async () => {
 				</div>
 			</div>
 
-			<div id="archives-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-[repeat(auto-fit,320px)] justify-center lg:justify-between content-start gap-x-4 gap-y-8 *:only:col-span-full min-h-104">
+			<div id="archives-grid" className={`scroll-m-20 py-8 lg:py-16 grid grid-cols-[repeat(auto-fit,320px)] justify-center ${data.docs.length === 2 ? 'lg:justify-start' : 'lg:justify-between'} content-start gap-x-4 gap-y-8 *:only:col-span-full min-h-104`}>
 				{loading ? (
 					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[300px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />

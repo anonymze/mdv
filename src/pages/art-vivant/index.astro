@@ -24,7 +24,7 @@ const locale = (Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
-const SPECTACLES_LIMIT = 8
+const SPECTACLES_LIMIT = 6
 const RESIDENCE_LIMIT = 4
 
 const spectacles = await find<ArtVivant>('art_vivant', {
