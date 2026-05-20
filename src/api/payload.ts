@@ -45,7 +45,11 @@ function buildQuery(params?: PayloadQueryParams): string {
       if (typeof value === 'object' && value !== null) {
         // Nested operator: where[field][operator]=value
         Object.entries(value).forEach(([operator, val]) => {
-          searchParams.set(`where[${field}][${operator}]`, String(val))
+          if (Array.isArray(val)) {
+            val.forEach((v, i) => searchParams.set(`where[${field}][${operator}][${i}]`, String(v)))
+          } else {
+            searchParams.set(`where[${field}][${operator}]`, String(val))
+          }
         })
       } else {
         // Simple equality: where[field][equals]=value
