@@ -66,14 +66,13 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 									aria-pressed={isActive}
 									tabIndex={isActive ? -1 : 0}
 									className={cn(
-										'relative p-0 border-0',
+										'relative p-0 border-0 overflow-hidden',
 										isVertical ? 'w-full' : 'h-full',
-										'transition-[flex-grow,flex-basis,border-radius] duration-300 ease-out',
+										'transition-[flex-grow,flex-basis,border-radius,background-color] [transition-duration:300ms,300ms,300ms,400ms] ease-out',
 										'before:content-[""] before:absolute before:-inset-[5px]',
-										slot.barClassName ?? DEFAULT_BAR_CLASS,
 										isActive
-											? 'grow shrink basis-0 cursor-default rounded-2xl'
-											: 'grow-0 shrink-0 basis-10 lg:basis-[50px] cursor-pointer rounded-[20px] lg:rounded-[25px]'
+											? 'bg-transparent grow shrink basis-0 cursor-default rounded-2xl'
+											: cn(slot.barClassName ?? DEFAULT_BAR_CLASS, 'grow-0 shrink-0 basis-10 lg:basis-[50px] cursor-pointer rounded-[20px] lg:rounded-[25px]')
 									)}
 								>
 									<img
@@ -84,7 +83,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 											'absolute inset-0 h-full w-full object-cover',
 											'transition-[opacity,border-radius] duration-300 ease-in',
 											'outline outline-1 -outline-offset-1 outline-black/10',
-											isActive ? 'opacity-100 rounded-2xl delay-[50ms]' : 'opacity-0 rounded-[20px] lg:rounded-[25px] pointer-events-none'
+											isActive ? 'opacity-100 rounded-2xl delay-200' : 'opacity-0 rounded-[20px] lg:rounded-[25px] pointer-events-none'
 										)}
 									/>
 								</button>

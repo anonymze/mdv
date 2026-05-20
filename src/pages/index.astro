@@ -185,12 +185,12 @@ const jsonLd = {
 	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	<main id="main-content">
 		<section
-			class="relative grid h-[calc(100dvh-var(--header-height))] max-h-225 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 pt-11.5 *:rounded-lg lg:rounded-b-3xl"
+			class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 sm:gap-2.5 md:gap-3.5 bg-[#345f6e] p-1.5 sm:p-3.5 pt-11.5 sm:pt-16 *:rounded-lg lg:rounded-b-3xl"
 		>
 			<a
 				href={getRelativeLocaleUrl(locale, 'art-vivant')}
 				aria-label={t('ART_VIVANT')}
-				class="notch-br group relative col-span-10 col-start-1 row-span-18 row-start-1 block overflow-hidden bg-[#be7a5a]"
+				class="group relative col-span-10 col-start-1 row-span-18 row-start-1 block overflow-hidden bg-[#be7a5a]"
 			>
 				<img src={LayoutHome1.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 				<div
@@ -220,7 +220,7 @@ const jsonLd = {
 			<a
 				href={getRelativeLocaleUrl(locale, 'exposition')}
 				aria-label={t('EXPOSITION')}
-				class="notch-bl group relative col-span-19 col-start-22 row-span-20 row-start-1 block overflow-hidden bg-[#f4ede1]"
+				class="group relative col-span-19 col-start-22 row-span-20 row-start-1 block overflow-hidden bg-[#f4ede1]"
 			>
 				<img
 					src={LayoutHome3.src}
@@ -241,7 +241,7 @@ const jsonLd = {
 			<a
 				href={getRelativeLocaleUrl(locale, 'artiste')}
 				aria-label={t('ARTISTE')}
-				class="notch-tr group relative col-span-13 col-start-1 row-span-22 row-start-19 block overflow-hidden bg-[#f4ede1]"
+				class="group relative col-span-13 col-start-1 row-span-22 row-start-19 block overflow-hidden bg-[#f4ede1]"
 			>
 				<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 				<div
@@ -271,7 +271,7 @@ const jsonLd = {
 			<a
 				href={getRelativeLocaleUrl(locale, 'mediatheque')}
 				aria-label={t('MEDIATHEQUE')}
-				class="notch-tl group relative col-span-13 col-start-28 row-span-20 row-start-21 block overflow-hidden bg-[#e5aa7f]"
+				class="group relative col-span-13 col-start-28 row-span-20 row-start-21 block overflow-hidden bg-[#e5aa7f]"
 			>
 				<img src={LayoutHome6.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 				<div
@@ -284,13 +284,14 @@ const jsonLd = {
 				</div>
 			</a>
 			<div
-				class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center overflow-hidden bg-[#f4ede1] p-2"
+				class="z-40 col-span-27 col-start-7 md:col-span-25 md:col-start-8 row-span-10 row-start-16 min-[765px]:row-span-8 min-[765px]:row-start-17 flex translate-x-[0.2rem] items-center justify-center overflow-hidden bg-[#f4ede1] p-2 outline-8 sm:outline-14 outline-[#345f6e]"
 			>
-				<h1 class="text-primary text-center text-3xl! leading-8 font-medium! lg:text-[42px]! lg:leading-14">
+				<h1 class="text-primary text-center text-2xl! leading-8 sm:text-3xl! sm:leading-10 font-medium! break-words lg:leading-14 lg:text-[42px]!">
 					Maison du Parc national et<br />de la vallée &middot; Luz-Saint-Sauveur
 				</h1>
 			</div>
 		</section>
+
 
 		<section class="section-default">
 			<article class="grid grid-cols-1 gap-4 lg:flex">

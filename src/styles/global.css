@@ -22,6 +22,10 @@
 
 :root {
 	--header-height: 4rem;
+	--header-overlap: 3rem;
+	@media (max-width: 26.874rem) {
+		--header-overlap: 2.5rem;
+	}
 	--background: #f5ede3;
 	--foreground: #1e3d47;
 	--card: oklch(1 0 0);
