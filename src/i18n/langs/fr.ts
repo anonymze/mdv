@@ -55,6 +55,8 @@ export default {
 	CINEMA_DESC_PART3:
 		'Notre plus belle force ? Être à votre écoute. Vos envies et vos recommandations nous inspirent afin que la programmation vous ressemble et vous fasse vibrer.',
 	CINEMA_DECOUVREZ_PROGRAMME: 'Découvrez le programme',
+	CINEMA_HERO_TITRE: 'Une salle qui vous ressemble',
+	CINEMA_HERO_SUB: 'Découvrez tout le programme',
 	CINEMA_INTRO: 'Le programme cinéma à découvrir',
 	CINEMA_PROGRAMME_TITRE: 'Le programme cinéma',
 	CINEMA_PROGRAMME_INTRO: 'Découvrez ci-dessous la programmation prévue pour les prochains jours.',
@@ -148,6 +150,10 @@ export default {
 	EVENT_TITLE: 'Event title',
 	EXPOSITION: 'Exposition',
 	EXPOSITION_DU_MOMENT: 'Exposition du moment',
+	EXPOSITION_HERO_TITRE: "Un espace dédié à l'art visuel",
+	EXPOSITION_HERO_SUB: 'La salle des voûtes habitée par des artistes',
+	EXPOSITION_HERO_DESC:
+		"La salle des voûtes, espace atypique avec son architecture colossale accueille des expositions tout au long de l'année. Entre art et nature, les expositions proposées passent du volet artistique au volet pédagogique grâce à la contribution du Parc national et ses nombreuses propositions de sensibilisation autour de l'environnement. La salle accueille également différents projets plus artistiques : photographies, peintures, sculptures, céramique, d'artistes d'ici et d'ailleurs.",
 	EXPOSITIONS_TITRE: 'Les expositions',
 	EXPOSITIONS_INTRO: "Un espace d'expositions artistiques accessible à tous, tout au long de l'année",
 	EXPOSITIONS_DESC:
@@ -215,6 +221,14 @@ export default {
 	MAISON_DU_PARC_COMPLET: 'Maison du Parc national et de la vallée',
 	MATERIEL: 'Matériel',
 	MEDIATHEQUE: 'Médiathèque',
+	MEDIATHEQUE_HERO_TITRE: 'Un lieu de découvertes et de partage',
+	MEDIATHEQUE_HERO_SUB: 'Des moments à partager en famille ou entre amis',
+	MEDIATHEQUE_HERO_DESC_PART1:
+		'La médiathèque est un lieu de découverte où vous pouvez flâner parmi romans, bandes dessinées, magazines et documentaires. Notre fonds est régulièrement renouvelé, avec le soutien de la médiathèque départementale des Hautes-Pyrénées.',
+	MEDIATHEQUE_HERO_DESC_PART2:
+		"Sur place ou avec abonnement, vous pouvez emprunter des livres et accéder aux ressources numériques. Un espace ludothèque permet de jouer sur place ou d'emprunter des jeux de société.",
+	MEDIATHEQUE_HERO_DESC_PART3:
+		'Des espaces calmes sont également disponibles pour travailler seul ou en groupe, avec Wi-Fi gratuit, impressions et numérisation de documents.',
 	MEDIATHEQUE_DESC:
 		"La médiathèque est un lieu ouvert à tous, dédié à la lecture, à la découverte et au partage. Romans, bandes dessinées, documentaires, magazines et romans vision : chacun peut y trouver de quoi s'informer, s'évader ou se divertir. Conviviale et accueillante, elle propose des espaces pour lire, feuilleter les ouvrages et profiter d'un moment calme, seul, en famille ou entre amis.",
 	MEDIATHEQUE_EVENEMENTS_TITRE: 'Évènements liés à la médiathèque',
