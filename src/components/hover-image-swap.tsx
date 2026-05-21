@@ -14,6 +14,8 @@ export interface Row {
 	defaultIndex?: number
 	height?: string
 	width?: string
+	cardStyle?: boolean
+	compactPills?: boolean
 }
 
 interface Props {
@@ -45,7 +47,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 				if (row.slots.length === 1) {
 					const slot = row.slots[0]
 					return (
-						<div key={rowIdx} className={cn('overflow-hidden rounded-3xl', height, width)}>
+						<div key={rowIdx} className={cn('overflow-hidden rounded-3xl', height, width, row.cardStyle && 'border border-black shadow-card')}>
 							<img
 								src={slot.src}
 								alt={slot.alt ?? ''}
@@ -87,8 +89,8 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 										'transition-[flex-grow,flex-basis,border-radius,background-color] [transition-duration:300ms,300ms,300ms,400ms] ease-out',
 										'before:content-[""] before:absolute before:-inset-[5px]',
 										isActive
-											? cn('bg-transparent grow shrink basis-0 rounded-3xl', slot.href ? 'cursor-pointer' : 'cursor-default')
-											: cn(slot.barClassName ?? DEFAULT_BAR_CLASS, 'grow-0 shrink-0 basis-10 lg:basis-[50px] cursor-pointer rounded-[24px] lg:rounded-[30px]')
+											? cn('bg-transparent grow shrink basis-0 rounded-3xl', slot.href ? 'cursor-pointer' : 'cursor-default', row.cardStyle && 'border border-black shadow-card')
+											: cn(slot.barClassName ?? DEFAULT_BAR_CLASS, row.compactPills ? 'grow-0 shrink-0 basis-[33px] lg:basis-[43px] cursor-pointer rounded-[18px] lg:rounded-[24px]' : 'grow-0 shrink-0 basis-10 lg:basis-[50px] cursor-pointer rounded-[24px] lg:rounded-[30px]')
 									)}
 								>
 									<img
@@ -103,7 +105,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 										)}
 									/>
 									{isActive && slot.badge && (
-										<span className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-cream text-foreground text-xs font-medium px-3 py-1.5 rounded-full shadow whitespace-nowrap">
+										<span className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-white text-secondary-muted text-sm font-medium px-3 py-1.5 rounded-full shadow whitespace-nowrap">
 											{slot.badge}
 										</span>
 									)}

@@ -41,7 +41,7 @@ export function MyImage({
 				alt={alt}
 				layout="fullWidth"
 				loading={loading}
-				aspectRatio={aspectRatio}
+				{...(aspectRatio !== undefined && { aspectRatio })}
 				background={background ?? undefined}
 				className={className}
 				priority={priority}
