@@ -26,117 +26,42 @@ const t = createTranslator(locale)
 	<main id="main-content">
 
 	<section
-		class="relative grid h-[calc(100dvh-var(--header-height))] max-h-225 grid-cols-40 grid-rows-40 gap-3.5 bg-[#345f6e] p-3.5 pt-11.5 *:rounded-lg lg:rounded-b-3xl"
+		class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 sm:gap-2.5 md:gap-3.5 bg-[#345f6e] p-1.5 sm:p-3.5 pt-11.5 sm:pt-16 *:rounded-lg lg:rounded-b-3xl"
 	>
-		<a
-			href={getRelativeLocaleUrl(locale, 'art-vivant')}
-			aria-label={t('ART_VIVANT')}
-			class="notch-br group relative col-span-10 col-start-1 row-span-18 row-start-1 block overflow-hidden bg-[#be7a5a]"
-		>
-			<img src={LayoutHome1.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
-			<div
-				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#be7a5a]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-			>
-				<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('ART_VIVANT')}</h2>
-				<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
-					>{t('HERO_TILE_ART_VIVANT_SUB')}</span
-				>
+		<div class="bg-cream relative col-span-24 col-start-1 row-span-17 row-start-1 overflow-hidden lg:p-5">
+			<img src={LayoutHome1.src} alt="" loading="eager" class="absolute inset-0 h-full w-full object-cover lg:hidden" />
+			<div class="bg-cream/80 absolute inset-0 lg:hidden"></div>
+			<div class="hidden lg:block">
+				<h2 class="pb-2 text-2xl lg:pb-3">{t('ARTISTE_HERO_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-6">{t('ARTISTE_HERO_SUB')}</p>
+				<p class="text-sm">{t('ARTISTE_HERO_DESC')}</p>
 			</div>
-		</a>
-		<a
-			href={getRelativeLocaleUrl(locale, 'cinema')}
-			aria-label={t('CINEMA')}
-			class="group relative z-20 col-span-11 col-start-11 row-span-16 row-start-1 block [clip-path:inset(0_0_-0.75rem_0_round_0.5rem)] lg:[clip-path:inset(0_0_-1.5rem_0_round_0.5rem)]"
-		>
-			<div class="absolute inset-0 rounded-lg bg-[#e5aa7f]"></div>
-			<div class="absolute inset-x-0 top-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
-				<img src={LayoutHome2.src} alt="" loading="eager" class="h-full w-full object-cover object-bottom" />
-			</div>
-			<div
-				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#e5aa7f]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-			>
-				<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('CINEMA')}</h2>
-				<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
-					>{t('HERO_TILE_CINEMA_SUB')}</span
-				>
-			</div>
-		</a>
-		<a
-			href={getRelativeLocaleUrl(locale, 'exposition')}
-			aria-label={t('EXPOSITION')}
-			class="notch-bl group relative col-span-19 col-start-22 row-span-20 row-start-1 block overflow-hidden bg-[#f4ede1]"
-		>
-			<img
-				src={LayoutHome3.src}
-				alt=""
-				loading="eager"
-				fetchpriority="high"
-				class="h-full w-full rounded-lg object-cover"
-			/>
-			<div
-				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#f4ede1]/90 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-			>
-				<h2 class="text-foreground font-serif text-3xl lg:text-5xl">{t('EXPOSITION')}</h2>
-				<span class="text-foreground max-w-40 pt-1 font-sans text-sm font-medium lg:pt-2 lg:text-lg"
-					>{t('HERO_TILE_EXPOSITION_SUB')}</span
-				>
-			</div>
-		</a>
-		<a
-			href={getRelativeLocaleUrl(locale, 'artiste')}
-			aria-label={t('ARTISTE')}
-			class="notch-tr group relative col-span-13 col-start-1 row-span-22 row-start-19 block overflow-hidden bg-[#f4ede1]"
-		>
+		</div>
+		<div class="bg-cream relative col-span-16 col-start-25 row-start-1 row-end-24 overflow-hidden md:row-end-21">
+			<img src={LayoutHome3.src} alt="" loading="eager" fetchpriority="high" class="h-full w-full rounded-lg object-cover" />
+		</div>
+		<div class="bg-cream relative col-span-13 col-start-1 row-span-23 row-start-18 overflow-hidden">
 			<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
-			<div
-				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#f4ede1]/90 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-			>
-				<h2 class="text-foreground font-serif text-3xl lg:text-5xl">{t('ARTISTE')}</h2>
-				<span class="text-foreground max-w-40 pt-1 font-sans text-sm font-medium lg:pt-2 lg:text-lg"
-					>{t('HERO_TILE_ARTISTE_SUB')}</span
-				>
-			</div>
-		</a>
-		<a
-			href={getRelativeLocaleUrl(locale, 'jeune-public')}
-			aria-label={t('JEUNESSE')}
-			class="group relative z-20 col-span-14 col-start-14 row-span-16 row-start-25 block [clip-path:inset(-0.75rem_0_0_0_round_0.5rem)] lg:[clip-path:inset(-1.5rem_0_0_0_round_0.5rem)]"
-		>
-			<div class="absolute inset-0 rounded-lg bg-[#be7a5a]"></div>
-			<div class="absolute inset-x-0 bottom-0 z-20 h-[calc(100%+0.75rem)] lg:h-[calc(100%+1.5rem)]">
-				<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full object-cover object-top" />
-			</div>
-			<div
-				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#be7a5a]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-			>
-				<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('JEUNESSE')}</h2>
-				<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
-					>{t('HERO_TILE_JEUNESSE_SUB')}</span
-				>
-			</div>
-		</a>
-		<a
-			href={getRelativeLocaleUrl(locale, 'mediatheque')}
-			aria-label={t('MEDIATHEQUE')}
-			class="notch-tl group relative col-span-13 col-start-28 row-span-20 row-start-21 block overflow-hidden bg-[#e5aa7f]"
-		>
-			<img src={LayoutHome6.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
-			<div
-				class="absolute inset-0 z-30 flex flex-col items-center justify-center rounded-lg bg-[#e5aa7f]/85 p-3 text-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 lg:p-6"
-			>
-				<h2 class="font-serif text-3xl text-white lg:text-5xl">{t('MEDIATHEQUE')}</h2>
-				<span class="max-w-40 pt-1 font-sans text-sm font-medium text-white lg:pt-2 lg:text-lg"
-					>{t('HERO_TILE_MEDIATHEQUE_SUB')}</span
-				>
-			</div>
-		</a>
-		<div
-			class="z-10 col-span-25 col-start-8 row-span-8 row-start-17 flex translate-x-[0.2rem] items-center justify-center overflow-hidden bg-[#f4ede1] p-2"
-		>
-			<h1 class="text-primary text-center text-3xl! leading-8 font-medium! lg:text-[42px]! lg:leading-14">
-				Maison du Parc national et<br />de la vallée &middot; Luz-Saint-Sauveur
+		</div>
+		<div class="relative hidden overflow-hidden bg-[#be7a5a] md:col-span-13 md:col-start-14 md:row-span-17 md:row-start-24 md:block">
+			<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+		</div>
+		<div class="bg-cream relative col-span-27 col-start-14 row-start-24 row-end-41 flex flex-col items-center justify-end gap-3 overflow-hidden p-3 md:col-span-14 md:col-start-27 md:row-start-21 md:gap-7 lg:p-5">
+			<Button link="/dossier_technique.pdf" openInNewTab size={'xl'} className="w-full">{t('DOSSIER_TECHNIQUE')}</Button>
+		</div>
+		<div class="bg-cream z-40 col-span-17 col-start-12 row-span-6 row-start-18 flex translate-x-[0.2rem] items-center justify-center overflow-hidden p-2 outline-8 outline-[#345f6e] sm:outline-10 md:outline-14">
+			<h1 class="text-primary text-center text-xl! leading-7 sm:text-2xl! sm:leading-8 md:text-4xl! md:leading-12 lg:text-[40px]! lg:leading-12 font-medium! break-words">
+				{t('ARTISTE')}
 			</h1>
 		</div>
+	</section>
+
+	<section class="section-default lg:hidden">
+		<article>
+			<h2 class="pb-2 lg:pb-3">{t('ARTISTE_HERO_TITRE')}</h2>
+			<p class="distinguished pb-3 lg:pb-16">{t('ARTISTE_HERO_SUB')}</p>
+			<p class="lg:w-2/3">{t('ARTISTE_HERO_DESC')}</p>
+		</article>
 	</section>
 
 		<section class="section-default" id="residence">

@@ -19,6 +19,10 @@ export default {
 	ANNEE_2024: '2024',
 	ANNEE_2025: '2025',
 	ARCHIVES: 'Archives',
+	ARCHIVES_HERO_TITRE: 'Retour sur notre programmation',
+	ARCHIVES_HERO_SUB: "Explorez l'histoire de notre structure, saison après saison",
+	ARCHIVES_HERO_DESC:
+		"Envie de retrouver un spectacle ou de connaître l'historique de notre structure ? Nos archives vous invitent à faire un véritable voyage dans le temps !",
 	MENTIONS_LEGALES: 'Mentions légales',
 	ARCHIVES_DESC:
 		"Replongez dans l'histoire de la Maison du Parc national et de la vallée à travers nos archives : spectacles passés, expositions marquantes, événements culturels qui ont façonné notre lieu depuis sa création en 1982.",
@@ -33,6 +37,10 @@ export default {
 	CARTE_ABONNEMENT_DESC: '10 entrées, non nominatives',
 	LES_IMMANQUABLES: 'Les immanquables',
 	ARTISTE: 'Artiste',
+	ARTISTE_HERO_TITRE: 'Un soutien à la création',
+	ARTISTE_HERO_SUB: "Un lieu ressource d'accompagnement artistique",
+	ARTISTE_HERO_DESC:
+		"Tout au long de l'année, des équipes artistiques sont accueillies dans la Maison avec la mise à disposition d'espaces pour favoriser le travail de recherche et le processus de création de projets d'horizons différents : théâtre, musique, cirque, danse, écriture, art visuel…",
 	INFORMATIONS_ARTISTE: 'Informations artistes',
 	AUTRES_ACTUALITES: 'Autres actualités',
 	AUTRES_INFORMATIONS: 'Informations',
@@ -192,6 +200,14 @@ export default {
 	INFORMATIONS: 'Informations',
 	INFORMATIONS_GENERALES: 'Informations générales',
 	INFORMATIONS_PRATIQUES: 'Informations pratiques',
+	INFORMATIONS_HERO_DESC_PART1:
+		'La Maison du Parc national et de la vallée est un lieu atypique où se rencontrent culture, nature et création artistique. Depuis plus de 30 ans, elle se développe avec et pour ses usagers, en proposant des moments de découverte et de convivialité.',
+	INFORMATIONS_HERO_DESC_PART2:
+		'Sa salle de spectacle et de cinéma, avec sa belle charpente et ses murs de pierre, offre un cadre intimiste au cœur de la vie du lieu.',
+	INFORMATIONS_HERO_DESC_PART3:
+		"Autour de cette programmation, la Maison propose également une médiathèque, un espace numérique, un point d'information sur le Parc national et accueille des artistes en résidence.",
+	INFORMATIONS_HERO_DESC_PART4:
+		'Un lieu engagé où la culture est un véritable moteur de partage et de dynamisme pour le territoire.',
 	INFORMATIONS_TECHNIQUES: 'Informations techniques',
 	SPECIFICATIONS_TECHNIQUES: 'Spécifications techniques',
 	INFORMATIONS_TECHNIQUES_DESC:
@@ -201,6 +217,11 @@ export default {
 	DOSSIER_TECHNIQUE: 'Dossier technique',
 	DOSSIER_CANDIDATURE: 'Dossier de candidature',
 	JEUNESSE: 'Jeunesse',
+	JEUNESSE_HERO_SUB: 'Des actions culturelles et artistiques pour les plus jeunes',
+	JEUNESSE_HERO_DESC_PART1:
+		'La Maison du Parc national et de la vallée collabore avec les écoles et le collège pour proposer aux élèves une programmation culturelle variée : spectacles, cinéma, médiation en médiathèque et expositions.',
+	JEUNESSE_HERO_DESC_PART2:
+		"Elle organise aussi des événements jeune public ouverts aux familles, favorisant la découverte des arts et de la nature. Ces actions s'inscrivent dans une démarche éducative, en lien avec les programmes scolaires, pour faire de la culture un véritable outil de transmission.",
 	L_EQUIPE: "L'équipe",
 	LIBRE_ACCES: 'Libre accès',
 	LIEU: 'Lieu',
@@ -281,8 +302,20 @@ export default {
 	PARC_NATIONAL_DESC:
 		"La Maison du Parc national et de la vallée est une véritable vitrine pour toutes celles et ceux qui souhaitent mieux connaître le Parc national des Pyrénées. Sur place, vous trouverez une documentation riche à consulter librement ainsi que des films à visionner pour découvrir le territoire sous un autre angle. Tout au long de l'année, les gardes-moniteurs animent les lieux de leur présence et de leur passion. Ils partagent leurs connaissances, leurs expériences et leur amour du patrimoine naturel, offrant ainsi des rencontres privilégiées et authentiques. La Maison est également un espace dédié à la mise en valeur des produits labellisés Esprit Parc, ainsi qu'une boutique où vous pourrez retrouver divers souvenirs et goodies inspirés du Parc national.",
 	PARC_NATIONAL_SITE_OFFICIEL: 'Site officiel du Parc national des Pyrénées',
+	PARC_NATIONAL_HERO_SUB: 'En partenariat avec le Parc national des Pyrénées',
+	PARC_NATIONAL_HERO_DESC_PART1:
+		'La Maison du Parc national et de la vallée est une vitrine pour découvrir le Parc national des Pyrénées. Vous y trouverez une documentation en libre accès ainsi que des films pour explorer le territoire autrement.',
+	PARC_NATIONAL_HERO_DESC_PART2:
+		"Tout au long de l'année, les gardes-moniteurs partagent leurs connaissances et leur passion du patrimoine naturel à travers des rencontres privilégiées.",
+	PARC_NATIONAL_HERO_DESC_PART3:
+		'La Maison propose aussi un espace dédié aux produits labellisés Esprit Parc et une boutique de souvenirs inspirés du Parc national des Pyrénées.',
 	AUTRES_EVENEMENTS_TITRE: "L'agenda des actions locales",
 	AUTRES_EVENEMENTS_INTRO: 'Des initiatives qui font vivre le territoire, en partenariat avec la maison du Parc National et de la vallée',
+	AUTRES_ACTUALITES_TITRE: 'Les autres événements',
+	AUTRES_ACTUALITES_HERO_TITRE: 'Agenda des actions locales',
+	AUTRES_ACTUALITES_HERO_SUB: 'Des événements qui font vivre la vallée au rythme des saisons.',
+	AUTRES_ACTUALITES_HERO_DESC:
+		'La Maison du Parc national et de la vallée accueille de nombreuses associations locales. Notre mission est de les soutenir en relayant leurs actions au sein de notre établissement, afin de valoriser leur engagement et de favoriser les initiatives qui participent à la vie du territoire.',
 	PARC_EVENEMENTS_DESC:
 		"Tout au long de l'année, le Parc national des Pyrénées propose des activités variées pour sensibiliser et faire découvrir son territoire. Découvrez des projections sous le ciel étoilé, assistez à des conférences passionnantes ou rencontrez et échangez avec les gardes-moniteurs.",
 	PARC_EVENEMENTS_INTRO: "Des rencontres et des découvertes tout au long de l'année",
