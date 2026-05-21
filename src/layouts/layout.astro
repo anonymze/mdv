@@ -62,7 +62,7 @@ const currentLang = Astro.params.lang || Astro.currentLocale || 'fr'
 const meta = metadata[currentLang]
 const pageTitle = `${title}${meta.titleSuffix}`
 const pageDescription = description || meta.defaultDescription
-const cleanPath = Astro.url.pathname.replace(/^\/(en|es)\//, '/')
+const cleanPath = Astro.url.pathname.replace(/^\/(fr|en|es)\//, '/')
 ---
 
 <html lang={Astro.params.lang || Astro.currentLocale}>

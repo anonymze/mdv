@@ -4,6 +4,7 @@ import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import { stripTextAlign } from '@/utils/helper'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.params.lang || 'fr') as I18n
 const t = createTranslator(locale)
@@ -18,7 +19,7 @@ const results = await Promise.allSettled(
 const found = results.find((r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled')
 
 if (!found) {
-	return Astro.redirect('/archives')
+	return Astro.redirect(getRelativeLocaleUrl(locale, 'archives'))
 }
 
 const item = found.value
