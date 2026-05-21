@@ -25,7 +25,7 @@ interface Props {
 }
 
 const { hoursForToday, hoursData } = Astro.props
-const locale = (Astro.currentLocale || 'fr') as I18n
+const locale = (Astro.params.lang || Astro.currentLocale || 'fr') as I18n
 const t = createTranslator(locale)
 const menuNavs = getMenuNavs(t)
 const currentPath = Astro.url.pathname

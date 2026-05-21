@@ -1,0 +1,347 @@
+---
+export const prerender = true
+export const getStaticPaths = () => [
+	{ params: { lang: 'fr' } },
+	{ params: { lang: 'en' } },
+	{ params: { lang: 'es' } }
+]
+import { find } from '@/api/payload'
+import MyImage from '@/components/my-image.astro'
+import { SpectaclesGrid } from '@/components/spectacles-grid'
+import { createTranslator, I18n } from '@/i18n/translations'
+import Layout from '@/layouts/layout.astro'
+import type { EvenementType, ExpositionType } from '@/types/exposition'
+import type { ImmanquableDoc } from '@/types/immanquable'
+import { HoverImageSwap } from '@/components/hover-image-swap'
+import { MDV_DEFAULT_ADDRESS, renderRichText } from '@/utils/helper'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
+import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
+import LayoutHome3 from '@/assets/imgs/layout_home/3.png'
+import LayoutHome4 from '@/assets/imgs/layout_home/4.png'
+import LayoutHome5 from '@/assets/imgs/layout_home/5.png'
+import LayoutHome6 from '@/assets/imgs/layout_home/6.png'
+
+const locale = (Astro.params.lang || 'fr') as I18n
+const t = createTranslator(locale)
+const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
+
+const EVENEMENTS_LIMIT = 4
+
+const exposition = (await find<ExpositionType>('exposition/current', {
+	locale
+})) as unknown as ExpositionType | null
+
+const evenements = await find<EvenementType>('exposition', {
+	limit: EVENEMENTS_LIMIT,
+	locale,
+	where: { type: { equals: 'evenement' } }
+})
+
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
+
+const immanquableRes = await fetch(`${PAYLOAD_URL}/api/immanquable?collection=exposition&locale=${locale}`)
+const immanquableData = (await immanquableRes.json()) as { docs: ImmanquableDoc[] }
+const immanquables = immanquableData.docs ?? []
+
+const IMMANQUABLE_PATHS: Record<string, (id: string) => string> = {
+	art_vivant: (id) => `art-vivant/spectacle/${id}`,
+	cinema: (id) => `cinema/seance/${id}`,
+	exposition: () => 'exposition',
+	parc_national: (id) => `parc-national/evenement/${id}`,
+	autres_actualites: (id) => `autres-actualites/evenement/${id}`
+}
+const getImmanquableUrl = (item: ImmanquableDoc) =>
+	getRelativeLocaleUrl(locale, IMMANQUABLE_PATHS[item._collection]?.(item.id) ?? 'exposition')
+const getImmanquableImage = (item: ImmanquableDoc) => {
+	const thumb = 'thumbnail' in item ? item.thumbnail : undefined
+	const fallback = 'images' in item ? item.images?.[0]?.image : undefined
+	const url = thumb?.url ?? fallback?.url
+	return {
+		src: url ? `${PAYLOAD_URL}${url}` : LayoutHome6.src,
+		alt: thumb?.alt ?? ''
+	}
+}
+
+const evenementsTranslations = {
+	PRECEDENT: t('PRECEDENT'),
+	SUIVANT: t('SUIVANT'),
+	IMAGE_PLACEHOLDER: t('IMAGE_PLACEHOLDER'),
+	EN_SAVOIR_PLUS: t('EN_SAVOIR_PLUS'),
+	AUCUN_CONTENU: t('AUCUN_CONTENU'),
+	TOUS: t('TOUS')
+}
+---
+
+<Layout title={t('EXPOSITION')}>
+	<main id="main-content">
+
+	<section
+		class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 sm:gap-2.5 md:gap-3.5 bg-[#345f6e] p-1.5 sm:p-3.5 pt-11.5 sm:pt-16 *:rounded-lg lg:rounded-b-3xl"
+	>
+		<div class="bg-cream relative col-span-24 col-start-1 row-span-17 row-start-1 overflow-hidden lg:p-5">
+			<img src={LayoutHome1.src} alt="" loading="eager" class="absolute inset-0 h-full w-full object-cover lg:hidden" />
+			<div class="bg-cream/80 absolute inset-0 lg:hidden"></div>
+			<div class="hidden lg:block">
+				<h2 class="pb-2 text-2xl lg:pb-3">{t('EXPOSITION_HERO_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-6">{t('EXPOSITION_HERO_SUB')}</p>
+				<p class="text-sm">{t('EXPOSITION_HERO_DESC')}</p>
+			</div>
+		</div>
+		<div class="bg-cream relative col-span-16 col-start-25 row-start-1 row-end-24 overflow-hidden md:row-end-21">
+			<img src={LayoutHome3.src} alt="" loading="eager" fetchpriority="high" class="h-full w-full rounded-lg object-cover" />
+		</div>
+		<div class="bg-cream relative col-span-13 col-start-1 row-span-23 row-start-18 overflow-hidden">
+			<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+		</div>
+		<div class="relative hidden overflow-hidden bg-[#be7a5a] md:col-span-13 md:col-start-14 md:row-span-17 md:row-start-24 md:block">
+			<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+		</div>
+		<div class="bg-cream relative col-span-27 col-start-14 row-start-24 row-end-41 flex flex-col gap-3 overflow-hidden p-3 md:col-span-14 md:col-start-27 md:row-start-21 md:gap-7 lg:p-5">
+			{immanquables.length > 0 && (
+				<>
+					<h2 class="text-center text-xl! md:text-right">{t('LES_IMMANQUABLES')}</h2>
+					{immanquables.length === 1 ? (
+						<a
+							href={getImmanquableUrl(immanquables[0])}
+							aria-label={immanquables[0].title}
+							class="shadow-card relative block flex-1 overflow-hidden rounded-3xl border border-black"
+						>
+							<img
+								src={getImmanquableImage(immanquables[0]).src}
+								alt={getImmanquableImage(immanquables[0]).alt}
+								loading="eager"
+								class="h-full w-full object-cover"
+							/>
+						</a>
+					) : (
+						<HoverImageSwap
+							client:visible
+							direction="horizontal"
+							className="flex-1 min-h-0"
+							rows={[{
+								slots: immanquables.map((item, i) => {
+									const img = getImmanquableImage(item)
+									return {
+										src: img.src,
+										alt: img.alt || item.title,
+										href: getImmanquableUrl(item),
+										...(item.immanquable === 'coup_de_coeur' && { badge: t('COUP_DE_COEUR') }),
+										...(item.immanquable === 'cine_passion' && { badge: 'Cine passion' }),
+										...(i > 0 && { barClassName: ['bg-secondary', 'bg-secondary-muted', 'bg-primary'][(i - 1) % 3] })
+									}
+								}),
+								defaultIndex: 0,
+								height: 'h-full',
+								width: 'w-full',
+								cardStyle: true,
+								compactPills: true
+							}]}
+						/>
+					)}
+				</>
+			)}
+		</div>
+		<div class="bg-cream z-40 col-span-17 col-start-12 row-span-6 row-start-18 flex translate-x-[0.2rem] items-center justify-center overflow-hidden p-2 outline-8 outline-[#345f6e] sm:outline-10 md:outline-14">
+			<h1 class="text-primary text-center text-xl! leading-7 sm:text-2xl! sm:leading-8 md:text-4xl! md:leading-12 lg:text-[40px]! lg:leading-12 font-medium! break-words">
+				{t('EXPOSITION')}
+			</h1>
+		</div>
+	</section>
+
+	<section class="section-default lg:hidden">
+		<article>
+			<h2 class="pb-2 lg:pb-3">{t('EXPOSITION_HERO_TITRE')}</h2>
+			<p class="distinguished pb-3 lg:pb-16">{t('EXPOSITION_HERO_SUB')}</p>
+			<p class="lg:w-2/3">{t('EXPOSITION_HERO_DESC')}</p>
+		</article>
+	</section>
+
+		{
+			exposition && (
+				<section class="section-default" id="exposition">
+					<article class="grid grid-cols-1 gap-5 pb-8 lg:grid-cols-3 lg:gap-8 lg:pb-16 items-start">
+						<div class="flex flex-col lg:col-span-2">
+							<h2 class="text-primary pb-2 lg:pb-3">{t('EXPO_MOMENT_TITRE')}</h2>
+							<h3 class="text-primary pb-8 lg:pb-16">{exposition.title}</h3>
+							<p set:html={renderRichText(exposition.description)} />
+
+							<div class="hidden lg:block">
+								{(() => {
+									const displayImages = exposition.images?.slice(0, 3) || []
+									const count = displayImages.filter(Boolean).length
+
+									if (count === 0) return null
+
+									const gridClass =
+										count === 3
+											? 'mt-8 lg:mt-16 grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5'
+											: count === 2
+												? 'mt-8 lg:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5'
+												: 'mt-8 lg:mt-16 grid grid-cols-1 gap-3 lg:gap-5'
+
+									return (
+										<div class={gridClass}>
+											{displayImages[0] && (
+												<MyImage
+													src={displayImages[0]?.image?.url}
+													alt={displayImages[0]?.image?.alt ?? ''}
+													background={displayImages[0]?.image?.blurhash}
+													width={400}
+													height={300}
+													layout="fullWidth"
+												/>
+											)}
+											{displayImages[1] && (
+												<MyImage
+													src={displayImages[1]?.image?.url}
+													alt={displayImages[1]?.image?.alt ?? ''}
+													background={displayImages[1]?.image?.blurhash}
+													width={400}
+													height={300}
+													layout="fullWidth"
+												/>
+											)}
+											{displayImages[2] && (
+												<MyImage
+													src={displayImages[2]?.image?.url}
+													alt={displayImages[2]?.image?.alt ?? ''}
+													background={displayImages[2]?.image?.blurhash}
+													width={800}
+													height={300}
+													layout="fullWidth"
+													class="col-span-2 lg:col-span-1"
+												/>
+											)}
+										</div>
+									)
+								})()}
+							</div>
+						</div>
+						<div class="bg-secondary rounded-3xl p-4 lg:p-5 space-y-2 lg:sticky lg:top-[calc(var(--header-height)+1rem)]">
+							<div class="bg-background rounded-2xl px-4 py-2">
+								<span class="font-medium">{t('DATE')}</span> : {t('DATE_FROM')}{' '}
+								{new Date(exposition.date_start).toLocaleDateString(locale, {
+									weekday: 'long',
+									day: 'numeric',
+									month: 'long',
+									timeZone: 'Europe/Paris'
+								})}{' '}
+								{t('DATE_TO')}{' '}
+								{new Date(exposition.date_end).toLocaleDateString(locale, {
+									weekday: 'long',
+									day: 'numeric',
+									month: 'long',
+									timeZone: 'Europe/Paris'
+								})}
+							</div>
+							<div class="bg-background rounded-2xl px-4 py-2">
+								<span class="font-medium">{t('HORAIRE')}</span> : {t('SUR_HORAIRES_OUVERTURE')}
+							</div>
+							{exposition.tags && (
+								<div class="flex flex-wrap items-center gap-2 px-1 py-1">
+									{exposition.tags.split(';').map((tag: string) => (
+										<span class="bg-primary text-primary-foreground distinguished rounded-2xl px-3 py-1 text-xs">
+											{tag.trim()}
+										</span>
+									))}
+								</div>
+							)}
+							<div class="bg-background rounded-2xl px-4 py-2">
+								<span class="font-medium">{t('ADRESSE')}</span> : {MDV_DEFAULT_ADDRESS}
+							</div>
+							<div class="bg-background rounded-2xl px-4 py-2">
+								<span class="font-medium">{t('TARIF')}</span> : {t('LIBRE_ACCES')}
+							</div>
+							<div class="bg-background rounded-2xl px-4 py-2">
+								<span class="font-medium">{t('GENRE')}</span> : {exposition.genre}
+							</div>
+							<div class="bg-background rounded-2xl px-4 py-2">
+								<span class="font-medium">{t('AUTEURS')}</span> : {exposition.authors}
+							</div>
+							<div class="bg-background rounded-2xl px-4 py-2">
+								<span class="font-medium">{t('CREDITS_PHOTOS')}</span> : {exposition.credits_photos}
+							</div>
+							<div class="bg-background rounded-2xl px-4 py-2">
+								<span class="font-medium">{t('PORTFOLIO')}</span> : {exposition.portfolio_authors}
+							</div>
+						</div>
+					</article>
+
+					<div class="lg:hidden">
+						{(() => {
+							const displayImages = exposition.images?.slice(0, 3) || []
+							const count = displayImages.filter(Boolean).length
+
+							if (count === 0) return null
+
+							const gridClass =
+								count === 3
+									? 'mt-8 grid grid-cols-2 gap-3'
+									: count === 2
+										? 'mt-8 grid grid-cols-1 gap-3'
+										: 'mt-8 grid grid-cols-1 gap-3'
+
+							return (
+								<div class={gridClass}>
+									{displayImages[0] && (
+										<MyImage
+											src={displayImages[0]?.image?.url}
+											alt={displayImages[0]?.image?.alt ?? ''}
+											background={displayImages[0]?.image?.blurhash}
+											width={400}
+											height={300}
+											layout="fullWidth"
+										/>
+									)}
+									{displayImages[1] && (
+										<MyImage
+											src={displayImages[1]?.image?.url}
+											alt={displayImages[1]?.image?.alt ?? ''}
+											background={displayImages[1]?.image?.blurhash}
+											width={400}
+											height={300}
+											layout="fullWidth"
+										/>
+									)}
+									{displayImages[2] && (
+										<MyImage
+											src={displayImages[2]?.image?.url}
+											alt={displayImages[2]?.image?.alt ?? ''}
+											background={displayImages[2]?.image?.blurhash}
+											width={800}
+											height={300}
+											layout="fullWidth"
+											class="col-span-2"
+										/>
+									)}
+								</div>
+							)
+						})()}
+					</div>
+				</section>
+			)
+		}
+
+		{evenements.docs.length > 0 && (
+		<section class="section-default" id="evenements">
+			<article>
+				<h2 class="text-primary pb-2 lg:pb-3">{t('EVENEMENTS_EXPO')}</h2>
+				<p class="distinguished pb-3">{t('EVENEMENTS_EXPO_INTRO')}</p>
+			</article>
+
+			<SpectaclesGrid
+				client:load
+				initialData={evenements}
+				locale={locale}
+				localePrefix={localePrefix}
+				limit={EVENEMENTS_LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				collection="exposition"
+				showFilters={false}
+				translations={evenementsTranslations}
+			/>
+		</section>
+		)}
+	</main>
+</Layout>

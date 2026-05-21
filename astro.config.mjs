@@ -36,13 +36,9 @@ export default defineConfig({
     i18n: {
         locales: ['es', 'en', 'fr'],
         defaultLocale: 'fr',
-        fallback: {
-            es: 'fr',
-            en: 'fr'
-        },
         routing: {
-            prefixDefaultLocale: false,
-            fallbackType: 'rewrite'
+            prefixDefaultLocale: true,
+            redirectToDefaultLocale: false
         }
     },
     image: {

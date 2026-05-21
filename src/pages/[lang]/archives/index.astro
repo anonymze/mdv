@@ -1,0 +1,119 @@
+---
+export const prerender = true
+export const getStaticPaths = () => [
+	{ params: { lang: 'fr' } },
+	{ params: { lang: 'en' } },
+	{ params: { lang: 'es' } }
+]
+import { find } from '@/api/payload'
+import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
+import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
+import LayoutHome3 from '@/assets/imgs/layout_home/3.png'
+import LayoutHome4 from '@/assets/imgs/layout_home/4.png'
+import LayoutHome5 from '@/assets/imgs/layout_home/5.png'
+import LayoutHome6 from '@/assets/imgs/layout_home/6.png'
+import { ArchivesGrid, type ArchiveDoc } from '@/components/archives-grid'
+import { createTranslator, I18n } from '@/i18n/translations'
+import Layout from '@/layouts/layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const locale = (Astro.params.lang || 'fr') as I18n
+const t = createTranslator(locale)
+const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
+
+const LIMIT = 8
+
+const translations = {
+	PRECEDENT: t('PRECEDENT'),
+	SUIVANT: t('SUIVANT'),
+	IMAGE_PLACEHOLDER: t('IMAGE_PLACEHOLDER'),
+	EN_SAVOIR_PLUS: t('EN_SAVOIR_PLUS'),
+	MOTS_CLES: t('MOTS_CLES'),
+	ANNEE: t('ANNEE'),
+	AUCUN_CONTENU: t('AUCUN_CONTENU'),
+	TOUS: t('TOUS'),
+	collectionOptions: [
+		{ key: t('ART_VIVANT'), value: 'art_vivant' },
+		{ key: t('PARC_NATIONAL'), value: 'parc_national' },
+		{ key: t('EXPOSITION'), value: 'exposition' },
+		{ key: t('AUTRES_ACTUALITES'), value: 'autres_actualites' },
+		{ key: t('CINEMA'), value: 'cinema' }
+	]
+}
+
+const twoWeeksAgo = new Date()
+twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14)
+const initialData = await find<ArchiveDoc>('art_vivant', {
+	limit: LIMIT,
+	page: 1,
+	locale,
+	upcomingOnly: false,
+	where: {
+		archive: { equals: true },
+		date_start: { less_than: twoWeeksAgo.toISOString() }
+	}
+})
+
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
+---
+
+<Layout title={t('ARCHIVES')}>
+	<main id="main-content">
+		<section
+			class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 sm:gap-2.5 md:gap-3.5 bg-[#345f6e] p-1.5 sm:p-3.5 pt-11.5 sm:pt-16 *:rounded-lg lg:rounded-b-3xl"
+		>
+			<div class="bg-cream relative col-span-24 col-start-1 row-span-17 row-start-1 overflow-hidden lg:p-5">
+				<img src={LayoutHome1.src} alt="" loading="eager" class="absolute inset-0 h-full w-full object-cover lg:hidden" />
+				<div class="bg-cream/80 absolute inset-0 lg:hidden"></div>
+				<div class="hidden lg:block">
+					<h2 class="pb-2 text-2xl lg:pb-3">{t('ARCHIVES_HERO_TITRE')}</h2>
+					<p class="distinguished pb-3 lg:pb-6">{t('ARCHIVES_HERO_SUB')}</p>
+					<p class="text-sm">{t('ARCHIVES_HERO_DESC')}</p>
+				</div>
+			</div>
+			<div class="bg-cream relative col-span-16 col-start-25 row-start-1 row-end-24 overflow-hidden md:row-end-21">
+				<img src={LayoutHome3.src} alt="" loading="eager" fetchpriority="high" class="h-full w-full rounded-lg object-cover" />
+			</div>
+			<div class="bg-cream relative col-span-13 col-start-1 row-span-23 row-start-18 overflow-hidden">
+				<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+			</div>
+			<div class="relative hidden overflow-hidden bg-[#be7a5a] md:col-span-13 md:col-start-14 md:row-span-17 md:row-start-24 md:block">
+				<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
+			</div>
+			<div class="relative col-span-27 col-start-14 row-start-24 row-end-41 overflow-hidden md:col-span-14 md:col-start-27 md:row-start-21">
+				<img src={LayoutHome6.src} alt="" loading="eager" class="absolute inset-0 h-full w-full object-cover" />
+				<div class="bg-white/80 absolute inset-0"></div>
+			</div>
+			<div class="bg-cream z-40 col-span-17 col-start-12 row-span-6 row-start-18 flex translate-x-[0.2rem] items-center justify-center overflow-hidden p-2 outline-8 outline-[#345f6e] sm:outline-10 md:outline-14">
+				<h1 class="text-primary text-center text-xl! leading-7 sm:text-2xl! sm:leading-8 md:text-4xl! md:leading-12 lg:text-[40px]! lg:leading-12 font-medium! break-words">
+					{t('ARCHIVES')}
+				</h1>
+			</div>
+		</section>
+
+		<section class="section-default lg:hidden">
+			<article>
+				<h2 class="pb-2 lg:pb-3">{t('ARCHIVES_HERO_TITRE')}</h2>
+				<p class="distinguished pb-3 lg:pb-16">{t('ARCHIVES_HERO_SUB')}</p>
+				<p class="lg:w-2/3">{t('ARCHIVES_HERO_DESC')}</p>
+			</article>
+		</section>
+
+		<section class="section-default" id="archives">
+			<article>
+				<h2 class="pb-2 lg:pb-3">{t('ARCHIVES')}</h2>
+				<p class="distinguished pb-3 lg:pb-16">{t('ARCHIVES_DESC')}</p>
+			</article>
+
+			<ArchivesGrid
+				client:load
+				locale={locale}
+				localePrefix={localePrefix}
+				limit={LIMIT}
+				payloadUrl={PAYLOAD_URL}
+				initialData={initialData}
+				translations={translations}
+			/>
+		</section>
+	</main>
+</Layout>

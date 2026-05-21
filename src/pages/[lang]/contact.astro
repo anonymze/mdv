@@ -1,0 +1,47 @@
+---
+export const prerender = true
+export const getStaticPaths = () => [
+	{ params: { lang: 'fr' } },
+	{ params: { lang: 'en' } },
+	{ params: { lang: 'es' } }
+]
+import ContactImg from '@/assets/imgs/contact.webp'
+import { ContactForm } from '@/components/contact-form'
+import MyImage from '@/components/my-image.astro'
+import { createTranslator, I18n } from '@/i18n/translations'
+import Layout from '@/layouts/layout.astro'
+
+const locale = (Astro.params.lang || 'fr') as I18n
+const t = createTranslator(locale)
+---
+
+<Layout title={t('NOUS_CONTACTER')}>
+	<main id="main-content">
+		<h1 class="sr-only">{t('NOUS_CONTACTER')}</h1>
+		<section class="section-default">
+			<article class="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-12">
+				<div class="flex flex-col lg:col-span-2">
+					<h2 class="text-primary pb-4 lg:pb-6">{t('NOUS_CONTACTER')}</h2>
+					<p class="distinguished pb-8 lg:pb-12">{t('CONTACT_INTRO')}</p>
+					<p class="whitespace-pre-line pb-8 lg:pb-12">{t('CONTACT_DESC')}</p>
+
+					<ContactForm
+						client:load
+						locale={locale}
+						apiBaseUrl={import.meta.env.PUBLIC_PAYLOAD_URL}
+					/>
+				</div>
+				<div class="max-h-[400px] lg:max-h-none">
+					<MyImage
+						alt=""
+						src={ContactImg}
+						width={700}
+						height={650}
+						layout="fullWidth"
+						class="h-full max-h-[400px] w-full rounded-2xl object-cover lg:max-h-none"
+					/>
+				</div>
+			</article>
+		</section>
+	</main>
+</Layout>

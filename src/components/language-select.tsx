@@ -19,8 +19,8 @@ export function LanguageSelect({ currentLocale, currentPath, className }: Props)
 
 	const handleChange = (value: string) => {
 		setSelectedLocale(value);
-		const pathWithoutLocale = currentPath.replace(/^\/(en|es)/, "");
-		const newPath = value === "fr" ? pathWithoutLocale : `/${value}${pathWithoutLocale}`;
+		const pathWithoutLocale = currentPath.replace(/^\/(fr|en|es)/, "");
+		const newPath = `/${value}${pathWithoutLocale}`;
 		setTimeout(() => {
 			window.location.href = newPath || "/";
 		}, 1);

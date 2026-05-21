@@ -17,7 +17,7 @@ export interface Props {
 }
 
 const { title, description = '', image } = Astro.props
-const locale = (Astro.currentLocale || 'fr') as I18n
+const locale = (Astro.params.lang || Astro.currentLocale || 'fr') as I18n
 
 const hoursData = await findGlobal<Hour>('hours', { locale })
 
@@ -58,14 +58,14 @@ const metadata: {
 	}
 }
 
-const currentLang = Astro.currentLocale || 'fr'
+const currentLang = Astro.params.lang || Astro.currentLocale || 'fr'
 const meta = metadata[currentLang]
 const pageTitle = `${title}${meta.titleSuffix}`
 const pageDescription = description || meta.defaultDescription
 const cleanPath = Astro.url.pathname.replace(/^\/(en|es)\//, '/')
 ---
 
-<html lang={Astro.currentLocale}>
+<html lang={Astro.params.lang || Astro.currentLocale}>
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
