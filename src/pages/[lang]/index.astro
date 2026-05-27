@@ -23,12 +23,12 @@ import ThirtyFourthImg from '@/assets/imgs/home/34.webp'
 import ThirtyFiveImg from '@/assets/imgs/home/35.webp'
 import ThirtySixImg from '@/assets/imgs/home/36.webp'
 import ThirtySevenImg from '@/assets/imgs/home/37.webp'
-import LayoutHome1 from '@/assets/imgs/layout_home/1.png'
-import LayoutHome2 from '@/assets/imgs/layout_home/2.png'
-import LayoutHome3 from '@/assets/imgs/layout_home/3.png'
-import LayoutHome4 from '@/assets/imgs/layout_home/4.png'
-import LayoutHome5 from '@/assets/imgs/layout_home/5.png'
-import LayoutHome6 from '@/assets/imgs/layout_home/6.png'
+import LayoutHome1 from '@/assets/imgs/layout_home/1.webp'
+import LayoutHome2 from '@/assets/imgs/layout_home/2.webp'
+import LayoutHome3 from '@/assets/imgs/layout_home/3.webp'
+import LayoutHome4 from '@/assets/imgs/layout_home/4.webp'
+import LayoutHome5 from '@/assets/imgs/layout_home/5.webp'
+import LayoutHome6 from '@/assets/imgs/layout_home/6.webp'
 import { HoverImageSwap } from '@/components/hover-image-swap'
 import MyImage from '@/components/my-image.astro'
 import { NewsletterForm } from '@/components/newsletter-form'
@@ -496,7 +496,7 @@ const jsonLd = {
 							<p set:html={renderRichText(exposition.description)} />
 
 							<div class="mb-5 pt-12 lg:mt-auto">
-								<Button link={getRelativeLocaleUrl(locale, 'exposition')} size={'xl'} className="w-fit">
+								<Button link={`${getRelativeLocaleUrl(locale, 'exposition')}#exposition`} size={'xl'} className="w-fit">
 									{t('EN_SAVOIR_PLUS')}
 								</Button>
 							</div>

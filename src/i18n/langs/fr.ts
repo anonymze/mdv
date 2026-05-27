@@ -191,7 +191,7 @@ export default {
 	HERO_TILE_ART_VIVANT_SUB: "Des temps forts culturels toute l'année",
 	HERO_TILE_ARTISTE_SUB: 'Un lien ressource pour développer vos projets',
 	HERO_TILE_CINEMA_SUB: 'Découvrez tout le programme',
-	HERO_TILE_EXPOSITION_SUB: "Découvrez 12 expositions toute l'année",
+	HERO_TILE_EXPOSITION_SUB: "Des expositions toute l'année",
 	HERO_TILE_JEUNESSE_SUB: 'La culture au cœur du parcours éducatif',
 	HERO_TILE_MEDIATHEQUE_SUB: 'La place de la découverte et du jeu',
 	IMAGE_PLACEHOLDER: 'Image de remplacement',
