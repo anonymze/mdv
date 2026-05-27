@@ -51,6 +51,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 							<img
 								src={slot.src}
 								alt={slot.alt ?? ''}
+								decoding="async"
 								className="h-full w-full object-cover outline outline-1 -outline-offset-1 outline-black/10"
 							/>
 						</div>
@@ -86,7 +87,6 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 									className={cn(
 										'relative p-0 border-0 overflow-hidden',
 										isVertical ? 'w-full' : 'h-full',
-										'will-change-[flex-grow,flex-basis,border-radius,background-color]',
 										'transition-[flex-grow,flex-basis,border-radius,background-color] [transition-duration:300ms,300ms,300ms,400ms] ease-out',
 										'before:content-[""] before:absolute before:-inset-[5px]',
 										isActive
@@ -98,6 +98,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 										src={slot.src}
 										alt={slot.alt ?? ''}
 										aria-hidden={!isActive}
+										decoding="async"
 										className={cn(
 											'absolute inset-0 h-full w-full object-cover',
 											'transition-[opacity,border-radius] duration-300 ease-in',
