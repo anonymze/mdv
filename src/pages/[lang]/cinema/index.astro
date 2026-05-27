@@ -10,6 +10,10 @@ import FirstMediaImg from '@/assets/imgs/cinema/1.webp'
 import SecondMediaImg from '@/assets/imgs/cinema/2.webp'
 import ThirdMediaImg from '@/assets/imgs/cinema/3.webp'
 import FourthMediaImg from '@/assets/imgs/cinema/4.webp'
+import AdrcLogo from '@/assets/imgs/cinema/ADRC.webp'
+import AfcaeLogo from '@/assets/imgs/cinema/AFCAE.webp'
+import CinephilaeLogo from '@/assets/imgs/cinema/cinephile.webp'
+import VeoLogo from '@/assets/imgs/cinema/veo.webp'
 import LayoutHome1 from '@/assets/imgs/layout_home/1.webp'
 import LayoutHome2 from '@/assets/imgs/layout_home/2.webp'
 import LayoutHome3 from '@/assets/imgs/layout_home/3.webp'
@@ -321,5 +325,20 @@ const getImmanquableImage = (item: ImmanquableDoc) => {
 			/>
 		</section>
 		)}
+
+		<section class="section-default pt-0" aria-label="Partenaires cinéma">
+			<div class="grid grid-cols-2 place-items-center gap-8 lg:grid-cols-4 lg:gap-12">
+				<MyImage src={VeoLogo} alt="VEO" width={180} height={109} class="h-auto max-h-16 w-auto rounded-none object-contain lg:max-h-20" />
+				<MyImage src={AdrcLogo} alt="ADRC" width={240} height={168} class="h-auto max-h-16 w-auto rounded-none object-contain lg:max-h-20" />
+				<MyImage src={AfcaeLogo} alt="AFCAE" width={260} height={152} class="h-auto max-h-16 w-auto rounded-none object-contain lg:max-h-20" />
+				<MyImage
+					src={CinephilaeLogo}
+					alt="Cinephilae"
+					width={180}
+					height={96}
+					class="h-auto max-h-16 w-auto rounded-none object-contain lg:max-h-20"
+				/>
+			</div>
+		</section>
 	</main>
 </Layout>
