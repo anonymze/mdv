@@ -14,7 +14,7 @@ const { locale, hoursData } = Astro.props
 const t = createTranslator(locale)
 
 const hours = hoursData
-const { isClosed, today, openRanges, period } = getHoursForToday(hours)
+const { isClosed, today, todayKey, openRanges, period } = getHoursForToday(hours)
 const schedule = getHoursSchedule(hours, period)
 
 const formatHourFr = (iso: string) => {
@@ -46,7 +46,7 @@ const getHoursDayLabel = (day: HoursDay) => {
 	<div class="flex h-full flex-col items-start px-4 pt-5 pb-4  text-left">
 		<p class="text-sm font-semibold text-white">
 			{t('DATE_FROM')}{' '}
-			<time datetime={today.toISOString().split('T')[0]}>
+			<time datetime={todayKey}>
 				{today.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' })}
 			</time>
 			&nbsp;:

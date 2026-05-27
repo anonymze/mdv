@@ -16,6 +16,7 @@ import { ArrowRightIcon } from 'lucide-react'
 interface HoursForToday {
 	isClosed: boolean
 	today: Date
+	todayKey: string
 	openStart: string | null
 	openEnd: string | null
 	openRanges: HoursRange[]
@@ -64,7 +65,7 @@ const hoursInfo = {
 		month: 'long',
 		timeZone: 'Europe/Paris'
 	}),
-	todayIso: hoursForToday.today.toISOString().split('T')[0],
+	todayIso: hoursForToday.todayKey,
 	openRanges: hoursForToday.openRanges,
 	schedule: activeSchedule.map((line) => ({
 		label: getHoursDayLabel(line.day),

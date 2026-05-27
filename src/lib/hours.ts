@@ -29,7 +29,7 @@ const getParisDateKey = (date: string | Date) => {
 	return `${year}-${month}-${day}`
 }
 
-const getParisToday = () => new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' }))
+const getDayFromDateKey = (dateKey: string) => new Date(`${dateKey}T12:00:00Z`).getUTCDay()
 
 const isCompleteRange = (start?: string | null, end?: string | null) => {
 	if (!start || !end) return null
@@ -44,7 +44,7 @@ const isInRange = (dateKey: string, start: string, end: string) =>
 const isExceptionallyClosed = (hours: Hour, todayKey: string) =>
 	hours.closed_dates?.some(({ date }) => getParisDateKey(date) === todayKey) ?? false
 
-export function getHoursPeriod(hours: Hour, today = getParisToday()): HoursPeriod {
+export function getHoursPeriod(hours: Hour, today = new Date()): HoursPeriod {
 	const todayKey = getParisDateKey(today)
 
 	if (isInRange(todayKey, hours.horaires_ete.ete_date_from, hours.horaires_ete.ete_date_to)) {
@@ -116,12 +116,12 @@ export function getHoursSchedule(hours: Hour, period: HoursPeriod): HoursSchedul
 }
 
 export function getHoursForToday(hours: Hour) {
-	const today = getParisToday()
+	const today = new Date()
 	const todayKey = getParisDateKey(today)
 	const period = getHoursPeriod(hours, today)
 	const isClosedDate = isExceptionallyClosed(hours, todayKey)
 	const schedule = getHoursSchedule(hours, period)
-	const day = today.getDay()
+	const day = getDayFromDateKey(todayKey)
 	const scheduleLine =
 		day === 0
 			? schedule.find((line) => line.day === 'sunday')
@@ -133,6 +133,7 @@ export function getHoursForToday(hours: Hour) {
 
 	return {
 		today,
+		todayKey,
 		period,
 		isClosed,
 		openRanges,
