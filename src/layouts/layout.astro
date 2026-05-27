@@ -14,12 +14,13 @@ export interface Props {
 	title: string
 	description?: string
 	image?: string | null
+	hoursData?: Hour
 }
 
-const { title, description = '', image } = Astro.props
+const { title, description = '', image, hoursData: providedHoursData } = Astro.props
 const locale = (Astro.params.lang || Astro.currentLocale || 'fr') as I18n
 
-const hoursData = await findGlobal<Hour>('hours', { locale })
+const hoursData = providedHoursData ?? await findGlobal<Hour>('hours', { locale })
 
 const hoursForToday = getHoursForToday(hoursData)
 

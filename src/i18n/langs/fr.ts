@@ -146,7 +146,7 @@ export default {
 	ESPACE_CULTURE_INTRO: 'À "La Maison du Parc national et de la vallée", on y fait quoi ?',
 	ESPACE_CULTURE_TITRE: 'Un espace culture et nature',
 	ESPACES_ARTISTIQUES: 'Espaces artistiques',
-	ETUDIANT: 'Étudiant',
+	ETUDIANT: 'Étudiant et -18 ans',
 	EVENEMENT: 'Évènement',
 	EVENEMENT_IMMANQUABLE: "L'évènement immanquable",
 	EVENEMENTS: 'Évènements',
@@ -211,7 +211,7 @@ export default {
 	INFORMATIONS_TECHNIQUES: 'Informations techniques',
 	SPECIFICATIONS_TECHNIQUES: 'Spécifications techniques',
 	INFORMATIONS_TECHNIQUES_DESC:
-		"Consultez et téléchargez tous les dossiers techniques relatifs à notre salle de spectacle et à notre salle d'exposition. Le dossier de candidature pour nos résidences artistiques est également disponible.",
+		"Consultez et télécharger tous les dossiers relatifs à notre salle de spectacle et à notre salle d'exposition.",
 	INFORMATIONS_TECHNIQUES_INTRO: 'Dossiers technique et de candidature',
 	INFORMATIONS_TECHNIQUES_TITRE: 'Les informations techniques',
 	DOSSIER_TECHNIQUE: 'Dossier technique',
@@ -348,7 +348,7 @@ export default {
 		"Tout au long de l'année, notre cinéma vous invite à découvrir le 7ᵉ art autrement grâce à une programmation riche et accompagnée d'animations variées : projections-rencontres, ciné-quizz, festivals nationaux, cycles thématiques, coups de cœur surprises ou ateliers jeune public « Rembobine ton cinéma ». Autant de moments pour partager, apprendre et s'émerveiller autour du cinéma.",
 	RDV_CINEMA_INTRO: 'Des animations pour tous, entre découvertes, rencontres et animations ludiques',
 	REDUIT: 'Réduit',
-	REDUIT_DESC: '3-13 ans et abonné',
+	REDUIT_DESC: '3-13 ans et abonné médiathèque',
 	RESIDENCE: 'Résidence',
 	RESIDENCE_ACCUEIL_DESC:
 		"La résidence artistique est un temps privilégié que nous vous proposons pour créer, rechercher et expérimenter. Elle vous offre un espace de travail, des moyens adaptés et un cadre propice pour développer votre projet artistique, affiner votre écriture ou finaliser une œuvre.\n\nEn vous accueillant en résidence, nous affirmons notre engagement en faveur de la création et du soutien aux compagnies, notamment locales. Ces temps de travail sont pensés pour vous accompagner dans votre parcours artistique et vous offrir des conditions favorables à l'épanouissement de votre projet.",
