@@ -20,8 +20,6 @@ import FifthImg from '@/assets/imgs/mediatheque/5.webp'
 import SixthImg from '@/assets/imgs/mediatheque/6.webp'
 import SeventhImg from '@/assets/imgs/mediatheque/7.webp'
 import EighthImg from '@/assets/imgs/mediatheque/8.webp'
-import NinthImg from '@/assets/imgs/mediatheque/9.webp'
-import TenthImg from '@/assets/imgs/mediatheque/10.webp'
 import { HoverImageSwap } from '@/components/hover-image-swap'
 import { LudothequeGrid } from '@/components/ludotheque-grid'
 import { SpectaclesGrid } from '@/components/spectacles-grid'
@@ -312,61 +310,20 @@ const getImmanquableImage = (item: ImmanquableDoc) => {
 		)}
 
 		<section class="section-default" id="cyberbase">
-			<article class="pb-8 lg:pb-16">
-				<h2 class="pb-2 lg:pb-3">{t('CYBERBASE_TITRE')}</h2>
-				<p class="distinguished pb-3 lg:pb-16">{t('CYBERBASE_INTRO')}</p>
-				<p class="lg:w-2/3">{t('CYBERBASE_DESC')}</p>
-			</article>
+			<article class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
+				<div>
+					<h2 class="pb-2 lg:pb-3">{t('CYBERBASE_TITRE')}</h2>
+					<p class="distinguished pb-3 lg:pb-16">{t('CYBERBASE_INTRO')}</p>
+					<p>{t('CYBERBASE_DESC')}</p>
+				</div>
 
-			<div class="hidden lg:block">
-				<HoverImageSwap
-					client:visible
-					direction="horizontal"
-					rows={[{
-						slots: [
-							{ src: FifthImg.src, alt: '', barClassName: 'bg-secondary' },
-							{ src: SixthImg.src, alt: '', barClassName: 'bg-secondary-muted' },
-							{ src: SeventhImg.src, alt: '', barClassName: 'bg-primary' },
-							{ src: EighthImg.src, alt: '', barClassName: 'bg-secondary' },
-							{ src: NinthImg.src, alt: '', barClassName: 'bg-secondary-muted' },
-							{ src: TenthImg.src, alt: '' }
-						],
-						defaultIndex: 5,
-						height: 'h-[250px]',
-						width: 'w-full'
-					}]}
-				/>
-			</div>
-			<div class="lg:hidden flex flex-col gap-4">
-				<HoverImageSwap
-					client:visible
-					direction="horizontal"
-					rows={[{
-						slots: [
-							{ src: FifthImg.src, alt: '' },
-							{ src: SixthImg.src, alt: '', barClassName: 'bg-primary' },
-							{ src: SeventhImg.src, alt: '', barClassName: 'bg-secondary' }
-						],
-						defaultIndex: 0,
-						height: 'h-[180px]',
-						width: 'w-full'
-					}]}
-				/>
-				<HoverImageSwap
-					client:visible
-					direction="horizontal"
-					rows={[{
-						slots: [
-							{ src: EighthImg.src, alt: '', barClassName: 'bg-secondary' },
-							{ src: NinthImg.src, alt: '', barClassName: 'bg-secondary-muted' },
-							{ src: TenthImg.src, alt: '' }
-						],
-						defaultIndex: 2,
-						height: 'h-[180px]',
-						width: 'w-full'
-					}]}
-				/>
-			</div>
+				<div class="grid grid-cols-2 gap-2 lg:gap-4">
+					<img src={FifthImg.src} alt="" loading="lazy" decoding="async" class="aspect-[4/3] h-full w-full rounded-lg object-cover" />
+					<img src={SixthImg.src} alt="" loading="lazy" decoding="async" class="aspect-[4/3] h-full w-full rounded-lg object-cover" />
+					<img src={SeventhImg.src} alt="" loading="lazy" decoding="async" class="aspect-[4/3] h-full w-full rounded-lg object-cover" />
+					<img src={EighthImg.src} alt="" loading="lazy" decoding="async" class="aspect-[4/3] h-full w-full rounded-lg object-cover" />
+				</div>
+			</article>
 		</section>
 
 		<section class="section-default" id="autres-medias">
