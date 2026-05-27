@@ -4,6 +4,7 @@ import { LanguageSelect } from '@/components/language-select'
 import { MobileMenu } from '@/components/mobile-menu'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
+import { getHoursSchedule, type HoursDay, type HoursPeriod, type HoursRange } from '@/lib/hours'
 import { getMenuNavs } from '@/lib/menu-navs'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
@@ -17,6 +18,8 @@ interface HoursForToday {
 	today: Date
 	openStart: string | null
 	openEnd: string | null
+	openRanges: HoursRange[]
+	period: HoursPeriod
 }
 
 interface Props {
@@ -44,26 +47,31 @@ const mobileLinks = [
 	{ label: t('MENTIONS_LEGALES'), href: getRelativeLocaleUrl(locale, 'mentions-legales') }
 ]
 
-const formatTime = (iso: string) =>
-	new Date(iso).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' })
+const getHoursDayLabel = (day: HoursDay) => {
+	if (day === 'wednesday') return t('MERCREDI')
+	if (day === 'sunday') return t('DIMANCHE')
+	return t('LUNDI_SAMEDI')
+}
+
+const activeSchedule = getHoursSchedule(hoursData, hoursForToday.period)
 
 const hoursInfo = {
 	isClosed: hoursForToday.isClosed,
 	todayLabel: hoursForToday.today.toLocaleDateString(locale, { dateStyle: 'full', timeZone: 'Europe/Paris' }),
-	todayShortLabel: hoursForToday.today.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' }),
+	todayShortLabel: hoursForToday.today.toLocaleDateString(locale, {
+		weekday: 'long',
+		day: 'numeric',
+		month: 'long',
+		timeZone: 'Europe/Paris'
+	}),
 	todayIso: hoursForToday.today.toISOString().split('T')[0],
-	openLabel:
-		hoursForToday.openStart && hoursForToday.openEnd
-			? `${formatTime(hoursForToday.openStart)} - ${formatTime(hoursForToday.openEnd)}`
-			: undefined,
-	openStart: hoursForToday.openStart,
-	openEnd: hoursForToday.openEnd,
-	baseStart: hoursData.horaires_base.base_start,
-	baseEnd: hoursData.horaires_base.base_end,
-	dimancheStart: hoursData.horaires_base.dimanche_start,
-	dimancheEnd: hoursData.horaires_base.dimanche_end
+	openRanges: hoursForToday.openRanges,
+	schedule: activeSchedule.map((line) => ({
+		label: getHoursDayLabel(line.day),
+		ranges: line.ranges,
+		isClosed: line.isClosed
+	}))
 }
-
 ---
 
 <a
@@ -71,7 +79,9 @@ const hoursInfo = {
 	class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:text-black"
 	>{t('SKIP_TO_CONTENT')}</a
 >
-<header class="bg-primary-foreground sticky top-0 z-50 flex h-(--header-height) gap-4 rounded-b-3xl mb-[calc(-1*var(--header-overlap))]">
+<header
+	class="bg-primary-foreground sticky top-0 z-50 mb-[calc(-1*var(--header-overlap))] flex h-(--header-height) gap-4 rounded-b-3xl"
+>
 	<div class="flex h-full flex-1 justify-between px-5 py-2">
 		<a class="flex items-center justify-center" href={getRelativeLocaleUrl(locale, '')}
 			><img src={LogoImg.src} alt={t('LOGO_ALT')} loading="eager" class="w-15" /></a
@@ -101,9 +111,7 @@ const hoursInfo = {
 			hoursCardLabels={{
 				tabLabel: t('HORAIRES_TAB'),
 				dateFromLabel: t('DATE_FROM'),
-				seasonLabel: t('DE_LA_SAISON'),
-				mondaySaturdayLabel: t('LUNDI_SAMEDI'),
-				sundayLabel: t('DIMANCHE')
+				seasonLabel: t('DE_LA_SAISON')
 			}}
 			hoursLearnMoreHref={`${getRelativeLocaleUrl(locale, 'informations')}#horaires`}
 			hours={hoursInfo}
@@ -115,13 +123,12 @@ const hoursInfo = {
 		client:media="(min-width: 1280px)"
 		currentLocale={locale}
 		currentPath={currentPath}
-		className="hidden lg:flex self-center"
+		className="hidden self-center lg:flex"
 	/>
 	<Button
 		link={getRelativeLocaleUrl(locale, 'contact')}
 		variant={'default'}
 		client:media="(min-width: 1280px)"
-		className="group hidden w-40 lg:flex self-center mr-6"
-		>{t('NOUS_CONTACTER')}</Button
+		className="group mr-6 hidden w-40 self-center lg:flex">{t('NOUS_CONTACTER')}</Button
 	>
 </header>

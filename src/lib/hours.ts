@@ -1,42 +1,142 @@
 import type { Hour } from '@/types/hours'
 
-export function getHoursForToday(hours: Hour) {
-	const today = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' }))
+export interface HoursRange {
+	start: string
+	end: string
+}
 
-	const isClosed =
-		hours.closed_dates?.some(({ date }) => {
-			const closedDate = new Date(date)
-			return closedDate.getMonth() === today.getMonth() && closedDate.getDate() === today.getDate()
-		}) ?? false
+export type HoursPeriod = 'base' | 'ete' | 'hiver'
+export type HoursDay = 'mondaySaturday' | 'wednesday' | 'sunday'
 
-	let openStart: string | null = null
-	let openEnd: string | null = null
+export interface HoursScheduleLine {
+	day: HoursDay
+	ranges: HoursRange[]
+	isClosed: boolean
+}
 
-	if (!isClosed) {
-		const isEte =
-			today >= new Date(hours.horaires_ete.ete_date_from) &&
-			today <= new Date(hours.horaires_ete.ete_date_to)
+const parisDateFormatter = new Intl.DateTimeFormat('en-CA', {
+	timeZone: 'Europe/Paris',
+	year: 'numeric',
+	month: '2-digit',
+	day: '2-digit'
+})
 
-		const isHiver =
-			(today >= new Date(hours.horaires_hiver.noel_date_from) &&
-				today <= new Date(hours.horaires_hiver.noel_date_to)) ||
-			(today >= new Date(hours.horaires_hiver.fevrier_date_from) &&
-				today <= new Date(hours.horaires_hiver.fevrier_date_to))
+const getParisDateKey = (date: string | Date) => {
+	const parts = parisDateFormatter.formatToParts(new Date(date))
+	const year = parts.find((part) => part.type === 'year')?.value
+	const month = parts.find((part) => part.type === 'month')?.value
+	const day = parts.find((part) => part.type === 'day')?.value
+	return `${year}-${month}-${day}`
+}
 
-		if (isEte) {
-			openStart = hours.horaires_ete.ete_start
-			openEnd = hours.horaires_ete.ete_end
-		} else if (isHiver) {
-			openStart = hours.horaires_hiver.hiver_start
-			openEnd = hours.horaires_hiver.hiver_end
-		} else if (today.getDay() === 0) {
-			openStart = hours.horaires_base.dimanche_start
-			openEnd = hours.horaires_base.dimanche_end
-		} else {
-			openStart = hours.horaires_base.base_start
-			openEnd = hours.horaires_base.base_end
-		}
+const getParisToday = () => new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' }))
+
+const isCompleteRange = (start?: string | null, end?: string | null) => {
+	if (!start || !end) return null
+	return { start, end }
+}
+
+const buildRanges = (ranges: Array<HoursRange | null>) => ranges.filter((range): range is HoursRange => Boolean(range))
+
+const isInRange = (dateKey: string, start: string, end: string) =>
+	dateKey >= getParisDateKey(start) && dateKey <= getParisDateKey(end)
+
+const isExceptionallyClosed = (hours: Hour, todayKey: string) =>
+	hours.closed_dates?.some(({ date }) => getParisDateKey(date) === todayKey) ?? false
+
+export function getHoursPeriod(hours: Hour, today = getParisToday()): HoursPeriod {
+	const todayKey = getParisDateKey(today)
+
+	if (isInRange(todayKey, hours.horaires_ete.ete_date_from, hours.horaires_ete.ete_date_to)) {
+		return 'ete'
 	}
 
-	return { today, isClosed, openStart, openEnd }
+	const isHiver =
+		isInRange(todayKey, hours.horaires_hiver.noel_date_from, hours.horaires_hiver.noel_date_to) ||
+		isInRange(todayKey, hours.horaires_hiver.fevrier_date_from, hours.horaires_hiver.fevrier_date_to)
+
+	return isHiver ? 'hiver' : 'base'
+}
+
+export function getHoursSchedule(hours: Hour, period: HoursPeriod): HoursScheduleLine[] {
+	if (period === 'ete') {
+		const mondaySaturday = isCompleteRange(hours.horaires_ete.ete_start, hours.horaires_ete.ete_end)
+		const wednesdayMorning = isCompleteRange(
+			hours.horaires_ete.ete_mercredi_matin_start,
+			hours.horaires_ete.ete_mercredi_matin_end
+		)
+		const sunday = isCompleteRange(hours.horaires_ete.ete_dimanche_start, hours.horaires_ete.ete_dimanche_end)
+
+		return [
+			{ day: 'mondaySaturday', ranges: mondaySaturday ? [mondaySaturday] : [], isClosed: !mondaySaturday },
+			{
+				day: 'wednesday',
+				ranges: buildRanges([wednesdayMorning, mondaySaturday]),
+				isClosed: !wednesdayMorning && !mondaySaturday
+			},
+			{ day: 'sunday', ranges: sunday ? [sunday] : [], isClosed: !sunday }
+		]
+	}
+
+	if (period === 'hiver') {
+		const mondaySaturday = isCompleteRange(hours.horaires_hiver.hiver_start, hours.horaires_hiver.hiver_end)
+		const wednesdayMorning = isCompleteRange(
+			hours.horaires_hiver.hiver_mercredi_matin_start,
+			hours.horaires_hiver.hiver_mercredi_matin_end
+		)
+		const sunday = isCompleteRange(hours.horaires_hiver.hiver_dimanche_start, hours.horaires_hiver.hiver_dimanche_end)
+
+		return [
+			{ day: 'mondaySaturday', ranges: mondaySaturday ? [mondaySaturday] : [], isClosed: !mondaySaturday },
+			{
+				day: 'wednesday',
+				ranges: buildRanges([wednesdayMorning, mondaySaturday]),
+				isClosed: !wednesdayMorning && !mondaySaturday
+			},
+			{ day: 'sunday', ranges: sunday ? [sunday] : [], isClosed: !sunday }
+		]
+	}
+
+	const mondaySaturday = isCompleteRange(hours.horaires_base.base_start, hours.horaires_base.base_end)
+	const wednesdayMorning = isCompleteRange(
+		hours.horaires_base.mercredi_matin_start,
+		hours.horaires_base.mercredi_matin_end
+	)
+	const sunday = isCompleteRange(hours.horaires_base.dimanche_start, hours.horaires_base.dimanche_end)
+
+	return [
+		{ day: 'mondaySaturday', ranges: mondaySaturday ? [mondaySaturday] : [], isClosed: !mondaySaturday },
+		{
+			day: 'wednesday',
+			ranges: buildRanges([wednesdayMorning, mondaySaturday]),
+			isClosed: !wednesdayMorning && !mondaySaturday
+		},
+		{ day: 'sunday', ranges: sunday ? [sunday] : [], isClosed: !sunday }
+	]
+}
+
+export function getHoursForToday(hours: Hour) {
+	const today = getParisToday()
+	const todayKey = getParisDateKey(today)
+	const period = getHoursPeriod(hours, today)
+	const isClosedDate = isExceptionallyClosed(hours, todayKey)
+	const schedule = getHoursSchedule(hours, period)
+	const day = today.getDay()
+	const scheduleLine =
+		day === 0
+			? schedule.find((line) => line.day === 'sunday')
+			: day === 3
+				? schedule.find((line) => line.day === 'wednesday')
+				: schedule.find((line) => line.day === 'mondaySaturday')
+	const openRanges = isClosedDate ? [] : (scheduleLine?.ranges ?? [])
+	const isClosed = isClosedDate || openRanges.length === 0
+
+	return {
+		today,
+		period,
+		isClosed,
+		openRanges,
+		openStart: openRanges[0]?.start ?? null,
+		openEnd: openRanges[0]?.end ?? null
+	}
 }

@@ -15,21 +15,24 @@ interface HoursInfo {
 	todayLabel: string
 	todayShortLabel: string
 	todayIso: string
-	openLabel?: string
-	openStart: string | null
-	openEnd: string | null
-	baseStart: string
-	baseEnd: string
-	dimancheStart: string
-	dimancheEnd: string
+	openRanges: {
+		start: string
+		end: string
+	}[]
+	schedule: {
+		label: string
+		ranges: {
+			start: string
+			end: string
+		}[]
+		isClosed: boolean
+	}[]
 }
 
 interface HoursCardLabels {
 	tabLabel: string
 	dateFromLabel: string
 	seasonLabel: string
-	mondaySaturdayLabel: string
-	sundayLabel: string
 }
 
 interface Props {
@@ -98,7 +101,7 @@ export function MobileMenu({
 
 			<div
 				className={cn(
-					'bg-foreground text-white fixed inset-y-0 right-0 z-50 flex w-full flex-col overflow-y-auto transition-all duration-300 min-[410px]:w-[95%]',
+					'bg-foreground fixed inset-y-0 right-0 z-50 flex w-full flex-col overflow-y-auto text-white transition-all duration-300 min-[410px]:w-[95%]',
 					open ? 'pointer-events-auto translate-x-0 opacity-100' : 'pointer-events-none translate-x-full opacity-0'
 				)}
 				aria-hidden={!open}
@@ -119,7 +122,7 @@ export function MobileMenu({
 				</div>
 
 				{/* Nav links */}
-				<nav className="grid grid-cols-2 gap-x-4 gap-y-2.5 px-8 justify-items-end mt-2">
+				<nav className="mt-2 grid grid-cols-2 justify-items-end gap-x-4 gap-y-2.5 px-8">
 					{links.map((link) => (
 						<a
 							key={link.href}
@@ -131,7 +134,7 @@ export function MobileMenu({
 						</a>
 					))}
 				</nav>
-				<div className="flex w-full items-center justify-end gap-4 px-8 pt-3 mb-2">
+				<div className="mb-2 flex w-full items-center justify-end gap-4 px-8 pt-3">
 					<Button link={artisteHref} variant="default" className="!bg-primary hover:!bg-primary/90">
 						{artisteLabel}
 					</Button>
@@ -150,15 +153,9 @@ export function MobileMenu({
 						todayIso={hours.todayIso}
 						isClosed={hours.isClosed}
 						closedLabel={closedLabel}
-						openStart={hours.openStart}
-						openEnd={hours.openEnd}
+						openRanges={hours.openRanges}
 						seasonLabel={hoursCardLabels.seasonLabel}
-						mondaySaturdayLabel={hoursCardLabels.mondaySaturdayLabel}
-						sundayLabel={hoursCardLabels.sundayLabel}
-						baseStart={hours.baseStart}
-						baseEnd={hours.baseEnd}
-						dimancheStart={hours.dimancheStart}
-						dimancheEnd={hours.dimancheEnd}
+						schedule={hours.schedule}
 						learnMoreLabel={learnMoreLabel}
 						learnMoreHref={hoursLearnMoreHref}
 					/>

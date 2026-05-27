@@ -1,10 +1,6 @@
 ---
 export const prerender = true
-export const getStaticPaths = () => [
-	{ params: { lang: 'fr' } },
-	{ params: { lang: 'en' } },
-	{ params: { lang: 'es' } }
-]
+export const getStaticPaths = () => [{ params: { lang: 'fr' } }, { params: { lang: 'en' } }, { params: { lang: 'es' } }]
 import { findGlobal } from '@/api/payload'
 import FirstImg from '@/assets/imgs/info/1.webp'
 import SecondImg from '@/assets/imgs/info/2.webp'
@@ -25,10 +21,10 @@ import ParcNationalImg from '@/assets/imgs/sponsos/parc-national.webp'
 import PrefetImg from '@/assets/imgs/sponsos/prefet.webp'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
+import { getHoursSchedule, type HoursDay, type HoursPeriod, type HoursRange } from '@/lib/hours'
 import Layout from '@/layouts/layout.astro'
 import type { Hour } from '@/types/hours'
 import { MDV_DEFAULT_ADDRESS, MDV_PARKING_DEFAULT_ADDRESS } from '@/utils/helper'
-import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.params.lang || 'fr') as I18n
 const t = createTranslator(locale)
@@ -41,15 +37,41 @@ const formatTime = (dateStr: string) => {
 		timeZone: 'Europe/Paris'
 	})
 }
+const formatDate = (dateStr: string) => {
+	return new Date(dateStr).toLocaleDateString(locale, {
+		weekday: 'long',
+		day: 'numeric',
+		month: 'long',
+		timeZone: 'Europe/Paris'
+	})
+}
+const formatRanges = (ranges: HoursRange[]) =>
+	ranges.map((range) => `${formatTime(range.start)} - ${formatTime(range.end)}`).join(' / ')
+const getHoursDayLabel = (day: HoursDay) => {
+	if (day === 'wednesday') return t('MERCREDI')
+	if (day === 'sunday') return t('DIMANCHE')
+	return t('LUNDI_SAMEDI')
+}
+const hoursPeriods: { title: string; period: HoursPeriod }[] = [
+	{ title: t('JOURS_NORMAUX'), period: 'base' },
+	{ title: t('VACANCES_ETE'), period: 'ete' },
+	{ title: t('VACANCES_HIVER'), period: 'hiver' }
+]
+const closedDates = hours.closed_dates ?? []
 ---
 
 <Layout title={t('INFORMATIONS')} hoursData={hours}>
 	<main id="main-content">
 		<section
-			class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 sm:gap-2.5 md:gap-3.5 bg-[#345f6e] p-1.5 sm:p-3.5 pt-11.5 sm:pt-16 *:rounded-lg lg:rounded-b-3xl"
+			class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 bg-[#345f6e] p-1.5 pt-11.5 *:rounded-lg sm:gap-2.5 sm:p-3.5 sm:pt-16 md:gap-3.5 lg:rounded-b-3xl"
 		>
 			<div class="bg-cream relative col-span-24 col-start-1 row-span-17 row-start-1 overflow-hidden lg:p-5">
-				<img src={LayoutHome1.src} alt="" loading="eager" class="absolute inset-0 h-full w-full object-cover lg:hidden" />
+				<img
+					src={LayoutHome1.src}
+					alt=""
+					loading="eager"
+					class="absolute inset-0 h-full w-full object-cover lg:hidden"
+				/>
 				<div class="bg-cream/80 absolute inset-0 lg:hidden"></div>
 				<div class="hidden lg:block">
 					<h2 class="pb-6 text-2xl lg:pb-6">{t('A_PROPOS')}</h2>
@@ -65,20 +87,34 @@ const formatTime = (dateStr: string) => {
 				</div>
 			</div>
 			<div class="bg-cream relative col-span-16 col-start-25 row-start-1 row-end-24 overflow-hidden md:row-end-21">
-				<img src={LayoutHome3.src} alt="" loading="eager" fetchpriority="high" class="h-full w-full rounded-lg object-cover" />
+				<img
+					src={LayoutHome3.src}
+					alt=""
+					loading="eager"
+					fetchpriority="high"
+					class="h-full w-full rounded-lg object-cover"
+				/>
 			</div>
 			<div class="bg-cream relative col-span-13 col-start-1 row-span-23 row-start-18 overflow-hidden">
 				<img src={LayoutHome4.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 			</div>
-			<div class="relative hidden overflow-hidden bg-[#be7a5a] md:col-span-13 md:col-start-14 md:row-span-17 md:row-start-24 md:block">
+			<div
+				class="relative hidden overflow-hidden bg-[#be7a5a] md:col-span-13 md:col-start-14 md:row-span-17 md:row-start-24 md:block"
+			>
 				<img src={LayoutHome5.src} alt="" loading="eager" class="h-full w-full rounded-lg object-cover" />
 			</div>
-			<div class="relative col-span-27 col-start-14 row-start-24 row-end-41 overflow-hidden md:col-span-14 md:col-start-27 md:row-start-21">
+			<div
+				class="relative col-span-27 col-start-14 row-start-24 row-end-41 overflow-hidden md:col-span-14 md:col-start-27 md:row-start-21"
+			>
 				<img src={LayoutHome6.src} alt="" loading="eager" class="absolute inset-0 h-full w-full object-cover" />
-				<div class="bg-white/80 absolute inset-0"></div>
+				<div class="absolute inset-0 bg-white/80"></div>
 			</div>
-			<div class="bg-cream z-40 col-span-17 col-start-12 row-span-6 row-start-18 flex translate-x-[0.2rem] items-center justify-center overflow-hidden p-2 outline-8 outline-[#345f6e] sm:outline-10 md:outline-14">
-				<h1 class="text-primary text-center text-xl! leading-7 sm:text-2xl! sm:leading-8 md:text-4xl! md:leading-12 lg:text-[40px]! lg:leading-12 font-medium! break-words">
+			<div
+				class="bg-cream z-40 col-span-17 col-start-12 row-span-6 row-start-18 flex translate-x-[0.2rem] items-center justify-center overflow-hidden p-2 outline-8 outline-[#345f6e] sm:outline-10 md:outline-14"
+			>
+				<h1
+					class="text-primary text-center text-xl! leading-7 font-medium! break-words sm:text-2xl! sm:leading-8 md:text-4xl! md:leading-12 lg:text-[40px]! lg:leading-12"
+				>
 					{t('INFORMATIONS_PRATIQUES')}
 				</h1>
 			</div>
@@ -114,17 +150,30 @@ const formatTime = (dateStr: string) => {
 
 						<div class="rounded-3xl bg-[#F5EDE2] p-4">
 							<p class="font-title text-foreground border-foreground mb-4 border-b text-lg">{t('HORAIRES')}</p>
-							<div class="space-y-2 pl-3">
-								<div>
-									<p class="font-medium">{t('LUNDI_SAMEDI')}</p>
-									<p>{formatTime(hours.horaires_base.base_start)} - {formatTime(hours.horaires_base.base_end)}</p>
-								</div>
-								<div>
-									<p class="font-medium">{t('DIMANCHE')}</p>
-									<p>
-										{formatTime(hours.horaires_base.dimanche_start)} - {formatTime(hours.horaires_base.dimanche_end)}
-									</p>
-								</div>
+							<div class="space-y-4 pl-3">
+								{
+									hoursPeriods.map(({ title, period }) => (
+										<div>
+											<p class="font-medium">{title}</p>
+											<div class="space-y-1">
+												{getHoursSchedule(hours, period).map((line) => (
+													<p>
+														<span>{getHoursDayLabel(line.day)}</span> :{' '}
+														{line.isClosed ? t('FERME') : formatRanges(line.ranges)}
+													</p>
+												))}
+											</div>
+										</div>
+									))
+								}
+								{
+									closedDates.length > 0 && (
+										<div>
+											<p class="font-medium">{t('FERMETURES_EXCEPTIONNELLES')}</p>
+											<p>{closedDates.map(({ date }) => formatDate(date)).join(' / ')}</p>
+										</div>
+									)
+								}
 							</div>
 						</div>
 
@@ -180,7 +229,7 @@ const formatTime = (dateStr: string) => {
 								</div>
 							</div>
 						</div>
-						<div class="w-25 overflow-hidden rounded-3xl] lg:w-28.75">
+						<div class="rounded-3xl] w-25 overflow-hidden lg:w-28.75">
 							<MyImage
 								src={FirstImg}
 								alt=""
@@ -218,7 +267,7 @@ const formatTime = (dateStr: string) => {
 								</div>
 							</div>
 						</div>
-						<div class="w-25 overflow-hidden rounded-3xl] lg:w-28.75">
+						<div class="rounded-3xl] w-25 overflow-hidden lg:w-28.75">
 							<MyImage
 								src={SecondImg}
 								alt=""
@@ -235,22 +284,22 @@ const formatTime = (dateStr: string) => {
 					>
 						<div class="flex flex-col">
 							<h3 class="text-foreground pb-8">{t('TARIFS_CINEMA')}</h3>
-								<div class="mt-auto flex flex-col items-start gap-3">
-									<div class="bg-secondary rounded-3xl px-4 py-2">
-										<p class="text-foreground!"><span>{t('ADULTE')}</span> : 7 €</p>
-									</div>
-									<div class="bg-secondary rounded-3xl px-4 py-2">
-										<p class="text-foreground!"><span>{t('ETUDIANT')}</span> : 6 €</p>
-									</div>
-									<div class="bg-secondary rounded-3xl px-4 py-2">
-										<p class="text-foreground!"><span>{t('ENFANT_MOINS_13')}</span> : 5 €</p>
-									</div>
-									<div class="bg-secondary rounded-3xl px-4 py-2">
-										<p class="text-foreground!"><span>{t('ABONNE')}</span> : 5,80 €</p>
-									</div>
+							<div class="mt-auto flex flex-col items-start gap-3">
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ADULTE')}</span> : 7 €</p>
 								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ETUDIANT')}</span> : 6 €</p>
+								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ENFANT_MOINS_13')}</span> : 5 €</p>
+								</div>
+								<div class="bg-secondary rounded-3xl px-4 py-2">
+									<p class="text-foreground!"><span>{t('ABONNE')}</span> : 5,80 €</p>
+								</div>
+							</div>
 						</div>
-						<div class="w-25 overflow-hidden rounded-3xl] lg:w-28.75">
+						<div class="rounded-3xl] w-25 overflow-hidden lg:w-28.75">
 							<MyImage
 								src={ThirdImg}
 								alt=""
@@ -292,7 +341,7 @@ const formatTime = (dateStr: string) => {
 					class="bg-secondary-muted relative order-2 overflow-hidden rounded-b-4xl lg:order-1 lg:overflow-visible lg:rounded-l-4xl lg:rounded-br-none"
 				>
 					<div
-						class="lg:absolute lg:inset-x-0 lg:bottom-0 lg:top-[-28px] lg:h-[calc(100%+28px)] lg:overflow-hidden lg:rounded-bl-4xl"
+						class="lg:absolute lg:inset-x-0 lg:top-[-28px] lg:bottom-0 lg:h-[calc(100%+28px)] lg:overflow-hidden lg:rounded-bl-4xl"
 					>
 						<MyImage
 							alt=""

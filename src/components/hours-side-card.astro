@@ -1,33 +1,50 @@
 ---
-import { findGlobal } from '@/api/payload'
 import { createTranslator, type I18n } from '@/i18n/translations'
-import { getHoursForToday } from '@/lib/hours'
+import { getHoursForToday, getHoursSchedule, type HoursDay, type HoursRange } from '@/lib/hours'
 import type { Hour } from '@/types/hours'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { SideCard } from './side-card'
 
 interface Props {
 	locale: I18n
+	hoursData: Hour
 }
 
-const { locale } = Astro.props
+const { locale, hoursData } = Astro.props
 const t = createTranslator(locale)
 
-const hours = await findGlobal<Hour>('hours', { locale })
-const { isClosed, today, openStart, openEnd } = getHoursForToday(hours)
+const hours = hoursData
+const { isClosed, today, openRanges, period } = getHoursForToday(hours)
+const schedule = getHoursSchedule(hours, period)
 
 const formatHourFr = (iso: string) => {
 	const d = new Date(iso)
-	const parts = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Paris' }).split(':')
+	const parts = d
+		.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Paris' })
+		.split(':')
 	const h = parseInt(parts[0], 10)
 	const m = parts[1]
 	return m === '00' ? `${h}h` : `${h}h${m}`
 }
+
+const formatRanges = (ranges: HoursRange[]) =>
+	ranges.map((range) => `${formatHourFr(range.start)} - ${formatHourFr(range.end)}`).join(' / ')
+const getHoursDayLabel = (day: HoursDay) => {
+	if (day === 'wednesday') return t('MERCREDI')
+	if (day === 'sunday') return t('DIMANCHE')
+	return t('LUNDI_SAMEDI')
+}
 ---
 
-<SideCard client:media="(min-width: 1280px)" height="h-60" tabText={[t('HORAIRES_TAB')]} tabClassName="text-sm font-title font-normal" ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}>
-	<div class="flex h-full flex-col items-start px-4 py-5 text-left">
-		<p class="text-base font-medium text-white">
+<SideCard
+	client:media="(min-width: 1280px)"
+	height="h-60"
+	tabText={[t('HORAIRES_TAB')]}
+	tabClassName="text-sm font-title font-normal"
+	ariaLabel={t('PANNEAU_HORAIRES_OUVERTURE')}
+>
+	<div class="flex h-full flex-col items-start px-4 pt-5 pb-4  text-left">
+		<p class="text-sm font-semibold text-white">
 			{t('DATE_FROM')}{' '}
 			<time datetime={today.toISOString().split('T')[0]}>
 				{today.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' })}
@@ -35,24 +52,32 @@ const formatHourFr = (iso: string) => {
 			&nbsp;:
 		</p>
 
-		{isClosed ? (
-			<p class="font-serif text-3xl pt-2 w-full text-center text-white">{t('FERME')}</p>
-		) : openStart && openEnd ? (
-			<p class="font-serif text-3xl pt-2 w-full text-center text-white" itemscope itemtype="https://schema.org/OpeningHoursSpecification">
-				<meta itemprop="opens" content={openStart} />
-				<meta itemprop="closes" content={openEnd} />
-				<time datetime={openStart}>{formatHourFr(openStart)}</time> - <time datetime={openEnd}>{formatHourFr(openEnd)}</time>
-			</p>
-		) : null}
+		{
+			isClosed ? (
+				<p class="w-full pt-2 text-center font-serif text-3xl text-white">{t('FERME')}</p>
+			) : openRanges.length > 0 ? (
+				<p class={`w-full pt-2 text-center font-serif text-white ${openRanges.length > 1 ? 'text-2xl' : 'text-3xl'}`}>
+					{formatRanges(openRanges)}
+				</p>
+			) : null
+		}
 
-		<p class="pt-6 pb-2 text-base font-medium text-white">{t('DE_LA_SAISON')}&nbsp;:</p>
+		<p class="pt-4 pb-2 text-sm font-semibold text-white">{t('DE_LA_SAISON')}&nbsp;:</p>
 
-		<div class="text-sm space-y-0.5">
-			<p class="text-white">{t('LUNDI_SAMEDI')} : {formatHourFr(hours.horaires_base.base_start)} - {formatHourFr(hours.horaires_base.base_end)}</p>
-			<p class="text-white">{t('DIMANCHE')} : {formatHourFr(hours.horaires_base.dimanche_start)} - {formatHourFr(hours.horaires_base.dimanche_end)}</p>
+		<div class="space-y-0.5 text-sm">
+			{
+				schedule.map((line) => (
+					<p class="text-white">
+						{getHoursDayLabel(line.day)} : {line.isClosed ? t('FERME') : formatRanges(line.ranges)}
+					</p>
+				))
+			}
 		</div>
 
-		<a href={`${getRelativeLocaleUrl(locale, 'informations')}#horaires`} class="mt-auto text-xs underline underline-offset-4 text-white">
+		<a
+			href={`${getRelativeLocaleUrl(locale, 'informations')}#horaires`}
+			class="mt-auto text-xs text-white underline underline-offset-4"
+		>
 			{t('EN_SAVOIR_PLUS')}
 		</a>
 	</div>
