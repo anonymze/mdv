@@ -86,6 +86,7 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 									className={cn(
 										'relative p-0 border-0 overflow-hidden',
 										isVertical ? 'w-full' : 'h-full',
+										'will-change-[flex-grow,flex-basis,border-radius,background-color]',
 										'transition-[flex-grow,flex-basis,border-radius,background-color] [transition-duration:300ms,300ms,300ms,400ms] ease-out',
 										'before:content-[""] before:absolute before:-inset-[5px]',
 										isActive
