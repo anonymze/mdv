@@ -103,6 +103,7 @@ export function HoursCard({
 					</a>
 				</div>
 			</article>
+
 		</div>
 	)
 }
