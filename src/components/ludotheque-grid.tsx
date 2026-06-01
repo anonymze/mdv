@@ -215,7 +215,7 @@ export function LudothequeGrid({
 						return (
 							<article
 								key={item.id}
-								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-black bg-white w-[360px] h-[360px]"
+								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-foreground bg-white w-[360px] h-[360px]"
 							>
 								<MyImage
 									src={item.thumbnail?.url}

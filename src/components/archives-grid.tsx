@@ -208,7 +208,7 @@ const fetchData = async () => {
 						return (
 							<article
 								key={item.id}
-								className="group shadow-card relative col-span-1 w-[320px] overflow-hidden rounded-2xl border border-black bg-white h-[400px]"
+								className="group shadow-card relative col-span-1 w-[320px] overflow-hidden rounded-2xl border border-foreground bg-white h-[400px]"
 							>
 								<MyImage
 									src={getImage(item)?.url}

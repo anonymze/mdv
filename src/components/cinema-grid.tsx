@@ -276,7 +276,7 @@ export function CinemaGrid({
 						return (
 							<article
 								key={item.id}
-								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-black bg-white h-[300px]"
+								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-foreground bg-white h-[300px]"
 							>
 								<MyImage
 									src={item.thumbnail?.url}

@@ -304,7 +304,7 @@ export function SpectaclesGrid({
 						return (
 							<article
 								key={item.id}
-								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-black bg-white w-[320px] h-[400px]"
+								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-foreground bg-white w-[320px] h-[400px]"
 							>
 								<MyImage
 									src={item.thumbnail?.url}

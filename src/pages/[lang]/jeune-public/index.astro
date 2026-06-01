@@ -118,7 +118,7 @@ const getImmanquableImage = (item: ImmanquableDoc) => {
 						<a
 							href={getImmanquableUrl(immanquables[0])}
 							aria-label={immanquables[0].title}
-							class="shadow-card relative block flex-1 overflow-hidden rounded-3xl border border-black"
+							class="shadow-card relative block flex-1 overflow-hidden rounded-3xl border border-foreground"
 						>
 							<img
 								src={getImmanquableImage(immanquables[0]).src}
@@ -270,7 +270,7 @@ const getImmanquableImage = (item: ImmanquableDoc) => {
 
 						return (
 							<article
-								class="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-black bg-white w-[360px] h-[360px]"
+								class="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-foreground bg-white w-[360px] h-[360px]"
 							>
 								<MyImage
 									src={item.thumbnail?.url}
