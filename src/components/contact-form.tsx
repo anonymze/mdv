@@ -15,7 +15,7 @@ const fieldClasses =
 
 export function ContactForm({ locale, apiBaseUrl }: Props) {
 	const [status, setStatus] = useState<Status>('idle')
-	const [form, setForm] = useState({ nom: '', prenom: '', email: '', telephone: '', message: '' })
+	const [form, setForm] = useState({ name: '', firstname: '', email: '', mobile: '', message: '' })
 	const t = langs[locale]
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -33,7 +33,7 @@ export function ContactForm({ locale, apiBaseUrl }: Props) {
 			})
 			if (res.ok) {
 				setStatus('success')
-				setForm({ nom: '', prenom: '', email: '', telephone: '', message: '' })
+				setForm({ name: '', firstname: '', email: '', mobile: '', message: '' })
 			} else {
 				setStatus('error')
 			}
@@ -48,18 +48,18 @@ export function ContactForm({ locale, apiBaseUrl }: Props) {
 				<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
 					<input
 						type="text"
-						name="nom"
+						name="name"
 						required
-						value={form.nom}
+						value={form.name}
 						onChange={handleChange}
 						placeholder={t.NOM}
 						className={fieldClasses}
 					/>
 					<input
 						type="text"
-						name="prenom"
+						name="firstname"
 						required
-						value={form.prenom}
+						value={form.firstname}
 						onChange={handleChange}
 						placeholder={t.PRENOM}
 						className={fieldClasses}
@@ -75,8 +75,9 @@ export function ContactForm({ locale, apiBaseUrl }: Props) {
 					/>
 					<input
 						type="tel"
-						name="telephone"
-						value={form.telephone}
+						name="mobile"
+						required
+						value={form.mobile}
 						onChange={handleChange}
 						placeholder={t.NUMERO_TELEPHONE}
 						className={fieldClasses}
