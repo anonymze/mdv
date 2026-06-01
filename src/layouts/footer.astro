@@ -3,22 +3,27 @@ import logoSvg from '@/assets/icons/logo.svg'
 import MyImage from '@/components/my-image.astro'
 import { NewsletterForm } from '@/components/newsletter-form'
 import { createTranslator, type I18n } from '@/i18n/translations'
+import { getHoursForToday, getHoursSchedule, type HoursDay, type HoursRange } from '@/lib/hours'
 import { getMenuNavs } from '@/lib/menu-navs'
+import type { Hour } from '@/types/hours'
 import { getRelativeLocaleUrl } from 'astro:i18n'
-import BeHappyImg from '@/assets/imgs/sponsos/be-happy.webp';
-import EuropeImg from '@/assets/imgs/sponsos/europe.webp';
-import HautesPyreneesImg from '@/assets/imgs/sponsos/hautes-pyrenees.webp';
-import ParcNationalImg from '@/assets/imgs/sponsos/parc-national.webp';
-import OccitanieImg from '@/assets/imgs/sponsos/occitanie.webp';
-import PrefetImg from '@/assets/imgs/sponsos/prefet.webp';
+import BeHappyImg from '@/assets/imgs/sponsos/be-happy.webp'
+import EuropeImg from '@/assets/imgs/sponsos/europe.webp'
+import HautesPyreneesImg from '@/assets/imgs/sponsos/hautes-pyrenees.webp'
+import ParcNationalImg from '@/assets/imgs/sponsos/parc-national.webp'
+import OccitanieImg from '@/assets/imgs/sponsos/occitanie.webp'
+import PrefetImg from '@/assets/imgs/sponsos/prefet.webp'
 
 interface Props {
 	locale: I18n
+	hoursData: Hour
 }
 
-const { locale } = Astro.props
+const { locale, hoursData } = Astro.props
 const t = createTranslator(locale)
 const menuNavs = getMenuNavs(t)
+const { period } = getHoursForToday(hoursData)
+const schedule = getHoursSchedule(hoursData, period)
 
 const espacesArtistiques = menuNavs[0]?.subMenus || []
 const maisonDuParc = [
@@ -28,6 +33,25 @@ const maisonDuParc = [
 	menuNavs[4],
 	{ label: t('MENTIONS_LEGALES'), link: '/mentions-legales' }
 ].filter(Boolean)
+
+const formatHourFr = (iso: string) => {
+	const d = new Date(iso)
+	const parts = d
+		.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Paris' })
+		.split(':')
+	const h = parseInt(parts[0], 10)
+	const m = parts[1]
+	return m === '00' ? `${h}h` : `${h}h${m}`
+}
+
+const formatRanges = (ranges: HoursRange[]) =>
+	ranges.map((range) => `${formatHourFr(range.start)} - ${formatHourFr(range.end)}`).join(' / ')
+
+const getHoursDayLabel = (day: HoursDay) => {
+	if (day === 'wednesday') return t('MERCREDI')
+	if (day === 'sunday') return t('DIMANCHE')
+	return t('LUNDI_SAMEDI')
+}
 ---
 
 <footer class="bg-foreground text-white space-y-8 lg:space-y-14 px-5 lg:px-10 py-10 lg:py-20 mt-8 lg:mt-16 rounded-t-3xl">
@@ -58,11 +82,15 @@ const maisonDuParc = [
 				<div>
 					<h4 class="text-white font-normal font-serif">{t('HORAIRES')}</h4>
 					<hr class="mb-4 border-white/40" />
-					<p class="pl-4 text-sm text-white">
-						{t('HORAIRES_PART1')}
-						<br />
-						{t('HORAIRES_PART2')}
-					</p>
+					<div class="space-y-1 pl-4 text-sm text-white">
+						{
+							schedule.map((line) => (
+								<p class="text-white">
+									{getHoursDayLabel(line.day)} : {line.isClosed ? t('FERME') : formatRanges(line.ranges)}
+								</p>
+							))
+						}
+					</div>
 				</div>
 			</div>
 		</div>
