@@ -6,12 +6,12 @@ export const getStaticPaths = () => [
 	{ params: { lang: 'es' } }
 ]
 import { find } from '@/api/payload'
-import LayoutHome1 from '@/assets/imgs/layout_home/1.webp'
-import LayoutHome2 from '@/assets/imgs/layout_home/2.webp'
-import LayoutHome3 from '@/assets/imgs/layout_home/3.webp'
-import LayoutHome4 from '@/assets/imgs/layout_home/4.webp'
-import LayoutHome5 from '@/assets/imgs/layout_home/5.webp'
-import LayoutHome6 from '@/assets/imgs/layout_home/6.webp'
+import LayoutHome1 from '@/assets/imgs/layout_archives/1.webp'
+import LayoutHome2 from '@/assets/imgs/layout_archives/1.webp'
+import LayoutHome3 from '@/assets/imgs/layout_archives/4.webp'
+import LayoutHome4 from '@/assets/imgs/layout_archives/3.webp'
+import LayoutHome5 from '@/assets/imgs/layout_archives/1.webp'
+import LayoutHome6 from '@/assets/imgs/layout_archives/2.webp'
 import { ArchivesGrid, type ArchiveDoc } from '@/components/archives-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
@@ -82,7 +82,6 @@ const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 			</div>
 			<div class="relative col-span-27 col-start-14 row-start-24 row-end-41 overflow-hidden md:col-span-14 md:col-start-27 md:row-start-21">
 				<img src={LayoutHome6.src} alt="" loading="eager" class="absolute inset-0 h-full w-full object-cover" />
-				<div class="bg-white/80 absolute inset-0"></div>
 			</div>
 			<div class="bg-cream z-40 col-span-17 col-start-12 row-span-6 row-start-18 flex translate-x-[0.2rem] items-center justify-center overflow-hidden p-2 outline-8 outline-[#345f6e] sm:outline-10 md:outline-14">
 				<h1 class="text-primary text-center text-xl! leading-7 sm:text-2xl! sm:leading-8 md:text-4xl! md:leading-12 lg:text-[40px]! lg:leading-12 font-medium! break-words">

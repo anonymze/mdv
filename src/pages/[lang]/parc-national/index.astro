@@ -19,12 +19,12 @@ import Layout from '@/layouts/layout.astro'
 import type { ParcNational } from '@/types/parc-national'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 const locale = (Astro.params.lang || 'fr') as I18n
-import LayoutHome1 from '@/assets/imgs/layout_home/1.webp'
-import LayoutHome2 from '@/assets/imgs/layout_home/2.webp'
-import LayoutHome3 from '@/assets/imgs/layout_home/3.webp'
-import LayoutHome4 from '@/assets/imgs/layout_home/4.webp'
-import LayoutHome5 from '@/assets/imgs/layout_home/5.webp'
-import LayoutHome6 from '@/assets/imgs/layout_home/6.webp'
+import LayoutHome1 from '@/assets/imgs/layout_parc_national/1.webp'
+import LayoutHome2 from '@/assets/imgs/layout_parc_national/1.webp'
+import LayoutHome3 from '@/assets/imgs/layout_parc_national/2.webp'
+import LayoutHome4 from '@/assets/imgs/layout_parc_national/3.webp'
+import LayoutHome5 from '@/assets/imgs/layout_parc_national/1.webp'
+import LayoutHome6 from '@/assets/imgs/layout_parc_national/1.webp'
 const t = createTranslator(locale)
 const localePrefix = getRelativeLocaleUrl(locale, '').replace(/\/$/, '')
 
