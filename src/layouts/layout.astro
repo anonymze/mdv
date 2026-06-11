@@ -69,7 +69,10 @@ const cleanPath = Astro.url.pathname.replace(/^\/(fr|en|es)\//, '/')
 <html lang={Astro.params.lang || Astro.currentLocale}>
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
 

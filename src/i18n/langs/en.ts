@@ -36,6 +36,8 @@ export default {
 	AUTRES_ACTUALITES: "Other news",
 	AUTRES_INFORMATIONS: "Information",
 	AUCUN_CONTENU: "No content available",
+	AUTRES_ACTUALITES_AUCUN_CONTENU:
+		"The Maison du Parc national et de la Vallee is a resource centre dedicated to the associations that bring our territory to life. Throughout the year, we welcome these volunteers engaged in a variety of fields: music, theatre, reading, solidarity and sports activities. We make our spaces available to them to offer suitable venues for their meetings, rehearsals and performances. Come back soon to find the schedule of upcoming events offered by these local associations.",
 	AUTRES_MEDIAS: "Other media",
 	AUTRES_MEDIAS_DESC: "The media library also offers a wide selection of multimedia formats: CDs, DVDs and vinyl for all tastes. Your subscription also gives you access to a multitude of online resources, to listen, watch or discover content from home or on site. Music, films, online press, tutorials, documentaries and more: everything is at your fingertips to enrich your leisure time and discoveries.",
 	AUTRES_MEDIAS_INTRO: "CDs, DVDs, vinyl and online clicks!",

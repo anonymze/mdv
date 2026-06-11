@@ -1,8 +1,9 @@
 import type { createTranslator } from '@/i18n/translations'
 
 type Translator = ReturnType<typeof createTranslator>
+type TranslationKey = Parameters<Translator>[0]
 
-const PUBLIC_FIELD_MAP: Record<string, string> = {
+const PUBLIC_FIELD_MAP: Record<string, TranslationKey> = {
 	'children': 'PUBLIC_ENFANTS',
 	'all_public': 'PUBLIC_TOUT_PUBLIC',
 	'all_public_avertissment': 'PUBLIC_TOUT_PUBLIC_AVERTISSEMENT',
@@ -11,7 +12,7 @@ const PUBLIC_FIELD_MAP: Record<string, string> = {
 	'forbidden_18': 'PUBLIC_INTERDIT_18'
 }
 
-const LUDO_DURATION_MAP: Record<string, string> = {
+const LUDO_DURATION_MAP: Record<string, TranslationKey> = {
 	'5': 'LUDO_DURATION_5',
 	'10': 'LUDO_DURATION_10',
 	'15': 'LUDO_DURATION_15',
@@ -26,8 +27,7 @@ export function translatePublicField(value: string | undefined | null, t: Transl
 	const key = PUBLIC_FIELD_MAP[value]
 	if (!key) return value
 
-	// @ts-ignore
-	return t(key as keyof ReturnType<Translator>)
+	return t(key)
 }
 
 export function translateLudoDuration(value: string | undefined | null, t: Translator): string {
@@ -36,7 +36,6 @@ export function translateLudoDuration(value: string | undefined | null, t: Trans
 	const key = LUDO_DURATION_MAP[value]
 	if (!key) return value
 
-	// @ts-ignore
-	return t(key as keyof ReturnType<Translator>)
+	return t(key)
 }
 

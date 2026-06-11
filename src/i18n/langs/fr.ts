@@ -45,6 +45,8 @@ export default {
 	AUTRES_ACTUALITES: 'Autres actualités',
 	AUTRES_INFORMATIONS: 'Informations',
 	AUCUN_CONTENU: 'Aucun contenu disponible',
+	AUTRES_ACTUALITES_AUCUN_CONTENU:
+		"La Maison du Parc national et de la Vallée est un lieu de ressources dédié aux associations qui font vivre notre territoire. Tout au long de l'année, nous accueillons ces bénévoles engagés dans des domaines variés : musique, théâtre, lecture, solidarité ou encore activités sportives. Nous mettons à leur disposition nos espaces afin de leur offrir des lieux adaptés pour leurs réunions, répétitions et représentations. Retrouvez bientôt ici la programmation des prochains événements proposés par ces associations locales.",
 	AUTRES_MEDIAS: 'Autres médias',
 	AUTRES_MEDIAS_DESC:
 		"La médiathèque propose également un large choix de supports multimédias : CD, DVD et vinyles pour tous les goûts. Votre abonnement vous permet aussi d'accéder à une multitude de ressources en ligne, pour écouter, regarder ou découvrir des contenus depuis chez vous ou sur place. Musique, films, presse en ligne, tutoriels, documentaires et plus encore : tout est à portée de main pour enrichir vos loisirs et vos découvertes.",

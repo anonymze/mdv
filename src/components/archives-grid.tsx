@@ -4,14 +4,15 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { SmartPagination } from '@/components/smart-pagination'
 import { stripTextAlign } from '@/utils/helper'
+import type { RichTextField } from '@/types/rich-text'
 import { useEffect, useState } from 'react'
 
 export type ArchiveDoc = {
 	id: string
 	type?: string
 	title: string
-	description?: any
-	synopsis?: any
+	description?: RichTextField
+	synopsis?: RichTextField
 	date_start: string
 	thumbnail?: { url?: string; alt?: string; blurhash?: string } | null
 	images?: { image?: { url?: string; alt?: string; blurhash?: string } | null }[] | null
@@ -114,9 +115,9 @@ const fetchData = async () => {
 		const richText = item.description ?? item.synopsis
 		return (
 			richText?.root?.children
-				?.flatMap((p: any) => p.children ?? [])
-				?.filter((c: any) => c.type === 'text')
-				?.map((c: any) => c.text)
+				?.flatMap((p) => p.children ?? [])
+				?.filter((c) => c.type === 'text')
+				?.map((c) => c.text)
 				?.join(' ') ?? ''
 		)
 	}
