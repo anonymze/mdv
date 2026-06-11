@@ -25,6 +25,13 @@ export const sprintf = (str: string, ...args: string[]) => {
 }
 
 
+// tags come from admin as free text, separators vary (";" or ",")
+export const splitTags = (tags: string) =>
+	tags
+		.split(/[;,]/)
+		.map((tag) => tag.trim())
+		.filter(Boolean)
+
 export const stripTextAlign = (html: string) =>
 	html.replace(/text-align\s*:\s*[^;}"]+;?/g, '')
 

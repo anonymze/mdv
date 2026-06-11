@@ -95,7 +95,7 @@ export function ArticleGrid({
 						return (
 							<article
 								key={item.id}
-								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-foreground bg-white w-[360px] h-[360px]"
+								className="group shadow-card relative col-span-1 overflow-hidden rounded-2xl border border-primary bg-white w-[360px] h-[360px]"
 							>
 								<MyImage
 									src={item.thumbnail?.url}
@@ -111,9 +111,11 @@ export function ArticleGrid({
 								<figure className="bg-background/90 absolute inset-x-0 bottom-0 h-[110px] overflow-hidden rounded-t-2xl p-4 transition-[height] duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-hover:h-full">
 									<figcaption className="grid grid-cols-[1fr_auto] gap-x-3 items-center">
 										<h3 className="line-clamp-1 group-hover:line-clamp-3">{item.title}</h3>
-										<div className="row-span-2 bg-secondary flex shrink-0 items-center justify-center rounded-2xl px-7 py-5 text-3xl font-serif text-white">
-											9 €
-										</div>
+										{item.price && (
+											<div className="row-span-2 bg-secondary/90 flex shrink-0 items-center justify-center rounded-2xl px-7 py-5 text-3xl font-serif text-white">
+												{item.price}
+											</div>
+										)}
 										{descText && <p className="!text-foreground line-clamp-2 group-hover:line-clamp-9 group-hover:pt-2 text-sm">{descText}</p>}
 									</figcaption>
 								</figure>

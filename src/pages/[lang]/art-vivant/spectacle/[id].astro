@@ -8,7 +8,7 @@ import Layout from '@/layouts/layout.astro'
 import { cn } from '@/lib/utils'
 import type { ArtVivant } from '@/types/art-vivant'
 import { VideoPlayer } from '@/components/video-player'
-import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, splitTags } from '@/utils/helper'
 
 export async function getStaticPaths() {
 	const locale = 'fr'
@@ -189,10 +189,10 @@ const allImages = (item.other_images?.map((img) => img.image) || []).filter(Bool
 						<span class="font-medium">{t('PORTFOLIO')}</span> : {item.portfolio_authors}
 					</div>
 					{item.tags && (
-						<div class="flex flex-wrap items-center gap-2 px-1 py-1">
-							{item.tags.split(';').map((tag: string) => (
-								<span class="bg-primary text-primary-foreground distinguished rounded-2xl px-3 py-1 text-xs">
-									{tag.trim()}
+						<div class="flex flex-wrap items-center gap-2 bg-background rounded-2xl px-4 py-2">
+							{splitTags(item.tags).map((tag) => (
+								<span class="bg-secondary distinguished rounded-lg px-3 py-1 text-sm uppercase text-background">
+									{tag}
 								</span>
 							))}
 						</div>
