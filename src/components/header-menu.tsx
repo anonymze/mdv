@@ -95,12 +95,12 @@ export function NavigationMenuDemo({ menuNavs, localePrefix, className }: { menu
 												{subMenu.link ? (
 													<a
 														href={`${localePrefix}${subMenu.link}`}
-														className="text-white text-sm font-medium uppercase transition-colors duration-200 hover:text-secondary"
+														className="text-white text-base font-medium uppercase transition-colors duration-200 hover:text-secondary"
 													>
 														{subMenu.label}
 													</a>
 												) : (
-													<span className="text-white text-sm font-medium uppercase">{subMenu.label}</span>
+													<span className="text-white text-base font-medium uppercase">{subMenu.label}</span>
 												)}
 											</div>
 											<ul className="flex-1 p-4 overflow-y-auto">
@@ -142,7 +142,7 @@ function ListItem({
 }: React.ComponentPropsWithoutRef<'li'> & { href: string; title: string }) {
 	return (
 		<li {...props} className="group/link block py-1 pl-4">
-			<a href={href} className="block pb-1 text-white transition-colors duration-200 hover:text-secondary">
+			<a href={href} className="block pb-1 text-white font-normal transition-colors duration-200 hover:text-secondary">
 				{title}
 			</a>
 		</li>
