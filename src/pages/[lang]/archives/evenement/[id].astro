@@ -1,28 +1,37 @@
 ---
-import { findByID } from '@/api/payload'
+export const prerender = true
+
+import { find, findByID } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import { stripTextAlign } from '@/utils/helper'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+
+export async function getStaticPaths() {
+	const COLLECTIONS = ['art_vivant', 'parc_national', 'exposition', 'autres_actualites', 'cinema']
+	const langs = ['fr', 'en', 'es'] as const
+	const perCollection = await Promise.all(
+		COLLECTIONS.map((col) =>
+			find<any>(col, {
+				limit: 100,
+				locale: 'fr',
+				where: { archive: { equals: true } }
+			})
+		)
+	)
+	return perCollection.flatMap((data, i) =>
+		data.docs.flatMap((item) =>
+			langs.map((lang) => ({ params: { lang, id: item.id }, props: { collection: COLLECTIONS[i] } }))
+		)
+	)
+}
 
 const locale = (Astro.params.lang || 'fr') as I18n
 const t = createTranslator(locale)
 const { id } = Astro.params
+const { collection } = Astro.props
 
-const COLLECTIONS = ['art_vivant', 'parc_national', 'exposition', 'autres_actualites', 'cinema']
-
-const results = await Promise.allSettled(
-	COLLECTIONS.map((col) => findByID<any>(col, id!, { locale }))
-)
-
-const found = results.find((r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled')
-
-if (!found) {
-	return Astro.redirect(getRelativeLocaleUrl(locale, 'archives'))
-}
-
-const item = found.value
+const item = await findByID<any>(collection, id!, { locale })
 const itemImage = item.thumbnail ?? item.images?.[0]?.image ?? null
 
 const getDescText = (item: any) => {
