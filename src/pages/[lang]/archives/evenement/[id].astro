@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 	const perCollection = await Promise.all(
 		COLLECTIONS.map((col) =>
 			find<any>(col, {
-				limit: 1000,
+				limit: 9999,
 				locale: 'fr',
 				upcomingOnly: false,
 				where: { archive: { equals: true } }
