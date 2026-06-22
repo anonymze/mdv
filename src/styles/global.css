@@ -163,6 +163,8 @@
 	}
 	html {
 		scrollbar-gutter: stable;
+		color-scheme: only light;
+		background-color: #fff;
 	}
 	body[data-scroll-locked] {
 		margin-right: 0 !important;

@@ -2,6 +2,7 @@
 import HoursSideCard from '@/components/hours-side-card.astro'
 import type { I18n } from '@/i18n/translations'
 import { Font } from 'astro:assets'
+import { ClientRouter } from 'astro:transitions'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import '../styles/global.css'
 import Header from './header.astro'
@@ -75,6 +76,7 @@ const cleanPath = Astro.url.pathname.replace(/^\/(fr|en|es)\//, '/')
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
+		<ClientRouter />
 
 		<Font cssVariable="--font-dm-serif-text" preload />
 		<Font cssVariable="--font-noto-sans" preload />
@@ -117,10 +119,10 @@ const cleanPath = Astro.url.pathname.replace(/^\/(fr|en|es)\//, '/')
 	</head>
 	<body>
 		<div class="container">
-			<Header hoursForToday={hoursForToday} hoursData={hoursData} />
+			<Header hoursForToday={hoursForToday} hoursData={hoursData} transition:persist />
 			<slot />
-			<Footer locale={locale} hoursData={hoursData} />
+			<Footer locale={locale} hoursData={hoursData} transition:persist />
 		</div>
-		<HoursSideCard locale={locale} hoursData={hoursData} />
+		<HoursSideCard locale={locale} hoursData={hoursData} transition:persist />
 	</body>
 </html>

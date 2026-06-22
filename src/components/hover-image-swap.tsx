@@ -96,13 +96,12 @@ export function HoverImageSwap({ rows, direction = 'horizontal', className, gap 
 								>
 									<img
 										src={slot.src}
-										alt={slot.alt ?? ''}
-										aria-hidden={!isActive}
+										alt={isActive ? (slot.alt ?? '') : ''}
 										decoding="async"
 										className={cn(
 											'absolute inset-0 h-full w-full object-cover',
 											'transition-[opacity,border-radius] duration-300 ease-in',
-											'outline outline-1 -outline-offset-1 outline-black/10',
+											'outline -outline-offset-1 outline-black/10',
 											isActive ? 'opacity-100 rounded-3xl delay-200' : 'opacity-0 rounded-[24px] lg:rounded-[30px] pointer-events-none'
 										)}
 									/>

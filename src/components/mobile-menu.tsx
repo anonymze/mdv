@@ -104,7 +104,7 @@ export function MobileMenu({
 					'bg-foreground fixed inset-y-0 right-0 z-50 flex w-full flex-col overflow-y-auto text-white transition-all duration-300 min-[410px]:w-[95%]',
 					open ? 'pointer-events-auto translate-x-0 opacity-100' : 'pointer-events-none translate-x-full opacity-0'
 				)}
-				aria-hidden={!open}
+				inert={!open}
 			>
 				{/* Top bar — same height as header (h-16) so X sits where burger was */}
 				<div className="flex h-16 shrink-0 items-center justify-between px-5">
