@@ -102,7 +102,7 @@ export function MobileMenu({
 			<div
 				className={cn(
 					'bg-foreground fixed inset-y-0 right-0 z-50 flex w-full flex-col overflow-y-auto text-white min-[410px]:w-[95%]',
-					open ? 'transition-all duration-300 pointer-events-auto translate-x-0 opacity-100' : 'pointer-events-none translate-x-full opacity-0'
+					open ? 'transition-[transform,opacity] duration-300 pointer-events-auto translate-x-0 opacity-100' : 'pointer-events-none translate-x-full opacity-0'
 				)}
 				inert={!open}
 			>
