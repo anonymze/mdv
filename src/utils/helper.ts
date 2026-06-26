@@ -61,29 +61,31 @@ export const getPortfolioSegments = (value?: string | null) => {
 	return segments.length > 0 ? segments : [{ text: value }]
 }
 
-export function renderRichText(richText: RichTextField): string {
-	return richText.root.children
-		.map((paragraph) => {
-			const text = paragraph.children
-				.map((node) => {
-					if (node.type === 'text') {
-						let content = node.text
-						// format is a bitmask: 1=bold, 2=italic, 4=strikethrough, 8=underline
-						if (node.format) {
-							if (node.format & 1) content = `<strong>${content}</strong>`
-							if (node.format & 2) content = `<em>${content}</em>`
-							if (node.format & 8) content = `<u>${content}</u>`
-							if (node.format & 4) content = `<s>${content}</s>`
-						}
-						return content
+export function renderRichText(richText: RichTextField, blockSeparator = ' '): string {
+	const blocks = richText.root.children.map((paragraph) => {
+		const text = paragraph.children
+			.map((node) => {
+				if (node.type === 'text') {
+					let content = node.text
+					// format is a bitmask: 1=bold, 2=italic, 4=strikethrough, 8=underline
+					if (node.format) {
+						if (node.format & 1) content = `<strong>${content}</strong>`
+						if (node.format & 2) content = `<em>${content}</em>`
+						if (node.format & 8) content = `<u>${content}</u>`
+						if (node.format & 4) content = `<s>${content}</s>`
 					}
-					if (node.type === 'linebreak') return '<br>'
-					return ''
-				})
-				.join('')
+					return content
+				}
+				if (node.type === 'linebreak') return '<br>'
+				return ''
+			})
+			.join('')
 
-			// Add <br> before paragraph if indented
-			return paragraph.indent > 0 ? `<br>${text}` : text
-		})
-		.join(' ')
+		// Add <br> before paragraph if indented
+		return paragraph.indent > 0 ? `<br>${text}` : text
+	})
+
+	// default ' ' keeps existing behavior; pass a block separator to preserve paragraph breaks
+	if (blockSeparator === ' ') return blocks.join(' ')
+	return blocks.filter((text) => text.length > 0).join(blockSeparator)
 }
