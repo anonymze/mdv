@@ -35,6 +35,32 @@ export const splitTags = (tags: string) =>
 export const stripTextAlign = (html: string) =>
 	html.replace(/text-align\s*:\s*[^;}"]+;?/g, '')
 
+const portfolioUrlPattern = /https?:\/\/[^\s<>"']+/g
+export const getPortfolioSegments = (value?: string | null) => {
+	if (!value) return []
+
+	const segments: { text: string; href?: string }[] = []
+	let lastIndex = 0
+
+	for (const match of value.matchAll(portfolioUrlPattern)) {
+		const href = match[0]
+		const index = match.index
+
+		if (index === undefined) continue
+		if (index > lastIndex) segments.push({ text: value.slice(lastIndex, index) })
+
+		segments.push({
+			text: href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''),
+			href
+		})
+		lastIndex = index + href.length
+	}
+
+	if (lastIndex < value.length) segments.push({ text: value.slice(lastIndex) })
+
+	return segments.length > 0 ? segments : [{ text: value }]
+}
+
 export function renderRichText(richText: RichTextField): string {
 	return richText.root.children
 		.map((paragraph) => {

@@ -171,7 +171,7 @@ export default {
 	HERO_TILE_MEDIATHEQUE_SUB: "The place for discovery and play",
 	IMAGE_PLACEHOLDER: "Placeholder image",
 	INCONNU: "Unknown",
-	IMMANQUABLE: "unmissable",
+	IMMANQUABLE: "Unmissable",
 	INFORMATIONS: "Information",
 	INFORMATIONS_GENERALES: "General information",
 	INFORMATIONS_HERO_DESC_PART1: "The Maison du Parc national et de la vallée is an atypical venue where culture, nature and artistic creation meet. For more than 30 years, it has grown with and for its users, offering moments of discovery and conviviality.",

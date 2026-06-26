@@ -148,12 +148,11 @@ const spectacleTranslations = {
 				{
 					immanquables.length > 0 && (
 						<>
-							<h2 class="text-center text-xl! md:text-right">{t('LES_IMMANQUABLES')}</h2>
 							{immanquables.length === 1 ? (
 								<a
 									href={getImmanquableUrl(immanquables[0])}
 									aria-label={immanquables[0].title}
-									class="shadow-card relative block flex-1 overflow-hidden rounded-3xl border border-secondary"
+									class="shadow-card relative block flex-1 overflow-hidden rounded-3xl border border-secondary md:mt-14"
 								>
 									<img
 										src={getImmanquableImage(immanquables[0]).src}
@@ -161,12 +160,15 @@ const spectacleTranslations = {
 										loading="eager"
 										class="h-full w-full object-cover"
 									/>
+									<span class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-white text-secondary-muted text-sm font-medium px-3 py-1.5 rounded-full shadow whitespace-nowrap">
+										{immanquables[0].immanquable === 'coup_de_coeur' ? t('COUP_DE_COEUR') : immanquables[0].immanquable === 'cine_passion' ? 'Cine passion' : t('IMMANQUABLE')}
+									</span>
 								</a>
 							) : (
 								<HoverImageSwap
 									client:visible
 									direction="horizontal"
-									className="flex-1 min-h-0"
+									className="flex-1 min-h-0 md:mt-14"
 									rows={[
 										{
 											slots: immanquables.map((item, i) => {
@@ -177,6 +179,7 @@ const spectacleTranslations = {
 													href: getImmanquableUrl(item),
 													...(item.immanquable === 'coup_de_coeur' && { badge: t('COUP_DE_COEUR') }),
 													...(item.immanquable === 'cine_passion' && { badge: 'Cine passion' }),
+													...(item.immanquable === 'immanquable' && { badge: t('IMMANQUABLE') }),
 													...(i > 0 && {
 														barClassName: ['bg-secondary', 'bg-secondary-muted', 'bg-primary'][(i - 1) % 3]
 													})

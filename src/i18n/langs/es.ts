@@ -170,7 +170,7 @@ export default {
 	HERO_TILE_JEUNESSE_SUB: "La cultura en el corazón del recorrido educativo",
 	HERO_TILE_MEDIATHEQUE_SUB: "El lugar del descubrimiento y el juego",
 	IMAGE_PLACEHOLDER: "Imagen de sustitución",
-	IMMANQUABLE: "imperdible",
+	IMMANQUABLE: "Imperdible",
 	INCONNU: "Desconocido",
 	INFORMATIONS: "Información",
 	INFORMATIONS_GENERALES: "Información general",
