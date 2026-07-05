@@ -17,8 +17,6 @@ si label non présent, on affiche pas la data dans le cadre orange plutot que de
 
 Expositions et évènements à venir -> mélange expo + evenements
 
-enelver l'opacité quand pas d'immanquable ?
-
 "Pour quel public" (uniquement cinéma)
 Tout public des 3 ans, des 6 ans, des 8 ans, des 10 ans
 enfants  ça degage dans cinema

@@ -40,7 +40,7 @@ const seances = await find<Cinema>('cinema', {
 	page: 1,
 	locale,
 	where: {
-		type: { equals: 'seance' }
+		type: { in: ['seance', 'rdv_cinema'] }
 	}
 })
 
@@ -235,6 +235,7 @@ const getImmanquableImage = (item: ImmanquableDoc) => {
 				limit={SEANCES_LIMIT}
 				payloadUrl={PAYLOAD_URL}
 				showFilters={false}
+				types={['seance', 'rdv_cinema']}
 				translations={cinemaTranslations}
 			/>
 		</section>
@@ -324,6 +325,7 @@ const getImmanquableImage = (item: ImmanquableDoc) => {
 				payloadUrl={PAYLOAD_URL}
 				showFilters={false}
 				linkPath="scolaire"
+				types={['scolaire']}
 				translations={cinemaTranslations}
 			/>
 		</section>
