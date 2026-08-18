@@ -1,0 +1,77 @@
+---
+export const prerender = true
+export const getStaticPaths = () => [
+	{ params: { lang: 'fr' } },
+	{ params: { lang: 'en' } },
+	{ params: { lang: 'es' } }
+]
+import { find } from '@/api/payload'
+import Layout from '@/layouts/layout.astro'
+import type { DocumentAdministratif, DocumentAdministratifCategory } from '@/types/document-administratif'
+
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
+
+const SECTIONS: { key: DocumentAdministratifCategory; label: string }[] = [
+	{ key: 'deliberation', label: 'Délibérations' },
+	{ key: 'compte_rendu', label: 'Comptes rendus' },
+	{ key: 'proces_verbal', label: 'Procès verbaux' }
+]
+
+const { docs } = await find<DocumentAdministratif>('documents_administratifs', {
+	upcomingOnly: false,
+	limit: 1000,
+	sort: '-date'
+})
+
+const formatDate = (iso: string) =>
+	new Date(iso).toLocaleDateString('fr-FR', {
+		day: 'numeric',
+		month: 'long',
+		year: 'numeric',
+		timeZone: 'Europe/Paris'
+	})
+---
+
+<Layout title="Administration">
+	<main id="main-content">
+		<section class="section-default">
+			<article class="max-w-3xl mx-auto flex flex-col gap-8">
+				<header>
+					<h1 class="text-primary pb-2 lg:pb-4">Administration</h1>
+					<p class="distinguished">Maison du Parc National et de la vallée</p>
+				</header>
+
+				{
+					SECTIONS.map(({ key, label }) => {
+						const items = docs.filter((doc) => doc.category === key)
+						return (
+							<section>
+								<h2 class="text-primary pb-2 lg:pb-3">{label}</h2>
+								{items.length > 0 ? (
+									<ul class="flex flex-col gap-3">
+										{items.map((doc) => (
+											<li>
+												<a
+													href={`${PAYLOAD_URL}${doc.url}`}
+													target="_blank"
+													rel="noopener noreferrer"
+													download
+													class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 hover:underline"
+												>
+													<span class="font-title">{doc.title}</span>
+													<span class="distinguished text-sm capitalize">{formatDate(doc.date)}</span>
+												</a>
+											</li>
+										))}
+									</ul>
+								) : (
+									<p class="text-sm">Aucun document pour le moment.</p>
+								)}
+							</section>
+						)
+					})
+				}
+			</article>
+		</section>
+	</main>
+</Layout>

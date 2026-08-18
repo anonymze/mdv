@@ -20,3 +20,9 @@ Expositions et évènements à venir -> mélange expo + evenements
 "Pour quel public" (uniquement cinéma)
 Tout public des 3 ans, des 6 ans, des 8 ans, des 10 ans
 enfants  ça degage dans cinema
+
+DEVIS SIGNÉ VENTE EN LIGNE
+une page supplémentaire (administration) comme mentions légales, dessous dans le footer de mentions légales, délibération, compte rendu, process verbal
+côté admin pouvoir ajotuer des fichiers pdfs qui seront affichés sur la page
+
+nom du fichier + date
