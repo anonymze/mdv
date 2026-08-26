@@ -16,6 +16,7 @@ interface CinemaGridProps {
 	mobileScrollOnly?: boolean
 	linkPath?: string
 	types?: string[]
+	pageParam?: string
 	translations: {
 		PRECEDENT: string
 		SUIVANT: string
@@ -46,11 +47,13 @@ export function CinemaGrid({
 	mobileScrollOnly = false,
 	linkPath = 'seance',
 	types = ['seance'],
+	pageParam = 'page',
 	translations
 }: CinemaGridProps) {
 	const [data, setData] = useState<PayloadResponse<Cinema>>(initialData)
 	const [page, setPage] = useState(1)
 	const [loading, setLoading] = useState(false)
+	const gridId = `cinema-grid-${pageParam}`
 
 	// Filter states
 	const [searchKeyword, setSearchKeyword] = useState('')
@@ -149,6 +152,15 @@ export function CinemaGrid({
 		setPage(1)
 	}, [debouncedSearchKeyword, selectedGenre, selectedTags, selectedDate, selectedLanguage])
 
+	// restore pagination from the URL on mount (back navigation)
+	useEffect(() => {
+		const restored = parseInt(new URLSearchParams(window.location.search).get(pageParam) ?? '1', 10)
+		if (Number.isFinite(restored) && restored > 1) {
+			setPage(restored)
+			requestAnimationFrame(() => document.getElementById(gridId)?.scrollIntoView())
+		}
+	}, [])
+
 	const getSynopsisText = (item: Cinema) => {
 		return item.synopsis.root.children
 			.flatMap((para) => para.children)
@@ -178,10 +190,17 @@ export function CinemaGrid({
 	const handlePageChange = (newPage: number) => {
 		if (newPage < 1 || newPage > data.totalPages) return
 		setPage(newPage)
+
+		const params = new URLSearchParams(window.location.search)
+		if (newPage === 1) params.delete(pageParam)
+		else params.set(pageParam, String(newPage))
+		const query = params.toString()
+		window.history.replaceState(window.history.state, '', `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`)
+
 		if (!mobileScrollOnly || window.innerWidth < 1024) {
-			const target = document.getElementById('cinema-grid')
-		target?.scrollIntoView({ behavior: 'smooth' })
-		setTimeout(() => target?.scrollIntoView({ behavior: 'smooth' }), 600)
+			const target = document.getElementById(gridId)
+			target?.scrollIntoView({ behavior: 'smooth' })
+			setTimeout(() => target?.scrollIntoView({ behavior: 'smooth' }), 600)
 		}
 	}
 
@@ -262,7 +281,7 @@ export function CinemaGrid({
 				</div>
 			)}
 
-			<div id="cinema-grid" className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-5">
+			<div id={gridId} className="scroll-m-20 py-8 lg:py-16 grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-5">
 				{loading ? (
 					<div className="col-span-full flex w-full !max-w-none items-center justify-center min-h-[257px]">
 						<div className="border-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
