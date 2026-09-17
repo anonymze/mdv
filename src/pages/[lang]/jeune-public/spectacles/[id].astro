@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 		limit: 50,
 		locale,
 		where: {
-			type: { equals: 'evenement' },
+			type: { in: ['evenement', 'scolaire'] },
 			jeunePublic: { equals: true }
 		}
 	})

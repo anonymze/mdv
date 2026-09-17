@@ -34,7 +34,7 @@ const evenements = await find<ArtVivant>('art_vivant', {
 	limit: 4,
 	locale,
 	where: {
-		type: { equals: 'evenement' },
+		type: { in: ['evenement', 'scolaire'] },
 		jeunePublic: { equals: true }
 	}
 })
