@@ -9,6 +9,8 @@ import tailwindcss from '@tailwindcss/vite'
 // https://astro.build/config
 export default defineConfig({
     output: 'static',
+    // astro 7 defaults to 'jsx', which drops the whitespace between inline elements
+    compressHTML: true,
     redirects: {
         '/': '/fr/'
     },
