@@ -10,13 +10,13 @@ import { ContactForm } from '@/components/contact-form'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import { MDV_DEFAULT_ADDRESS, TELEPHONE_DEFAULT } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, TELEPHONE_DEFAULT, toMetaDescription } from '@/utils/helper'
 
 const locale = (Astro.params.lang || 'fr') as I18n
 const t = createTranslator(locale)
 ---
 
-<Layout title={t('NOUS_CONTACTER')}>
+<Layout title={t('NOUS_CONTACTER')} description={toMetaDescription(t('CONTACT_DESC'))}>
 	<main id="main-content">
 		<h1 class="sr-only">{t('NOUS_CONTACTER')}</h1>
 		<section class="section-default">

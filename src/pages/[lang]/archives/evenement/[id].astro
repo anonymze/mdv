@@ -5,7 +5,7 @@ import { find, findByID } from '@/api/payload'
 import MyImage from '@/components/my-image.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
-import { stripTextAlign } from '@/utils/helper'
+import { stripTextAlign, toMetaDescription } from '@/utils/helper'
 
 export async function getStaticPaths() {
 	const COLLECTIONS = ['art_vivant', 'parc_national', 'exposition', 'autres_actualites', 'cinema']
@@ -58,7 +58,7 @@ const formatDate = (dateStr: string) =>
 	})
 ---
 
-<Layout title={item.title} image={itemImage?.url}>
+<Layout title={item.title} image={itemImage?.url} description={toMetaDescription(item.description ?? item.synopsis)}>
 	<main id="main-content">
 		<section class="section-default bg-primary mt-7 md:mt-6 lg:mt-0">
 			<MyImage

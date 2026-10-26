@@ -15,6 +15,7 @@ import LayoutHome6 from '@/assets/imgs/layout_archives/2.webp'
 import { ArchivesGrid, type ArchiveDoc } from '@/components/archives-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
+import { toMetaDescription } from '@/utils/helper'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.params.lang || 'fr') as I18n
@@ -58,7 +59,7 @@ const initialData = await find<ArchiveDoc>('art_vivant', {
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
-<Layout title={t('ARCHIVES')}>
+<Layout title={t('ARCHIVES')} description={toMetaDescription(t('ARCHIVES_HERO_DESC'))}>
 	<main id="main-content">
 		<section
 			class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 sm:gap-2.5 md:gap-3.5 bg-[#345f6e] p-1.5 sm:p-3.5 pt-11.5 sm:pt-16 *:rounded-lg lg:rounded-b-3xl"

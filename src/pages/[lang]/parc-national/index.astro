@@ -16,6 +16,7 @@ import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { Button } from '@/components/ui/button'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
+import { toMetaDescription } from '@/utils/helper'
 import type { ParcNational } from '@/types/parc-national'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 const locale = (Astro.params.lang || 'fr') as I18n
@@ -68,7 +69,7 @@ const articlesTranslations = {
 const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL
 ---
 
-<Layout title={t('PARC_NATIONAL')}>
+<Layout title={t('PARC_NATIONAL')} description={toMetaDescription(t('PARC_NATIONAL_HERO_DESC_PART1'))}>
 	<main id="main-content">
 
 	<section

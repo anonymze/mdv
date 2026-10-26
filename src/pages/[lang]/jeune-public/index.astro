@@ -11,6 +11,7 @@ import SpectacleCard from '@/components/spectacle-card.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import Layout from '@/layouts/layout.astro'
+import { toMetaDescription } from '@/utils/helper'
 import {
 	translateLudoDuration,
 	translatePublicField
@@ -83,7 +84,7 @@ const getImmanquableImage = (item: ImmanquableDoc) => {
 }
 ---
 
-<Layout title={t('JEUNESSE')}>
+<Layout title={t('JEUNESSE')} description={toMetaDescription(t('JEUNESSE_HERO_DESC_PART1'))}>
 	<main id="main-content">
 	<section
 		class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 sm:gap-2.5 md:gap-3.5 bg-[#345f6e] p-1.5 sm:p-3.5 pt-11.5 sm:pt-16 *:rounded-lg lg:rounded-b-3xl"

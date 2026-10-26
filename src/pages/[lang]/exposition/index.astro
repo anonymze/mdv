@@ -16,7 +16,7 @@ import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
 import type { EvenementType, ExpositionType } from '@/types/exposition'
 import type { ImmanquableDoc } from '@/types/immanquable'
-import { MDV_DEFAULT_ADDRESS, renderRichText, splitTags, getPortfolioSegments } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, renderRichText, splitTags, getPortfolioSegments, toMetaDescription } from '@/utils/helper'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const locale = (Astro.params.lang || 'fr') as I18n
@@ -70,7 +70,7 @@ const evenementsTranslations = {
 }
 ---
 
-<Layout title={t('EXPOSITION')}>
+<Layout title={t('EXPOSITION')} description={toMetaDescription(t('EXPOSITION_HERO_DESC'))}>
 	<main id="main-content">
 		<section
 			class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 bg-[#345f6e] p-1.5 pt-11.5 *:rounded-lg sm:gap-2.5 sm:p-3.5 sm:pt-16 md:gap-3.5 lg:rounded-b-3xl"

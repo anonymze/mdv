@@ -26,6 +26,7 @@ import MyImage from '@/components/my-image.astro'
 import SpectacleCard from '@/components/spectacle-card.astro'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
+import { toMetaDescription } from '@/utils/helper'
 import type { Cinema } from '@/types/cinema'
 import type { ImmanquableDoc } from '@/types/immanquable'
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -125,7 +126,7 @@ const getImmanquableImage = (item: ImmanquableDoc) => {
 }
 ---
 
-<Layout title={t('CINEMA')}>
+<Layout title={t('CINEMA')} description={toMetaDescription(t('CINEMA_DESC_PART1'))}>
 	<main id="main-content">
 
 	<section

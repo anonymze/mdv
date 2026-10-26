@@ -24,7 +24,7 @@ import { createTranslator, I18n } from '@/i18n/translations'
 import { getHoursSchedule, type HoursDay, type HoursPeriod, type HoursRange } from '@/lib/hours'
 import Layout from '@/layouts/layout.astro'
 import type { Hour } from '@/types/hours'
-import { MDV_DEFAULT_ADDRESS, MDV_PARKING_DEFAULT_ADDRESS } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, MDV_PARKING_DEFAULT_ADDRESS, toMetaDescription } from '@/utils/helper'
 
 const locale = (Astro.params.lang || 'fr') as I18n
 const t = createTranslator(locale)
@@ -60,7 +60,7 @@ const hoursPeriods: { title: string; period: HoursPeriod }[] = [
 const closedDates = hours.closed_dates ?? []
 ---
 
-<Layout title={t('INFORMATIONS')} hoursData={hours}>
+<Layout title={t('INFORMATIONS')} description={toMetaDescription(t('INFORMATIONS_HERO_DESC_PART1'))} hoursData={hours}>
 	<main id="main-content">
 		<section
 			class="relative grid h-[calc(100dvh-var(--header-height)+var(--header-overlap))] max-h-225 grid-cols-40 grid-rows-40 gap-2 bg-[#345f6e] p-1.5 pt-11.5 *:rounded-lg sm:gap-2.5 sm:p-3.5 sm:pt-16 md:gap-3.5 lg:rounded-b-3xl"

@@ -25,6 +25,7 @@ import { LudothequeGrid } from '@/components/ludotheque-grid'
 import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
+import { toMetaDescription } from '@/utils/helper'
 import type { Ludotheque, MediathequeSpectacle } from '@/types/mediatheque'
 import type { ImmanquableDoc } from '@/types/immanquable'
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -139,7 +140,7 @@ const getImmanquableImage = (item: ImmanquableDoc) => {
 }
 ---
 
-<Layout title={t('MEDIATHEQUE')}>
+<Layout title={t('MEDIATHEQUE')} description={toMetaDescription(t('MEDIATHEQUE_HERO_DESC_PART1'))}>
 	<main id="main-content">
 
 	<section

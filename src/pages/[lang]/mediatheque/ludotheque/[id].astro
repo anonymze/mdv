@@ -9,7 +9,7 @@ import { VideoPlayer } from '@/components/video-player'
 import { translateLudoDuration } from '@/lib/translate-fields'
 import { cn } from '@/lib/utils'
 import type { Ludotheque, Mediatheque } from '@/types/mediatheque'
-import { MDV_DEFAULT_ADDRESS } from '@/utils/helper'
+import { MDV_DEFAULT_ADDRESS, toMetaDescription } from '@/utils/helper'
 export async function getStaticPaths() {
 	const locale = 'fr'
 	const data = await find<Ludotheque>('mediatheque', {
@@ -49,7 +49,7 @@ const moreInfoText = item.informations_more
 const allImages = (item.other_images?.map((img) => img.image) || []).filter(Boolean).slice(0, 3)
 ---
 
-<Layout title={item.title} image={item.thumbnail?.url}>
+<Layout title={item.title} image={item.thumbnail?.url} description={toMetaDescription(item.description)}>
 	<main id="main-content">
 		<section class="section-default rounded-t-none bg-primary">
 			<article class="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">

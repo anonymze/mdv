@@ -21,6 +21,7 @@ import SpectacleCard from '@/components/spectacle-card.astro'
 import { SpectaclesGrid } from '@/components/spectacles-grid'
 import { createTranslator, I18n } from '@/i18n/translations'
 import Layout from '@/layouts/layout.astro'
+import { toMetaDescription } from '@/utils/helper'
 import type { ArtVivant } from '@/types/art-vivant'
 import type { ImmanquableDoc } from '@/types/immanquable'
 import { getRelativeLocaleUrl } from 'astro:i18n'
@@ -101,7 +102,7 @@ const spectacleTranslations = {
 }
 ---
 
-<Layout title={t('ART_VIVANT')}>
+<Layout title={t('ART_VIVANT')} description={toMetaDescription(t('ART_VIVANT_DESC_PART1'))}>
 	<main id="main-content">
 		{/* HERO */}
 		<section

@@ -64,6 +64,8 @@ const currentLang = Astro.params.lang || Astro.currentLocale || 'fr'
 const meta = metadata[currentLang]
 const pageTitle = `${title}${meta.titleSuffix}`
 const pageDescription = description || meta.defaultDescription
+// media urls from the cms are relative to the admin, social crawlers need an absolute url
+const ogImage = image && !image.startsWith('http') ? `${import.meta.env.PUBLIC_PAYLOAD_URL}${image}` : image
 const cleanPath = Astro.url.pathname.replace(/^\/(fr|en|es)\//, '/')
 ---
 
@@ -97,13 +99,13 @@ const cleanPath = Astro.url.pathname.replace(/^\/(fr|en|es)\//, '/')
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:site_name" content="Maison du Parc National et de la Vallée" />
 		<meta property="og:locale" content={meta.ogLocale} />
-		{image && <meta property="og:image" content={image} />}
+		{ogImage && <meta property="og:image" content={ogImage} />}
 
 		<!-- Twitter Card Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={pageTitle} />
 		<meta name="twitter:description" content={pageDescription} />
-		{image && <meta name="twitter:image" content={image} />}
+		{ogImage && <meta name="twitter:image" content={ogImage} />}
 
 		<!-- Hreflang -->
 		<link rel="alternate" hreflang="fr" href={new URL(getRelativeLocaleUrl('fr', cleanPath), Astro.site).href} />

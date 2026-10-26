@@ -35,6 +35,32 @@ export const splitTags = (tags: string) =>
 export const stripTextAlign = (html: string) =>
 	html.replace(/text-align\s*:\s*[^;}"]+;?/g, '')
 
+const HTML_ENTITIES: Record<string, string> = { nbsp: ' ', amp: '&', quot: '"', apos: "'", '#39': "'", lt: '<', gt: '>' }
+
+// imported rich text holds raw html in its text nodes: strip it for the meta description
+export const toMetaDescription = (value?: RichTextField | string | null, maxLength = 160) => {
+	if (!value) return undefined
+
+	const raw =
+		typeof value === 'string'
+			? value
+			: value.root.children
+					.flatMap((paragraph) => paragraph.children ?? [])
+					.map((node) => (node.type === 'text' ? node.text : ' '))
+					.join(' ')
+	const text = raw
+		.replace(/<[^>]*>/g, ' ')
+		.replace(/&(#39|[a-z]+);/g, (entity, name: string) => HTML_ENTITIES[name] ?? entity)
+		.replace(/\s+/g, ' ')
+		.trim()
+
+	if (!text) return undefined
+	if (text.length <= maxLength) return text
+
+	const cut = text.lastIndexOf(' ', maxLength - 4)
+	return `${text.slice(0, cut > 0 ? cut : maxLength - 4)}...`
+}
+
 const portfolioUrlPattern = /https?:\/\/[^\s<>"']+/g
 export const getPortfolioSegments = (value?: string | null) => {
 	if (!value) return []

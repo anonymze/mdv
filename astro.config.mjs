@@ -17,9 +17,10 @@ export default defineConfig({
     adapter: vercel({
         imageService: true,
         imagesConfig: {
+            // must contain every width used by an image `src` (fallback), not only the srcset breakpoints
             sizes: [
-                100, 150, 200, 250, 300, 350, 400, 500, 640, 750, 828, 850, 960, 1080, 1280, 1300, 1500, 1668, 1920, 2048, 2560,
-                3200, 3840, 4480, 5120, 6016
+                80, 100, 120, 130, 150, 160, 180, 200, 240, 250, 260, 275, 300, 350, 360, 400, 420, 454, 500, 640, 700, 750, 800,
+                828, 850, 960, 1080, 1100, 1200, 1280, 1300, 1400, 1500, 1668, 1920, 2048, 2560, 3200, 3840, 4480, 5120, 6016
             ],
             domains: ['mdv-admin.vercel.app']
         }
