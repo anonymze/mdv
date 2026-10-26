@@ -13,7 +13,7 @@ import { MDV_DEFAULT_ADDRESS, splitTags, getPortfolioSegments } from '@/utils/he
 export async function getStaticPaths() {
 	const locale = 'fr'
 	const data = await find<ArtVivant>('art_vivant', {
-		limit: 50,
+		limit: 9999,
 		locale,
 		where: {
 			type: { in: ['evenement', 'scolaire'] },

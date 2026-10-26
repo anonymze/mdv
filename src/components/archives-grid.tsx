@@ -79,9 +79,19 @@ const fetchData = async () => {
 			setLoading(true)
 			const twoWeeksAgo = new Date()
 			twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14)
-			const where: any = {
-				archive: { equals: true },
-				date_start: { less_than: twoWeeksAgo.toISOString() }
+			const cutoff = twoWeeksAgo.toISOString()
+			const where: any = { archive: { equals: true } }
+
+			// an exposition runs over a period: archived only once it has ended
+			if (collection === 'exposition') {
+				where.date_end = { less_than: cutoff }
+			} else {
+				where.date_start = { less_than: cutoff }
+			}
+
+			// residences have no archive toggle in the admin (hidden, defaults to true)
+			if (collection === 'art_vivant') {
+				where.type = { not_equals: 'residence' }
 			}
 
 			if (debouncedKeyword) {
@@ -90,6 +100,7 @@ const fetchData = async () => {
 
 			if (year) {
 				where.date_start = {
+					...where.date_start,
 					greater_than_equal: `${year}-01-01T00:00:00.000Z`,
 					less_than_equal: `${year}-12-31T23:59:59.999Z`
 				}
@@ -135,7 +146,7 @@ const fetchData = async () => {
 
 	const generateYearOptions = () => {
 		const years = []
-		for (let y = 2025; y >= 2017; y--) {
+		for (let y = new Date().getFullYear(); y >= 2017; y--) {
 			years.push({ key: y.toString(), value: y.toString() })
 		}
 		return years

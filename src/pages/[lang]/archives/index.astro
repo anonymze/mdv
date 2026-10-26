@@ -50,6 +50,7 @@ const initialData = await find<ArchiveDoc>('art_vivant', {
 	upcomingOnly: false,
 	where: {
 		archive: { equals: true },
+		type: { not_equals: 'residence' },
 		date_start: { less_than: twoWeeksAgo.toISOString() }
 	}
 })

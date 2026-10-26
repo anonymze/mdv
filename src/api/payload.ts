@@ -101,15 +101,25 @@ export async function find<T>(collection: string, params?: FindOptions): Promise
   return data
 }
 
-export async function findGlobal<T>(slug: string, params?: Pick<PayloadQueryParams, 'depth' | 'locale'>): Promise<T> {
-  const query = buildQuery(params)
-  const res = await fetch(`${PAYLOAD_URL}/globals/${slug}${query}`)
+const globalsCache = new Map<string, Promise<unknown>>()
+
+async function fetchGlobal<T>(url: string): Promise<T> {
+  const res = await fetch(url)
 
   if (!res.ok) {
     throw new Error(`Payload fetch failed: ${res.status} ${res.statusText}`)
   }
 
   return res.json()
+}
+
+// the static build renders every page in one process: fetch each global once per build
+export function findGlobal<T>(slug: string, params?: Pick<PayloadQueryParams, 'depth' | 'locale'>): Promise<T> {
+  const url = `${PAYLOAD_URL}/globals/${slug}${buildQuery(params)}`
+  if (import.meta.env.DEV) return fetchGlobal<T>(url)
+
+  if (!globalsCache.has(url)) globalsCache.set(url, fetchGlobal<T>(url))
+  return globalsCache.get(url) as Promise<T>
 }
 
 export async function findByID<T>(collection: string, id: string, params?: PayloadQueryParams): Promise<T> {
